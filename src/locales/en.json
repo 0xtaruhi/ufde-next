@@ -13,6 +13,7 @@
         "general": "General"
     },
     "project": {
-        "create_a_new_project": "Let's create a new project!"
+        "create_a_new_project": "Let's create a new project!",
+        "new_project": "New Project"
     }
 }

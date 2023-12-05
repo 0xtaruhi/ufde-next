@@ -13,6 +13,7 @@
         "general": "通用"
     },
     "project": {
-        "create_a_new_project": "创建一个新项目吧！"
+        "create_a_new_project": "创建一个新项目吧！",
+        "new_project": "新建项目"
     }
 }

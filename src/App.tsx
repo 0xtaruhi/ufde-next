@@ -8,6 +8,7 @@ import {
   Button,
   useMantineColorScheme,
   useComputedColorScheme,
+  Group,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
@@ -78,7 +79,7 @@ function MenuArea() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Group>
       <Menu>
         <Menu.Target>
           <Button variant="transparent">
@@ -90,7 +91,7 @@ function MenuArea() {
           <Menu.Item>{t("menu.new_project")}</Menu.Item>
         </Menu.Dropdown>
       </Menu>
-    </>
+    </Group>
   );
 }
 
@@ -117,11 +118,11 @@ function App() {
         padding="md"
       >
         <AppShell.Header>
-          <Flex justify="space-between" align="center" style={{ padding: "10px 20px" }}>
+          <Flex justify="flex-start" gap="md" align="center" style={{ padding: "10px 20px" }}>
             <Burger opened={opened} onClick={toggle} visibleFrom="sm" size="sm" />
             <MenuArea />
             {/* light/dark mode toggle button */}
-            <ActionIcon size="md" variant="subtle" onClick={toggleColorScheme}>
+            <ActionIcon size="md" variant="subtle" onClick={toggleColorScheme} style={{ marginLeft: "auto" }}>
               {computedColorScheme === "dark" ? <TbSun /> : <TbMoon />}
             </ActionIcon>
           </Flex>

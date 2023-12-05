@@ -13,6 +13,7 @@
         "general": "一般"
     },
     "project": {
-        "create_a_new_project": "新しいプロジェクトを作成しよう！"
+        "create_a_new_project": "新しいプロジェクトを作成しよう！",
+        "new_project": "新しいプロジェクト"
     }
 }

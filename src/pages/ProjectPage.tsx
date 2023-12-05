@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Center, Title, Button, Group } from "@mantine/core";
 
 import { ProjectProps } from "../model/project";
 
@@ -6,8 +7,14 @@ function emptyProjectPage() {
   const { t } = useTranslation();
   return (
     <>
-      {" "}
-      <h1>{t("project.create_a_new_project")}</h1>
+      <Center h={500} style={{ textAlign: "center" }}>
+        <Group align="center" >
+          <Title order={1}>{t("project.create_a_new_project")}</Title>
+          <Button variant="outline" color="blue" size="md">
+            {t("project.new_project")}
+          </Button>
+        </Group>
+      </Center>
     </>
   );
 }
