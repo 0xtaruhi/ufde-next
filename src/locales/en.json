@@ -1,0 +1,18 @@
+{
+    "nav": {
+        "project": "Project",
+        "settings": "Settings"
+    },
+    "menu": {
+        "file": "File",
+        "project": "Project",
+        "new_project": "New Project"
+    },
+    "settings": {
+        "language": "Language",
+        "general": "General"
+    },
+    "project": {
+        "create_a_new_project": "Let's create a new project!"
+    }
+}

@@ -1,0 +1,5 @@
+body {
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}

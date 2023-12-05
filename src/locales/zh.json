@@ -1,0 +1,18 @@
+{
+    "nav": {
+        "project": "项目",
+        "settings": "设置"
+    },
+    "menu": {
+        "file": "文件",
+        "project": "项目",
+        "new_project": "新建项目"
+    },
+    "settings": {
+        "language": "语言",
+        "general": "通用"
+    },
+    "project": {
+        "create_a_new_project": "创建一个新项目吧！"
+    }
+}
