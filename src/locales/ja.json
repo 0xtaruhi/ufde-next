@@ -1,19 +1,42 @@
 {
-    "nav": {
-        "project": "項目",
-        "settings": "設定"
-    },
-    "menu": {
-        "file": "ファイル",
-        "project": "項目",
-        "new_project": "新しいプロジェクト"
-    },
-    "settings": {
-        "language": "言語",
-        "general": "一般"
-    },
-    "project": {
-        "create_a_new_project": "新しいプロジェクトを作成しよう！",
-        "new_project": "新しいプロジェクト"
-    }
+  "nav": {
+    "project": "プロジェクト",
+    "settings": "設定"
+  },
+  "menu": {
+    "file": "ファイル",
+    "project": "プロジェクト",
+    "new_project": "新しいプロジェクト"
+  },
+  "settings": {
+    "language": "言語",
+    "general": "一般"
+  },
+  "project": {
+    "create_a_new_project": "新しいプロジェクトを作成しよう！",
+    "new_project": "新しいプロジェクト"
+  },
+  "create_project": {
+    "basic_info": "基本情報",
+    "import_files": "ファイルインポート",
+    "target_device": "ターゲットデバイス",
+    "project_name": "プロジェクト名",
+    "project_name_placeholder": "プロジェクト名を入力してください",
+    "project_path": "プロジェクトパス",
+    "project_path_placeholder": "プロジェクトパスを選択してください",
+    "create_sub_dir": "サブディレクトリを作成する",
+    "source_files": "ソースファイル",
+    "file_name": "ファイル名",
+    "file_path": "ファイルパス",
+    "file_type": "ファイルタイプ",
+    "finish_hint": "全ての設定が完了しました。「完了」をクリックしてプロジェクトを作成してください。"
+  },
+  "common": {
+    "first_step": "ステップ1",
+    "second_step": "ステップ2",
+    "third_step": "ステップ3",
+    "next": "次へ",
+    "back": "戻る",
+    "finish": "完了"
+  }
 }

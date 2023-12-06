@@ -1,30 +1,21 @@
-import {
-  AppShell,
-  Flex,
-  Burger,
-  ActionIcon,
-  NavLink,
-  Menu,
-  Button,
-  useMantineColorScheme,
-  useComputedColorScheme,
-  Group,
-} from "@mantine/core";
+import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { TbSettings, TbChevronRight, TbFile, TbSun, TbMoon } from "react-icons/tb";
+import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
 
 import { ProjectInfo } from "./model/project";
 
 import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
+import HeaderBar from "./HeaderBar";
 
 interface NavLinkData {
   label: string;
   icon?: React.ElementType;
   rightSection?: React.ElementType;
   description?: string;
+  link: string;
 }
 
 const navLinksData: NavLinkData[] = [
@@ -33,8 +24,9 @@ const navLinksData: NavLinkData[] = [
     icon: TbFile,
     rightSection: TbChevronRight,
     description: "",
+    link: "/project",
   },
-  { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
+  { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight, link: "/settings" },
 ];
 
 interface ContentAreaProps {
@@ -75,57 +67,23 @@ function NavbarArea({ setCurrentNavIndex }: { setCurrentNavIndex: (index: number
   return <>{items}</>;
 }
 
-function MenuArea() {
-  const { t } = useTranslation();
-
-  return (
-    <Group>
-      <Menu>
-        <Menu.Target>
-          <Button variant="transparent">
-            <TbFile size={18} /> {t("menu.file")}
-          </Button>
-        </Menu.Target>
-        <Menu.Dropdown>
-          <Menu.Label>{t("menu.project")}</Menu.Label>
-          <Menu.Item>{t("menu.new_project")}</Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
-    </Group>
-  );
-}
-
 function App() {
   const [opened, { toggle }] = useDisclosure(true);
   const [currentNavIndex, setCurrentNavIndex] = useState(0);
-
-  // color scheme
-  const { setColorScheme } = useMantineColorScheme();
-  const computedColorScheme = useComputedColorScheme("light");
-  const toggleColorScheme = () => {
-    setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
-  };
 
   return (
     <div className="App">
       <AppShell
         header={{ height: 50 }}
         navbar={{
-          width: 180,
+          width: 200,
           breakpoint: "sm",
           collapsed: { desktop: !opened },
         }}
         padding="md"
       >
         <AppShell.Header>
-          <Flex justify="flex-start" gap="md" align="center" style={{ padding: "10px 20px" }}>
-            <Burger opened={opened} onClick={toggle} visibleFrom="sm" size="sm" />
-            <MenuArea />
-            {/* light/dark mode toggle button */}
-            <ActionIcon size="md" variant="subtle" onClick={toggleColorScheme} style={{ marginLeft: "auto" }}>
-              {computedColorScheme === "dark" ? <TbSun /> : <TbMoon />}
-            </ActionIcon>
-          </Flex>
+          <HeaderBar opened={opened} toggle={toggle} />
         </AppShell.Header>
 
         <AppShell.Navbar p="md">

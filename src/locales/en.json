@@ -1,19 +1,42 @@
 {
-    "nav": {
-        "project": "Project",
-        "settings": "Settings"
-    },
-    "menu": {
-        "file": "File",
-        "project": "Project",
-        "new_project": "New Project"
-    },
-    "settings": {
-        "language": "Language",
-        "general": "General"
-    },
-    "project": {
-        "create_a_new_project": "Let's create a new project!",
-        "new_project": "New Project"
-    }
+  "nav": {
+    "project": "Project",
+    "settings": "Settings"
+  },
+  "menu": {
+    "file": "File",
+    "project": "Project",
+    "new_project": "New Project"
+  },
+  "settings": {
+    "language": "Language",
+    "general": "General"
+  },
+  "project": {
+    "create_a_new_project": "Let's create a new project!",
+    "new_project": "New Project"
+  },
+  "create_project": {
+    "basic_info": "Basic Information",
+    "import_files": "File Import",
+    "target_device": "Target Device",
+    "project_name": "Project Name",
+    "project_name_placeholder": "Enter project name",
+    "project_path": "Project Path",
+    "project_path_placeholder": "Enter project path",
+    "create_sub_dir": "Create subdirectory",
+    "source_files": "Source Files",
+    "file_name": "File Name",
+    "file_path": "File Path",
+    "file_type": "File Type",
+    "finish_hint": "All settings are complete, click Finish to create the project."
+  },
+  "common": {
+    "first_step": "First Step",
+    "second_step": "Second Step",
+    "third_step": "Third Step",
+    "next": "Next",
+    "back": "Back",
+    "finish": "Finish"
+  }
 }
