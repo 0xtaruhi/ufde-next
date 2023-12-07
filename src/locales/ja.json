@@ -14,7 +14,8 @@
   },
   "project": {
     "create_a_new_project": "新しいプロジェクトを作成しよう！",
-    "new_project": "新しいプロジェクト"
+    "new_project": "新しいプロジェクト",
+    "open_project": "プロジェクトを開く"
   },
   "create_project": {
     "basic_info": "基本情報",
@@ -38,5 +39,18 @@
     "next": "次へ",
     "back": "戻る",
     "finish": "完了"
+  },
+  "startup": {
+    "welcome_head": "",
+    "welcome_tail": "へようこそ!",
+    "intro": "UFDE-Next は、復旦大学自開発 FPGA のための、論理合成から実装までの新世代統合設計環境です。",
+    "tag1": {
+      "title": "Tauri に基づき開発",
+      "content": "Tauri は、Rust で書かれた、Electron のようなフレームワークです。Electron と比べて、Tauri はより軽量で、より高速です。"
+    },
+    "tag2": {
+      "title": "オーペンソース",
+      "content": "UFDE-Next は、オープンソースであり、MIT ライセンスで提供されています。コードは GitHub で公開されており、誰でも自由に利用できます。"
+    }
   }
 }

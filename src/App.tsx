@@ -1,7 +1,7 @@
 import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
 
 import { ProjectInfo } from "./model/project";
@@ -9,6 +9,11 @@ import { ProjectInfo } from "./model/project";
 import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
+
+const ProjectContext = createContext<{
+  project: ProjectInfo | null;
+  setProject: (_: ProjectInfo | null) => void;
+}>({ project: null, setProject: (_: ProjectInfo | null) => {} });
 
 interface NavLinkData {
   label: string;
@@ -31,13 +36,14 @@ const navLinksData: NavLinkData[] = [
 
 interface ContentAreaProps {
   currentNavIndex: number;
-  project: ProjectInfo | null;
 }
 
 function ContentArea(props: ContentAreaProps) {
+  const { project } = useContext(ProjectContext);
+
   switch (props.currentNavIndex) {
     case 0:
-      return <ProjectPage project={props.project} />;
+      return <ProjectPage project={project} />;
     case 1:
       return <SettingsPage />;
     default:
@@ -71,6 +77,9 @@ function App() {
   const [opened, { toggle }] = useDisclosure(true);
   const [currentNavIndex, setCurrentNavIndex] = useState(0);
 
+  const [project, setProject] = useState<ProjectInfo | null>(null);
+  useContext(ProjectContext);
+
   return (
     <div className="App">
       <AppShell
@@ -91,7 +100,9 @@ function App() {
         </AppShell.Navbar>
 
         <AppShell.Main>
-          <ContentArea currentNavIndex={currentNavIndex} project={null} />
+          <ProjectContext.Provider value={{ project, setProject }}>
+            <ContentArea currentNavIndex={currentNavIndex} />
+          </ProjectContext.Provider>
         </AppShell.Main>
       </AppShell>
     </div>
@@ -99,3 +110,4 @@ function App() {
 }
 
 export default App;
+export { ProjectContext };

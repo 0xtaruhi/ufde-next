@@ -1,4 +1,4 @@
-import { Combobox, useCombobox, InputBase, Input, Divider, ScrollArea } from "@mantine/core";
+import { Combobox, useCombobox, InputBase, Input, Divider, ScrollArea, Card } from "@mantine/core";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
@@ -65,10 +65,12 @@ function SettingsPage() {
 
   return (
     <>
-      <ScrollArea>
-        <Divider my="xs" label={t("settings.general")} labelPosition="left" />
-        <LanguageSelector />
-      </ScrollArea>
+      <Divider my="xs" label={t("settings.general")} labelPosition="center" />
+      <Card withBorder radius={10} p="md" shadow="sm">
+        <ScrollArea>
+          <LanguageSelector />
+        </ScrollArea>
+      </Card>
     </>
   );
 }

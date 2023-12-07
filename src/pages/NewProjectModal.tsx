@@ -41,22 +41,42 @@ function NewProjectStep1() {
   };
 
   const [createSubDir, setCreateSubDir] = useState(true);
+  const [projectNameErr, setProjectNameErr] = useState("");
+  const [projectPathErr, setProjectPathErr] = useState("");
 
   return (
     <Stack gap="sm" style={{ marginBottom: 20 }}>
-      <Input.Wrapper label={t("create_project.project_name")} withAsterisk>
+      <Input.Wrapper label={t("create_project.project_name")} error={projectNameErr} withAsterisk>
         <Input
           placeholder={t("create_project.project_name_placeholder")}
-          onChange={(event) => setProjectName(event.currentTarget.value)}
+          onChange={(event) => {
+            const name = event.currentTarget.value;
+            setProjectName(name);
+            if (name === "") {
+              setProjectNameErr("Project name cannot be empty");
+            } else {
+              setProjectNameErr("");
+            }
+          }}
+          error={projectNameErr}
         />
       </Input.Wrapper>
-      <Input.Wrapper label={t("create_project.project_path")} withAsterisk>
+      <Input.Wrapper label={t("create_project.project_path")} error={projectPathErr} withAsterisk>
         <Flex align="center">
           <Input
             className="inputBox"
             value={projectPath}
+            error={projectPathErr}
             placeholder={t("create_project.project_path_placeholder")}
             readOnly={true}
+            onChange={(event) => {
+              const path = event.currentTarget.value;
+              if (path === "") {
+                setProjectPathErr("Project path cannot be empty");
+              } else {
+                setProjectPathErr("");
+              }
+            }}
           />
           <ActionIcon variant="subtle" size="lg" onClick={onPathBrowseClick}>
             <TbBrowser />

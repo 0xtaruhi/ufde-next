@@ -14,7 +14,8 @@
   },
   "project": {
     "create_a_new_project": "Let's create a new project!",
-    "new_project": "New Project"
+    "new_project": "New Project",
+    "open_project": "Open Project"
   },
   "create_project": {
     "basic_info": "Basic Information",
@@ -38,5 +39,18 @@
     "next": "Next",
     "back": "Back",
     "finish": "Finish"
+  },
+  "startup": {
+    "welcome_head": "Welcome to",
+    "welcome_tail": "!",
+    "intro": "UFDE-Next is a new generation of FPGA integrated design environment from synthesis to implementation for Fudan University's self-developed FPGAs.",
+    "tag1": {
+      "title": "Based on Tauri",
+      "content": "Tauri is an Electron-like framework written in Rust. Compared to Electron, it is smaller and has a faster startup."
+    },
+    "tag2": {
+      "title": "Open Source",
+      "content": "UFDE-Next is open source under the MIT license. You can view the source code on GitHub and use it freely."
+    }
   }
 }
