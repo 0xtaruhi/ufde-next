@@ -13,6 +13,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { TbCheck } from "react-icons/tb";
+import { VscNewFile, VscFolderOpened } from "react-icons/vsc";
 
 import "./StartupPage.css";
 import light_image from "../assets/startup.svg";
@@ -27,13 +28,13 @@ function StartUpPage() {
 
   return (
     <>
-      <Container size="md">
+      <Container size="lg">
         <div className="inner">
           <div className="content">
             <Title className="title">
               {t("startup.welcome_head")}{" "}
               <Text component="span" variant="gradient" gradient={{ from: "blue", to: "cyan" }} inherit>
-                UFDE-Next
+                UFDE+
               </Text>{" "}
               {t("startup.welcome_tail")}
             </Title>
@@ -60,11 +61,15 @@ function StartUpPage() {
             </List>
             <div style={{ paddingTop: 20 }}>
               <Group gap={10}>
-                <Button variant="filled" size="md" onClick={open}>
+                <Button variant="filled" size="md" onClick={open} leftSection={<VscNewFile />}>
                   {t("project.new_project")}
                 </Button>
                 <FileButton onChange={() => {}} accept="project/prj">
-                  {(props) => <Button {...props} size="md" variant="outline">{t("project.open_project")}</Button>}
+                  {(props) => (
+                    <Button {...props} size="md" variant="outline" leftSection={<VscFolderOpened />}>
+                      {t("project.open_project")}
+                    </Button>
+                  )}
                 </FileButton>
               </Group>
             </div>

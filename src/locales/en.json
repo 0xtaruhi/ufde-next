@@ -30,7 +30,10 @@
     "file_name": "File Name",
     "file_path": "File Path",
     "file_type": "File Type",
-    "finish_hint": "All settings are complete, click Finish to create the project."
+    "finish_hint": "All settings are complete, click Finish to create the project.",
+    "empty_project_name_error": "Project name cannot be empty!",
+    "invalid_project_name_error": "Project name contains invalid characters!",
+    "empty_project_path_error": "Project path cannot be empty!"
   },
   "common": {
     "first_step": "First Step",
@@ -43,14 +46,14 @@
   "startup": {
     "welcome_head": "Welcome to",
     "welcome_tail": "!",
-    "intro": "UFDE-Next is a new generation of FPGA integrated design environment from synthesis to implementation for Fudan University's self-developed FPGAs.",
+    "intro": "UFDE+ is a new generation of FPGA integrated design environment from synthesis to implementation for Fudan University's self-developed FPGAs.",
     "tag1": {
       "title": "Based on Tauri",
       "content": "Tauri is an Electron-like framework written in Rust. Compared to Electron, it is smaller and has a faster startup."
     },
     "tag2": {
       "title": "Open Source",
-      "content": "UFDE-Next is open source under the MIT license. You can view the source code on GitHub and use it freely."
+      "content": "UFDE+ is open source under the MIT license. You can view the source code on GitHub and use it freely."
     }
   }
 }

@@ -26,7 +26,7 @@ function MenuArea() {
     <Group>
       <Menu>
         <Menu.Target>
-          <Button variant="transparent">
+          <Button variant="subtle">
             <TbFile size={18} /> {t("menu.file")}
           </Button>
         </Menu.Target>

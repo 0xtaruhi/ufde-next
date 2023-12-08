@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { createContext, useContext, useState } from "react";
 import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
+import { Route, Routes, Link } from "react-router-dom";
 
 import { ProjectInfo } from "./model/project";
 
@@ -29,53 +30,35 @@ const navLinksData: NavLinkData[] = [
     icon: TbFile,
     rightSection: TbChevronRight,
     description: "",
-    link: "/project",
+    link: "/",
   },
   { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight, link: "/settings" },
 ];
 
-interface ContentAreaProps {
-  currentNavIndex: number;
-}
-
-function ContentArea(props: ContentAreaProps) {
-  const { project } = useContext(ProjectContext);
-
-  switch (props.currentNavIndex) {
-    case 0:
-      return <ProjectPage project={project} />;
-    case 1:
-      return <SettingsPage />;
-    default:
-      return <></>;
-  }
-}
-
-function NavbarArea({ setCurrentNavIndex }: { setCurrentNavIndex: (index: number) => void }) {
+function NavbarArea() {
   const { t } = useTranslation();
   const [active, setActive] = useState(0);
 
   const items = navLinksData.map((item, index) => (
-    <NavLink
-      active={active === index}
-      label={t(item.label)}
-      key={item.label}
-      leftSection={item.icon && <item.icon size={15} />}
-      rightSection={item.rightSection && <item.rightSection size={15} />}
-      description={item.description}
-      onClick={() => {
-        setActive(index);
-        setCurrentNavIndex(index);
-      }}
-    />
+    <Link to={item.link} key={item.label} style={{ textDecoration: "none", color: "inherit" }}>
+      <NavLink
+        active={active === index}
+        label={t(item.label)}
+        leftSection={item.icon && <item.icon size={15} />}
+        rightSection={item.rightSection && <item.rightSection size={15} />}
+        description={item.description}
+        onClick={() => {
+          setActive(index);
+        }}
+      />
+    </Link>
   ));
 
   return <>{items}</>;
 }
 
 function App() {
-  const [opened, { toggle }] = useDisclosure(true);
-  const [currentNavIndex, setCurrentNavIndex] = useState(0);
+  const [opened, { toggle }] = useDisclosure(false);
 
   const [project, setProject] = useState<ProjectInfo | null>(null);
   useContext(ProjectContext);
@@ -96,12 +79,15 @@ function App() {
         </AppShell.Header>
 
         <AppShell.Navbar p="md">
-          <NavbarArea setCurrentNavIndex={setCurrentNavIndex} />
+          <NavbarArea />
         </AppShell.Navbar>
 
         <AppShell.Main>
           <ProjectContext.Provider value={{ project, setProject }}>
-            <ContentArea currentNavIndex={currentNavIndex} />
+            <Routes>
+              <Route path="/" Component={() => ProjectPage({ project })} />
+              <Route path="/settings" Component={SettingsPage} />
+            </Routes>
           </ProjectContext.Provider>
         </AppShell.Main>
       </AppShell>

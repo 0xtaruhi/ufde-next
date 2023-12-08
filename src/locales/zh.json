@@ -30,7 +30,10 @@
     "file_name": "文件名",
     "file_path": "文件路径",
     "file_type": "文件类型",
-    "finish_hint": "所有设定已完成，点击完成按钮以创建项目。"
+    "finish_hint": "所有设定已完成，点击完成按钮以创建项目。",
+    "empty_project_name_error": "项目名称不能为空。",
+    "invalid_project_name_error": "项目名称包含无效字符。",
+    "empty_project_path_error": "项目路径不能为空。"
   },
   "common": {
     "first_step": "步骤一",
@@ -43,14 +46,14 @@
   "startup": {
     "welcome_head": "欢迎使用",
     "welcome_tail": "!",
-    "intro": "UFDE-Next 是新一代用于复旦大学自主开发 FPGA 芯片的从综合到实现的集成设计环境。",
+    "intro": "UFDE+ 是新一代用于复旦大学自主开发 FPGA 芯片的从综合到实现的集成设计环境。",
     "tag1": {
       "title": "基于 Tauri 框架开发",
       "content": "Tauri 是一个使用 Rust 编写的类似于 Electron 的框架。与 Electron 相比，Tauri 有更小的体积和更快的启动速度。"
     },
     "tag2": {
       "title": "开源",
-      "content": "UFDE-Next 采用 MIT 协议开源，您可以在 GitHub 上找到我们的代码并自由使用。"
+      "content": "UFDE+ 采用 MIT 协议开源，您可以在 GitHub 上找到我们的代码并自由使用。"
     }
   }
 }
