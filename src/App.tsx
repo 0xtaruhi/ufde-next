@@ -50,6 +50,7 @@ function NavbarArea() {
         onClick={() => {
           setActive(index);
         }}
+        component="button"
       />
     </Link>
   ));

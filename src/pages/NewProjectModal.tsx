@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, createContext, useContext } from "react";
+import { useState, createContext } from "react";
 import {
   Button,
   Group,
@@ -12,6 +12,8 @@ import {
   ScrollArea,
   InputWrapper,
 } from "@mantine/core";
+import { useForm } from "@mantine/form";
+
 import { Input, Stack, Text, Table } from "@mantine/core";
 import { TbBrowser, TbFileImport } from "react-icons/tb";
 import { open } from "@tauri-apps/api/dialog";
@@ -69,7 +71,7 @@ function PrevAndNextButton(props: PrevAndNextButtonProps) {
       <Button disabled={currentStep === 0} variant="default" onClick={onPrevClick}>
         {t("common.back")}
       </Button>
-      <Button disabled={false} onClick={onNextClick}>
+      <Button disabled={false} onClick={onNextClick} type="submit">
         {currentStep === totalSteps ? t("common.finish") : t("common.next")}
       </Button>
     </Group>
@@ -79,90 +81,63 @@ function PrevAndNextButton(props: PrevAndNextButtonProps) {
 function NewProjectStep1(props: StepProps) {
   const { t } = useTranslation();
 
-  const [projectPath, setProjectPath] = useState("");
-  const [projectName, setProjectName] = useState("");
-
-  const { project, setProject } = useContext(NewProjectContext);
+  const form = useForm({
+    initialValues: {
+      projectName: "",
+      projectPath: "",
+      createSubDir: true,
+    },
+    validate: {
+      projectName: (value) => {
+        if (value === "") {
+          return t("create_project.empty_project_name_error");
+        } else if (value.match('[$-/:-?{-~!"^_`\\\\\\[\\]]') !== null) {
+          return t("create_project.invalid_project_name_error");
+        }
+        return "";
+      },
+      projectPath: (value) => {
+        if (value === "") {
+          return t("create_project.empty_project_path_error");
+        }
+        return "";
+      },
+    },
+  });
 
   const onPathBrowseClick = async () => {
     const dir = await getSelectedDirectory();
     if (dir) {
-      setProjectPath(dir as string);
-      checkProjectPathValid(dir as string);
+      form.setFieldValue("projectPath", dir as string);
+      form.validate();
     }
   };
 
   const [createSubDir, setCreateSubDir] = useState(true);
-  const [projectNameErr, setProjectNameErr] = useState("");
-  const [projectPathErr, setProjectPathErr] = useState("");
-
-  const checkProjectNameValid = (name: string) => {
-    if (name === "") {
-      setProjectNameErr(t("create_project.empty_project_name_error"));
-      return false;
-    } else if (name.match('[$-/:-?{-~!"^_`\\\\\\[\\]]') !== null) {
-      setProjectNameErr(t("create_project.invalid_project_name_error"));
-      return false;
-    } else {
-      setProjectNameErr("");
-    }
-    return true;
-  };
-
-  const checkProjectPathValid = (path: string) => {
-    if (path === "") {
-      setProjectPathErr(t("create_project.empty_project_path_error"));
-      return false;
-    } else {
-      setProjectPathErr("");
-    }
-    return true;
-  };
 
   const handleNextClick = () => {
-    const nameValid = checkProjectNameValid(projectName);
-    const pathValid = checkProjectPathValid(projectPath);
-    if (!(nameValid && pathValid)) {
-      return;
+    if (!form.validate().hasErrors) {
+      props.onNextClick?.();
     }
-    setProject?.({
-      name: projectName,
-      path: projectPath,
-      file_lists: project?.file_lists || [],
-      target_device: project?.target_device || "FDP3P7",
-    });
-    console.log(project);
-    props.onNextClick?.();
   };
 
   return (
     <Stack gap="sm" style={{ marginBottom: 20 }}>
-      <Input.Wrapper label={t("create_project.project_name")} error={projectNameErr} withAsterisk>
+      <Input.Wrapper label={t("create_project.project_name")} error={form.errors.projectName} withAsterisk>
         <Input
           placeholder={t("create_project.project_name_placeholder")}
-          onChange={(event) => {
-            const name = event.currentTarget.value;
-            if (checkProjectNameValid(name)) {
-              setProjectName(name);
-            }
-          }}
-          error={projectNameErr}
+          error={form.errors.projectName}
+          {...form.getInputProps("projectName")}
         />
       </Input.Wrapper>
-      <Input.Wrapper label={t("create_project.project_path")} error={projectPathErr} withAsterisk>
+      <Input.Wrapper label={t("create_project.project_path")} error={form.errors.projectPath} withAsterisk>
         <Flex align="center">
           <Input
             className="inputBox"
-            value={projectPath}
-            error={projectPathErr}
+            error={form.errors.projectPath}
             placeholder={t("create_project.project_path_placeholder")}
             readOnly={true}
-            onChange={(event) => {
-              const path = event.currentTarget.value;
-              if (checkProjectPathValid(path)) {
-                setProjectPath(path);
-              }
-            }}
+            {...form.getInputProps("projectPath")}
           />
           <ActionIcon variant="subtle" size="lg" onClick={onPathBrowseClick}>
             <TbBrowser />
@@ -264,7 +239,6 @@ function NewProjectModal(props: ModalProps) {
 
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-  // const nextStep = () => {};
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   const [project, setProject] = useState<ProjectInfo>({
