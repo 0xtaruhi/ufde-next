@@ -57,9 +57,9 @@
     }
   },
   "program": {
+    "program": "Program",
     "failed": "Program Failed",
     "error": {
-      "program": "Program",
       "device open failed": "Open device failed. Please check the connection status."
     }
   }
