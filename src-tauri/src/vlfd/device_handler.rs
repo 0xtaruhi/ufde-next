@@ -34,6 +34,7 @@ impl DeviceHandler {
     }
 
     pub fn sync_delay(&self) -> DeviceResult<()> {
+        let start = std::time::Instant::now();
         loop {
             let mut buffer = [0u8; 1];
             self.usb.write_usb(EndPoint::EP4, &buffer)?;
@@ -41,6 +42,9 @@ impl DeviceHandler {
 
             if buffer[0] != 0 {
                 break;
+            }
+            if start.elapsed() > std::time::Duration::from_secs(1) {
+                return Err("sync delay timeout".to_string());
             }
         }
 
