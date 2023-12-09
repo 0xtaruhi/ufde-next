@@ -1,4 +1,5 @@
 import { Combobox, useCombobox, InputBase, Input, Divider, ScrollArea, Card } from "@mantine/core";
+
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
@@ -56,6 +57,7 @@ function LanguageSelector() {
           <Combobox.Options>{options}</Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
+
     </>
   );
 }

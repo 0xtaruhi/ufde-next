@@ -3,7 +3,6 @@ import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { createContext, useContext, useState } from "react";
 import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
-import { Route, Routes, Link } from "react-router-dom";
 
 import { ProjectInfo } from "./model/project";
 
@@ -21,7 +20,6 @@ interface NavLinkData {
   icon?: React.ElementType;
   rightSection?: React.ElementType;
   description?: string;
-  link: string;
 }
 
 const navLinksData: NavLinkData[] = [
@@ -30,32 +28,37 @@ const navLinksData: NavLinkData[] = [
     icon: TbFile,
     rightSection: TbChevronRight,
     description: "",
-    link: "/",
   },
-  { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight, link: "/settings" },
+  { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
 ];
 
-function NavbarArea() {
+function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: (arg0: string) => void }) {
   const { t } = useTranslation();
-  const [active, setActive] = useState(0);
 
-  const items = navLinksData.map((item, index) => (
-    <Link to={item.link} key={item.label} style={{ textDecoration: "none", color: "inherit" }}>
-      <NavLink
-        active={active === index}
-        label={t(item.label)}
-        leftSection={item.icon && <item.icon size={15} />}
-        rightSection={item.rightSection && <item.rightSection size={15} />}
-        description={item.description}
-        onClick={() => {
-          setActive(index);
-        }}
-        component="button"
-      />
-    </Link>
+  const items = navLinksData.map((item) => (
+    <NavLink
+      active={navLabel === item.label}
+      label={t(item.label)}
+      key={item.label}
+      leftSection={item.icon && <item.icon size={15} />}
+      rightSection={item.rightSection && <item.rightSection size={15} />}
+      description={item.description}
+      onClick={() => {
+        setNavLabel(item.label);
+      }}
+    />
   ));
 
   return <>{items}</>;
+}
+
+function MainContextArea({ navLabel, project }: { navLabel: string; project: ProjectInfo | null }) {
+  if (navLabel === "nav.project") {
+    return <ProjectPage project={project} />;
+  } else if (navLabel === "nav.settings") {
+    return <SettingsPage />;
+  }
+  return <></>;
 }
 
 function App() {
@@ -63,6 +66,8 @@ function App() {
 
   const [project, setProject] = useState<ProjectInfo | null>(null);
   useContext(ProjectContext);
+
+  const [navLabel, setNavLabel] = useState<string>("nav.project");
 
   return (
     <div className="App">
@@ -80,15 +85,12 @@ function App() {
         </AppShell.Header>
 
         <AppShell.Navbar p="md">
-          <NavbarArea />
+          <NavbarArea navLabel={navLabel} setNavLabel={setNavLabel} />
         </AppShell.Navbar>
 
         <AppShell.Main>
           <ProjectContext.Provider value={{ project, setProject }}>
-            <Routes>
-              <Route path="/" Component={() => ProjectPage({ project })} />
-              <Route path="/settings" Component={SettingsPage} />
-            </Routes>
+            <MainContextArea navLabel={navLabel} project={project} />
           </ProjectContext.Provider>
         </AppShell.Main>
       </AppShell>

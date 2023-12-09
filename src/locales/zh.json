@@ -55,5 +55,12 @@
       "title": "开源",
       "content": "UFDE+ 采用 MIT 协议开源，您可以在 GitHub 上找到我们的代码并自由使用。"
     }
+  },
+  "program": {
+    "program": "下载位流",
+    "failed": "下载失败",
+    "error": {
+      "device open failed": "打开设备失败，请检查设备连接情况。"
+    }
   }
 }

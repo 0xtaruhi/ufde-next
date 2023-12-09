@@ -55,5 +55,12 @@
       "title": "Open Source",
       "content": "UFDE+ is open source under the MIT license. You can view the source code on GitHub and use it freely."
     }
+  },
+  "program": {
+    "failed": "Program Failed",
+    "error": {
+      "program": "Program",
+      "device open failed": "Open device failed. Please check the connection status."
+    }
   }
 }

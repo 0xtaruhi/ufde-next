@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+
 import "@mantine/core/styles.css";
-import { BrowserRouter} from 'react-router-dom';
+import "@mantine/notifications/styles.css";
 
 import "./i18n";
 import App from "./App";
@@ -11,9 +13,8 @@ import "./App.css";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <MantineProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Notifications />
+      <App />
     </MantineProvider>
   </React.StrictMode>
 );
