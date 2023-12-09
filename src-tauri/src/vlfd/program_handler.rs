@@ -1,5 +1,4 @@
 use super::cfg::CfgInfo;
-use super::device_error::DeviceError;
 use super::device_handler::DeviceHandler;
 use super::usb_handler::EndPoint;
 
@@ -31,15 +30,13 @@ impl ProgramHandler {
 
     pub fn program(&mut self, bitfile: &std::path::Path) -> DeviceResult<()> {
         // Check if file is readable
-        let file = std::fs::File::open(bitfile)
-            .map_err(|_e| DeviceError::Other(String::from("File open error")))?;
+        let file = std::fs::File::open(bitfile).map_err(|_e| "bitfile open failed")?;
 
         let lines = std::io::BufReader::new(file).lines();
         let mut program_data = Vec::with_capacity(lines.size_hint().0 * 2);
 
         for line in lines {
-            let line =
-                line.map_err(|_err| DeviceError::Other("Line read error".to_string()))?;
+            let line = line.map_err(|_err| "bitfile read failed")?;
 
             let line = line.trim();
             if line.is_empty() {
@@ -63,9 +60,7 @@ impl ProgramHandler {
 
                 let remapped = char_remap(c);
                 if remapped.is_none() {
-                    return Err(DeviceError::Other(String::from(
-                        "Invalid character in bitfile",
-                    )));
+                    return Err("invalid char in bitfile".to_string());
                 }
 
                 data = (data << 4) | (remapped.unwrap() as u16);
@@ -100,9 +95,7 @@ impl ProgramHandler {
 
         let programmed = self.device.cfg.is_programmed();
         if !programmed {
-            return Err(DeviceError::Other(String::from(
-                "FPGA programming failed",
-            )));
+            return Err("fpga programming failed".to_string());
         }
 
         Ok(())

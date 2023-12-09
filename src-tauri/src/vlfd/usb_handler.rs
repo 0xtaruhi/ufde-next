@@ -1,4 +1,3 @@
-use super::device_error::DeviceError;
 use super::device_handler::DeviceResult;
 use libusb1_sys as libusb_ffi;
 use std::os::raw::c_int;
@@ -34,20 +33,20 @@ impl UsbHandler {
             unsafe { libusb_ffi::libusb_open_device_with_vid_pid(std::ptr::null_mut(), VID, PID) };
 
         if handle.is_null() {
-            return Err(DeviceError::Open);
+            return Err("device open failed".to_string());
         }
 
         unsafe {
             let result = libusb_ffi::libusb_claim_interface(handle, 0);
             if result < 0 {
                 libusb_ffi::libusb_close(handle);
-                return Err(DeviceError::Open);
+                return Err("device open failed".to_string());
             }
 
             let error_check = |r: c_int| {
                 if r < 0 {
                     self.try_close();
-                    return Err(DeviceError::Open);
+                    return Err("device open failed".to_string());
                 }
                 Ok(())
             };
@@ -80,13 +79,13 @@ impl UsbHandler {
             unsafe {
                 let result = libusb_ffi::libusb_release_interface(self.handle, 0);
                 if result < 0 {
-                    return Err(DeviceError::Close(format!("{result}")));
+                    return Err("device close failed".to_string());
                 }
 
                 libusb_ffi::libusb_close(self.handle);
             }
         } else {
-            return Err(DeviceError::Close(String::from("Device not opened")));
+            return Err("device not opened".to_string());
         }
 
         unsafe {
@@ -114,7 +113,7 @@ impl UsbHandler {
 
             if result != 0 {
                 self.try_close();
-                return Err(DeviceError::Read(String::from("USB read error")));
+                return Err("read data failed".to_string());
             }
 
             if transferred == untransferred {
@@ -156,7 +155,7 @@ impl UsbHandler {
 
             if result != 0 {
                 self.try_close();
-                return Err(DeviceError::Write(String::from("USB write error")));
+                return Err("write usb failed".to_string());
             }
 
             if transferred == untransferred {

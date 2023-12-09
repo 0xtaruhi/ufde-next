@@ -1,4 +1,3 @@
-pub mod device_error;
 mod program_handler;
 pub use program_handler::ProgramHandler;
 

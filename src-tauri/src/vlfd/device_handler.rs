@@ -1,5 +1,4 @@
 use super::cfg::Cfg;
-use super::device_error::DeviceError;
 use super::usb_handler::EndPoint;
 use super::usb_handler::UsbHandler;
 
@@ -11,7 +10,7 @@ pub struct DeviceHandler {
     decode_index: usize,
 }
 
-pub type DeviceResult<T> = Result<T, DeviceError>;
+pub type DeviceResult<T> = Result<T, String>;
 
 impl DeviceHandler {
     pub fn new() -> Self {
