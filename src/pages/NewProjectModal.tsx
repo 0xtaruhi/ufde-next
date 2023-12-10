@@ -16,11 +16,11 @@ import { useForm } from "@mantine/form";
 
 import { Input, Stack, Text, Table } from "@mantine/core";
 import { TbBrowser, TbFileImport } from "react-icons/tb";
-import { open } from "@tauri-apps/api/dialog";
+import { DialogFilter, open } from "@tauri-apps/api/dialog";
 
 import "./NewProjectModal.css";
 import { t } from "i18next";
-import { ProjectInfo, addRecentlyOpenedProject } from "../model/project";
+import { ProjectInfo, SourceFile, addRecentlyOpenedProject } from "../model/project";
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { createDir, writeTextFile } from "@tauri-apps/api/fs";
@@ -41,6 +41,15 @@ async function getSelectedDirectory() {
     multiple: false,
     directory: true,
   });
+  return result;
+}
+
+async function getSourceFilesByDialog({ dialogFilter }: { dialogFilter: DialogFilter[] | undefined }) {
+  const result = open({
+    multiple: true,
+    filters: dialogFilter,
+  });
+
   return result;
 }
 
@@ -160,14 +169,51 @@ function NewProjectStep1(props: StepProps) {
 function NewProjectStep2(props: StepProps) {
   const { t } = useTranslation();
 
+  const [sourceFiles, setSourceFiles] = useState<SourceFile[]>([]);
+
+  function getFileInfoByPath(path: string): SourceFile {
+    function getTypeByExtension(ext: string) {
+      switch (ext) {
+        case "v":
+          return "verilog";
+        case "sv":
+          return "systemverilog";
+        case "xml":
+          return "constraint";
+        default:
+          return "unknown";
+      }
+    }
+    const arr = path.split("/");
+    const name = arr[arr.length - 1];
+    const type = getTypeByExtension(name.split(".")[1]);
+    return { name: name, path: path, type: type };
+  }
+
   const onImportFilesClick = async () => {
-    const result = await open({
-      multiple: true,
-    });
-    console.log(result);
+    const selectedSourcefiles = (await getSourceFilesByDialog({
+      dialogFilter: [
+        { name: t("sourcefile.verilog"), extensions: ["v"] },
+        { name: t("sourcefile.systemverilog"), extensions: [".sv"] },
+        { name: t("sourcefile.constraint"), extensions: [".xml"] },
+      ],
+    })) as string[];
+
+    if (selectedSourcefiles) {
+      const files = selectedSourcefiles.map((path) => getFileInfoByPath(path));
+      setSourceFiles((prev) => {
+        const newFiles = files.filter((file) => prev.findIndex((f) => f.path === file.path) === -1);
+        return [...prev, ...newFiles];
+      });
+    }
   };
 
-  const rows = newProject.file_lists.map((file) => (
+  const handleNextClick = () => {
+    newProject.file_lists = sourceFiles;
+    props.onNextClick?.();
+  };
+
+  const rows = sourceFiles.map((file) => (
     <Table.Tr key={file.path}>
       <Table.Td>{file.name}</Table.Td>
       <Table.Td>{file.path}</Table.Td>
@@ -203,7 +249,7 @@ function NewProjectStep2(props: StepProps) {
       >
         {t("create_project.import_files")}
       </Button>
-      <PrevAndNextButton {...props} />
+      <PrevAndNextButton {...props} onNextClick={handleNextClick} />
     </Stack>
   );
 }

@@ -69,5 +69,10 @@
     "error": {
       "device open failed": "打开设备失败，请检查设备连接情况。"
     }
+  },
+  "sourcefile": {
+    "verilog": "Verilog 文件",
+    "systemverilog": "SystemVerilog 文件",
+    "constraint": "约束文件"
   }
 }

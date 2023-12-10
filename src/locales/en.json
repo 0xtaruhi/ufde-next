@@ -69,5 +69,10 @@
     "error": {
       "device open failed": "Open device failed. Please check the connection status."
     }
+  },
+  "sourcefile": {
+    "verilog": "Verilog File",
+    "systemverilog": "SystemVerilog File",
+    "constraint": "Constraint File"
   }
 }

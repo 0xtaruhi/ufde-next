@@ -1,9 +1,9 @@
 import { BaseDirectory, writeTextFile } from "@tauri-apps/api/fs";
 
-type SourceFile = {
+export type SourceFile = {
   name: string;
   path: string;
-  type: "verilog" | "systemverilog" | "constraint" | "other";
+  type: "verilog" | "systemverilog" | "constraint" | "unknown";
 };
 
 export type ProjectInfo = {
@@ -34,6 +34,5 @@ export function addRecentlyOpenedProject(project: ProjectInfo) {
 }
 
 export function saveRecentlyOpenedProjects() {
-  console.log(BaseDirectory.AppData);
   writeTextFile("recent_projects.json", JSON.stringify(recentlyOpenedProjects), { dir: BaseDirectory.AppData });
 }

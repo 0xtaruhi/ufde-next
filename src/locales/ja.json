@@ -69,5 +69,10 @@
     "error": {
       "device open failed": "デバイスオープンに失敗にしました、接続状態をもう一度確認してください。"
     }
+  },
+  "sourcefile": {
+    "verilog": "Verilog ファイル",
+    "systemverilog": "SystemVerilog ファイル",
+    "constraint": "制約ファイル"
   }
 }
