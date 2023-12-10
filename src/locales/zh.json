@@ -19,7 +19,10 @@
   "project": {
     "create_a_new_project": "创建一个新项目吧！",
     "new_project": "新建项目",
-    "open_project": "打开项目"
+    "open_project": "打开项目",
+    "open_project_failed_title": "打开项目失败",
+    "close_project_no_project_title": "没有打开的项目",
+    "close_project_no_project_content": "当前没有打开的项目。请先打开一个项目。"
   },
   "create_project": {
     "basic_info": "基本信息",

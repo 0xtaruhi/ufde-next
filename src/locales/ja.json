@@ -19,7 +19,10 @@
   "project": {
     "create_a_new_project": "新規プロジェクトを作成しよう！",
     "new_project": "新規プロジェクト",
-    "open_project": "プロジェクトを開く"
+    "open_project": "プロジェクトを開く",
+    "open_project_failed_title": "プロジェクトを開くに失敗",
+    "close_project_no_project_title": "プロジェクトが開かれていません",
+    "close_project_no_project_content": "プロジェクトが開かれていません。プロジェクトを開いてから、もう一度お試しください。"
   },
   "create_project": {
     "basic_info": "基本情報",

@@ -1,4 +1,5 @@
-import { BaseDirectory, writeTextFile } from "@tauri-apps/api/fs";
+import { open } from "@tauri-apps/api/dialog";
+import { BaseDirectory, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
 
 export type SourceFile = {
   name: string;
@@ -35,4 +36,25 @@ export function addRecentlyOpenedProject(project: ProjectInfo) {
 
 export function saveRecentlyOpenedProjects() {
   writeTextFile("recent_projects.json", JSON.stringify(recentlyOpenedProjects), { dir: BaseDirectory.AppData });
+}
+
+export async function openProject() {
+  const path = await open({
+    multiple: false,
+    filters: [
+      {
+        name: "Project",
+        extensions: ["json"],
+      },
+    ],
+  });
+
+  if (path && !Array.isArray(path)) {
+    const content = await readTextFile(path);
+    const openedProject = JSON.parse(content) as ProjectInfo;
+    openedProject.path = path;
+    addRecentlyOpenedProject(openedProject);
+    return openedProject;
+  }
+  return null;
 }

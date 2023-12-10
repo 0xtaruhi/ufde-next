@@ -20,7 +20,7 @@ type NavLinkData = {
   icon?: React.ElementType;
   rightSection?: React.ElementType;
   description?: string;
-}
+};
 
 const navLinksData: NavLinkData[] = [
   {
@@ -68,29 +68,29 @@ function App() {
 
   return (
     <div className="App">
-      <AppShell
-        header={{ height: 50 }}
-        navbar={{
-          width: 200,
-          breakpoint: "sm",
-          collapsed: { desktop: !opened },
-        }}
-        padding="md"
-      >
-        <AppShell.Header>
-          <HeaderBar opened={opened} toggle={toggle} />
-        </AppShell.Header>
+      <ProjectContext.Provider value={{ project, setProject }}>
+        <AppShell
+          header={{ height: 50 }}
+          navbar={{
+            width: 200,
+            breakpoint: "sm",
+            collapsed: { desktop: !opened },
+          }}
+          padding="md"
+        >
+          <AppShell.Header>
+            <HeaderBar opened={opened} toggle={toggle} />
+          </AppShell.Header>
 
-        <AppShell.Navbar p="md">
-          <NavbarArea navLabel={navLabel} setNavLabel={setNavLabel} />
-        </AppShell.Navbar>
+          <AppShell.Navbar p="md">
+            <NavbarArea navLabel={navLabel} setNavLabel={setNavLabel} />
+          </AppShell.Navbar>
 
-        <AppShell.Main>
-          <ProjectContext.Provider value={{ project, setProject }}>
+          <AppShell.Main>
             <MainContextArea navLabel={navLabel} />
-          </ProjectContext.Provider>
-        </AppShell.Main>
-      </AppShell>
+          </AppShell.Main>
+        </AppShell>
+      </ProjectContext.Provider>
     </div>
   );
 }

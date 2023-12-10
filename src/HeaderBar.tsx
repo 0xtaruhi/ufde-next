@@ -4,6 +4,10 @@ import { ActionIcon } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { Group, Menu, Button, Burger } from "@mantine/core";
 import { VscClose, VscFolderOpened, VscNewFile, VscSave, VscSaveAs } from "react-icons/vsc";
+import { useContext } from "react";
+import { ProjectContext } from "./App";
+import { openProject } from "./model/project";
+import { showFailedNotification, showWarningNotification } from "./pages/Notifies";
 
 function LightDarkToggleButton() {
   const { setColorScheme } = useMantineColorScheme();
@@ -19,36 +23,63 @@ function LightDarkToggleButton() {
   );
 }
 
-const menuItems = [
-  {
-    icon: <VscNewFile />,
-    label: "menu.new_project",
-    onClick: () => {},
-  },
-  {
-    icon: <VscFolderOpened />,
-    label: "menu.open_project",
-    onClick: () => {},
-  },
-  {
-    icon: <VscSave />,
-    label: "menu.save_project",
-    onClick: () => {},
-  },
-  {
-    icon: <VscSaveAs />,
-    label: "menu.save_project_as",
-    onClick: () => {},
-  },
-  {
-    icon: <VscClose />,
-    label: "menu.close_project",
-    onClick: () => {},
-  }
-];
-
 function MenuArea() {
   const { t } = useTranslation();
+  const { project, setProject } = useContext(ProjectContext);
+
+  const menuItems = [
+    {
+      icon: <VscNewFile />,
+      label: "menu.new_project",
+      onClick: () => {},
+    },
+    {
+      icon: <VscFolderOpened />,
+      label: "menu.open_project",
+      onClick: () => {
+        openProject().then(
+          (p) => {
+            if (p) {
+              setProject(p);
+            }
+          },
+          (err) => {
+            console.error(err);
+            showFailedNotification({
+              translation: t,
+              message: err,
+              title: t("project.open_project_failed_title"),
+            });
+          }
+        );
+      },
+    },
+    {
+      icon: <VscSave />,
+      label: "menu.save_project",
+      onClick: () => {},
+    },
+    {
+      icon: <VscSaveAs />,
+      label: "menu.save_project_as",
+      onClick: () => {},
+    },
+    {
+      icon: <VscClose />,
+      label: "menu.close_project",
+      onClick: () => {
+        if (project === null) {
+          showWarningNotification({
+            translation: t,
+            message: t("project.close_project_no_project_content"),
+            title: t("project.close_project_no_project_title"),
+          });
+        } else {
+          setProject(null);
+        }
+      },
+    },
+  ];
 
   return (
     <Group>
