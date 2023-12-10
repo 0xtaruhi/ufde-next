@@ -23,13 +23,17 @@ import { t } from "i18next";
 import { ProjectInfo, addRecentlyOpenedProject } from "../model/project";
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
-import { writeTextFile } from "@tauri-apps/api/fs";
+import { createDir, writeTextFile } from "@tauri-apps/api/fs";
 
 const newProject: ProjectInfo = {
   name: "",
   path: "",
   file_lists: [],
   target_device: "FDP3P7",
+};
+
+const extraConfig = {
+  createSubDir: true,
 };
 
 async function getSelectedDirectory() {
@@ -82,7 +86,7 @@ function NewProjectStep1(props: StepProps) {
     initialValues: {
       projectName: newProject.name,
       projectPath: newProject.path,
-      createSubDir: true,
+      createSubDir: extraConfig.createSubDir,
     },
     validate: {
       projectName: (value) => {
@@ -108,8 +112,6 @@ function NewProjectStep1(props: StepProps) {
       form.setFieldValue("projectPath", dir as string);
     }
   };
-
-  const [createSubDir, setCreateSubDir] = useState(true);
 
   const handleNextClick = () => {
     // setNewProject({ ...newProject, name: form.values.projectName, path: form.values.projectPath });
@@ -144,9 +146,11 @@ function NewProjectStep1(props: StepProps) {
         </Flex>
       </Input.Wrapper>
       <Checkbox
-        checked={createSubDir}
+        checked={extraConfig.createSubDir}
         label={t("create_project.create_sub_dir")}
-        onChange={(event) => setCreateSubDir(event.currentTarget.checked)}
+        onChange={(event) => {
+          extraConfig.createSubDir = event.currentTarget.checked;
+        }}
       />
       <PrevAndNextButton {...props} onNextClick={handleNextClick} />
     </Stack>
@@ -253,7 +257,21 @@ function NewProjectModal(props: ModalProps) {
   };
 
   const handleCompleteButtonClicked = () => {
-    const filepath = newProject.path + "/" + newProject.name + ".json";
+    var filepath = newProject.path + "/";
+
+    if (extraConfig.createSubDir === true) {
+      createDir(newProject.path + "/" + newProject.name).catch(() => {
+        showFailedNotification({
+          translation: t,
+          title: t("create_project.create_new_failed_title"),
+          message: t("create_project.check_dir"),
+        });
+      });
+      filepath = newProject.path + "/" + newProject.name + "/";
+    }
+
+    filepath += newProject.name + ".json";
+
     const { path, ...rest } = newProject;
     writeTextFile(filepath, JSON.stringify(rest))
       .then(handleProjectCreatedSuccess, handleProjectCreatedFailed)
