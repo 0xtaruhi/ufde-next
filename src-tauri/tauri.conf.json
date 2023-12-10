@@ -23,6 +23,19 @@
         "message": false,
         "open": true,
         "save": false
+      },
+      "fs": {
+        "all": false,
+        "copyFile": false,
+        "createDir": true,
+        "exists": true,
+        "readDir": true,
+        "readFile": true,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": ["**", "$APPDATA/*"],
+        "writeFile": true
       }
     },
     "bundle": {

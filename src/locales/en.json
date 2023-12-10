@@ -6,7 +6,11 @@
   "menu": {
     "file": "File",
     "project": "Project",
-    "new_project": "New Project"
+    "new_project": "New Project",
+    "open_project": "Open Project",
+    "save_project": "Save Project",
+    "save_project_as": "Save Project As",
+    "close_project": "Close Project"
   },
   "settings": {
     "language": "Language",
@@ -33,7 +37,10 @@
     "finish_hint": "All settings are complete, click Finish to create the project.",
     "empty_project_name_error": "Project name cannot be empty!",
     "invalid_project_name_error": "Project name contains invalid characters!",
-    "empty_project_path_error": "Project path cannot be empty!"
+    "empty_project_path_error": "Project path cannot be empty!",
+    "create_new_failed_title": "Create new project failed",
+    "check_dir": "Please check the permissions of the program or project path.",
+    "create_new_success_title": "Successfully created new project"
   },
   "common": {
     "first_step": "First Step",

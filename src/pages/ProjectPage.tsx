@@ -1,14 +1,17 @@
 import { Button } from "@mantine/core";
 import { invoke } from "@tauri-apps/api";
 
-import { ProjectProps } from "../model/project";
 import StartUpPage from "./StartupPage";
 import showProgramFailedNotification from "./Notifies";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { ProjectContext } from "../App";
 
-function ProjectPage(props: ProjectProps) {
+function ProjectPage() {
   const { t } = useTranslation();
-  if (props.project !== null) {
+  const { project } = useContext(ProjectContext);
+
+  if (project !== null) {
     return (
       <>
         <Button

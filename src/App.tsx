@@ -1,7 +1,7 @@
 import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
 
 import { ProjectInfo } from "./model/project";
@@ -12,10 +12,10 @@ import HeaderBar from "./HeaderBar";
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
-  setProject: (_: ProjectInfo | null) => void;
-}>({ project: null, setProject: (_: ProjectInfo | null) => {} });
+  setProject: (project: ProjectInfo | null) => void;
+}>({ project: null, setProject: () => {} });
 
-interface NavLinkData {
+type NavLinkData = {
   label: string;
   icon?: React.ElementType;
   rightSection?: React.ElementType;
@@ -52,9 +52,9 @@ function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: 
   return <>{items}</>;
 }
 
-function MainContextArea({ navLabel, project }: { navLabel: string; project: ProjectInfo | null }) {
+function MainContextArea({ navLabel }: { navLabel: string }) {
   if (navLabel === "nav.project") {
-    return <ProjectPage project={project} />;
+    return <ProjectPage />;
   } else if (navLabel === "nav.settings") {
     return <SettingsPage />;
   }
@@ -63,10 +63,7 @@ function MainContextArea({ navLabel, project }: { navLabel: string; project: Pro
 
 function App() {
   const [opened, { toggle }] = useDisclosure(false);
-
   const [project, setProject] = useState<ProjectInfo | null>(null);
-  useContext(ProjectContext);
-
   const [navLabel, setNavLabel] = useState<string>("nav.project");
 
   return (
@@ -90,7 +87,7 @@ function App() {
 
         <AppShell.Main>
           <ProjectContext.Provider value={{ project, setProject }}>
-            <MainContextArea navLabel={navLabel} project={project} />
+            <MainContextArea navLabel={navLabel} />
           </ProjectContext.Provider>
         </AppShell.Main>
       </AppShell>

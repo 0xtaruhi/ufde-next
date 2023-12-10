@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, createContext } from "react";
+import { useState, useContext } from "react";
 import {
   Button,
   Group,
@@ -20,20 +20,17 @@ import { open } from "@tauri-apps/api/dialog";
 
 import "./NewProjectModal.css";
 import { t } from "i18next";
-import { ProjectInfo } from "../model/project";
+import { ProjectInfo, addRecentlyOpenedProject } from "../model/project";
+import { ProjectContext } from "../App";
+import { showFailedNotification, showSuccessNotification } from "./Notifies";
+import { writeTextFile } from "@tauri-apps/api/fs";
 
-const NewProjectContext = createContext<{
-  project: ProjectInfo;
-  setProject: (_: ProjectInfo) => void;
-}>({
-  project: {
-    name: "",
-    path: "",
-    file_lists: [],
-    target_device: "FDP3P7",
-  },
-  setProject: () => {},
-});
+const newProject: ProjectInfo = {
+  name: "",
+  path: "",
+  file_lists: [],
+  target_device: "FDP3P7",
+};
 
 async function getSelectedDirectory() {
   const result = open({
@@ -43,25 +40,25 @@ async function getSelectedDirectory() {
   return result;
 }
 
-interface PrevAndNextButtonProps {
+type PrevAndNextButtonProps = {
   totalSteps: number;
   currentStep: number;
   onPrevClick?: () => void;
   onNextClick?: () => void;
-}
+};
 
-interface StepProps {
+type StepProps = {
   totalSteps: number;
   currentStep: number;
   onPrevClick?: () => void;
   onNextClick?: () => void;
-}
+};
 
-interface StepContent {
+type StepContent = {
   label: string;
   description: string;
   content?: (props: StepProps) => JSX.Element;
-}
+};
 
 function PrevAndNextButton(props: PrevAndNextButtonProps) {
   const { totalSteps, currentStep, onPrevClick, onNextClick } = props;
@@ -83,8 +80,8 @@ function NewProjectStep1(props: StepProps) {
 
   const form = useForm({
     initialValues: {
-      projectName: "",
-      projectPath: "",
+      projectName: newProject.name,
+      projectPath: newProject.path,
       createSubDir: true,
     },
     validate: {
@@ -94,13 +91,13 @@ function NewProjectStep1(props: StepProps) {
         } else if (value.match('[$-/:-?{-~!"^_`\\\\\\[\\]]') !== null) {
           return t("create_project.invalid_project_name_error");
         }
-        return "";
+        return null;
       },
       projectPath: (value) => {
         if (value === "") {
           return t("create_project.empty_project_path_error");
         }
-        return "";
+        return null;
       },
     },
   });
@@ -109,13 +106,15 @@ function NewProjectStep1(props: StepProps) {
     const dir = await getSelectedDirectory();
     if (dir) {
       form.setFieldValue("projectPath", dir as string);
-      form.validate();
     }
   };
 
   const [createSubDir, setCreateSubDir] = useState(true);
 
   const handleNextClick = () => {
+    // setNewProject({ ...newProject, name: form.values.projectName, path: form.values.projectPath });
+    newProject.name = form.values.projectName;
+    newProject.path = form.values.projectPath;
     if (!form.validate().hasErrors) {
       props.onNextClick?.();
     }
@@ -154,18 +153,6 @@ function NewProjectStep1(props: StepProps) {
   );
 }
 
-interface FileItem {
-  name: string;
-  path: string;
-  type: "verilog" | "vhdl" | "systemverilog" | "unknown";
-}
-
-const files: FileItem[] = [
-  { name: "test.v", path: "/home/abc/test.v", type: "verilog" },
-  { name: "test.vhd", path: "/home/abc/test.vhd", type: "vhdl" },
-  { name: "test.sv", path: "/home/abc/test.sv", type: "systemverilog" },
-];
-
 function NewProjectStep2(props: StepProps) {
   const { t } = useTranslation();
 
@@ -176,7 +163,7 @@ function NewProjectStep2(props: StepProps) {
     console.log(result);
   };
 
-  const rows = files.map((file) => (
+  const rows = newProject.file_lists.map((file) => (
     <Table.Tr key={file.path}>
       <Table.Td>{file.name}</Table.Td>
       <Table.Td>{file.path}</Table.Td>
@@ -237,45 +224,70 @@ const steps: StepContent[] = [
 function NewProjectModal(props: ModalProps) {
   const { t } = useTranslation();
 
+  const { setProject } = useContext(ProjectContext);
   const [active, setActive] = useState(0);
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+
+  const nextStep = () => {
+    setActive((current) => (current < 3 ? current + 1 : current));
+  };
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const [project, setProject] = useState<ProjectInfo>({
-    name: "",
-    path: "",
-    file_lists: [],
-    target_device: "FDP3P7",
-  });
+  const handleProjectCreatedSuccess = () => {
+    setProject(newProject);
+    addRecentlyOpenedProject(newProject);
+
+    showSuccessNotification({
+      message: "",
+      title: t("create_project.create_new_success_title"),
+      translation: t,
+    });
+  };
+
+  const handleProjectCreatedFailed = (err: any) => {
+    console.log(err);
+    showFailedNotification({
+      message: t("create_project.check_dir"),
+      title: t("create_project.create_new_failed_title"),
+      translation: t,
+    });
+  };
+
+  const handleCompleteButtonClicked = () => {
+    const filepath = newProject.path + "/" + newProject.name + ".json";
+    const { path, ...rest } = newProject;
+    writeTextFile(filepath, JSON.stringify(rest))
+      .then(handleProjectCreatedSuccess, handleProjectCreatedFailed)
+      .finally(() => {
+        props.onClose();
+      });
+  };
 
   return (
     <Modal {...props} title={t("project.new_project")}>
       <Modal.Body>
-        <NewProjectContext.Provider value={{ project, setProject }}>
-          <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false}>
-            {steps.map((step, index) => (
-              <Stepper.Step key={step.label} label={t(step.label)} description={t(step.description)}>
-                {step.content
-                  ? step.content({
-                      currentStep: index,
-                      totalSteps: steps.length,
-                      onPrevClick: prevStep,
-                      onNextClick: nextStep,
-                    })
-                  : null}
-              </Stepper.Step>
-            ))}
-            <Stepper.Completed>
-              {t("create_project.finish_hint")}
-              <PrevAndNextButton
-                currentStep={steps.length}
-                totalSteps={steps.length}
-                onPrevClick={prevStep}
-                onNextClick={nextStep}
-              />
-            </Stepper.Completed>
-          </Stepper>
-        </NewProjectContext.Provider>
+        <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false}>
+          {steps.map((step, index) => (
+            <Stepper.Step key={step.label} label={t(step.label)} description={t(step.description)}>
+              {step.content
+                ? step.content({
+                    currentStep: index,
+                    totalSteps: steps.length,
+                    onPrevClick: prevStep,
+                    onNextClick: nextStep,
+                  })
+                : null}
+            </Stepper.Step>
+          ))}
+          <Stepper.Completed>
+            {t("create_project.finish_hint")}
+            <PrevAndNextButton
+              currentStep={steps.length}
+              totalSteps={steps.length}
+              onPrevClick={prevStep}
+              onNextClick={handleCompleteButtonClicked}
+            />
+          </Stepper.Completed>
+        </Stepper>
       </Modal.Body>
     </Modal>
   );

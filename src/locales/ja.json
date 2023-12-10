@@ -6,15 +6,19 @@
   "menu": {
     "file": "ファイル",
     "project": "プロジェクト",
-    "new_project": "新しいプロジェクト"
+    "new_project": "新規プロジェクト",
+    "open_project": "プロジェクトを開く",
+    "save_project": "プロジェクトを保存",
+    "save_project_as": "プロジェクトを別名で保存",
+    "close_project": "プロジェクトを閉じる"
   },
   "settings": {
     "language": "言語",
     "general": "一般"
   },
   "project": {
-    "create_a_new_project": "新しいプロジェクトを作成しよう！",
-    "new_project": "新しいプロジェクト",
+    "create_a_new_project": "新規プロジェクトを作成しよう！",
+    "new_project": "新規プロジェクト",
     "open_project": "プロジェクトを開く"
   },
   "create_project": {
@@ -33,7 +37,10 @@
     "finish_hint": "全ての設定が完了しました。「完了」をクリックしてプロジェクトを作成してください。",
     "empty_project_name_error": "プロジェクト名を入力してください。",
     "invalid_project_name_error": "プロジェクト名に無効な文字が含まれています。",
-    "empty_project_path_error": "プロジェクトパスを選択してください。"
+    "empty_project_path_error": "プロジェクトパスを選択してください。",
+    "create_new_failed_title": "新規プロジェクト作成失敗",
+    "check_dir": "プログラムまたはプロジェクトパスのパーミッションを確認してください。",
+    "create_new_success_title": "新規プロジェクト作成成功"
   },
   "common": {
     "first_step": "ステップ1",

@@ -1,6 +1,6 @@
 import i18n from "i18next";
 
-export interface Language {
+export type Language = {
   name: string;
   countryCode: string;
   code: string;

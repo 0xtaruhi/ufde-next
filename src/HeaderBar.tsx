@@ -3,7 +3,7 @@ import { TbSun, TbMoon, TbFile } from "react-icons/tb";
 import { ActionIcon } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { Group, Menu, Button, Burger } from "@mantine/core";
-import { VscNewFile } from "react-icons/vsc";
+import { VscClose, VscFolderOpened, VscNewFile, VscSave, VscSaveAs } from "react-icons/vsc";
 
 function LightDarkToggleButton() {
   const { setColorScheme } = useMantineColorScheme();
@@ -19,6 +19,34 @@ function LightDarkToggleButton() {
   );
 }
 
+const menuItems = [
+  {
+    icon: <VscNewFile />,
+    label: "menu.new_project",
+    onClick: () => {},
+  },
+  {
+    icon: <VscFolderOpened />,
+    label: "menu.open_project",
+    onClick: () => {},
+  },
+  {
+    icon: <VscSave />,
+    label: "menu.save_project",
+    onClick: () => {},
+  },
+  {
+    icon: <VscSaveAs />,
+    label: "menu.save_project_as",
+    onClick: () => {},
+  },
+  {
+    icon: <VscClose />,
+    label: "menu.close_project",
+    onClick: () => {},
+  }
+];
+
 function MenuArea() {
   const { t } = useTranslation();
 
@@ -32,7 +60,12 @@ function MenuArea() {
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Label>{t("menu.project")}</Menu.Label>
-          <Menu.Item leftSection={<VscNewFile />}>{t("menu.new_project")}</Menu.Item>
+          {menuItems.map((item) => (
+            <Menu.Item key={item.label} leftSection={item.icon} onClick={item.onClick}>
+              {" "}
+              {t(item.label)}
+            </Menu.Item>
+          ))}
         </Menu.Dropdown>
       </Menu>
     </Group>

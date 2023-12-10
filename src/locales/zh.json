@@ -6,7 +6,11 @@
   "menu": {
     "file": "文件",
     "project": "项目",
-    "new_project": "新建项目"
+    "new_project": "新建项目",
+    "open_project": "打开项目",
+    "save_project": "保存项目",
+    "save_project_as": "另存为",
+    "close_project": "关闭项目"
   },
   "settings": {
     "language": "语言",
@@ -33,7 +37,10 @@
     "finish_hint": "所有设定已完成，点击完成按钮以创建项目。",
     "empty_project_name_error": "项目名称不能为空。",
     "invalid_project_name_error": "项目名称包含无效字符。",
-    "empty_project_path_error": "项目路径不能为空。"
+    "empty_project_path_error": "项目路径不能为空。",
+    "create_new_failed_title": "创建新项目失败",
+    "check_dir": "请检查程序或相关路径的权限",
+    "create_new_success_title": "创建新项目成功"
   },
   "common": {
     "first_step": "步骤一",
