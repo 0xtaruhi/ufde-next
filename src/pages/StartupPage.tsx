@@ -8,7 +8,6 @@ import {
   List,
   ThemeIcon,
   Group,
-  FileButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
@@ -19,12 +18,17 @@ import "./StartupPage.css";
 import light_image from "../assets/startup.svg";
 import dark_image from "../assets/startup-dark.svg";
 import NewProjectModal from "./NewProjectModal";
+import { openProject } from "../model/project";
+import { useContext } from "react";
+import { ProjectContext } from "../App";
+import { showFailedNotification } from "./Notifies";
 
 function StartUpPage() {
   const { t } = useTranslation();
   const computedColorScheme = useComputedColorScheme("light");
 
   const [opened, { open, close }] = useDisclosure();
+  const { setProject } = useContext(ProjectContext);
 
   return (
     <>
@@ -64,13 +68,30 @@ function StartUpPage() {
                 <Button variant="filled" size="md" onClick={open} leftSection={<VscNewFile />}>
                   {t("project.new_project")}
                 </Button>
-                <FileButton onChange={() => {}} accept="project/prj">
-                  {(props) => (
-                    <Button {...props} size="md" variant="outline" leftSection={<VscFolderOpened />}>
-                      {t("project.open_project")}
-                    </Button>
-                  )}
-                </FileButton>
+                <Button
+                  size="md"
+                  variant="outline"
+                  leftSection={<VscFolderOpened />}
+                  onClick={() => {
+                    openProject().then(
+                      (p) => {
+                        if (p) {
+                          setProject(p);
+                        }
+                      },
+                      (err) => {
+                        console.error(err);
+                        showFailedNotification({
+                          translation: t,
+                          message: err,
+                          title: t("project.open_project_failed_title"),
+                        });
+                      }
+                    );
+                  }}
+                >
+                  {t("project.open_project")}
+                </Button>
               </Group>
             </div>
           </div>

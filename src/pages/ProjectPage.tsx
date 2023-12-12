@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Button, Card, Title } from "@mantine/core";
 import { invoke } from "@tauri-apps/api";
 
 import StartUpPage from "./StartupPage";
@@ -14,6 +14,9 @@ function ProjectPage() {
   if (project !== null) {
     return (
       <>
+        <Card withBorder radius="md" p="md">
+          <Title>{project.name}</Title>
+        </Card>
         <Button
           variant="subtle"
           onClick={() => {

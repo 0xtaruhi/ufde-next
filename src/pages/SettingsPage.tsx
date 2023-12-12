@@ -68,7 +68,7 @@ function SettingsPage() {
   return (
     <>
       <Divider my="xs" label={t("settings.general")} labelPosition="center" />
-      <Card withBorder radius={10} p="md" shadow="sm">
+      <Card radius={10} p="lg" shadow="sm">
         <ScrollArea>
           <LanguageSelector />
         </ScrollArea>
