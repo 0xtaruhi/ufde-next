@@ -44,9 +44,55 @@ Install [Rust](https://www.rust-lang.org/tools/install) and [Cargo](https://doc.
 
 Install [pnpm](https://pnpm.io/installation) first. Optionally, you can use npm or yarn instead.
 
+#### Cmake
+
+Install [Cmake](https://cmake.org/install/)
+
+#### Clang
+
+We recommend using [Clang](https://clang.llvm.org/) as the C/C++ compiler on the Linux and macOS platforms. On Windows, you can use [MSVC](https://visualstudio.microsoft.com/zh-hans/vs/features/cplusplus/)(*tested*) or [MinGW](http://www.mingw.org/) instead.
+
 ### Installing
 
-After cloning the repository, run the following command to install dependencies:
+#### Clone the repository
+
+```
+git clone https://github.com/0xtaruhi/ufde-next.git
+```
+
+#### Build FDE CLI
+
+The FDE Command Line Interface (FDE CLI) is a command line tool for FPGA design. It is written in C++ and it is the core of UFDE+. Although I've
+tried to clean all the warnings, there may still be some warnings when compiling. Just ignore them.
+
+FDE CLI is a submodule of UFDE+. So you need to initialize the submodule first:
+
+```bash
+git submodule update --init --recursive
+```
+
+Then, run the following command to build FDE CLI:
+
+```bash
+cd public/FDE-Source
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . && cmake --install .
+```
+
+You can find the built FDE CLI in the `public/FDE-Source/build/bin` directory. 
+
+**Note:** 
+1. If you are using MSVC on Windows, you need to add the `--config Release` option to the `cmake --build .` command.
+2. On macOS, the error `ld: library 'icudata' not found` may occur when building FDE CLI. You can fix this by running the following command: (Surely you need to install this library via Homebrew)
+```bash
+export LIBRARY_PATH=${LIBRARY_PATH}:/usr/local/opt/icu4c/lib
+```
+3. **IMPORTANT**: **DO NOT CHANGE THE BUILD DIRECTORY NAME!**
+
+#### Build UFDE+
+
+Change the current directory to the root directory of UFDE+ and run the following command to install the dependencies:
 
 ```bash
 pnpm install
