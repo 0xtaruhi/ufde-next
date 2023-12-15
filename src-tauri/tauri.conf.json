@@ -14,7 +14,18 @@
       "all": false,
       "shell": {
         "all": false,
-        "open": true
+        "open": true,
+        "sidecar": true,
+        "scope": [
+          { "name": "binaries/fde-cli/bitgen", "sidecar": true },
+          { "name": "binaries/fde-cli/import", "sidecar": true },
+          { "name": "binaries/fde-cli/map", "sidecar": true },
+          { "name": "binaries/fde-cli/nlfiner", "sidecar": true },
+          { "name": "binaries/fde-cli/pack", "sidecar": true },
+          { "name": "binaries/fde-cli/place", "sidecar": true },
+          { "name": "binaries/fde-cli/route", "sidecar": true },
+          { "name": "binaries/fde-cli/sta", "sidecar": true }
+        ]
       },
       "dialog": {
         "all": false,
@@ -34,8 +45,15 @@
         "removeDir": false,
         "removeFile": false,
         "renameFile": false,
-        "scope": ["**", "$APPDATA/*"],
+        "scope": [
+          "**",
+          "$APPDATA/*",
+          "$RESOURCE/**"
+        ],
         "writeFile": true
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {
@@ -48,6 +66,16 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
+      ],
+      "externalBin": [
+        "binaries/fde-cli/bitgen",
+        "binaries/fde-cli/import",
+        "binaries/fde-cli/map",
+        "binaries/fde-cli/nlfiner",
+        "binaries/fde-cli/pack",
+        "binaries/fde-cli/place",
+        "binaries/fde-cli/route",
+        "binaries/fde-cli/sta"
       ]
     },
     "security": {

@@ -6,6 +6,7 @@ import showProgramFailedNotification from "./Notifies";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { ProjectContext } from "../App";
+import { Command } from "@tauri-apps/api/shell";
 
 function ProjectPage() {
   const { t } = useTranslation();
@@ -26,6 +27,17 @@ function ProjectPage() {
           }}
         >
           {t("program.program")}
+        </Button>
+        <Button
+          variant="subtle"
+          onClick={() => {
+            const mapCommand = Command.sidecar("binaries/fde-cli/map");
+            mapCommand.execute().then((res) => {
+              console.log(res);
+            });
+          }}
+        >
+          test command
         </Button>
       </>
     );
