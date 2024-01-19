@@ -1,0 +1,14 @@
+.sectionTitle {
+    color: var(--mantine-color-dark);
+    padding: 8px;
+    font-size: large;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.projInfoField {
+    padding: 3px;
+    margin: 5px;
+    margin-right: auto;
+    font-weight: 700;
+}

@@ -97,6 +97,7 @@ impl UsbHandler {
 
     fn read_usb_base(&self, endpoint: EndPoint, buffer: &mut [u8]) -> DeviceResult<()> {
         let mut untransferred = buffer.len() as i32;
+        let mut buffer_current_ptr = buffer.as_mut_ptr();
 
         loop {
             let mut transferred = 0;
@@ -104,7 +105,7 @@ impl UsbHandler {
                 libusb_ffi::libusb_bulk_transfer(
                     self.handle,
                     endpoint as u8,
-                    buffer.as_ptr() as *mut u8,
+                    buffer_current_ptr,
                     untransferred,
                     &mut transferred,
                     1000,
@@ -121,6 +122,7 @@ impl UsbHandler {
             }
 
             untransferred -= transferred;
+            buffer_current_ptr = unsafe { buffer_current_ptr.add(transferred as usize) };
         }
 
         Ok(())
@@ -130,7 +132,7 @@ impl UsbHandler {
         let buffer = unsafe {
             std::slice::from_raw_parts_mut(
                 buffer.as_mut_ptr() as *mut u8,
-                buffer.len() * std::mem::size_of_val(buffer),
+                std::mem::size_of_val(buffer),
             )
         };
 
@@ -139,6 +141,7 @@ impl UsbHandler {
 
     fn write_usb_base(&self, endpoint: EndPoint, buffer: &[u8]) -> DeviceResult<()> {
         let mut untransferred = buffer.len() as i32;
+        let mut buffer_current_ptr = buffer.as_ptr();
 
         loop {
             let mut transferred = 0;
@@ -146,7 +149,7 @@ impl UsbHandler {
                 libusb_ffi::libusb_bulk_transfer(
                     self.handle,
                     endpoint as u8,
-                    buffer.as_ptr() as *mut u8,
+                    buffer_current_ptr as *mut u8,
                     untransferred,
                     &mut transferred,
                     1000,
@@ -163,6 +166,7 @@ impl UsbHandler {
             }
 
             untransferred -= transferred;
+            buffer_current_ptr = unsafe { buffer_current_ptr.add(transferred as usize) };
         }
 
         Ok(())
@@ -170,10 +174,7 @@ impl UsbHandler {
 
     pub fn write_usb<T>(&self, endpoint: EndPoint, buffer: &[T]) -> DeviceResult<()> {
         let buffer = unsafe {
-            std::slice::from_raw_parts(
-                buffer.as_ptr() as *const u8,
-                buffer.len() * std::mem::size_of_val(buffer),
-            )
+            std::slice::from_raw_parts(buffer.as_ptr() as *const u8, std::mem::size_of_val(buffer))
         };
 
         self.write_usb_base(endpoint, buffer)

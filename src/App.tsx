@@ -1,8 +1,8 @@
 import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
-import { createContext, useState } from "react";
-import { TbSettings, TbChevronRight, TbFile } from "react-icons/tb";
+import { createContext, useState, useContext } from "react";
+import { TbSettings, TbChevronRight, TbFile, TbActivity } from "react-icons/tb";
 
 import { ProjectInfo } from "./model/project";
 
@@ -27,15 +27,17 @@ const navLinksData: NavLinkData[] = [
     label: "nav.project",
     icon: TbFile,
     rightSection: TbChevronRight,
-    description: "",
   },
+  { label: "nav.flow", icon: TbActivity, rightSection: TbChevronRight },
   { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
 ];
 
 function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: (arg0: string) => void }) {
   const { t } = useTranslation();
+  const { project } = useContext(ProjectContext);
 
   const items = navLinksData.map((item) => (
+    project === null && item.label === "nav.flow" ? null :
     <NavLink
       active={navLabel === item.label}
       label={t(item.label)}

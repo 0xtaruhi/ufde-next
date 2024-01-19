@@ -1,6 +1,7 @@
 {
   "nav": {
     "project": "项目",
+    "flow": "流程",
     "settings": "设置"
   },
   "menu": {
@@ -22,7 +23,10 @@
     "open_project": "打开项目",
     "open_project_failed_title": "打开项目失败",
     "close_project_no_project_title": "没有打开的项目",
-    "close_project_no_project_content": "当前没有打开的项目。请先打开一个项目。"
+    "close_project_no_project_content": "当前没有打开的项目。请先打开一个项目。",
+    "basic_info": "基本信息",
+    "project_name": "项目名称",
+    "project_path": "项目路径"
   },
   "create_project": {
     "basic_info": "基本信息",
@@ -71,7 +75,8 @@
     "failed": "下载失败",
     "error": {
       "device open failed": "打开设备失败，请检查设备连接情况。"
-    }
+    },
+    "success": "下载成功"
   },
   "sourcefile": {
     "verilog": "Verilog 文件",

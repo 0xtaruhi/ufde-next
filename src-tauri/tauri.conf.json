@@ -17,14 +17,14 @@
         "open": true,
         "sidecar": true,
         "scope": [
-          { "name": "binaries/fde-cli/bitgen", "sidecar": true },
-          { "name": "binaries/fde-cli/import", "sidecar": true },
-          { "name": "binaries/fde-cli/map", "sidecar": true },
-          { "name": "binaries/fde-cli/nlfiner", "sidecar": true },
-          { "name": "binaries/fde-cli/pack", "sidecar": true },
-          { "name": "binaries/fde-cli/place", "sidecar": true },
-          { "name": "binaries/fde-cli/route", "sidecar": true },
-          { "name": "binaries/fde-cli/sta", "sidecar": true }
+          { "name": "binaries/fde-cli/bitgen", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/import", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/map", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/nlfiner", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/pack", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/place", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/route", "sidecar": true, "args": true },
+          { "name": "binaries/fde-cli/sta", "sidecar": true, "args": true }
         ]
       },
       "dialog": {

@@ -110,7 +110,7 @@ impl DeviceHandler {
         let buffer = unsafe {
             std::slice::from_raw_parts_mut(
                 buffer.as_mut_ptr() as *mut u16,
-                buffer.len() * std::mem::size_of_val(buffer) / 2,
+                std::mem::size_of_val(buffer) / 2,
             )
         };
 
@@ -133,7 +133,7 @@ impl DeviceHandler {
         let buffer = unsafe {
             std::slice::from_raw_parts_mut(
                 buffer.as_mut_ptr() as *mut u16,
-                buffer.len() * std::mem::size_of_val(buffer) / 2,
+                std::mem::size_of_val(buffer) / 2,
             )
         };
 
