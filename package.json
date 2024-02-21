@@ -10,29 +10,31 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@mantine/core": "^7.3.1",
-    "@mantine/form": "^7.3.1",
-    "@mantine/hooks": "^7.3.1",
-    "@mantine/notifications": "^7.3.1",
-    "@tauri-apps/api": "^1.5.1",
-    "i18next": "^23.7.8",
+    "@mantine/core": "^7.5.3",
+    "@mantine/form": "^7.5.3",
+    "@mantine/hooks": "^7.5.3",
+    "@mantine/notifications": "^7.5.3",
+    "@tauri-apps/api": "^1.5.3",
+    "ace-builds": "^1.32.6",
+    "i18next": "^23.8.3",
     "i18next-browser-languagedetector": "^7.2.0",
     "react": "^18.2.0",
+    "react-ace": "^10.1.0",
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.5.0",
     "react-icons": "^4.12.0",
-    "react-router-dom": "^6.20.1"
+    "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.5.7",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
+    "@tauri-apps/cli": "^1.5.9",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
-    "postcss": "^8.4.32",
-    "postcss-preset-mantine": "^1.11.1",
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",
     "typescript": "^5.3.3",
-    "vite": "^4.5.1"
+    "vite": "^4.5.2"
   }
 }

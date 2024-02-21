@@ -26,7 +26,13 @@
     "close_project_no_project_content": "当前没有打开的项目。请先打开一个项目。",
     "basic_info": "基本信息",
     "project_name": "项目名称",
-    "project_path": "项目路径"
+    "project_path": "项目路径",
+    "file_name": "文件名",
+    "file_path": "文件路径",
+    "file_type": "文件类型",
+    "source_files": "源文件",
+    "no_files": "没有文件",
+    "import_files": "导入文件"
   },
   "create_project": {
     "basic_info": "基本信息",
@@ -82,5 +88,36 @@
     "verilog": "Verilog 文件",
     "systemverilog": "SystemVerilog 文件",
     "constraint": "约束文件"
+  },
+  "flow": {
+    "settings": "设置",
+    "no-settings-available": "没有可用的设置",
+    "mode": "模式",
+    "dc": {
+      "import": {
+        "title": "导入 RTL 文件",
+        "description": "从 RTL 文件中导入电路网表，并转换为 XML 格式"
+      },
+      "map": {
+        "title": "工艺映射",
+        "description": "将逻辑网表映射到目标设备的原语上"
+      },
+      "pack": {
+        "title": "逻辑打包",
+        "description": "将查找表打包至逻辑块中"
+      },
+      "place": {
+        "title": "布局",
+        "description": "将逻辑块布局至目标设备上"
+      },
+      "route": {
+        "title": "布线",
+        "description": "将逻辑块之间的连接布线至目标设备上"
+      },
+      "genbit": {
+        "title": "生成位流",
+        "description": "生成目标设备的位流文件"
+      }
+    }
   }
 }

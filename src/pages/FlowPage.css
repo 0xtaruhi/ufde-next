@@ -1,0 +1,15 @@
+.flowItem {
+  background-color: transparent;
+  border-radius: var(--mantine-radius-md);
+  padding: 10px;
+}
+
+.flowItem:hover {
+  background-color: var(--mantine-color-default-hover);
+}
+
+.flowSettingsTitle {
+  border-bottom: 1px solid var(--mantine-color-default-border);
+  padding: 10px 0;
+  margin-bottom: 10px;
+}

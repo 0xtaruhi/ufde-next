@@ -9,6 +9,7 @@ import { ProjectInfo } from "./model/project";
 import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
+import FlowPage from "./pages/FlowPage";
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
@@ -57,6 +58,8 @@ function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: 
 function MainContextArea({ navLabel }: { navLabel: string }) {
   if (navLabel === "nav.project") {
     return <ProjectPage />;
+  } else if (navLabel === "nav.flow") {
+    return <FlowPage />;
   } else if (navLabel === "nav.settings") {
     return <SettingsPage />;
   }
@@ -64,7 +67,7 @@ function MainContextArea({ navLabel }: { navLabel: string }) {
 }
 
 function App() {
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle }] = useDisclosure(true);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [navLabel, setNavLabel] = useState<string>("nav.project");
 
