@@ -13,18 +13,61 @@
     "allowlist": {
       "all": false,
       "shell": {
-        "all": false,
+        "all": true,
+        "execute": true,
         "open": true,
         "sidecar": true,
         "scope": [
-          { "name": "binaries/fde-cli/bitgen", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/import", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/map", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/nlfiner", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/pack", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/place", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/route", "sidecar": true, "args": true },
-          { "name": "binaries/fde-cli/sta", "sidecar": true, "args": true }
+          {
+            "name": "binaries/fde-cli/bitgen",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/import",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/map",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/nlfiner",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/pack",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/place",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/route",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/fde-cli/sta",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "vscode.cmd",
+            "cmd": "code.cmd",
+            "args": true
+          },
+          {
+            "name": "vscode",
+            "cmd": "code",
+            "args": true
+          }
         ]
       },
       "dialog": {
@@ -57,6 +100,9 @@
       },
       "window": {
         "all": true
+      },
+      "os": {
+        "all": true
       }
     },
     "bundle": {
@@ -79,6 +125,9 @@
         "binaries/fde-cli/place",
         "binaries/fde-cli/route",
         "binaries/fde-cli/sta"
+      ],
+      "resources": [
+        "resource/**"
       ]
     },
     "security": {

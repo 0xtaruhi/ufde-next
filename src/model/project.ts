@@ -1,5 +1,6 @@
 import { open } from "@tauri-apps/api/dialog";
 import { BaseDirectory, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
+import isWindowsPlatform from "../utils/utils";
 
 export type SourceFile = {
   name: string;
@@ -49,10 +50,18 @@ export async function openProject() {
     ],
   });
 
+  async function getDirOfFile(path: string) {
+    if (await isWindowsPlatform()) {
+      return path.split("\\").slice(0, -1).join("\\");
+    } else {
+      return path.split("/").slice(0, -1).join("/");
+    }
+  }
+
   if (path && !Array.isArray(path)) {
     const content = await readTextFile(path);
     const openedProject = JSON.parse(content) as ProjectInfo;
-    openedProject.path = path;
+    openedProject.path = await getDirOfFile(path);
     addRecentlyOpenedProject(openedProject);
     return openedProject;
   }

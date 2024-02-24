@@ -46,7 +46,6 @@ function MenuArea() {
           (err) => {
             console.error(err);
             showFailedNotification({
-              translation: t,
               message: err,
               title: t("project.open_project_failed_title"),
             });
@@ -70,7 +69,6 @@ function MenuArea() {
       onClick: () => {
         if (project === null) {
           showWarningNotification({
-            translation: t,
             message: t("project.close_project_no_project_content"),
             title: t("project.close_project_no_project_title"),
           });

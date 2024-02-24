@@ -17,23 +17,28 @@ import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import "./FlowPage.css";
 import { useTranslation } from "react-i18next";
+import { Command } from "@tauri-apps/api/shell";
+import { useContext } from "react";
+import { ProjectContext } from "../App";
+import { resolveResource } from "@tauri-apps/api/path";
+import { useEffect } from "react";
+import { exists } from "@tauri-apps/api/fs";
+import { showSuccessNotification } from "./Notifies";
 
 const flowData = [
   { value: "DC", label: "DC" },
   { value: "Yosys", label: "Yosys" },
 ];
 
-function Flow({
-  flowName,
-  onRun,
-  runAvailable,
-  settingsPage,
-}: {
+interface AbstractFlowProps {
   flowName: string;
   onRun: () => void;
   runAvailable: boolean;
   settingsPage: React.ReactNode;
-}) {
+  status: string;
+}
+
+function Flow(props: AbstractFlowProps) {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -42,24 +47,35 @@ function Flow({
       <Drawer opened={opened} onClose={close} padding="md" size={350} position="right">
         <Stack gap="md">
           <Text size="md" className="flowSettingsTitle">
-            <b>{t("flow.settings")}</b> - {t("flow." + flowName + ".title")}
+            <b>{t("flow.settings")}</b> - {t("flow." + props.flowName + ".title")}
           </Text>
-          {settingsPage}
+          {props.settingsPage}
         </Stack>
       </Drawer>
       <Flex justify="space-between">
         <Text c="dimmed" size="sm">
-          {t("flow." + flowName + ".description")}
+          {t("flow." + props.flowName + ".description")}
         </Text>
         <Group>
-          <ActionIcon size="sm" variant="subtle" onClick={open} style={{ padding: "5px" }}>
+          <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
             <TbSettings size={20} />
           </ActionIcon>
-          <ActionIcon size="sm" variant="subtle" onClick={onRun} style={{ padding: "5px" }} disabled={!runAvailable}>
+          <ActionIcon
+            size="md"
+            variant="subtle"
+            onClick={props.onRun}
+            style={{ padding: "5px" }}
+            disabled={!props.runAvailable}
+          >
             <TbPlayerPlay size={20} />
           </ActionIcon>
         </Group>
       </Flex>
+      {props.status && (
+        <Text size="sm" c="dimmed">
+          {props.status}
+        </Text>
+      )}
     </>
   );
 }
@@ -78,78 +94,78 @@ function SettingsItem({ label, component }: { label: string; component: React.Re
   );
 }
 
-function DCImportFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
+interface FlowProps {
+  index: number;
   runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+  setActive: (index: number) => void;
+}
+
+function DCImportFlow(props: FlowProps) {
+  const projectContext = useContext(ProjectContext);
+  const [statusText, setStatusText] = useState<string>("");
+
+  const run = async () => {
+    const files = projectContext.project?.file_lists?.map((file) => file.path);
+
+    const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
+    console.log(celllibfilePath);
+    const outputFileName = projectContext.project?.name + "_dc_" + "imp.xml";
+
+    const command = Command.sidecar(
+      "binaries/fde-cli/import",
+      ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
+      { cwd: projectContext.project?.path }
+    );
+
+    command.stdout.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    command.execute().then(() => {
+      props.setActive(props.index + 1);
+      showSuccessNotification({ title: "Import", message: "Import completed successfully" });
+    }, (err) => {
+      console.error(err);
+      showSuccessNotification({ title: "Import", message: "Import failed" });
+    });
+  };
+
   return (
     <Flow
       flowName="dc.import"
-      onRun={() => {
-        setActive(active + 1);
-      }}
+      onRun={run}
       settingsPage={<EmptySettingsHint />}
-      runAvailable={runAvailable}
+      runAvailable={props.runAvailable}
+      status={statusText}
     />
   );
 }
 
-function DCMapFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
-  runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+function DCMapFlow(props: FlowProps) {
   return (
     <Flow
       flowName="dc.map"
-      onRun={() => {
-        setActive(active + 1);
-      }}
+      onRun={() => {}}
       settingsPage={<EmptySettingsHint />}
-      runAvailable={runAvailable}
+      runAvailable={props.runAvailable}
+      status=""
     />
   );
 }
 
-function DCPackFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
-  runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+function DCPackFlow(props: FlowProps) {
   return (
     <Flow
       flowName="dc.pack"
-      onRun={() => {
-        setActive(active + 1);
-      }}
+      onRun={() => {}}
       settingsPage={<EmptySettingsHint />}
-      runAvailable={runAvailable}
+      runAvailable={props.runAvailable}
+      status=""
     />
   );
 }
 
-function DCPlaceFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
-  runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+function DCPlaceFlow(props: FlowProps) {
   const { t } = useTranslation();
 
   const settings = (
@@ -162,26 +178,11 @@ function DCPlaceFlow({
   );
 
   return (
-    <Flow
-      flowName="dc.place"
-      onRun={() => {
-        setActive(active + 1);
-      }}
-      settingsPage={settings}
-      runAvailable={runAvailable}
-    />
+    <Flow flowName="dc.place" onRun={() => {}} settingsPage={settings} runAvailable={props.runAvailable} status="" />
   );
 }
 
-function DCRouteFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
-  runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+function DCRouteFlow(props: FlowProps) {
   function ModeSettingItem() {
     const combobox = useCombobox({
       onDropdownClose: () => combobox.resetSelectedOption(),
@@ -232,58 +233,61 @@ function DCRouteFlow({
   );
 
   return (
-    <Flow
-      flowName="dc.route"
-      onRun={() => {
-        setActive(active + 1);
-      }}
-      settingsPage={settings}
-      runAvailable={runAvailable}
-    />
+    <Flow flowName="dc.route" onRun={() => {}} settingsPage={settings} runAvailable={props.runAvailable} status="" />
   );
 }
 
-function DCGenBitFlow({
-  runAvailable,
-  active,
-  setActive,
-}: {
-  runAvailable: boolean;
-  active: number;
-  setActive: (arg0: number) => void;
-}) {
+function DCGenBitFlow(props: FlowProps) {
   return (
     <Flow
       flowName="dc.genbit"
-      onRun={() => {
-        setActive(active + 1);
-      }}
+      onRun={() => {}}
       settingsPage={<EmptySettingsHint />}
-      runAvailable={runAvailable}
+      runAvailable={props.runAvailable}
+      status=""
     />
   );
 }
 
 function DCFlows() {
   const { t } = useTranslation();
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
+  const projectContext = useContext(ProjectContext);
+  const project = projectContext.project;
 
   const flows = [
-    { name: "dc.import", component: DCImportFlow },
-    { name: "dc.map", component: DCMapFlow },
-    { name: "dc.pack", component: DCPackFlow },
-    { name: "dc.place", component: DCPlaceFlow },
-    { name: "dc.route", component: DCRouteFlow },
-    { name: "dc.genbit", component: DCGenBitFlow },
+    { name: "dc.import", component: DCImportFlow, target_file: "dc_imp.xml" },
+    { name: "dc.map", component: DCMapFlow, target_file: "dc_map.xml" },
+    { name: "dc.pack", component: DCPackFlow, target_file: "dc_pack.xml" },
+    { name: "dc.place", component: DCPlaceFlow, target_file: "dc_place.xml" },
+    { name: "dc.route", component: DCRouteFlow, target_file: "dc_route.xml" },
+    { name: "dc.genbit", component: DCGenBitFlow, target_file: "dc_genbit.xml" },
   ];
+
+  useEffect(() => {
+    const projectName = project?.name;
+    (async () => {
+      for (let i = 0; i < flows.length; i++) {
+        const flow = flows[i];
+        if (flow.target_file) {
+          const fileName = projectName + "_" + flow.target_file;
+          if (await exists(project?.path + "/" + fileName)) {
+            setActive(i + 1);
+          }
+        } else {
+          break;
+        }
+      }
+    })();
+  });
 
   return (
     <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={active}>
       {flows.map((flow, index) => {
         return (
-          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem">
+          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
             {flow.component ? (
-              <flow.component runAvailable={active === index + 1} active={active} setActive={setActive} />
+              <flow.component runAvailable={active >= index} index={index} setActive={setActive} />
             ) : (
               <></>
             )}

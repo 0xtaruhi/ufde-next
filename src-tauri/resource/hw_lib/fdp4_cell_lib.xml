@@ -1,0 +1,3295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries name="lib">
+	<library name="cell_lib">
+		<cell name="LUT" type="LUT">
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="A3" direction="input"/>
+			<port name="A4" direction="input"/>
+			<port name="WS" direction="input"/>
+			<port name="DI" direction="input"/>
+			<port name="D" direction="output"/>
+		</cell>
+		<cell name="FF" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="AND2" type="COMB">
+			<property name="truthtable" value="11"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AND3" type="COMB">
+			<property name="truthtable" value="111"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AND4" type="COMB">
+			<property name="truthtable" value="1111"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI21" type="COMB">
+			<property name="truthtable" value="0-0|-00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI211" type="COMB">
+			<property name="truthtable" value="0-00|-000"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI22" type="COMB">
+			<property name="truthtable" value="0-0-|0--0|-00-|-0-0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI221" type="COMB">
+			<property name="truthtable" value="0-0-0|0--00|-00-0|-0-00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI222" type="COMB">
+			<property name="truthtable" value="0-0-0-|0-0--0|0--00-|0--0-0|-00-0-|-00--0|-0-00-|-0-0-0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="C1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI2BB1" type="COMB">
+			<property name="truthtable" value="1-0|-10"/>
+			<port name="A0N" direction="input"/>
+			<port name="A1N" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI2BB2" type="COMB">
+			<property name="truthtable" value="1-0-|1--0|-10-|-1-0"/>
+			<port name="A0N" direction="input"/>
+			<port name="A1N" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI31" type="COMB">
+			<property name="truthtable" value="0--0|-0-0|--00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI32" type="COMB">
+			<property name="truthtable" value="0--0-|0---0|-0-0-|-0--0|--00-|--0-0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="AOI33" type="COMB">
+			<property name="truthtable" value="0--0--|0---0-|0----0|-0-0--|-0--0-|-0---0|--00--|--0-0-|--0--0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="B2" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="BUF" type="COMB">
+			<property name="truthtable" value="1"/>
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IBUF" type="COMB">
+			<property name="truthtable" value="1"/>
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OBUF" type="COMB">
+			<property name="truthtable" value="1"/>
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IOBUF" type="GENERIC">
+			<port name="O" direction="output"/>
+			<port name="IO" direction="inout"/>
+			<port name="I" direction="input"/>
+			<port name="T" direction="input"/>
+		</cell>
+		<cell name="CLKBUF" type="COMB">
+			<property name="truthtable" value="1"/>
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DFFHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+			<port name="D" direction="input"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="DFFRHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+			<port name="D" direction="input"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="RN" direction="input" type="reset"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="DFFSHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+			<port name="D" direction="input"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="SN" direction="input" type="reset"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="DFFNHQ" type="FFLATCH">
+			<property name="edge" value="fall"/>
+			<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="fe"/-->
+			<port name="D" direction="input"/>
+			<port name="CKN" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="EDFFHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<port name="D" direction="input"/>
+			<port name="E" direction="input" type="enable"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="EDFFTRHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<port name="RN" direction="input" type="reset"/>
+			<port name="D" direction="input"/>
+			<port name="E" direction="input" type="enable"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="EDFFTSHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<port name="SN" direction="input" type="reset"/>
+			<port name="D" direction="input"/>
+			<port name="E" direction="input" type="enable"/>
+			<port name="CK" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="INV" type="COMB">
+			<property name="truthtable" value="0"/>
+			<port name="A" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="MX2" type="COMB">
+			<property name="truthtable" value="1-0|-11"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="S0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="MXI2" type="COMB">
+			<property name="truthtable" value="-01|0-0|-00"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="S0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="MX4" type="COMB">
+			<property name="truthtable" value="1---00|-1--01|--1-10|---111"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="S0" direction="input"/>
+			<port name="S1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND2" type="COMB">
+			<property name="truthtable" value="0-|-0"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND2B" type="COMB">
+			<property name="truthtable" value="1-|-0"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND3" type="COMB">
+			<property name="truthtable" value="0--|-0-|--0"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND3B" type="COMB">
+			<property name="truthtable" value="1--|-0-|--0"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND4" type="COMB">
+			<property name="truthtable" value="0---|-0--|--0-|---0"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND4B" type="COMB">
+			<property name="truthtable" value="1---|-0--|--0-|---0"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NAND4BB" type="COMB">
+			<property name="truthtable" value="1---|-1--|--0-|---0"/>
+			<port name="AN" direction="input"/>
+			<port name="BN" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR2" type="COMB">
+			<property name="truthtable" value="00"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR2B" type="COMB">
+			<property name="truthtable" value="10"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR3" type="COMB">
+			<property name="truthtable" value="000"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR3B" type="COMB">
+			<property name="truthtable" value="100"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR4" type="COMB">
+			<property name="truthtable" value="0000"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR4B" type="COMB">
+			<property name="truthtable" value="1000"/>
+			<port name="AN" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="NOR4BB" type="COMB">
+			<property name="truthtable" value="1100"/>
+			<port name="AN" direction="input"/>
+			<port name="BN" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI21" type="COMB">
+			<property name="truthtable" value="00-|--0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI211" type="COMB">
+			<property name="truthtable" value="00--|--0-|---0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI22" type="COMB">
+			<property name="truthtable" value="00--|--00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI221" type="COMB">
+			<property name="truthtable" value="00---|--00-|----0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI222" type="COMB">
+			<property name="truthtable" value="00----|--00--|----00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="C0" direction="input"/>
+			<port name="C1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI2BB1" type="COMB">
+			<property name="truthtable" value="11-|--0"/>
+			<port name="A0N" direction="input"/>
+			<port name="A1N" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI2BB2" type="COMB">
+			<property name="truthtable" value="11--|--00"/>
+			<port name="A0N" direction="input"/>
+			<port name="A1N" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI31" type="COMB">
+			<property name="truthtable" value="000-|---0"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI32" type="COMB">
+			<property name="truthtable" value="000--|---00"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OAI33" type="COMB">
+			<property name="truthtable" value="000---|---000"/>
+			<port name="A0" direction="input"/>
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="B0" direction="input"/>
+			<port name="B1" direction="input"/>
+			<port name="B2" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OR2" type="COMB">
+			<property name="truthtable" value="1-|-1"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OR3" type="COMB">
+			<property name="truthtable" value="1--|-1-|--1"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="OR4" type="COMB">
+			<property name="truthtable" value="1---|-1--|--1-|---1"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="C" direction="input"/>
+			<port name="D" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="TBUF" type="TBUFFER">
+			<port name="A" direction="input"/>
+			<port name="OE" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="TLAT" type="FFLATCH">
+			<port name="D" direction="input"/>
+			<port name="G" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="TLATHQ" type="FFLATCH">
+			<property name="edge" value="rise"/>
+			<port name="D" direction="input"/>
+			<port name="G" direction="input" type="clock"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="XNOR2" type="COMB">
+			<property name="truthtable" value="11|00"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="XOR2" type="COMB">
+			<property name="truthtable" value="01|10"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="Y" direction="output"/>
+		</cell>
+		<cell name="ADDF" type="MACRO">
+			<property name="truthtable" value="1100001100111100"/>
+			<port name="A" direction="input"/>
+			<port name="B" direction="input"/>
+			<port name="CI" direction="input"/>
+			<port name="S" direction="output"/>
+			<port name="CO" direction="output" type="carry"/>
+		</cell>
+		<cell name="LOGIC_0" type="MACRO">
+			<property name="truthtable" value="|0"/>
+			<port name="LOGIC_0_PIN" direction="output"/>
+		</cell>
+		<cell name="LOGIC_1" type="MACRO">
+			<property name="truthtable" value="|1"/>
+			<port name="LOGIC_1_PIN" direction="output"/>
+		</cell>
+		<cell name="LUT2" type="LUT">
+			<port name="ADR0" direction="input"/>
+			<port name="ADR1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="LUT3" type="LUT">
+			<port name="ADR0" direction="input"/>
+			<port name="ADR1" direction="input"/>
+			<port name="ADR2" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="LUT4" type="LUT">
+			<port name="ADR0" direction="input"/>
+			<port name="ADR1" direction="input"/>
+			<port name="ADR2" direction="input"/>
+			<port name="ADR3" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="LUT5" type="LUT">
+			<port name="ADR0" direction="input"/>
+			<port name="ADR1" direction="input"/>
+			<port name="ADR2" direction="input"/>
+			<port name="ADR3" direction="input"/>
+			<port name="ADR4" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="LUT6" type="LUT">
+			<port name="ADR0" direction="input"/>
+			<port name="ADR1" direction="input"/>
+			<port name="ADR2" direction="input"/>
+			<port name="ADR3" direction="input"/>
+			<port name="ADR4" direction="input"/>
+			<port name="ADR5" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IPAD" type="MACRO">
+			<port name="PAD" direction="input"/>
+		</cell>
+		<cell name="OPAD" type="MACRO">
+			<port name="PAD" direction="output"/>
+		</cell>
+		<cell name="IOPAD" type="MACRO">
+			<port name="PAD" direction="inout"/>
+		</cell>
+		<cell name="INV" type="MACRO">
+			<port name="O" direction="output"/>
+			<port name="I" direction="input"/>
+		</cell>
+		<cell name="RAM" type="RAM">
+			<port direction="input" name="A_SWA[0]"/>
+			<port direction="input" name="A_SWA[1]"/>
+			<port direction="input" name="A_SWA[2]"/>
+			<port direction="input" name="A_SWA[3]"/>
+			<port direction="input" name="A_SWA[4]"/>
+			<port direction="input" name="A_SWA[5]"/>
+			<port direction="input" name="A_SWA[6]"/>
+			<port direction="input" name="A_SWA[7]"/>
+			<port direction="input" name="A_SWA[8]"/>
+			<port direction="input" name="A_SWA[9]"/>
+			<port direction="input" name="A_SWA[10]"/>
+			<port direction="input" name="A_SWA[11]"/>
+			<port direction="input" name="A_SWA[12]"/>
+			<port direction="input" name="A_SWA[13]"/>
+			<port direction="input" name="A_SW[0]"/>
+			<port direction="input" name="A_SW[1]"/>
+			<port direction="input" name="A_SW[2]"/>
+			<port direction="input" name="A_SW[3]"/>
+			<port direction="input" name="A_SW[4]"/>
+			<port direction="input" name="A_SW[5]"/>
+			<port direction="input" name="A_SW[6]"/>
+			<port direction="input" name="A_SW[7]"/>
+			<port direction="input" name="A_SW[8]"/>
+			<port direction="input" name="A_SW[9]"/>
+			<port direction="input" name="A_SW[10]"/>
+			<port direction="input" name="A_SW[11]"/>
+			<port direction="input" name="A_SW[12]"/>
+			<port direction="input" name="A_SW[13]"/>
+			<port direction="input" name="D_SWA[0]"/>
+			<port direction="input" name="D_SWA[1]"/>
+			<port direction="input" name="D_SWA[2]"/>
+			<port direction="input" name="D_SWA[3]"/>
+			<port direction="input" name="D_SWA[4]"/>
+			<port direction="input" name="D_SWA[5]"/>
+			<port direction="input" name="D_SWA[6]"/>
+			<port direction="input" name="D_SWA[7]"/>
+			<port direction="input" name="D_SWA[8]"/>
+			<port direction="input" name="D_SW[0]"/>
+			<port direction="input" name="D_SW[1]"/>
+			<port direction="input" name="D_SW[2]"/>
+			<port direction="input" name="D_SW[3]"/>
+			<port direction="input" name="D_SW[4]"/>
+			<port direction="input" name="D_SW[5]"/>
+			<port direction="input" name="D_SW[6]"/>
+			<port direction="input" name="D_SW[7]"/>
+			<port direction="input" name="D_SW[8]"/>
+			<port direction="input" name="WEN_SWA"/>
+			<port direction="input" name="WEN_SW"/>
+			<port direction="input" name="CEN_SWA"/>
+			<port direction="input" name="CEN_SW"/>
+			<port direction="input" name="OEN_SWA"/>
+			<port direction="input" name="OEN_SW"/>
+			<port direction="input" name="CLK_LOCAL_SWA"/>
+			<port direction="input" name="CLK_LOCAL_SW"/>
+			<port direction="input" name="SA"/>
+			<port direction="input" name="S"/>
+			<port direction="output" name="QA[0]"/>
+			<port direction="output" name="QA[1]"/>
+			<port direction="output" name="QA[2]"/>
+			<port direction="output" name="QA[3]"/>
+			<port direction="output" name="QA[4]"/>
+			<port direction="output" name="QA[5]"/>
+			<port direction="output" name="QA[6]"/>
+			<port direction="output" name="QA[7]"/>
+			<port direction="output" name="QA[8]"/>
+			<port direction="output" name="Q[0]"/>
+			<port direction="output" name="Q[1]"/>
+			<port direction="output" name="Q[2]"/>
+			<port direction="output" name="Q[3]"/>
+			<port direction="output" name="Q[4]"/>
+			<port direction="output" name="Q[5]"/>
+			<port direction="output" name="Q[6]"/>
+			<port direction="output" name="Q[7]"/>
+			<port direction="output" name="Q[8]"/>
+			<port direction="input" name="GCLK0" type="clock"/>
+			<port direction="input" name="GCLK1" type="clock"/>
+			<port direction="input" name="GCLK2" type="clock"/>
+			<port direction="input" name="GCLK3" type="clock"/>
+		</cell>
+		<cell name="BLOCKRAM_1" type="GENERIC">
+			<port name="DI0" direction="input"/>
+			<port name="DI1" direction="input"/>
+			<port name="DI2" direction="input"/>
+			<port name="DI3" direction="input"/>
+			<port name="DI4" direction="input"/>
+			<port name="DI5" direction="input"/>
+			<port name="DI6" direction="input"/>
+			<port name="DI7" direction="input"/>
+			<port name="DI8" direction="input"/>
+			<port name="DI9" direction="input"/>
+			<port name="DI10" direction="input"/>
+			<port name="DI11" direction="input"/>
+			<port name="DI12" direction="input"/>
+			<port name="DI13" direction="input"/>
+			<port name="DI14" direction="input"/>
+			<port name="DI15" direction="input"/>
+			<port name="ADDR0" direction="input"/>
+			<port name="ADDR1" direction="input"/>
+			<port name="ADDR2" direction="input"/>
+			<port name="ADDR3" direction="input"/>
+			<port name="ADDR4" direction="input"/>
+			<port name="ADDR5" direction="input"/>
+			<port name="ADDR6" direction="input"/>
+			<port name="ADDR7" direction="input"/>
+			<port name="ADDR8" direction="input"/>
+			<port name="ADDR9" direction="input"/>
+			<port name="ADDR10" direction="input"/>
+			<port name="ADDR11" direction="input"/>
+			<port name="RST" direction="input"/>
+			<port name="EN" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="DO0" direction="output"/>
+			<port name="DO1" direction="output"/>
+			<port name="DO2" direction="output"/>
+			<port name="DO3" direction="output"/>
+			<port name="DO4" direction="output"/>
+			<port name="DO5" direction="output"/>
+			<port name="DO6" direction="output"/>
+			<port name="DO7" direction="output"/>
+			<port name="DO8" direction="output"/>
+			<port name="DO9" direction="output"/>
+			<port name="DO10" direction="output"/>
+			<port name="DO11" direction="output"/>
+			<port name="DO12" direction="output"/>
+			<port name="DO13" direction="output"/>
+			<port name="DO14" direction="output"/>
+			<port name="DO15" direction="output"/>
+		</cell>
+		<cell name="BLOCKRAM_2" type="GENERIC">
+			<port name="DIA0" direction="input"/>
+			<port name="DIA1" direction="input"/>
+			<port name="DIA2" direction="input"/>
+			<port name="DIA3" direction="input"/>
+			<port name="DIA4" direction="input"/>
+			<port name="DIA5" direction="input"/>
+			<port name="DIA6" direction="input"/>
+			<port name="DIA7" direction="input"/>
+			<port name="DIA8" direction="input"/>
+			<port name="DIA9" direction="input"/>
+			<port name="DIA10" direction="input"/>
+			<port name="DIA11" direction="input"/>
+			<port name="DIA12" direction="input"/>
+			<port name="DIA13" direction="input"/>
+			<port name="DIA14" direction="input"/>
+			<port name="DIA15" direction="input"/>
+			<port name="ADDRA0" direction="input"/>
+			<port name="ADDRA1" direction="input"/>
+			<port name="ADDRA2" direction="input"/>
+			<port name="ADDRA3" direction="input"/>
+			<port name="ADDRA4" direction="input"/>
+			<port name="ADDRA5" direction="input"/>
+			<port name="ADDRA6" direction="input"/>
+			<port name="ADDRA7" direction="input"/>
+			<port name="ADDRA8" direction="input"/>
+			<port name="ADDRA9" direction="input"/>
+			<port name="ADDRA10" direction="input"/>
+			<port name="ADDRA11" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<port name="ENA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="DOA0" direction="output"/>
+			<port name="DOA1" direction="output"/>
+			<port name="DOA2" direction="output"/>
+			<port name="DOA3" direction="output"/>
+			<port name="DOA4" direction="output"/>
+			<port name="DOA5" direction="output"/>
+			<port name="DOA6" direction="output"/>
+			<port name="DOA7" direction="output"/>
+			<port name="DOA8" direction="output"/>
+			<port name="DOA9" direction="output"/>
+			<port name="DOA10" direction="output"/>
+			<port name="DOA11" direction="output"/>
+			<port name="DOA12" direction="output"/>
+			<port name="DOA13" direction="output"/>
+			<port name="DOA14" direction="output"/>
+			<port name="DOA15" direction="output"/>
+			<port name="DIB0" direction="input"/>
+			<port name="DIB1" direction="input"/>
+			<port name="DIB2" direction="input"/>
+			<port name="DIB3" direction="input"/>
+			<port name="DIB4" direction="input"/>
+			<port name="DIB5" direction="input"/>
+			<port name="DIB6" direction="input"/>
+			<port name="DIB7" direction="input"/>
+			<port name="DIB8" direction="input"/>
+			<port name="DIB9" direction="input"/>
+			<port name="DIB10" direction="input"/>
+			<port name="DIB11" direction="input"/>
+			<port name="DIB12" direction="input"/>
+			<port name="DIB13" direction="input"/>
+			<port name="DIB14" direction="input"/>
+			<port name="DIB15" direction="input"/>
+			<port name="ADDRB0" direction="input"/>
+			<port name="ADDRB1" direction="input"/>
+			<port name="ADDRB2" direction="input"/>
+			<port name="ADDRB3" direction="input"/>
+			<port name="ADDRB4" direction="input"/>
+			<port name="ADDRB5" direction="input"/>
+			<port name="ADDRB6" direction="input"/>
+			<port name="ADDRB7" direction="input"/>
+			<port name="ADDRB8" direction="input"/>
+			<port name="ADDRB9" direction="input"/>
+			<port name="ADDRB10" direction="input"/>
+			<port name="ADDRB11" direction="input"/>
+			<port name="RSTB" direction="input"/>
+			<port name="ENB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="DOB0" direction="output"/>
+			<port name="DOB1" direction="output"/>
+			<port name="DOB2" direction="output"/>
+			<port name="DOB3" direction="output"/>
+			<port name="DOB4" direction="output"/>
+			<port name="DOB5" direction="output"/>
+			<port name="DOB6" direction="output"/>
+			<port name="DOB7" direction="output"/>
+			<port name="DOB8" direction="output"/>
+			<port name="DOB9" direction="output"/>
+			<port name="DOB10" direction="output"/>
+			<port name="DOB11" direction="output"/>
+			<port name="DOB12" direction="output"/>
+			<port name="DOB13" direction="output"/>
+			<port name="DOB14" direction="output"/>
+			<port name="DOB15" direction="output"/>
+		</cell>
+		<cell name="RAMB4_S1" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DO"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDR"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DI"/>
+			<port name="EN" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="RST" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S1_S1" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="0" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S1_S2" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="1" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S1_S4" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S1_S8" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S1_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S2" type="RAM">
+			<portGrp direction="output" lsb="0" msb="1" name="DO"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDR"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DI"/>
+			<port name="EN" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="RST" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S2_S2" type="RAM">
+			<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="1" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S2_S4" type="RAM">
+			<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S2_S8" type="RAM">
+			<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S2_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S4" type="RAM">
+			<portGrp direction="output" lsb="0" msb="3" name="DO"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDR"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DI"/>
+			<port name="EN" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="RST" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S4_S4" type="RAM">
+			<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S4_S8" type="RAM">
+			<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S4_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S8" type="RAM">
+			<portGrp direction="output" lsb="0" msb="7" name="DO"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDR"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DI"/>
+			<port name="EN" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="RST" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S8_S8" type="RAM">
+			<portGrp direction="output" lsb="0" msb="7" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S8_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="7" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="8" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="7" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="15" name="DO"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDR"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DI"/>
+			<port name="EN" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="RST" direction="input"/>
+		</cell>
+		<cell name="RAMB4_S16_S16" type="RAM">
+			<portGrp direction="output" lsb="0" msb="15" name="DOA"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRA"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIA"/>
+			<port name="ENA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+			<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+			<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+			<port name="ENB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+		</cell>
+	</library>
+	<library name="template_cell_lib">
+		<cell name="FFX" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="FFY" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="F5MUX" type="GENERIC">
+			<port name="F" direction="input"/>
+			<port name="G" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="FXMUX" type="GENERIC">
+			<port name="F5" direction="input"/>
+			<port name="FXOR" direction="input"/>
+			<port name="F" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="XORF" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="XORG" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DYMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GYMUX" type="GENERIC">
+			<port name="SOPEXT" direction="input"/>
+			<port name="FX" direction="input"/>
+			<port name="GXOR" direction="input"/>
+			<port name="G" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="F6MUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="YBMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="XBMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DXMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ORCY" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CYINIT" type="GENERIC">
+			<port name="BX" direction="input"/>
+			<port name="CIN" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CY0F" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="F1" direction="input"/>
+			<port name="F2" direction="input"/>
+			<port name="BX" direction="input"/>
+			<port name="PROD" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CY0G" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="G1" direction="input"/>
+			<port name="G2" direction="input"/>
+			<port name="BY" direction="input"/>
+			<port name="PROD" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CYSELF" type="GENERIC">
+			<port name="I1" direction="input"/>
+			<port name="F" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CYSELG" type="GENERIC">
+			<port name="I1" direction="input"/>
+			<port name="G" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GAND" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="FAND" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CYMUXF" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="S0" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CYMUXG" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="S0" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SOPEXTSEL" type="GENERIC">
+			<port name="SOPIN" direction="input"/>
+			<port name="I0" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WSGEN" type="GENERIC">
+			<port name="WE" direction="input"/>
+			<port name="WE0" direction="input"/>
+			<port name="WE1" direction="input"/>
+			<port name="WE2" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="WSG" direction="output"/>
+			<port name="WSF" direction="output"/>
+		</cell>
+		<cell name="DIG_MUX" type="GENERIC">
+			<port name="SHIFTIN" direction="input"/>
+			<port name="ALTDIG" direction="input"/>
+			<port name="BY" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DIF_MUX" type="GENERIC">
+			<port name="SHIFTIN" direction="input"/>
+			<port name="ALTDIF" direction="input"/>
+			<port name="BX" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="BYINV" type="GENERIC">
+			<port name="BY" direction="input"/>
+			<port name="BY_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="BXINV" type="GENERIC">
+			<port name="BX" direction="input"/>
+			<port name="BX_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CEINV" type="GENERIC">
+			<port name="CE" direction="input"/>
+			<port name="CE_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="CLKINV" type="GENERIC">
+			<port name="CLK" direction="input"/>
+			<port name="CLK_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SRINV" type="GENERIC">
+			<port name="SR" direction="input"/>
+			<port name="SR_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="F" type="GENERIC">
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="A3" direction="input"/>
+			<port name="A4" direction="input"/>
+			<port name="WF1" direction="input"/>
+			<port name="WF2" direction="input"/>
+			<port name="WF3" direction="input"/>
+			<port name="WF4" direction="input"/>
+			<port name="WS" direction="input"/>
+			<port name="DI" direction="input"/>
+			<port name="D" direction="output"/>
+			<port name="MC15" direction="output"/>
+		</cell>
+		<cell name="G" type="GENERIC">
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="A3" direction="input"/>
+			<port name="A4" direction="input"/>
+			<port name="WG1" direction="input"/>
+			<port name="WG2" direction="input"/>
+			<port name="WG3" direction="input"/>
+			<port name="WG4" direction="input"/>
+			<port name="WS" direction="input"/>
+			<port name="DI" direction="input"/>
+			<port name="D" direction="output"/>
+			<port name="MC15" direction="output"/>
+		</cell>
+		<cell name="WG4USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WG3USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WG2USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WG1USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="COUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SLICEWE2USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SLICEWE1USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SLICEWE0USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WF4USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WF3USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WF2USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="WF1USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SRFFMUX" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SHIFTOUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="REVUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SOPOUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="YBUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="BYOUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="BYINVOUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="FXUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="YUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DIGUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="F5USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="XUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="BXOUTUSED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="I1_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="I0_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GCLKMUX" type="GENERIC">
+			<port name="I1" direction="input"/>
+			<port name="I0" direction="input"/>
+			<port name="T" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GCLK_BUFFER" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SINV" type="GENERIC">
+			<port name="S" direction="input"/>
+			<port name="S_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="T1INV" type="GENERIC">
+			<port name="T1" direction="input"/>
+			<port name="T1_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TCEINV" type="GENERIC">
+			<port name="TCE" direction="input"/>
+			<port name="TCE_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="T2INV" type="GENERIC">
+			<port name="T2" direction="input"/>
+			<port name="T2_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DIFFO_IN_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="O1INV" type="GENERIC">
+			<port name="O1" direction="input"/>
+			<port name="O1_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OTCLK1INV" type="GENERIC">
+			<port name="OTCLK1" direction="input"/>
+			<port name="OTCLK1_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OCEINV" type="GENERIC">
+			<port name="OCE" direction="input"/>
+			<port name="OCE_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="O2INV" type="GENERIC">
+			<port name="O2" direction="input"/>
+			<port name="O2_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OTCLK2INV" type="GENERIC">
+			<port name="OTCLK2" direction="input"/>
+			<port name="OTCLK2_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SRINV" type="GENERIC">
+			<port name="SR" direction="input"/>
+			<port name="SR_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="REVINV" type="GENERIC">
+			<port name="REV" direction="input"/>
+			<port name="REV_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TSR_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TREV_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OSR_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OREV_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TFF1" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="TFF2" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="OFF1" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="OFF2" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="TFFDDRBLACKBOX" type="GENERIC">
+			<port name="TFF1" direction="input"/>
+			<port name="TFF2" direction="input"/>
+			<port name="TFFDDR" direction="output"/>
+		</cell>
+		<cell name="OFFDDRBLACKBOX" type="GENERIC">
+			<port name="OFF1" direction="input"/>
+			<port name="OFF2" direction="input"/>
+			<port name="OFFDDR" direction="output"/>
+		</cell>
+		<cell name="TMUX" type="GENERIC">
+			<port name="T1" direction="input"/>
+			<port name="TFF1" direction="input"/>
+			<port name="TFFDDR" direction="input"/>
+			<port name="T2" direction="input"/>
+			<port name="TFF2" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OMUX" type="GENERIC">
+			<port name="O1" direction="input"/>
+			<port name="OFF1" direction="input"/>
+			<port name="OFFDDR" direction="input"/>
+			<port name="O2" direction="input"/>
+			<port name="OFF2" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="T_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="OUTBUF" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="T" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="INBUF" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ICLK1INV" type="GENERIC">
+			<port name="ICLK1" direction="input"/>
+			<port name="ICLK1_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ICEINV" type="GENERIC">
+			<port name="ICE" direction="input"/>
+			<port name="ICE_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ICLK2INV" type="GENERIC">
+			<port name="ICLK2" direction="input"/>
+			<port name="ICLK2_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="DELAY" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TSMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IDELMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ISELMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="T" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IFFDELMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IFFSELMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="T" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IFFDMUX" type="GENERIC">
+			<port name="I0" direction="input"/>
+			<port name="I1" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="ISR_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IREV_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IFF1" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="IFF2" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="GND" type="GENERIC">
+			<port name="G" direction="output"/>
+		</cell>
+		<cell name="I1_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="I0_USED" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GCLKMUX" type="GENERIC">
+			<port name="I1" direction="input"/>
+			<port name="I0" direction="input"/>
+			<port name="T" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="GCLK_BUFFER" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="SINV" type="GENERIC">
+			<port name="S" direction="input"/>
+			<port name="S_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="IINV" type="GENERIC">
+			<port name="I" direction="input"/>
+			<port name="I_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TINV" type="GENERIC">
+			<port name="T" direction="input"/>
+			<port name="T_B" direction="input"/>
+			<port name="O" direction="output"/>
+		</cell>
+		<cell name="TRISTATE" type="GENERIC">
+			<port name="I" direction="input" capacitance="0"/>
+			<port name="S" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_disable"/>
+					<related_pin value="S"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_enable"/>
+					<related_pin value="S"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+	</library>
+	<library name="template_work_lib">
+		<cell name="slice" type="SLICE">
+			<port name="SOPIN" direction="input"/>
+			<port name="FXINA" direction="input"/>
+			<port name="FXINB" direction="input"/>
+			<port name="G4" direction="input"/>
+			<port name="G3" direction="input"/>
+			<port name="G2" direction="input"/>
+			<port name="G1" direction="input"/>
+			<port name="WG4" direction="input"/>
+			<port name="WG3" direction="input"/>
+			<port name="WG2" direction="input"/>
+			<port name="WG1" direction="input"/>
+			<port name="ALTDIG" direction="input"/>
+			<port name="BY" direction="input"/>
+			<port name="SLICEWE2" direction="input"/>
+			<port name="SLICEWE1" direction="input"/>
+			<port name="SLICEWE0" direction="input"/>
+			<port name="F4" direction="input"/>
+			<port name="F3" direction="input"/>
+			<port name="F2" direction="input"/>
+			<port name="F1" direction="input"/>
+			<port name="WF4" direction="input"/>
+			<port name="WF3" direction="input"/>
+			<port name="WF2" direction="input"/>
+			<port name="WF1" direction="input"/>
+			<port name="BX" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="CIN" direction="input"/>
+			<port name="DY" direction="input"/>
+			<port name="DX" direction="input"/>
+			<port name="SHIFTOUT" direction="output"/>
+			<port name="SHIFTIN" direction="input"/>
+			<port name="COUT" direction="output"/>
+			<port name="SOPOUT" direction="output"/>
+			<port name="YB" direction="output"/>
+			<port name="BYOUT" direction="output"/>
+			<port name="BYINVOUT" direction="output"/>
+			<port name="FX" direction="output"/>
+			<port name="Y" direction="output"/>
+			<port name="YQ" direction="output"/>
+			<port name="DIG" direction="output"/>
+			<port name="XB" direction="output"/>
+			<port name="F5" direction="output"/>
+			<port name="X" direction="output"/>
+			<port name="XQ" direction="output"/>
+			<port name="BXOUT" direction="output"/>
+			<contents>
+				<instance name="ffx" cellRef="FFX" libraryRef="template_cell_lib"/>
+				<instance name="ffy" cellRef="FFY" libraryRef="template_cell_lib"/>
+				<instance name="f5mux" cellRef="F5MUX" libraryRef="template_cell_lib"/>
+				<instance name="fxmux" cellRef="FXMUX" libraryRef="template_cell_lib"/>
+				<instance name="xorf" cellRef="XORF" libraryRef="template_cell_lib"/>
+				<instance name="xorg" cellRef="XORG" libraryRef="template_cell_lib"/>
+				<instance name="dymux" cellRef="DYMUX" libraryRef="template_cell_lib"/>
+				<instance name="gymux" cellRef="GYMUX" libraryRef="template_cell_lib"/>
+				<instance name="f6mux" cellRef="F6MUX" libraryRef="template_cell_lib"/>
+				<instance name="ybmux" cellRef="YBMUX" libraryRef="template_cell_lib"/>
+				<instance name="xbmux" cellRef="XBMUX" libraryRef="template_cell_lib"/>
+				<instance name="dxmux" cellRef="DXMUX" libraryRef="template_cell_lib"/>
+				<instance name="orcy" cellRef="ORCY" libraryRef="template_cell_lib"/>
+				<instance name="cyinit" cellRef="CYINIT" libraryRef="template_cell_lib"/>
+				<instance name="cy0f" cellRef="CY0F" libraryRef="template_cell_lib"/>
+				<instance name="cy0g" cellRef="CY0G" libraryRef="template_cell_lib"/>
+				<instance name="cyself" cellRef="CYSELF" libraryRef="template_cell_lib"/>
+				<instance name="cyselg" cellRef="CYSELG" libraryRef="template_cell_lib"/>
+				<instance name="gand" cellRef="GAND" libraryRef="template_cell_lib"/>
+				<instance name="fand" cellRef="FAND" libraryRef="template_cell_lib"/>
+				<instance name="cymuxf" cellRef="CYMUXF" libraryRef="template_cell_lib"/>
+				<instance name="cymuxg" cellRef="CYMUXG" libraryRef="template_cell_lib"/>
+				<instance name="sopextsel" cellRef="SOPEXTSEL" libraryRef="template_cell_lib"/>
+				<instance name="wsgen" cellRef="WSGEN" libraryRef="template_cell_lib"/>
+				<instance name="dig_mux" cellRef="DIG_MUX" libraryRef="template_cell_lib"/>
+				<instance name="dif_mux" cellRef="DIF_MUX" libraryRef="template_cell_lib"/>
+				<instance name="byinv" cellRef="BYINV" libraryRef="template_cell_lib"/>
+				<instance name="bxinv" cellRef="BXINV" libraryRef="template_cell_lib"/>
+				<instance name="ceinv" cellRef="CEINV" libraryRef="template_cell_lib"/>
+				<instance name="clkinv" cellRef="CLKINV" libraryRef="template_cell_lib"/>
+				<instance name="srinv" cellRef="SRINV" libraryRef="template_cell_lib"/>
+				<instance name="f" cellRef="F" libraryRef="template_cell_lib"/>
+				<instance name="g" cellRef="G" libraryRef="template_cell_lib"/>
+				<instance name="wg4used" cellRef="WG4USED" libraryRef="template_cell_lib"/>
+				<instance name="wg3used" cellRef="WG3USED" libraryRef="template_cell_lib"/>
+				<instance name="wg2used" cellRef="WG2USED" libraryRef="template_cell_lib"/>
+				<instance name="wg1used" cellRef="WG1USED" libraryRef="template_cell_lib"/>
+				<instance name="coutused" cellRef="COUTUSED" libraryRef="template_cell_lib"/>
+				<instance name="slicewe2used" cellRef="SLICEWE2USED" libraryRef="template_cell_lib"/>
+				<instance name="slicewe1used" cellRef="SLICEWE1USED" libraryRef="template_cell_lib"/>
+				<instance name="slicewe0used" cellRef="SLICEWE0USED" libraryRef="template_cell_lib"/>
+				<instance name="wf4used" cellRef="WF4USED" libraryRef="template_cell_lib"/>
+				<instance name="wf3used" cellRef="WF3USED" libraryRef="template_cell_lib"/>
+				<instance name="wf2used" cellRef="WF2USED" libraryRef="template_cell_lib"/>
+				<instance name="wf1used" cellRef="WF1USED" libraryRef="template_cell_lib"/>
+				<instance name="srffmux" cellRef="SRFFMUX" libraryRef="template_cell_lib"/>
+				<instance name="shiftoutused" cellRef="SHIFTOUTUSED" libraryRef="template_cell_lib"/>
+				<instance name="revused" cellRef="REVUSED" libraryRef="template_cell_lib"/>
+				<instance name="sopoutused" cellRef="SOPOUTUSED" libraryRef="template_cell_lib"/>
+				<instance name="ybused" cellRef="YBUSED" libraryRef="template_cell_lib"/>
+				<instance name="byoutused" cellRef="BYOUTUSED" libraryRef="template_cell_lib"/>
+				<instance name="byinvoutused" cellRef="BYINVOUTUSED" libraryRef="template_cell_lib"/>
+				<instance name="fxused" cellRef="FXUSED" libraryRef="template_cell_lib"/>
+				<instance name="yused" cellRef="YUSED" libraryRef="template_cell_lib"/>
+				<instance name="digused" cellRef="DIGUSED" libraryRef="template_cell_lib"/>
+				<instance name="f5used" cellRef="F5USED" libraryRef="template_cell_lib"/>
+				<instance name="xused" cellRef="XUSED" libraryRef="template_cell_lib"/>
+				<instance name="bxoutused" cellRef="BXOUTUSED" libraryRef="template_cell_lib"/>
+				<net name="SOPIN">
+					<portRef name="SOPIN"/>
+					<portRef name="SOPIN" instanceRef="sopextsel"/>
+				</net>
+				<net name="FXINA">
+					<portRef name="FXINA"/>
+					<portRef name="I1" instanceRef="f6mux"/>
+				</net>
+				<net name="FXINB">
+					<portRef name="FXINB"/>
+					<portRef name="I0" instanceRef="f6mux"/>
+				</net>
+				<net name="G4">
+					<portRef name="G4"/>
+					<portRef name="A4" instanceRef="g"/>
+				</net>
+				<net name="G3">
+					<portRef name="G3"/>
+					<portRef name="A3" instanceRef="g"/>
+				</net>
+				<net name="G2">
+					<portRef name="G2"/>
+					<portRef name="G2" instanceRef="cy0g"/>
+					<portRef name="I1" instanceRef="gand"/>
+					<portRef name="A2" instanceRef="g"/>
+				</net>
+				<net name="G1">
+					<portRef name="G1"/>
+					<portRef name="G1" instanceRef="cy0g"/>
+					<portRef name="I0" instanceRef="gand"/>
+					<portRef name="A1" instanceRef="g"/>
+				</net>
+				<net name="WG4">
+					<portRef name="WG4"/>
+					<portRef name="I" instanceRef="wg4used"/>
+				</net>
+				<net name="WG3">
+					<portRef name="WG3"/>
+					<portRef name="I" instanceRef="wg3used"/>
+				</net>
+				<net name="WG2">
+					<portRef name="WG2"/>
+					<portRef name="I" instanceRef="wg2used"/>
+				</net>
+				<net name="WG1">
+					<portRef name="WG1"/>
+					<portRef name="I" instanceRef="wg1used"/>
+				</net>
+				<net name="ALTDIG">
+					<portRef name="ALTDIG"/>
+					<portRef name="ALTDIG" instanceRef="dig_mux"/>
+				</net>
+				<net name="BY">
+					<portRef name="BY"/>
+					<portRef name="BY" instanceRef="byinv"/>
+					<portRef name="BY_B" instanceRef="byinv"/>
+				</net>
+				<net name="SLICEWE2">
+					<portRef name="SLICEWE2"/>
+					<portRef name="I" instanceRef="slicewe2used"/>
+				</net>
+				<net name="SLICEWE1">
+					<portRef name="SLICEWE1"/>
+					<portRef name="I" instanceRef="slicewe1used"/>
+				</net>
+				<net name="SLICEWE0">
+					<portRef name="SLICEWE0"/>
+					<portRef name="I" instanceRef="slicewe0used"/>
+				</net>
+				<net name="F4">
+					<portRef name="F4"/>
+					<portRef name="A4" instanceRef="f"/>
+				</net>
+				<net name="F3">
+					<portRef name="F3"/>
+					<portRef name="A3" instanceRef="f"/>
+				</net>
+				<net name="F2">
+					<portRef name="F2"/>
+					<portRef name="F2" instanceRef="cy0f"/>
+					<portRef name="I1" instanceRef="fand"/>
+					<portRef name="A2" instanceRef="f"/>
+				</net>
+				<net name="F1">
+					<portRef name="F1"/>
+					<portRef name="F1" instanceRef="cy0f"/>
+					<portRef name="I0" instanceRef="fand"/>
+					<portRef name="A1" instanceRef="f"/>
+				</net>
+				<net name="WF4">
+					<portRef name="WF4"/>
+					<portRef name="I" instanceRef="wf4used"/>
+				</net>
+				<net name="WF3">
+					<portRef name="WF3"/>
+					<portRef name="I" instanceRef="wf3used"/>
+				</net>
+				<net name="WF2">
+					<portRef name="WF2"/>
+					<portRef name="I" instanceRef="wf2used"/>
+				</net>
+				<net name="WF1">
+					<portRef name="WF1"/>
+					<portRef name="I" instanceRef="wf1used"/>
+				</net>
+				<net name="BX">
+					<portRef name="BX"/>
+					<portRef name="BX" instanceRef="bxinv"/>
+					<portRef name="BX_B" instanceRef="bxinv"/>
+				</net>
+				<net name="CE">
+					<portRef name="CE"/>
+					<portRef name="CE" instanceRef="ceinv"/>
+					<portRef name="CE_B" instanceRef="ceinv"/>
+				</net>
+				<net name="CLK">
+					<portRef name="CLK"/>
+					<portRef name="CLK" instanceRef="clkinv"/>
+					<portRef name="CLK_B" instanceRef="clkinv"/>
+				</net>
+				<net name="SR">
+					<portRef name="SR"/>
+					<portRef name="SR" instanceRef="srinv"/>
+					<portRef name="SR_B" instanceRef="srinv"/>
+				</net>
+				<net name="CIN">
+					<portRef name="CIN"/>
+					<portRef name="CIN" instanceRef="cyinit"/>
+				</net>
+				<net name="DY">
+					<portRef name="DY"/>
+					<portRef name="I1" instanceRef="dymux"/>
+				</net>
+				<net name="DX">
+					<portRef name="DX"/>
+					<portRef name="I1" instanceRef="dxmux"/>
+				</net>
+				<net name="SHIFTOUT">
+					<portRef name="O" instanceRef="shiftoutused"/>
+					<portRef name="SHIFTOUT"/>
+				</net>
+				<net name="COUT">
+					<portRef name="O" instanceRef="coutused"/>
+					<portRef name="COUT"/>
+				</net>
+				<net name="SOPOUT">
+					<portRef name="O" instanceRef="sopoutused"/>
+					<portRef name="SOPOUT"/>
+				</net>
+				<net name="YB">
+					<portRef name="O" instanceRef="ybused"/>
+					<portRef name="YB"/>
+				</net>
+				<net name="BYOUT">
+					<portRef name="O" instanceRef="byoutused"/>
+					<portRef name="BYOUT"/>
+				</net>
+				<net name="BYINVOUT">
+					<portRef name="O" instanceRef="byinvoutused"/>
+					<portRef name="BYINVOUT"/>
+				</net>
+				<net name="FX">
+					<portRef name="O" instanceRef="fxused"/>
+					<portRef name="FX"/>
+				</net>
+				<net name="Y">
+					<portRef name="O" instanceRef="yused"/>
+					<portRef name="Y"/>
+				</net>
+				<net name="YQ">
+					<portRef name="Q" instanceRef="ffy"/>
+					<portRef name="YQ"/>
+				</net>
+				<net name="DIG">
+					<portRef name="O" instanceRef="digused"/>
+					<portRef name="DIG"/>
+				</net>
+				<net name="XB">
+					<portRef name="O" instanceRef="xbmux"/>
+					<portRef name="XB"/>
+				</net>
+				<net name="F5">
+					<portRef name="O" instanceRef="f5used"/>
+					<portRef name="F5"/>
+				</net>
+				<net name="X">
+					<portRef name="O" instanceRef="xused"/>
+					<portRef name="X"/>
+				</net>
+				<net name="XQ">
+					<portRef name="Q" instanceRef="ffx"/>
+					<portRef name="XQ"/>
+				</net>
+				<net name="BXOUT">
+					<portRef name="O" instanceRef="bxoutused"/>
+					<portRef name="BXOUT"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="I0" instanceRef="cy0f"/>
+					<portRef name="I0" instanceRef="cy0g"/>
+					<portRef name="I0" instanceRef="sopextsel"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="I1" instanceRef="cy0f"/>
+					<portRef name="I1" instanceRef="cy0g"/>
+					<portRef name="I1" instanceRef="cyself"/>
+					<portRef name="I1" instanceRef="cyselg"/>
+				</net>
+				<net name="byinv_o">
+					<portRef name="O" instanceRef="byinv"/>
+					<portRef name="I0" instanceRef="dymux"/>
+					<portRef name="BY" instanceRef="cy0g"/>
+					<portRef name="BY" instanceRef="dig_mux"/>
+					<portRef name="I" instanceRef="revused"/>
+					<portRef name="I" instanceRef="byoutused"/>
+					<portRef name="I" instanceRef="byinvoutused"/>
+				</net>
+				<net name="bxinv_o">
+					<portRef name="O" instanceRef="bxinv"/>
+					<portRef name="I0" instanceRef="dxmux"/>
+					<portRef name="BX" instanceRef="cyinit"/>
+					<portRef name="BX" instanceRef="cy0f"/>
+					<portRef name="BX" instanceRef="dif_mux"/>
+					<portRef name="I" instanceRef="bxoutused"/>
+				</net>
+				<net name="cymuxf_o">
+					<portRef name="O" instanceRef="cymuxf"/>
+					<portRef name="I0" instanceRef="xorg"/>
+					<portRef name="I1" instanceRef="xbmux"/>
+					<portRef name="I1" instanceRef="cymuxg"/>
+				</net>
+				<net name="cymuxg_o">
+					<portRef name="O" instanceRef="cymuxg"/>
+					<portRef name="I1" instanceRef="ybmux"/>
+					<portRef name="I1" instanceRef="orcy"/>
+					<portRef name="I" instanceRef="coutused"/>
+				</net>
+				<net name="ceinv_o">
+					<portRef name="O" instanceRef="ceinv"/>
+					<portRef name="CE" instanceRef="ffx"/>
+					<portRef name="CE" instanceRef="ffy"/>
+				</net>
+				<net name="cyinit_o">
+					<portRef name="O" instanceRef="cyinit"/>
+					<portRef name="I0" instanceRef="xorf"/>
+					<portRef name="I1" instanceRef="cymuxf"/>
+				</net>
+				<net name="clkinv_o">
+					<portRef name="O" instanceRef="clkinv"/>
+					<portRef name="CK" instanceRef="ffx"/>
+					<portRef name="CK" instanceRef="ffy"/>
+					<portRef name="CK" instanceRef="wsgen"/>
+				</net>
+				<net name="cy0f_o">
+					<portRef name="O" instanceRef="cy0f"/>
+					<portRef name="I0" instanceRef="cymuxf"/>
+				</net>
+				<net name="cyself_o">
+					<portRef name="S0" instanceRef="cymuxf"/>
+					<portRef name="O" instanceRef="cyself"/>
+				</net>
+				<net name="cyselg_o">
+					<portRef name="S0" instanceRef="cymuxg"/>
+					<portRef name="O" instanceRef="cyselg"/>
+				</net>
+				<net name="dxmux_o">
+					<portRef name="O" instanceRef="dxmux"/>
+					<portRef name="D" instanceRef="ffx"/>
+				</net>
+				<net name="dymux_o">
+					<portRef name="O" instanceRef="dymux"/>
+					<portRef name="D" instanceRef="ffy"/>
+				</net>
+				<net name="dig_mux_o">
+					<portRef name="O" instanceRef="dig_mux"/>
+					<portRef name="ALTDIF" instanceRef="dif_mux"/>
+					<portRef name="DI" instanceRef="g"/>
+					<portRef name="I" instanceRef="digused"/>
+				</net>
+				<net name="f_d">
+					<portRef name="D" instanceRef="f"/>
+					<portRef name="F" instanceRef="f5mux"/>
+					<portRef name="F" instanceRef="fxmux"/>
+					<portRef name="I1" instanceRef="xorf"/>
+					<portRef name="F" instanceRef="cyself"/>
+				</net>
+				<net name="fxmux_o">
+					<portRef name="O" instanceRef="fxmux"/>
+					<portRef name="I" instanceRef="xused"/>
+				</net>
+				<net name="f_mc15">
+					<portRef name="MC15" instanceRef="f"/>
+					<portRef name="I0" instanceRef="xbmux"/>
+					<portRef name="SHIFTIN" instanceRef="dif_mux"/>
+					<portRef name="I" instanceRef="shiftoutused"/>
+				</net>
+				<net name="fand_o">
+					<portRef name="O" instanceRef="fand"/>
+					<portRef name="PROD" instanceRef="cy0f"/>
+				</net>
+				<net name="f5mux_o">
+					<portRef name="O" instanceRef="f5mux"/>
+					<portRef name="F5" instanceRef="fxmux"/>
+					<portRef name="I" instanceRef="f5used"/>
+				</net>
+				<net name="f6mux_o">
+					<portRef name="O" instanceRef="f6mux"/>
+					<portRef name="FX" instanceRef="gymux"/>
+					<portRef name="I" instanceRef="fxused"/>
+				</net>
+				<net name="g_d">
+					<portRef name="D" instanceRef="g"/>
+					<portRef name="G" instanceRef="f5mux"/>
+					<portRef name="I1" instanceRef="xorg"/>
+					<portRef name="G" instanceRef="gymux"/>
+					<portRef name="G" instanceRef="cyselg"/>
+				</net>
+				<net name="gymux_o">
+					<portRef name="O" instanceRef="gymux"/>
+					<portRef name="I" instanceRef="yused"/>
+				</net>
+				<net name="g_mc15">
+					<portRef name="MC15" instanceRef="g"/>
+					<portRef name="I0" instanceRef="ybmux"/>
+				</net>
+				<net name="gand_o">
+					<portRef name="O" instanceRef="gand"/>
+					<portRef name="PROD" instanceRef="cy0g"/>
+				</net>
+				<net name="orcy_o">
+					<portRef name="O" instanceRef="orcy"/>
+					<portRef name="SOPEXT" instanceRef="gymux"/>
+					<portRef name="I" instanceRef="sopoutused"/>
+				</net>
+				<net name="revused_o">
+					<portRef name="O" instanceRef="revused"/>
+					<portRef name="REV" instanceRef="ffx"/>
+					<portRef name="REV" instanceRef="ffy"/>
+				</net>
+				<net name="srffmux_o">
+					<portRef name="O" instanceRef="srffmux"/>
+					<portRef name="SR" instanceRef="ffx"/>
+					<portRef name="SR" instanceRef="ffy"/>
+				</net>
+				<net name="sopextsel_o">
+					<portRef name="O" instanceRef="sopextsel"/>
+					<portRef name="I0" instanceRef="orcy"/>
+				</net>
+				<net name="srinv_o">
+					<portRef name="O" instanceRef="srinv"/>
+					<portRef name="WE" instanceRef="wsgen"/>
+					<portRef name="I" instanceRef="srffmux"/>
+				</net>
+				<net name="slicewe0used_o">
+					<portRef name="O" instanceRef="slicewe0used"/>
+					<portRef name="WE0" instanceRef="wsgen"/>
+				</net>
+				<net name="slicewe1used_o">
+					<portRef name="O" instanceRef="slicewe1used"/>
+					<portRef name="WE1" instanceRef="wsgen"/>
+				</net>
+				<net name="slicewe2used_o">
+					<portRef name="O" instanceRef="slicewe2used"/>
+					<portRef name="WE2" instanceRef="wsgen"/>
+				</net>
+				<net name="wsf">
+					<portRef name="WSF" instanceRef="wsgen"/>
+					<portRef name="WS" instanceRef="f"/>
+				</net>
+				<net name="wsg">
+					<portRef name="WSG" instanceRef="wsgen"/>
+					<portRef name="WS" instanceRef="g"/>
+				</net>
+				<net name="wf1used_o">
+					<portRef name="O" instanceRef="wf1used"/>
+					<portRef name="WF1" instanceRef="f"/>
+				</net>
+				<net name="wf2used_o">
+					<portRef name="O" instanceRef="wf2used"/>
+					<portRef name="WF2" instanceRef="f"/>
+				</net>
+				<net name="wf3used_o">
+					<portRef name="O" instanceRef="wf3used"/>
+					<portRef name="WF3" instanceRef="f"/>
+				</net>
+				<net name="wf4used_o">
+					<portRef name="O" instanceRef="wf4used"/>
+					<portRef name="WF4" instanceRef="f"/>
+				</net>
+				<net name="wg1used_o">
+					<portRef name="O" instanceRef="wg1used"/>
+					<portRef name="WG1" instanceRef="g"/>
+				</net>
+				<net name="wg2used_o">
+					<portRef name="O" instanceRef="wg2used"/>
+					<portRef name="WG2" instanceRef="g"/>
+				</net>
+				<net name="wg3used_o">
+					<portRef name="O" instanceRef="wg3used"/>
+					<portRef name="WG3" instanceRef="g"/>
+				</net>
+				<net name="wg4used_o">
+					<portRef name="O" instanceRef="wg4used"/>
+					<portRef name="WG4" instanceRef="g"/>
+				</net>
+				<net name="xorf_o">
+					<portRef name="O" instanceRef="xorf"/>
+					<portRef name="FXOR" instanceRef="fxmux"/>
+				</net>
+				<net name="xorg_o">
+					<portRef name="O" instanceRef="xorg"/>
+					<portRef name="GXOR" instanceRef="gymux"/>
+				</net>
+				<net name="ybmux_o">
+					<portRef name="O" instanceRef="ybmux"/>
+					<portRef name="I" instanceRef="ybused"/>
+				</net>
+				<net name="cy0g_o">
+					<portRef name="O" instanceRef="cy0g"/>
+					<portRef name="I0" instanceRef="cymuxg"/>
+				</net>
+				<net name="SHIFTIN">
+					<portRef name="SHIFTIN" instanceRef="dig_mux"/>
+					<portRef name="SHIFTIN"/>
+				</net>
+				<net name="dif_mux_o">
+					<portRef name="O" instanceRef="dif_mux"/>
+					<portRef name="DI" instanceRef="f"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="iob" type="IOB">
+			<port name="TRI1" direction="input"/>
+			<port name="TRICE" direction="input"/>
+			<port name="TRI2" direction="input"/>
+			<port name="OUT1" direction="input"/>
+			<port name="OUTTCK1" direction="input"/>
+			<port name="OUTCE" direction="input"/>
+			<port name="OUT2" direction="input"/>
+			<port name="OUTTCK2" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="INCK1" direction="input"/>
+			<port name="INCE" direction="input"/>
+			<port name="INCK2" direction="input"/>
+			<port name="IN" direction="output"/>
+			<port name="INQ1" direction="output"/>
+			<port name="INQ2" direction="output"/>
+			<port name="TRI" direction="output"/>
+			<port name="PAD" direction="inout"/>
+			<contents>
+				<instance name="t1inv" cellRef="T1INV" libraryRef="template_cell_lib"/>
+				<instance name="tceinv" cellRef="TCEINV" libraryRef="template_cell_lib"/>
+				<instance name="t2inv" cellRef="T2INV" libraryRef="template_cell_lib"/>
+				<instance name="diffo_in_used" cellRef="DIFFO_IN_USED" libraryRef="template_cell_lib"/>
+				<instance name="o1inv" cellRef="O1INV" libraryRef="template_cell_lib"/>
+				<instance name="otclk1inv" cellRef="OTCLK1INV" libraryRef="template_cell_lib"/>
+				<instance name="oceinv" cellRef="OCEINV" libraryRef="template_cell_lib"/>
+				<instance name="o2inv" cellRef="O2INV" libraryRef="template_cell_lib"/>
+				<instance name="otclk2inv" cellRef="OTCLK2INV" libraryRef="template_cell_lib"/>
+				<instance name="srinv" cellRef="SRINV" libraryRef="template_cell_lib"/>
+				<instance name="revinv" cellRef="REVINV" libraryRef="template_cell_lib"/>
+				<instance name="tsr_used" cellRef="TSR_USED" libraryRef="template_cell_lib"/>
+				<instance name="trev_used" cellRef="TREV_USED" libraryRef="template_cell_lib"/>
+				<instance name="osr_used" cellRef="OSR_USED" libraryRef="template_cell_lib"/>
+				<instance name="orev_used" cellRef="OREV_USED" libraryRef="template_cell_lib"/>
+				<instance name="tff1" cellRef="TFF1" libraryRef="template_cell_lib"/>
+				<instance name="tff2" cellRef="TFF2" libraryRef="template_cell_lib"/>
+				<instance name="off1" cellRef="OFF1" libraryRef="template_cell_lib"/>
+				<instance name="off2" cellRef="OFF2" libraryRef="template_cell_lib"/>
+				<instance name="tffddrblackbox" cellRef="TFFDDRBLACKBOX" libraryRef="template_cell_lib"/>
+				<instance name="offddrblackbox" cellRef="OFFDDRBLACKBOX" libraryRef="template_cell_lib"/>
+				<instance name="tmux" cellRef="TMUX" libraryRef="template_cell_lib"/>
+				<instance name="omux" cellRef="OMUX" libraryRef="template_cell_lib"/>
+				<instance name="t_used" cellRef="T_USED" libraryRef="template_cell_lib"/>
+				<instance name="outbuf" cellRef="OUTBUF" libraryRef="template_cell_lib"/>
+				<instance name="inbuf" cellRef="INBUF" libraryRef="template_cell_lib"/>
+				<instance name="iclk1inv" cellRef="ICLK1INV" libraryRef="template_cell_lib"/>
+				<instance name="iceinv" cellRef="ICEINV" libraryRef="template_cell_lib"/>
+				<instance name="iclk2inv" cellRef="ICLK2INV" libraryRef="template_cell_lib"/>
+				<instance name="delay" cellRef="DELAY" libraryRef="template_cell_lib"/>
+				<instance name="tsmux" cellRef="TSMUX" libraryRef="template_cell_lib"/>
+				<instance name="idelmux" cellRef="IDELMUX" libraryRef="template_cell_lib"/>
+				<instance name="iselmux" cellRef="ISELMUX" libraryRef="template_cell_lib"/>
+				<instance name="imux" cellRef="IMUX" libraryRef="template_cell_lib"/>
+				<instance name="iffdelmux" cellRef="IFFDELMUX" libraryRef="template_cell_lib"/>
+				<instance name="iffselmux" cellRef="IFFSELMUX" libraryRef="template_cell_lib"/>
+				<instance name="iffdmux" cellRef="IFFDMUX" libraryRef="template_cell_lib"/>
+				<instance name="isr_used" cellRef="ISR_USED" libraryRef="template_cell_lib"/>
+				<instance name="irev_used" cellRef="IREV_USED" libraryRef="template_cell_lib"/>
+				<instance name="iff1" cellRef="IFF1" libraryRef="template_cell_lib"/>
+				<instance name="iff2" cellRef="IFF2" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<net name="TRI1">
+					<portRef name="TRI1"/>
+					<portRef name="T1" instanceRef="t1inv"/>
+					<portRef name="T1_B" instanceRef="t1inv"/>
+				</net>
+				<net name="TRICE">
+					<portRef name="TRICE"/>
+					<portRef name="TCE" instanceRef="tceinv"/>
+					<portRef name="TCE_B" instanceRef="tceinv"/>
+				</net>
+				<net name="TRI2">
+					<portRef name="TRI2"/>
+					<portRef name="T2" instanceRef="t2inv"/>
+					<portRef name="T2_B" instanceRef="t2inv"/>
+				</net>
+				<net name="OUT1">
+					<portRef name="OUT1"/>
+					<portRef name="O1" instanceRef="o1inv"/>
+					<portRef name="O1_B" instanceRef="o1inv"/>
+				</net>
+				<net name="OUTTCK1">
+					<portRef name="OUTTCK1"/>
+					<portRef name="OTCLK1" instanceRef="otclk1inv"/>
+					<portRef name="OTCLK1_B" instanceRef="otclk1inv"/>
+				</net>
+				<net name="OUTCE">
+					<portRef name="OUTCE"/>
+					<portRef name="OCE" instanceRef="oceinv"/>
+					<portRef name="OCE_B" instanceRef="oceinv"/>
+				</net>
+				<net name="OUT2">
+					<portRef name="OUT2"/>
+					<portRef name="O2" instanceRef="o2inv"/>
+					<portRef name="O2_B" instanceRef="o2inv"/>
+				</net>
+				<net name="OUTTCK2">
+					<portRef name="OUTTCK2"/>
+					<portRef name="OTCLK2" instanceRef="otclk2inv"/>
+					<portRef name="OTCLK2_B" instanceRef="otclk2inv"/>
+				</net>
+				<net name="SR">
+					<portRef name="SR"/>
+					<portRef name="SR" instanceRef="srinv"/>
+					<portRef name="SR_B" instanceRef="srinv"/>
+				</net>
+				<net name="REV">
+					<portRef name="REV"/>
+					<portRef name="REV" instanceRef="revinv"/>
+					<portRef name="REV_B" instanceRef="revinv"/>
+				</net>
+				<net name="INCK1">
+					<portRef name="INCK1"/>
+					<portRef name="ICLK1" instanceRef="iclk1inv"/>
+				</net>
+				<net name="INCE">
+					<portRef name="INCE"/>
+					<portRef name="ICE" instanceRef="iceinv"/>
+				</net>
+				<net name="INCK2">
+					<portRef name="INCK2"/>
+					<portRef name="ICLK2" instanceRef="iclk2inv"/>
+				</net>
+				<net name="IN">
+					<portRef name="O" instanceRef="imux"/>
+					<portRef name="IN"/>
+				</net>
+				<net name="INQ1">
+					<portRef name="Q" instanceRef="iff1"/>
+					<portRef name="INQ1"/>
+				</net>
+				<net name="INQ2">
+					<portRef name="Q" instanceRef="iff2"/>
+					<portRef name="INQ2"/>
+				</net>
+				<net name="TRI">
+					<portRef name="O" instanceRef="t_used"/>
+					<portRef name="TRI"/>
+				</net>
+				<net name="revinv_o">
+					<portRef name="O" instanceRef="revinv"/>
+					<portRef name="I" instanceRef="trev_used"/>
+					<portRef name="I" instanceRef="orev_used"/>
+					<portRef name="I" instanceRef="irev_used"/>
+				</net>
+				<net name="srinv_o">
+					<portRef name="O" instanceRef="srinv"/>
+					<portRef name="I" instanceRef="tsr_used"/>
+					<portRef name="I" instanceRef="osr_used"/>
+					<portRef name="I" instanceRef="isr_used"/>
+				</net>
+				<net name="tsr_used_o">
+					<portRef name="O" instanceRef="tsr_used"/>
+					<portRef name="SR" instanceRef="tff1"/>
+					<portRef name="SR" instanceRef="tff2"/>
+				</net>
+				<net name="trev_used_o">
+					<portRef name="O" instanceRef="trev_used"/>
+					<portRef name="REV" instanceRef="tff1"/>
+					<portRef name="REV" instanceRef="tff2"/>
+				</net>
+				<net name="osr_used_o">
+					<portRef name="O" instanceRef="osr_used"/>
+					<portRef name="SR" instanceRef="off1"/>
+					<portRef name="SR" instanceRef="off2"/>
+				</net>
+				<net name="orev_used_o">
+					<portRef name="O" instanceRef="orev_used"/>
+					<portRef name="REV" instanceRef="off1"/>
+					<portRef name="REV" instanceRef="off2"/>
+				</net>
+				<net name="isr_used_o">
+					<portRef name="O" instanceRef="isr_used"/>
+					<portRef name="SR" instanceRef="iff1"/>
+					<portRef name="SR" instanceRef="iff2"/>
+				</net>
+				<net name="irev_used_o">
+					<portRef name="O" instanceRef="irev_used"/>
+					<portRef name="REV" instanceRef="iff1"/>
+					<portRef name="REV" instanceRef="iff2"/>
+				</net>
+				<net name="t1inv_o">
+					<portRef name="O" instanceRef="t1inv"/>
+					<portRef name="D" instanceRef="tff1"/>
+					<portRef name="T1" instanceRef="tmux"/>
+				</net>
+				<net name="tceinv_o">
+					<portRef name="O" instanceRef="tceinv"/>
+					<portRef name="CE" instanceRef="tff1"/>
+					<portRef name="CE" instanceRef="tff2"/>
+				</net>
+				<net name="t2inv_o">
+					<portRef name="O" instanceRef="t2inv"/>
+					<portRef name="D" instanceRef="tff2"/>
+					<portRef name="T2" instanceRef="tmux"/>
+				</net>
+				<net name="o1inv_o">
+					<portRef name="O" instanceRef="o1inv"/>
+					<portRef name="D" instanceRef="off1"/>
+					<portRef name="O1" instanceRef="omux"/>
+				</net>
+				<net name="otclk1inv_o">
+					<portRef name="O" instanceRef="otclk1inv"/>
+					<portRef name="CK" instanceRef="tff1"/>
+					<portRef name="CK" instanceRef="off1"/>
+				</net>
+				<net name="oceinv_o">
+					<portRef name="O" instanceRef="oceinv"/>
+					<portRef name="CE" instanceRef="off1"/>
+					<portRef name="CE" instanceRef="off2"/>
+				</net>
+				<net name="o2inv_o">
+					<portRef name="O" instanceRef="o2inv"/>
+					<portRef name="D" instanceRef="off2"/>
+					<portRef name="O2" instanceRef="omux"/>
+				</net>
+				<net name="otclk2inv_o">
+					<portRef name="O" instanceRef="otclk2inv"/>
+					<portRef name="CK" instanceRef="tff2"/>
+					<portRef name="CK" instanceRef="off2"/>
+				</net>
+				<net name="tff1_o">
+					<portRef name="Q" instanceRef="tff1"/>
+					<portRef name="TFF1" instanceRef="tffddrblackbox"/>
+					<portRef name="TFF1" instanceRef="tmux"/>
+				</net>
+				<net name="tff2_o">
+					<portRef name="Q" instanceRef="tff2"/>
+					<portRef name="TFF2" instanceRef="tffddrblackbox"/>
+					<portRef name="TFF2" instanceRef="tmux"/>
+				</net>
+				<net name="off1_o">
+					<portRef name="Q" instanceRef="off1"/>
+					<portRef name="OFF1" instanceRef="offddrblackbox"/>
+					<portRef name="OFF1" instanceRef="omux"/>
+				</net>
+				<net name="off2_o">
+					<portRef name="Q" instanceRef="off2"/>
+					<portRef name="OFF2" instanceRef="offddrblackbox"/>
+					<portRef name="OFF2" instanceRef="omux"/>
+				</net>
+				<net name="tffdrrblackbox_o">
+					<portRef name="TFFDDR" instanceRef="tffddrblackbox"/>
+					<portRef name="TFFDDR" instanceRef="tmux"/>
+				</net>
+				<net name="offdrrblackbox_o">
+					<portRef name="OFFDDR" instanceRef="offddrblackbox"/>
+					<portRef name="OFFDDR" instanceRef="omux"/>
+				</net>
+				<net name="tmux_o">
+					<portRef name="O" instanceRef="tmux"/>
+					<portRef name="I" instanceRef="t_used"/>
+					<portRef name="T" instanceRef="outbuf"/>
+				</net>
+				<net name="omux_o">
+					<portRef name="O" instanceRef="omux"/>
+					<portRef name="I" instanceRef="outbuf"/>
+					<portRef name="I0" instanceRef="iselmux"/>
+					<portRef name="I0" instanceRef="iffselmux"/>
+				</net>
+				<net name="iclk1_o">
+					<portRef name="O" instanceRef="iclk1inv"/>
+					<portRef name="ICLK1_B" instanceRef="iclk1inv"/>
+					<portRef name="CK" instanceRef="iff1"/>
+				</net>
+				<net name="ice_o">
+					<portRef name="O" instanceRef="iceinv"/>
+					<portRef name="ICE_B" instanceRef="iceinv"/>
+					<portRef name="CE" instanceRef="iff1"/>
+					<portRef name="CE" instanceRef="iff2"/>
+				</net>
+				<net name="iclk2_o">
+					<portRef name="O" instanceRef="iclk2inv"/>
+					<portRef name="ICLK2_B" instanceRef="iclk2inv"/>
+					<portRef name="CK" instanceRef="iff2"/>
+				</net>
+				<net name="inbuf_o">
+					<portRef name="O" instanceRef="inbuf"/>
+					<portRef name="I" instanceRef="delay"/>
+					<portRef name="I0" instanceRef="idelmux"/>
+					<portRef name="I1" instanceRef="iffdelmux"/>
+				</net>
+				<net name="delay_o">
+					<portRef name="O" instanceRef="delay"/>
+					<portRef name="I1" instanceRef="idelmux"/>
+					<portRef name="I0" instanceRef="iffdelmux"/>
+				</net>
+				<net name="tsmux_o">
+					<portRef name="O" instanceRef="tsmux"/>
+					<portRef name="T" instanceRef="iselmux"/>
+					<portRef name="T" instanceRef="iffselmux"/>
+				</net>
+				<net name="idelmux_o">
+					<portRef name="O" instanceRef="idelmux"/>
+					<portRef name="I1" instanceRef="iselmux"/>
+					<portRef name="I1" instanceRef="imux"/>
+				</net>
+				<net name="iffdelmux_o">
+					<portRef name="O" instanceRef="iffdelmux"/>
+					<portRef name="I1" instanceRef="iffselmux"/>
+					<portRef name="I1" instanceRef="iffdmux"/>
+				</net>
+				<net name="iselmux_o">
+					<portRef name="O" instanceRef="iselmux"/>
+					<portRef name="I0" instanceRef="imux"/>
+				</net>
+				<net name="iffselmux_o">
+					<portRef name="O" instanceRef="iffselmux"/>
+					<portRef name="I0" instanceRef="iffdmux"/>
+				</net>
+				<net name="iffdmux_o">
+					<portRef name="O" instanceRef="iffdmux"/>
+					<portRef name="D" instanceRef="iff1"/>
+					<portRef name="D" instanceRef="iff2"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="tsmux"/>
+				</net>
+				<net name="t_used_o">
+					<portRef name="I1" instanceRef="tsmux"/>
+				</net>
+				<net name="PAD">
+					<portRef name="PAD"/>
+					<portRef name="I" instanceRef="inbuf"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="bufgmux" type="BUFGMUX">
+			<port name="IN1" direction="input"/>
+			<port name="IN0" direction="input"/>
+			<port name="SEL" direction="input"/>
+			<port name="OUT" direction="output"/>
+			<contents>
+				<instance name="i1_used" cellRef="I1_USED" libraryRef="template_cell_lib"/>
+				<instance name="i0_used" cellRef="I0_USED" libraryRef="template_cell_lib"/>
+				<instance name="gclkmux" cellRef="GCLKMUX" libraryRef="template_cell_lib"/>
+				<instance name="gclk_buffer" cellRef="GCLK_BUFFER" libraryRef="template_cell_lib"/>
+				<instance name="sinv" cellRef="SINV" libraryRef="template_cell_lib"/>
+				<net name="IN1">
+					<portRef name="IN1"/>
+					<portRef name="I" instanceRef="i1_used"/>
+				</net>
+				<net name="IN0">
+					<portRef name="IN0"/>
+					<portRef name="I" instanceRef="i0_used"/>
+				</net>
+				<net name="SEL">
+					<portRef name="SEL"/>
+					<portRef name="S" instanceRef="sinv"/>
+					<portRef name="S_B" instanceRef="sinv"/>
+				</net>
+				<net name="OUT">
+					<portRef name="O" instanceRef="gclk_buffer"/>
+					<portRef name="OUT"/>
+				</net>
+				<net name="i1_used_o">
+					<portRef name="O" instanceRef="i1_used"/>
+					<portRef name="I1" instanceRef="gclkmux"/>
+				</net>
+				<net name="i0_used_o">
+					<portRef name="O" instanceRef="i0_used"/>
+					<portRef name="I0" instanceRef="gclkmux"/>
+				</net>
+				<net name="sinv_o">
+					<portRef name="O" instanceRef="sinv"/>
+					<portRef name="T" instanceRef="gclkmux"/>
+				</net>
+				<net name="gclkmux_o">
+					<portRef name="O" instanceRef="gclkmux"/>
+					<portRef name="I" instanceRef="gclk_buffer"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="tbuf" type="TBUF">
+			<port name="TRI" direction="input"/>
+			<port name="IN" direction="input"/>
+			<port name="OUT" direction="output"/>
+			<contents>
+				<instance name="iinv" cellRef="IINV" libraryRef="template_cell_lib"/>
+				<instance name="tinv" cellRef="TINV" libraryRef="template_cell_lib"/>
+				<instance name="tristate" cellRef="TRISTATE" libraryRef="template_cell_lib"/>
+				<net name="TRI">
+					<portRef name="TRI"/>
+					<portRef name="T" instanceRef="tinv"/>
+					<portRef name="T_B" instanceRef="tinv"/>
+				</net>
+				<net name="IN">
+					<portRef name="IN"/>
+					<portRef name="I" instanceRef="iinv"/>
+					<portRef name="I_B" instanceRef="iinv"/>
+				</net>
+				<net name="OUT">
+					<portRef name="O" instanceRef="tristate"/>
+					<portRef name="OUT"/>
+				</net>
+				<net name="iinv_o">
+					<portRef name="O" instanceRef="iinv"/>
+					<portRef name="I" instanceRef="tristate"/>
+				</net>
+				<net name="tinv_o">
+					<portRef name="O" instanceRef="tinv"/>
+					<portRef name="S" instanceRef="tristate"/>
+				</net>
+			</contents>
+		</cell>
+		<!--cell name="blockram" type="BLOCKRAM">
+			<port name="CLKA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="ENA" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="ENB" direction="input"/>
+			<port name="RSTB" direction="input"/>
+			<port name="ADDRA0" direction="input"/>
+			<port name="ADDRA1" direction="input"/>
+			<port name="ADDRA2" direction="input"/>
+			<port name="ADDRA3" direction="input"/>
+			<port name="ADDRA4" direction="input"/>
+			<port name="ADDRA5" direction="input"/>
+			<port name="ADDRA6" direction="input"/>
+			<port name="ADDRA7" direction="input"/>
+			<port name="ADDRA8" direction="input"/>
+			<port name="ADDRA9" direction="input"/>
+			<port name="ADDRA10" direction="input"/>
+			<port name="ADDRA11" direction="input"/>
+			<port name="ADDRB0" direction="input"/>
+			<port name="ADDRB1" direction="input"/>
+			<port name="ADDRB2" direction="input"/>
+			<port name="ADDRB3" direction="input"/>
+			<port name="ADDRB4" direction="input"/>
+			<port name="ADDRB5" direction="input"/>
+			<port name="ADDRB6" direction="input"/>
+			<port name="ADDRB7" direction="input"/>
+			<port name="ADDRB8" direction="input"/>
+			<port name="ADDRB9" direction="input"/>
+			<port name="ADDRB10" direction="input"/>
+			<port name="ADDRB11" direction="input"/>
+			<port name="DIA0" direction="input"/>
+			<port name="DIA1" direction="input"/>
+			<port name="DIA2" direction="input"/>
+			<port name="DIA3" direction="input"/>
+			<port name="DIA4" direction="input"/>
+			<port name="DIA5" direction="input"/>
+			<port name="DIA6" direction="input"/>
+			<port name="DIA7" direction="input"/>
+			<port name="DIA8" direction="input"/>
+			<port name="DIA9" direction="input"/>
+			<port name="DIA10" direction="input"/>
+			<port name="DIA11" direction="input"/>
+			<port name="DIA12" direction="input"/>
+			<port name="DIA13" direction="input"/>
+			<port name="DIA14" direction="input"/>
+			<port name="DIA15" direction="input"/>
+			<port name="DIB0" direction="input"/>
+			<port name="DIB1" direction="input"/>
+			<port name="DIB2" direction="input"/>
+			<port name="DIB3" direction="input"/>
+			<port name="DIB4" direction="input"/>
+			<port name="DIB5" direction="input"/>
+			<port name="DIB6" direction="input"/>
+			<port name="DIB7" direction="input"/>
+			<port name="DIB8" direction="input"/>
+			<port name="DIB9" direction="input"/>
+			<port name="DIB10" direction="input"/>
+			<port name="DIB11" direction="input"/>
+			<port name="DIB12" direction="input"/>
+			<port name="DIB13" direction="input"/>
+			<port name="DIB14" direction="input"/>
+			<port name="DIB15" direction="input"/>
+			<port name="DOA0" direction="output"/>
+			<port name="DOA1" direction="output"/>
+			<port name="DOA2" direction="output"/>
+			<port name="DOA3" direction="output"/>
+			<port name="DOA4" direction="output"/>
+			<port name="DOA5" direction="output"/>
+			<port name="DOA6" direction="output"/>
+			<port name="DOA7" direction="output"/>
+			<port name="DOA8" direction="output"/>
+			<port name="DOA9" direction="output"/>
+			<port name="DOA10" direction="output"/>
+			<port name="DOA11" direction="output"/>
+			<port name="DOA12" direction="output"/>
+			<port name="DOA13" direction="output"/>
+			<port name="DOA14" direction="output"/>
+			<port name="DOA15" direction="output"/>
+			<port name="DOB0" direction="output"/>
+			<port name="DOB1" direction="output"/>
+			<port name="DOB2" direction="output"/>
+			<port name="DOB3" direction="output"/>
+			<port name="DOB4" direction="output"/>
+			<port name="DOB5" direction="output"/>
+			<port name="DOB6" direction="output"/>
+			<port name="DOB7" direction="output"/>
+			<port name="DOB8" direction="output"/>
+			<port name="DOB9" direction="output"/>
+			<port name="DOB10" direction="output"/>
+			<port name="DOB11" direction="output"/>
+			<port name="DOB12" direction="output"/>
+			<port name="DOB13" direction="output"/>
+			<port name="DOB14" direction="output"/>
+			<port name="DOB15" direction="output"/>
+			<contents>
+				<instance name="clkamux" cellRef="CLKAMUX" libraryRef="template_cell_lib"/>
+				<instance name="weamux" cellRef="WEAMUX" libraryRef="template_cell_lib"/>
+				<instance name="enamux" cellRef="ENAMUX" libraryRef="template_cell_lib"/>
+				<instance name="rstamux" cellRef="RSTAMUX" libraryRef="template_cell_lib"/>
+				<instance name="blockrama" cellRef="BLOCKRAMA" libraryRef="template_cell_lib"/>
+				<instance name="clkbmux" cellRef="CLKBMUX" libraryRef="template_cell_lib"/>
+				<instance name="webmux" cellRef="WEBMUX" libraryRef="template_cell_lib"/>
+				<instance name="enbmux" cellRef="ENBMUX" libraryRef="template_cell_lib"/>
+				<instance name="rstbmux" cellRef="RSTBMUX" libraryRef="template_cell_lib"/>
+				<instance name="blockramb" cellRef="BLOCKRAMB" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="CLKA">
+					<portRef name="CLKA"/>
+					<portRef name="I0" instanceRef="clkamux"/>
+					<portRef name="I1" instanceRef="clkamux"/>
+				</net>
+				<net name="WEA">
+					<portRef name="WEA"/>
+					<portRef name="WEA_B" instanceRef="weamux"/>
+					<portRef name="WEA" instanceRef="weamux"/>
+				</net>
+				<net name="ENA">
+					<portRef name="ENA"/>
+					<portRef name="ENA_B" instanceRef="enamux"/>
+					<portRef name="ENA" instanceRef="enamux"/>
+				</net>
+				<net name="RSTA">
+					<portRef name="RSTA"/>
+					<portRef name="RSTA_B" instanceRef="rstamux"/>
+					<portRef name="RSTA" instanceRef="rstamux"/>
+				</net>
+				<net name="CLKB">
+					<portRef name="CLKB"/>
+					<portRef name="I0" instanceRef="clkbmux"/>
+					<portRef name="I1" instanceRef="clkbmux"/>
+				</net>
+				<net name="WEB">
+					<portRef name="WEB"/>
+					<portRef name="WEB_B" instanceRef="webmux"/>
+					<portRef name="WEB" instanceRef="webmux"/>
+				</net>
+				<net name="ENB">
+					<portRef name="ENB"/>
+					<portRef name="ENB_B" instanceRef="enbmux"/>
+					<portRef name="ENB" instanceRef="enbmux"/>
+				</net>
+				<net name="RSTB">
+					<portRef name="RSTB"/>
+					<portRef name="RSTB_B" instanceRef="rstbmux"/>
+					<portRef name="RSTB" instanceRef="rstbmux"/>
+				</net>
+				<net name="ADDRA0">
+					<portRef name="ADDRA0"/>
+					<portRef name="I16" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA1">
+					<portRef name="ADDRA1"/>
+					<portRef name="I17" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA2">
+					<portRef name="ADDRA2"/>
+					<portRef name="I18" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA3">
+					<portRef name="ADDRA3"/>
+					<portRef name="I19" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA4">
+					<portRef name="ADDRA4"/>
+					<portRef name="I20" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA5">
+					<portRef name="ADDRA5"/>
+					<portRef name="I21" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA6">
+					<portRef name="ADDRA6"/>
+					<portRef name="I22" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA7">
+					<portRef name="ADDRA7"/>
+					<portRef name="I23" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA8">
+					<portRef name="ADDRA8"/>
+					<portRef name="I24" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA9">
+					<portRef name="ADDRA9"/>
+					<portRef name="I25" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA10">
+					<portRef name="ADDRA10"/>
+					<portRef name="I26" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA11">
+					<portRef name="ADDRA11"/>
+					<portRef name="I27" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRB0">
+					<portRef name="ADDRB0"/>
+					<portRef name="I16" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB1">
+					<portRef name="ADDRB1"/>
+					<portRef name="I17" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB2">
+					<portRef name="ADDRB2"/>
+					<portRef name="I18" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB3">
+					<portRef name="ADDRB3"/>
+					<portRef name="I19" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB4">
+					<portRef name="ADDRB4"/>
+					<portRef name="I20" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB5">
+					<portRef name="ADDRB5"/>
+					<portRef name="I21" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB6">
+					<portRef name="ADDRB6"/>
+					<portRef name="I22" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB7">
+					<portRef name="ADDRB7"/>
+					<portRef name="I23" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB8">
+					<portRef name="ADDRB8"/>
+					<portRef name="I24" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB9">
+					<portRef name="ADDRB9"/>
+					<portRef name="I25" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB10">
+					<portRef name="ADDRB10"/>
+					<portRef name="I26" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB11">
+					<portRef name="ADDRB11"/>
+					<portRef name="I27" instanceRef="blockramb"/>
+				</net>
+				<net name="DIA0">
+					<portRef name="DIA0"/>
+					<portRef name="I0" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA1">
+					<portRef name="DIA1"/>
+					<portRef name="I1" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA2">
+					<portRef name="DIA2"/>
+					<portRef name="I2" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA3">
+					<portRef name="DIA3"/>
+					<portRef name="I3" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA4">
+					<portRef name="DIA4"/>
+					<portRef name="I4" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA5">
+					<portRef name="DIA5"/>
+					<portRef name="I5" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA6">
+					<portRef name="DIA6"/>
+					<portRef name="I6" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA7">
+					<portRef name="DIA7"/>
+					<portRef name="I7" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA8">
+					<portRef name="DIA8"/>
+					<portRef name="I8" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA9">
+					<portRef name="DIA9"/>
+					<portRef name="I9" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA10">
+					<portRef name="DIA10"/>
+					<portRef name="I10" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA11">
+					<portRef name="DIA11"/>
+					<portRef name="I11" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA12">
+					<portRef name="DIA12"/>
+					<portRef name="I12" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA13">
+					<portRef name="DIA13"/>
+					<portRef name="I13" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA14">
+					<portRef name="DIA14"/>
+					<portRef name="I14" instanceRef="blockrama"/>
+				</net>
+				<net name="DIA15">
+					<portRef name="DIA15"/>
+					<portRef name="I15" instanceRef="blockrama"/>
+				</net>
+				<net name="DIB0">
+					<portRef name="DIB0"/>
+					<portRef name="I0" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB1">
+					<portRef name="DIB1"/>
+					<portRef name="I1" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB2">
+					<portRef name="DIB2"/>
+					<portRef name="I2" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB3">
+					<portRef name="DIB3"/>
+					<portRef name="I3" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB4">
+					<portRef name="DIB4"/>
+					<portRef name="I4" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB5">
+					<portRef name="DIB5"/>
+					<portRef name="I5" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB6">
+					<portRef name="DIB6"/>
+					<portRef name="I6" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB7">
+					<portRef name="DIB7"/>
+					<portRef name="I7" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB8">
+					<portRef name="DIB8"/>
+					<portRef name="I8" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB9">
+					<portRef name="DIB9"/>
+					<portRef name="I9" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB10">
+					<portRef name="DIB10"/>
+					<portRef name="I10" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB11">
+					<portRef name="DIB11"/>
+					<portRef name="I11" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB12">
+					<portRef name="DIB12"/>
+					<portRef name="I12" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB13">
+					<portRef name="DIB13"/>
+					<portRef name="I13" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB14">
+					<portRef name="DIB14"/>
+					<portRef name="I14" instanceRef="blockramb"/>
+				</net>
+				<net name="DIB15">
+					<portRef name="DIB15"/>
+					<portRef name="I15" instanceRef="blockramb"/>
+				</net>
+				<net name="DOA0">
+					<portRef name="OUT0" instanceRef="blockrama"/>
+					<portRef name="DOA0"/>
+				</net>
+				<net name="DOA1">
+					<portRef name="OUT1" instanceRef="blockrama"/>
+					<portRef name="DOA1"/>
+				</net>
+				<net name="DOA2">
+					<portRef name="OUT2" instanceRef="blockrama"/>
+					<portRef name="DOA2"/>
+				</net>
+				<net name="DOA3">
+					<portRef name="OUT3" instanceRef="blockrama"/>
+					<portRef name="DOA3"/>
+				</net>
+				<net name="DOA4">
+					<portRef name="OUT4" instanceRef="blockrama"/>
+					<portRef name="DOA4"/>
+				</net>
+				<net name="DOA5">
+					<portRef name="OUT5" instanceRef="blockrama"/>
+					<portRef name="DOA5"/>
+				</net>
+				<net name="DOA6">
+					<portRef name="OUT6" instanceRef="blockrama"/>
+					<portRef name="DOA6"/>
+				</net>
+				<net name="DOA7">
+					<portRef name="OUT7" instanceRef="blockrama"/>
+					<portRef name="DOA7"/>
+				</net>
+				<net name="DOA8">
+					<portRef name="OUT8" instanceRef="blockrama"/>
+					<portRef name="DOA8"/>
+				</net>
+				<net name="DOA9">
+					<portRef name="OUT9" instanceRef="blockrama"/>
+					<portRef name="DOA9"/>
+				</net>
+				<net name="DOA10">
+					<portRef name="OUT10" instanceRef="blockrama"/>
+					<portRef name="DOA10"/>
+				</net>
+				<net name="DOA11">
+					<portRef name="OUT11" instanceRef="blockrama"/>
+					<portRef name="DOA11"/>
+				</net>
+				<net name="DOA12">
+					<portRef name="OUT12" instanceRef="blockrama"/>
+					<portRef name="DOA12"/>
+				</net>
+				<net name="DOA13">
+					<portRef name="OUT13" instanceRef="blockrama"/>
+					<portRef name="DOA13"/>
+				</net>
+				<net name="DOA14">
+					<portRef name="OUT14" instanceRef="blockrama"/>
+					<portRef name="DOA14"/>
+				</net>
+				<net name="DOA15">
+					<portRef name="OUT15" instanceRef="blockrama"/>
+					<portRef name="DOA15"/>
+				</net>
+				<net name="DOB0">
+					<portRef name="OUT0" instanceRef="blockramb"/>
+					<portRef name="DOB0"/>
+				</net>
+				<net name="DOB1">
+					<portRef name="OUT1" instanceRef="blockramb"/>
+					<portRef name="DOB1"/>
+				</net>
+				<net name="DOB2">
+					<portRef name="OUT2" instanceRef="blockramb"/>
+					<portRef name="DOB2"/>
+				</net>
+				<net name="DOB3">
+					<portRef name="OUT3" instanceRef="blockramb"/>
+					<portRef name="DOB3"/>
+				</net>
+				<net name="DOB4">
+					<portRef name="OUT4" instanceRef="blockramb"/>
+					<portRef name="DOB4"/>
+				</net>
+				<net name="DOB5">
+					<portRef name="OUT5" instanceRef="blockramb"/>
+					<portRef name="DOB5"/>
+				</net>
+				<net name="DOB6">
+					<portRef name="OUT6" instanceRef="blockramb"/>
+					<portRef name="DOB6"/>
+				</net>
+				<net name="DOB7">
+					<portRef name="OUT7" instanceRef="blockramb"/>
+					<portRef name="DOB7"/>
+				</net>
+				<net name="DOB8">
+					<portRef name="OUT8" instanceRef="blockramb"/>
+					<portRef name="DOB8"/>
+				</net>
+				<net name="DOB9">
+					<portRef name="OUT9" instanceRef="blockramb"/>
+					<portRef name="DOB9"/>
+				</net>
+				<net name="DOB10">
+					<portRef name="OUT10" instanceRef="blockramb"/>
+					<portRef name="DOB10"/>
+				</net>
+				<net name="DOB11">
+					<portRef name="OUT11" instanceRef="blockramb"/>
+					<portRef name="DOB11"/>
+				</net>
+				<net name="DOB12">
+					<portRef name="OUT12" instanceRef="blockramb"/>
+					<portRef name="DOB12"/>
+				</net>
+				<net name="DOB13">
+					<portRef name="OUT13" instanceRef="blockramb"/>
+					<portRef name="DOB13"/>
+				</net>
+				<net name="DOB14">
+					<portRef name="OUT14" instanceRef="blockramb"/>
+					<portRef name="DOB14"/>
+				</net>
+				<net name="DOB15">
+					<portRef name="OUT15" instanceRef="blockramb"/>
+					<portRef name="DOB15"/>
+				</net>
+				<net name="clkamux_o">
+					<portRef name="O" instanceRef="clkamux"/>
+					<portRef name="I31" instanceRef="blockrama"/>
+				</net>
+				<net name="clkbmux_o">
+					<portRef name="O" instanceRef="clkbmux"/>
+					<portRef name="I31" instanceRef="blockramb"/>
+				</net>
+				<net name="weamux_o">
+					<portRef name="O" instanceRef="weamux"/>
+					<portRef name="I30" instanceRef="blockrama"/>
+				</net>
+				<net name="webmux_o">
+					<portRef name="O" instanceRef="webmux"/>
+					<portRef name="I30" instanceRef="blockramb"/>
+				</net>
+				<net name="enamux_o">
+					<portRef name="O" instanceRef="enamux"/>
+					<portRef name="I29" instanceRef="blockrama"/>
+				</net>
+				<net name="enbmux_o">
+					<portRef name="O" instanceRef="enbmux"/>
+					<portRef name="I29" instanceRef="blockramb"/>
+				</net>
+				<net name="rstamux_o">
+					<portRef name="O" instanceRef="rstamux"/>
+					<portRef name="I28" instanceRef="blockrama"/>
+				</net>
+				<net name="rstbmux_o">
+					<portRef name="O" instanceRef="rstbmux"/>
+					<portRef name="I28" instanceRef="blockramb"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="weamux"/>
+					<portRef name="I0" instanceRef="enamux"/>
+					<portRef name="I0" instanceRef="rstamux"/>
+					<portRef name="I0" instanceRef="webmux"/>
+					<portRef name="I0" instanceRef="enbmux"/>
+					<portRef name="I0" instanceRef="rstbmux"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="weamux"/>
+					<portRef name="I1" instanceRef="enamux"/>
+					<portRef name="I1" instanceRef="rstamux"/>
+					<portRef name="I1" instanceRef="webmux"/>
+					<portRef name="I1" instanceRef="enbmux"/>
+					<portRef name="I1" instanceRef="rstbmux"/>
+				</net>
+			</contents>
+		</cell-->
+		<!--cell name="gclkiob" type="GCLKIOB">
+			<port name="PAD" direction="inout"/>
+			<port name="GCLKOUT" direction="output"/>
+			<contents>
+				<instance name="gclk_buf" cellRef="GCLK_BUF" libraryRef="template_cell_lib"/>
+				<net name="PAD">
+					<portRef name="PAD"/>
+					<portRef name="I" instanceRef="gclk_buf"/>
+				</net>
+				<net name="GCLKOUT">
+					<portRef name="O" instanceRef="gclk_buf"/>
+					<portRef name="GCLKOUT"/>
+				</net>
+			</contents>
+		</cell-->
+		<!--cell name="dll" type="DLL">
+			<port name="RST" direction="input"/>
+			<port name="CLKFB" direction="input"/>
+			<port name="CLKIN" direction="input"/>
+			<port name="LOCKED" direction="output"/>
+			<port name="CLK0" direction="output"/>
+			<port name="CLK90" direction="output"/>
+			<port name="CLK180" direction="output"/>
+			<port name="CLK270" direction="output"/>
+			<port name="CLK2X" direction="output"/>
+			<port name="CLK2X90" direction="output"/>
+			<port name="CLKDV" direction="output"/>
+			<contents>
+				<instance name="dll" cellRef="DLL_PRIM" libraryRef="template_cell_lib"/>
+				<net name="RST">
+					<portRef name="RST" instanceRef="dll"/>
+					<portRef name="RST"/>
+				</net>
+				<net name="CLKFB">
+					<portRef name="CLKFB" instanceRef="dll"/>
+					<portRef name="CLKFB"/>
+				</net>
+				<net name="CLKIN">
+					<portRef name="CLKIN" instanceRef="dll"/>
+					<portRef name="CLKIN"/>
+				</net>
+				<net name="LOCKED">
+					<portRef name="LOCKED" instanceRef="dll"/>
+					<portRef name="LOCKED"/>
+				</net>
+				<net name="CLK0">
+					<portRef name="CLK0" instanceRef="dll"/>
+					<portRef name="CLK0"/>
+				</net>
+				<net name="CLK90">
+					<portRef name="CLK90" instanceRef="dll"/>
+					<portRef name="CLK90"/>
+				</net>
+				<net name="CLK180">
+					<portRef name="CLK180" instanceRef="dll"/>
+					<portRef name="CLK180"/>
+				</net>
+				<net name="CLK270">
+					<portRef name="CLK270" instanceRef="dll"/>
+					<portRef name="CLK270"/>
+				</net>
+				<net name="CLK2X">
+					<portRef name="CLK2X" instanceRef="dll"/>
+					<portRef name="CLK2X"/>
+				</net>
+				<net name="CLK2X90">
+					<portRef name="CLK2X90" instanceRef="dll"/>
+					<portRef name="CLK2X90"/>
+				</net>
+				<net name="CLKDV">
+					<portRef name="CLKDV" instanceRef="dll"/>
+					<portRef name="CLKDV"/>
+				</net>
+			</contents>
+		</cell-->
+		<!--cell name="bscan" type="BSCAN">
+			<port name="TDO1" direction="input"/>
+			<port name="TDO2" direction="input"/>
+			<port name="RESET" direction="output"/>
+			<port name="DRCK1" direction="output"/>
+			<port name="DRCK2" direction="output"/>
+			<port name="UPDATE" direction="output"/>
+			<port name="SHIFT" direction="output"/>
+			<port name="TDI" direction="output"/>
+			<port name="SEL1" direction="output"/>
+			<port name="SEL2" direction="output"/>
+			<contents>
+				<instance name="bscan" cellRef="BSCAN_PRIM" libraryRef="template_cell_lib"/>
+				<net name="TDO1">
+					<portRef name="TDO1" instanceRef="bscan"/>
+					<portRef name="TDO1"/>
+				</net>
+				<net name="TDO2">
+					<portRef name="TDO2" instanceRef="bscan"/>
+					<portRef name="TDO2"/>
+				</net>
+				<net name="RESET">
+					<portRef name="RESET" instanceRef="bscan"/>
+					<portRef name="RESET"/>
+				</net>
+				<net name="DRCK1">
+					<portRef name="DRCK1" instanceRef="bscan"/>
+					<portRef name="DRCK1"/>
+				</net>
+				<net name="DRCK2">
+					<portRef name="DRCK2" instanceRef="bscan"/>
+					<portRef name="DRCK2"/>
+				</net>
+				<net name="UPDATE">
+					<portRef name="UPDATE" instanceRef="bscan"/>
+					<portRef name="UPDATE"/>
+				</net>
+				<net name="SHIFT">
+					<portRef name="SHIFT" instanceRef="bscan"/>
+					<portRef name="SHIFT"/>
+				</net>
+				<net name="TDI">
+					<portRef name="TDI" instanceRef="bscan"/>
+					<portRef name="TDI"/>
+				</net>
+				<net name="SEL1">
+					<portRef name="SEL1" instanceRef="bscan"/>
+					<portRef name="SEL1"/>
+				</net>
+				<net name="SEL2">
+					<portRef name="SEL2" instanceRef="bscan"/>
+					<portRef name="SEL2"/>
+				</net>
+			</contents>
+		</cell-->
+	</library>
+</libraries>

@@ -2,14 +2,14 @@ import { Button, Card, Stack, Title, Text, Flex, ScrollArea, Table } from "@mant
 import { invoke } from "@tauri-apps/api";
 
 import StartUpPage from "./StartupPage";
-import showProgramFailedNotification, { showSuccessNotification } from "./Notifies";
+import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { Command } from "@tauri-apps/api/shell";
 import "./ProjectPage.css";
 import { TbFileImport } from "react-icons/tb";
-import { WebviewWindow } from "@tauri-apps/api/window";
+import { platform } from "@tauri-apps/api/os";
 
 function SourceFileSection() {
   const { t } = useTranslation();
@@ -20,20 +20,13 @@ function SourceFileSection() {
       return (
         <Table.Tr
           key={file.name}
-          onDoubleClick={async ()=> {
-            const content = "module top();\nendmodule";
-
-            const webview = new WebviewWindow("editor", {
-              url: "editor.html",
-              title: "Editor",
-              width: 800,
-              height: 600,
+          onDoubleClick={async () => {
+            const platformName = await platform();
+            const cmdStr = /^win/i.test(platformName) ? "vscode.cmd" : "vscode";
+            const command = new Command(cmdStr, file.path);
+            command.spawn().catch((_) => {
+              showFailedNotification({ message: "other.vscode_not_found", title: "" });
             });
-            webview.once("tauri://created", async () => {
-              await webview.emit("content", content);
-              console.log("content sent");
-            });
-            
           }}
         >
           <Table.Td>{file.name}</Table.Td>
@@ -48,20 +41,31 @@ function SourceFileSection() {
         {t("project.no_files")}
       </Text>
     ) : (
-      <ScrollArea>
-        <Table.ScrollContainer minWidth={300}>
-          <Table striped highlightOnHover withTableBorder withColumnBorders>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>{t("project.file_name")}</Table.Th>
-                <Table.Th>{t("project.file_path")}</Table.Th>
-                <Table.Th>{t("project.file_type")}</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-          </Table>
-        </Table.ScrollContainer>
-      </ScrollArea>
+      <Stack gap="sm">
+        <Text
+          c="dimmed"
+          size="xs"
+          style={{
+            textAlign: "right",
+          }}
+        >
+          {t("project.double_click_to_open")}
+        </Text>
+        <ScrollArea>
+          <Table.ScrollContainer minWidth={300}>
+            <Table striped highlightOnHover withTableBorder withColumnBorders>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th>{t("project.file_name")}</Table.Th>
+                  <Table.Th>{t("project.file_path")}</Table.Th>
+                  <Table.Th>{t("project.file_type")}</Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>{rows}</Table.Tbody>
+            </Table>
+          </Table.ScrollContainer>
+        </ScrollArea>
+      </Stack>
     );
   }
 
@@ -119,10 +123,10 @@ function ProjectPage() {
           onClick={() => {
             invoke("program_fpga", { bitfile: "/Users/taruhi/Desktop/Dino/Dino_fde_yosys.bit" }).then(
               () => {
-                showSuccessNotification({ translation: t, title: "program.success", message: "" });
+                showSuccessNotification({ title: t("program.success"), message: "" });
               },
               (err) => {
-                showProgramFailedNotification({ translation: t, message: "program.error." + err });
+                showFailedNotification({ title: t("program.failed"), message: t("program.error." + err) });
               }
             );
           }}

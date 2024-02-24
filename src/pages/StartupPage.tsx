@@ -82,7 +82,6 @@ function StartUpPage() {
                       (err) => {
                         console.error(err);
                         showFailedNotification({
-                          translation: t,
                           message: err,
                           title: t("project.open_project_failed_title"),
                         });

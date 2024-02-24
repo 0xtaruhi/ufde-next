@@ -26,7 +26,14 @@
     "close_project_no_project_content": "プロジェクトが開かれていません。プロジェクトを開いてから、もう一度お試しください。",
     "basic_info": "基本情報",
     "project_name": "プロジェクト名",
-    "project_path": "プロジェクトパス"
+    "project_path": "プロジェクトパス",
+    "file_name": "ファイル名",
+    "file_path": "ファイルパス",
+    "file_type": "ファイルタイプ",
+    "source_file": "ソースファイル",
+    "no_files": "ファイルがありません",
+    "import_files": "ファイルインポート",
+    "double_click_to_open": "ダブルクリックで開く"
   },
   "create_project": {
     "basic_info": "基本情報",
@@ -78,9 +85,16 @@
     },
     "success": "書き込み成功"
   },
+  "flow": {
+    "settings": "設定",
+    "no-settings-available": "利用可能な設定がありません"
+  },
   "sourcefile": {
     "verilog": "Verilog ファイル",
     "systemverilog": "SystemVerilog ファイル",
     "constraint": "制約ファイル"
+  },
+  "other": {
+    "vscode_not_found": "Visual Studio Code が見つかりませんでした。インストールしてから、もう一度お試しください。"
   }
 }

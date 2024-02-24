@@ -1,0 +1,3717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<device name="fdp3p7">
+	<library name="cell_lib">
+		<cell name="LUT" type="LUT">
+			<port name="A1" direction="input"/>
+			<port name="A2" direction="input"/>
+			<port name="A3" direction="input"/>
+			<port name="A4" direction="input"/>
+			<port name="WS" direction="input"/>
+			<port name="DI" direction="input"/>
+			<port name="D" direction="output"/>
+		</cell>
+		<cell name="FF" type="GENERIC">
+			<port name="D" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="CK" direction="input"/>
+			<port name="INIT" direction="input"/>
+			<port name="REV" direction="input"/>
+			<port name="Q" direction="output"/>
+		</cell>
+		<cell name="BLOCKRAM_1" type="GENERIC">
+			<port name="DI0" direction="input"/>
+			<port name="DI1" direction="input"/>
+			<port name="DI2" direction="input"/>
+			<port name="DI3" direction="input"/>
+			<port name="DI4" direction="input"/>
+			<port name="DI5" direction="input"/>
+			<port name="DI6" direction="input"/>
+			<port name="DI7" direction="input"/>
+			<port name="DI8" direction="input"/>
+			<port name="DI9" direction="input"/>
+			<port name="DI10" direction="input"/>
+			<port name="DI11" direction="input"/>
+			<port name="DI12" direction="input"/>
+			<port name="DI13" direction="input"/>
+			<port name="DI14" direction="input"/>
+			<port name="DI15" direction="input"/>
+			<port name="ADDR0" direction="input"/>
+			<port name="ADDR1" direction="input"/>
+			<port name="ADDR2" direction="input"/>
+			<port name="ADDR3" direction="input"/>
+			<port name="ADDR4" direction="input"/>
+			<port name="ADDR5" direction="input"/>
+			<port name="ADDR6" direction="input"/>
+			<port name="ADDR7" direction="input"/>
+			<port name="ADDR8" direction="input"/>
+			<port name="ADDR9" direction="input"/>
+			<port name="ADDR10" direction="input"/>
+			<port name="ADDR11" direction="input"/>
+			<port name="RST" direction="input"/>
+			<port name="EN" direction="input"/>
+			<port name="WE" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="DO0" direction="output"/>
+			<port name="DO1" direction="output"/>
+			<port name="DO2" direction="output"/>
+			<port name="DO3" direction="output"/>
+			<port name="DO4" direction="output"/>
+			<port name="DO5" direction="output"/>
+			<port name="DO6" direction="output"/>
+			<port name="DO7" direction="output"/>
+			<port name="DO8" direction="output"/>
+			<port name="DO9" direction="output"/>
+			<port name="DO10" direction="output"/>
+			<port name="DO11" direction="output"/>
+			<port name="DO12" direction="output"/>
+			<port name="DO13" direction="output"/>
+			<port name="DO14" direction="output"/>
+			<port name="DO15" direction="output"/>
+		</cell>
+		<cell name="BLOCKRAM_2" type="GENERIC">
+			<port name="DIA0" direction="input"/>
+			<port name="DIA1" direction="input"/>
+			<port name="DIA2" direction="input"/>
+			<port name="DIA3" direction="input"/>
+			<port name="DIA4" direction="input"/>
+			<port name="DIA5" direction="input"/>
+			<port name="DIA6" direction="input"/>
+			<port name="DIA7" direction="input"/>
+			<port name="DIA8" direction="input"/>
+			<port name="DIA9" direction="input"/>
+			<port name="DIA10" direction="input"/>
+			<port name="DIA11" direction="input"/>
+			<port name="DIA12" direction="input"/>
+			<port name="DIA13" direction="input"/>
+			<port name="DIA14" direction="input"/>
+			<port name="DIA15" direction="input"/>
+			<port name="ADDRA0" direction="input"/>
+			<port name="ADDRA1" direction="input"/>
+			<port name="ADDRA2" direction="input"/>
+			<port name="ADDRA3" direction="input"/>
+			<port name="ADDRA4" direction="input"/>
+			<port name="ADDRA5" direction="input"/>
+			<port name="ADDRA6" direction="input"/>
+			<port name="ADDRA7" direction="input"/>
+			<port name="ADDRA8" direction="input"/>
+			<port name="ADDRA9" direction="input"/>
+			<port name="ADDRA10" direction="input"/>
+			<port name="ADDRA11" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<port name="ENA" direction="input"/>
+			<port name="WEA" direction="input"/>
+			<port name="CLKA" direction="input"/>
+			<port name="DOA0" direction="output"/>
+			<port name="DOA1" direction="output"/>
+			<port name="DOA2" direction="output"/>
+			<port name="DOA3" direction="output"/>
+			<port name="DOA4" direction="output"/>
+			<port name="DOA5" direction="output"/>
+			<port name="DOA6" direction="output"/>
+			<port name="DOA7" direction="output"/>
+			<port name="DOA8" direction="output"/>
+			<port name="DOA9" direction="output"/>
+			<port name="DOA10" direction="output"/>
+			<port name="DOA11" direction="output"/>
+			<port name="DOA12" direction="output"/>
+			<port name="DOA13" direction="output"/>
+			<port name="DOA14" direction="output"/>
+			<port name="DOA15" direction="output"/>
+			<port name="DIB0" direction="input"/>
+			<port name="DIB1" direction="input"/>
+			<port name="DIB2" direction="input"/>
+			<port name="DIB3" direction="input"/>
+			<port name="DIB4" direction="input"/>
+			<port name="DIB5" direction="input"/>
+			<port name="DIB6" direction="input"/>
+			<port name="DIB7" direction="input"/>
+			<port name="DIB8" direction="input"/>
+			<port name="DIB9" direction="input"/>
+			<port name="DIB10" direction="input"/>
+			<port name="DIB11" direction="input"/>
+			<port name="DIB12" direction="input"/>
+			<port name="DIB13" direction="input"/>
+			<port name="DIB14" direction="input"/>
+			<port name="DIB15" direction="input"/>
+			<port name="ADDRB0" direction="input"/>
+			<port name="ADDRB1" direction="input"/>
+			<port name="ADDRB2" direction="input"/>
+			<port name="ADDRB3" direction="input"/>
+			<port name="ADDRB4" direction="input"/>
+			<port name="ADDRB5" direction="input"/>
+			<port name="ADDRB6" direction="input"/>
+			<port name="ADDRB7" direction="input"/>
+			<port name="ADDRB8" direction="input"/>
+			<port name="ADDRB9" direction="input"/>
+			<port name="ADDRB10" direction="input"/>
+			<port name="ADDRB11" direction="input"/>
+			<port name="RSTB" direction="input"/>
+			<port name="ENB" direction="input"/>
+			<port name="WEB" direction="input"/>
+			<port name="CLKB" direction="input"/>
+			<port name="DOB0" direction="output"/>
+			<port name="DOB1" direction="output"/>
+			<port name="DOB2" direction="output"/>
+			<port name="DOB3" direction="output"/>
+			<port name="DOB4" direction="output"/>
+			<port name="DOB5" direction="output"/>
+			<port name="DOB6" direction="output"/>
+			<port name="DOB7" direction="output"/>
+			<port name="DOB8" direction="output"/>
+			<port name="DOB9" direction="output"/>
+			<port name="DOB10" direction="output"/>
+			<port name="DOB11" direction="output"/>
+			<port name="DOB12" direction="output"/>
+			<port name="DOB13" direction="output"/>
+			<port name="DOB14" direction="output"/>
+			<port name="DOB15" direction="output"/>
+		</cell>
+	</library>
+	<library name="template_cell_lib">
+		<cell name="GCLK_BUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="CEMUX_GCLK" type="GENERIC">
+			<property name="inv" value="CE_B"/>
+			<port name="O" direction="output" capacitance="13.8501">
+				<timing>
+					<related_pin value="CE"/>
+					<intrinsic_rise value="0.177482388"/>
+					<intrinsic_fall value="0.195077841"/>
+				</timing>
+				<timing>
+					<related_pin value="CE_B"/>
+					<intrinsic_rise value="0.403053535"/>
+					<intrinsic_fall value="0.309269748"/>
+				</timing>
+			</port>
+			<port name="CE_B" direction="input" capacitance="13.8403"/>
+			<port name="CE" direction="input" capacitance="16.1779"/>
+			<port name="I0" direction="input" capacitance="5.3914"/>
+			<port name="I1" direction="input" capacitance="3.9670"/>
+		</cell>
+		<cell name="GCLK_BUFFER" type="GENERIC">
+			<port name="I" direction="input" capacitance="7.8552"/>
+			<port name="S" direction="input" capacitance="14.3693"/>
+			<port name="O" direction="output" capacitance="35.8576">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.654207102"/>
+					<intrinsic_fall value="0.783108804"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_disable"/>
+					<related_pin value="S"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="0.638943312"/>
+					<intrinsic_fall value="0.7473139"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_enable"/>
+					<related_pin value="S"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_rise value="0.638943312"/>
+					<intrinsic_fall value="0.7473139"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="DELAY" type="GENERIC">
+			<port name="O" direction="output" capacitance="6.9265">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.752556652"/>
+					<intrinsic_fall value="0.810461569"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="9.9049"/>
+		</cell>
+		<cell name="DFF" type="GENERIC">
+			<port name="D" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CE" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CK" direction="input" capacitance="0" type="clock"/>
+			<port name="A_SET" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_SET" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="A_RST" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_RST" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="Q" direction="output">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="1"/>
+					<intrinsic_fall value="1"/>
+					<related_pin value="CK"/>
+				</timing>
+				<timing>
+					<timing_type value="falling_edge"/>
+					<intrinsic_rise value="1"/>
+					<intrinsic_fall value="1"/>
+					<related_pin value="CK"/>
+				</timing>
+				<timing>
+					<timing_type value="preset"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="1"/>
+					<related_pin value="A_SET"/>
+				</timing>
+				<timing>
+					<timing_type value="clear"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_fall value="1"/>
+					<related_pin value="A_RST"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="ICEMUX" type="GENERIC">
+			<property name="inv" value="ICE_B"/>
+			<port name="O" direction="output" capacitance="6.8665">
+				<timing>
+					<related_pin value="ICE_B"/>
+					<intrinsic_rise value="0.448635976469962"/>
+					<intrinsic_fall value="0.540719779319912"/>
+				</timing>
+				<timing>
+					<related_pin value="ICE"/>
+					<intrinsic_rise value="0.287525812780663"/>
+					<intrinsic_fall value="0.267420090876402"/>
+				</timing>
+			</port>
+			<port name="ICE_B" direction="input" capacitance="13.2316"/>
+			<port name="ICE" direction="input" capacitance="9.5381"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="ICKINV" type="GENERIC">
+			<property name="inv" value="I0"/>
+			<port name="O" direction="output" capacitance="5.1204">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.28392875036"/>
+					<intrinsic_fall value="0.2819002333"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.21674546176"/>
+					<intrinsic_fall value="0.23898416191"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="10.1505"/>
+			<port name="I1" direction="input" capacitance="10.1505"/>
+		</cell>
+		<cell name="IFF" type="GENERIC">
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0"/>
+			<port name="INIT" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="IINITMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="7.8262">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.213217712374271"/>
+					<intrinsic_fall value="0.203774692686212"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="10.9940"/>
+		</cell>
+		<cell name="IMUX_IOB" type="GENERIC">
+			<port name="O" direction="output" capacitance="7.5973">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.291384308"/>
+					<intrinsic_fall value="0.274507844"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="6.9265"/>
+		</cell>
+		<cell name="INBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="2.35"/>
+					<intrinsic_fall value="1.52"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="IOUTBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="13.9674">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.26020626"/>
+					<intrinsic_fall value="0.152827215236"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="7.0535"/>
+		</cell>
+		<cell name="LATCH" type="GENERIC">
+			<port name="D" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CE" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CK" direction="input" capacitance="0" type="clock"/>
+			<port name="A_SET" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_SET" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="A_RST" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_RST" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="Q" direction="output">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+					<related_pin value="CK"/>
+				</timing>
+				<timing>
+					<timing_type value="preset"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="0"/>
+					<related_pin value="A_SET"/>
+				</timing>
+				<timing>
+					<timing_type value="clear"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_fall value="0"/>
+					<related_pin value="A_RST"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="OBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<intrinsic_rise value="2.656"/>
+					<intrinsic_fall value="6.2"/>
+					<related_pin value="I"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="OCEMUX" type="GENERIC">
+			<property name="inv" value="OCE_B"/>
+			<port name="O" direction="output" capacitance="6.8665">
+				<timing>
+					<related_pin value="OCE_B"/>
+					<intrinsic_rise value="0.448635976469962"/>
+					<intrinsic_fall value="0.540719779319912"/>
+				</timing>
+				<timing>
+					<related_pin value="OCE"/>
+					<intrinsic_rise value="0.287525812780663"/>
+					<intrinsic_fall value="0.267420090876402"/>
+				</timing>
+			</port>
+			<port name="OCE_B" direction="input" capacitance="13.2316"/>
+			<port name="OCE" direction="input" capacitance="9.5381"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="OCKINV" type="GENERIC">
+			<property name="inv" value="I0"/>
+			<port name="O" direction="output" capacitance="5.1204">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.28392875036"/>
+					<intrinsic_fall value="0.2819002333"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.21674546176"/>
+					<intrinsic_fall value="0.23898416191"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="10.1505"/>
+			<port name="I1" direction="input" capacitance="10.1505"/>
+		</cell>
+		<cell name="OFF" type="GENERIC">
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0"/>
+			<port name="INIT" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="OINITMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="7.8262">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.213217712374271"/>
+					<intrinsic_fall value="0.203774692686212"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="10.9940"/>
+		</cell>
+		<cell name="OMUX" type="GENERIC">
+			<property name="inv" value="O_B"/>
+			<port name="OUT" direction="output" capacitance="6.8665">
+				<timing>
+					<related_pin value="O"/>
+					<intrinsic_rise value="0.296153459"/>
+					<intrinsic_fall value="0.32201891"/>
+				</timing>
+				<timing>
+					<related_pin value="O_B"/>
+					<intrinsic_rise value="0.600727508"/>
+					<intrinsic_fall value="0.507250853"/>
+				</timing>
+			</port>
+			<port name="O_B" direction="input" capacitance="13.2316"/>
+			<port name="O" direction="input" capacitance="9.5381"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="OUTBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="2.656"/>
+					<intrinsic_fall value="6.2"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_disable"/>
+					<related_pin value="S"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="2.656"/>
+					<intrinsic_fall value="6.2"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_enable"/>
+					<related_pin value="S"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_rise value="2.656"/>
+					<intrinsic_fall value="6.2"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="0"/>
+			<port name="S" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="OUTMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="18.6625">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.721206790141371"/>
+					<intrinsic_fall value="0.633078117964881"/>
+				</timing>
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.74094251868"/>
+					<intrinsic_fall value="0.67659635296389"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="7.6729"/>
+			<port name="I1" direction="input" capacitance="6.5394"/>
+		</cell>
+		<cell name="SRMUX_IOB" type="GENERIC">
+			<property name="inv" value="SR_B"/>
+			<port name="O" direction="output" capacitance="19.5150">
+				<timing>
+					<related_pin value="SR"/>
+					<intrinsic_rise value="0.612547818"/>
+					<intrinsic_fall value="0.531128146"/>
+				</timing>
+				<timing>
+					<related_pin value="SR_B"/>
+					<intrinsic_rise value="0.776873041"/>
+					<intrinsic_fall value="0.90166873"/>
+				</timing>
+			</port>
+			<port name="SR_B" direction="input" capacitance="11.5236"/>
+			<port name="SR" direction="input" capacitance="13.2316"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="TCEMUX" type="GENERIC">
+			<property name="inv" value="TCE_B"/>
+			<port name="O" direction="output" capacitance="6.8665">
+				<timing>
+					<related_pin value="TCE_B"/>
+					<intrinsic_rise value="0.448635976469962"/>
+					<intrinsic_fall value="0.540719779319912"/>
+				</timing>
+				<timing>
+					<related_pin value="TCE"/>
+					<intrinsic_rise value="0.287525812780663"/>
+					<intrinsic_fall value="0.267420090876402"/>
+				</timing>
+			</port>
+			<port name="TCE_B" direction="input" capacitance="9.5381"/>
+			<port name="TCE" direction="input" capacitance="11.5236"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="TCKINV" type="GENERIC">
+			<property name="inv" value="I0"/>
+			<port name="O" direction="output" capacitance="5.1204">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.28392875036"/>
+					<intrinsic_fall value="0.2819002333"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.21674546176"/>
+					<intrinsic_fall value="0.23898416191"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="10.1505"/>
+			<port name="I1" direction="input" capacitance="10.1505"/>
+		</cell>
+		<cell name="TFF" type="GENERIC">
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0"/>
+			<port name="INIT" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="TINITMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="7.8262">
+				<timing>
+					<intrinsic_rise value="0.213217712374271"/>
+					<intrinsic_fall value="0.203774692686212"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="10.9940"/>
+		</cell>
+		<cell name="TRIMUX" type="GENERIC">
+			<property name="inv" value="T_TB"/>
+			<port name="O" direction="output" capacitance="6.8665">
+				<timing>
+					<related_pin value="T_TB"/>
+					<intrinsic_rise value="0.530521064873280"/>
+					<intrinsic_fall value="0.477059844754600"/>
+				</timing>
+				<timing>
+					<related_pin value="T"/>
+					<intrinsic_rise value="0.357613070023683"/>
+					<intrinsic_fall value="0.211103813652580"/>
+				</timing>
+			</port>
+			<port name="T_TB" direction="input" capacitance="9.5381"/>
+			<port name="T" direction="input" capacitance="11.5236"/>
+			<port name="I0" direction="input" capacitance="6.0323"/>
+			<port name="I1" direction="input" capacitance="3.3830"/>
+		</cell>
+		<cell name="TSEL" type="GENERIC">
+			<port name="O" direction="output" capacitance="13.6383">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.108855152034273453312"/>
+					<intrinsic_fall value="1.151284440456"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.92742686101152"/>
+					<intrinsic_fall value="1.0903983224544"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="1.9030"/>
+			<port name="I1" direction="input" capacitance="7.6729"/>
+		</cell>
+		<cell name="GND" type="GENERIC">
+			<port name="G" direction="output"/>
+		</cell>
+		<cell name="VCC" type="GENERIC">
+			<port name="P" direction="output"/>
+		</cell>
+		<cell name="BLOCKRAMA" type="GENERIC">
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="I2" direction="input" capacitance="0"/>
+			<port name="I3" direction="input" capacitance="0"/>
+			<port name="I4" direction="input" capacitance="0"/>
+			<port name="I5" direction="input" capacitance="0"/>
+			<port name="I6" direction="input" capacitance="0"/>
+			<port name="I7" direction="input" capacitance="0"/>
+			<port name="I8" direction="input" capacitance="0"/>
+			<port name="I9" direction="input" capacitance="0"/>
+			<port name="I10" direction="input" capacitance="0"/>
+			<port name="I11" direction="input" capacitance="0"/>
+			<port name="I12" direction="input" capacitance="0"/>
+			<port name="I13" direction="input" capacitance="0"/>
+			<port name="I14" direction="input" capacitance="0"/>
+			<port name="I15" direction="input" capacitance="0"/>
+			<port name="I16" direction="input" capacitance="0"/>
+			<port name="I17" direction="input" capacitance="0"/>
+			<port name="I18" direction="input" capacitance="0"/>
+			<port name="I19" direction="input" capacitance="0"/>
+			<port name="I20" direction="input" capacitance="0"/>
+			<port name="I21" direction="input" capacitance="0"/>
+			<port name="I22" direction="input" capacitance="0"/>
+			<port name="I23" direction="input" capacitance="0"/>
+			<port name="I24" direction="input" capacitance="0"/>
+			<port name="I25" direction="input" capacitance="0"/>
+			<port name="I26" direction="input" capacitance="0"/>
+			<port name="I27" direction="input" capacitance="0"/>
+			<port name="I28" direction="input" capacitance="0"/>
+			<port name="I29" direction="input" capacitance="0"/>
+			<port name="I30" direction="input" capacitance="0"/>
+			<port name="I31" direction="input" capacitance="0"/>
+			<port name="OUT0" direction="output" capacitance="0"/>
+			<port name="OUT1" direction="output" capacitance="0"/>
+			<port name="OUT2" direction="output" capacitance="0"/>
+			<port name="OUT3" direction="output" capacitance="0"/>
+			<port name="OUT4" direction="output" capacitance="0"/>
+			<port name="OUT5" direction="output" capacitance="0"/>
+			<port name="OUT6" direction="output" capacitance="0"/>
+			<port name="OUT7" direction="output" capacitance="0"/>
+			<port name="OUT8" direction="output" capacitance="0"/>
+			<port name="OUT9" direction="output" capacitance="0"/>
+			<port name="OUT10" direction="output" capacitance="0"/>
+			<port name="OUT11" direction="output" capacitance="0"/>
+			<port name="OUT12" direction="output" capacitance="0"/>
+			<port name="OUT13" direction="output" capacitance="0"/>
+			<port name="OUT14" direction="output" capacitance="0"/>
+			<port name="OUT15" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="BLOCKRAMB" type="GENERIC">
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="I2" direction="input" capacitance="0"/>
+			<port name="I3" direction="input" capacitance="0"/>
+			<port name="I4" direction="input" capacitance="0"/>
+			<port name="I5" direction="input" capacitance="0"/>
+			<port name="I6" direction="input" capacitance="0"/>
+			<port name="I7" direction="input" capacitance="0"/>
+			<port name="I8" direction="input" capacitance="0"/>
+			<port name="I9" direction="input" capacitance="0"/>
+			<port name="I10" direction="input" capacitance="0"/>
+			<port name="I11" direction="input" capacitance="0"/>
+			<port name="I12" direction="input" capacitance="0"/>
+			<port name="I13" direction="input" capacitance="0"/>
+			<port name="I14" direction="input" capacitance="0"/>
+			<port name="I15" direction="input" capacitance="0"/>
+			<port name="I16" direction="input" capacitance="0"/>
+			<port name="I17" direction="input" capacitance="0"/>
+			<port name="I18" direction="input" capacitance="0"/>
+			<port name="I19" direction="input" capacitance="0"/>
+			<port name="I20" direction="input" capacitance="0"/>
+			<port name="I21" direction="input" capacitance="0"/>
+			<port name="I22" direction="input" capacitance="0"/>
+			<port name="I23" direction="input" capacitance="0"/>
+			<port name="I24" direction="input" capacitance="0"/>
+			<port name="I25" direction="input" capacitance="0"/>
+			<port name="I26" direction="input" capacitance="0"/>
+			<port name="I27" direction="input" capacitance="0"/>
+			<port name="I28" direction="input" capacitance="0"/>
+			<port name="I29" direction="input" capacitance="0"/>
+			<port name="I30" direction="input" capacitance="0"/>
+			<port name="I31" direction="input" capacitance="0"/>
+			<port name="OUT0" direction="output" capacitance="0"/>
+			<port name="OUT1" direction="output" capacitance="0"/>
+			<port name="OUT2" direction="output" capacitance="0"/>
+			<port name="OUT3" direction="output" capacitance="0"/>
+			<port name="OUT4" direction="output" capacitance="0"/>
+			<port name="OUT5" direction="output" capacitance="0"/>
+			<port name="OUT6" direction="output" capacitance="0"/>
+			<port name="OUT7" direction="output" capacitance="0"/>
+			<port name="OUT8" direction="output" capacitance="0"/>
+			<port name="OUT9" direction="output" capacitance="0"/>
+			<port name="OUT10" direction="output" capacitance="0"/>
+			<port name="OUT11" direction="output" capacitance="0"/>
+			<port name="OUT12" direction="output" capacitance="0"/>
+			<port name="OUT13" direction="output" capacitance="0"/>
+			<port name="OUT14" direction="output" capacitance="0"/>
+			<port name="OUT15" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="CLKAMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="CLKBMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="ENAMUX" type="GENERIC">
+			<property name="inv" value="ENA_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="ENA"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="ENA_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="ENA" direction="input" capacitance="0"/>
+			<port name="ENA_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="ENBMUX" type="GENERIC">
+			<property name="inv" value="ENB_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="ENB"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="ENB_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="ENB" direction="input" capacitance="0"/>
+			<port name="ENB_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="RAMB" type="GENERIC">
+			<port name="DI0" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI1" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI2" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI3" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI4" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI5" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI6" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI7" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI8" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI9" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI10" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI11" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI12" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI13" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI14" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DI15" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR0" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR1" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR2" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR3" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR4" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR5" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR6" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR7" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR8" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR9" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR10" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="ADDR11" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK" direction="input" capacitance="0" type="clock"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="EN" direction="input" capacitance="0"/>
+			<port name="RST" direction="input" capacitance="0"/>
+			<port name="DO0" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO1" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO2" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO3" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO4" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO5" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO6" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO7" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO8" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO9" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO10" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO11" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO12" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO13" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO14" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+			<port name="DO15" direction="output" capacitance="0">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="5"/>
+					<intrinsic_fall value="5"/>
+					<related_pin value="CLK"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="RSTAMUX" type="GENERIC">
+			<property name="inv" value="RSTA_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="RSTA"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="RSTA_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="RSTA" direction="input" capacitance="0"/>
+			<port name="RSTA_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="RSTBMUX" type="GENERIC">
+			<property name="inv" value="RSTB_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="RSTB"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="RSTB_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="RSTB" direction="input" capacitance="0"/>
+			<port name="RSTB_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="WEAMUX" type="GENERIC">
+			<property name="inv" value="WEA_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WEA"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="WEA_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="WEA" direction="input" capacitance="0"/>
+			<port name="WEA_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="WEBMUX" type="GENERIC">
+			<property name="inv" value="WEB_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WEB"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="WEB_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="WEB" direction="input" capacitance="0"/>
+			<port name="WEB_B" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="BXMUX" type="GENERIC">
+			<property name="inv" value="BX_B"/>
+			<port name="O" direction="output" capacitance="20.1679">
+				<timing>
+					<related_pin value="BX"/>
+					<intrinsic_rise value="0.501196984"/>
+					<intrinsic_fall value="0.465851592"/>
+				</timing>
+				<timing>
+					<related_pin value="BX_B"/>
+					<intrinsic_rise value="0.3792333284"/>
+					<intrinsic_fall value="0.2938694787"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="3.7379"/>
+			<port name="BX" direction="input" capacitance="15.0607"/>
+			<port name="BX_B" direction="input" capacitance="16.9277"/>
+		</cell>
+		<cell name="BYMUX" type="GENERIC">
+			<property name="inv" value="BY_B"/>
+			<port name="O" direction="output" capacitance="17.8331">
+				<timing>
+					<related_pin value="BY"/>
+					<intrinsic_rise value="0.583804441"/>
+					<intrinsic_fall value="0.565151275"/>
+				</timing>
+				<timing>
+					<related_pin value="BY_B"/>
+					<intrinsic_rise value="0.475770065"/>
+					<intrinsic_fall value="0.518440975"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="3.7379"/>
+			<port name="BY" direction="input" capacitance="15.0607"/>
+			<port name="BY_B" direction="input" capacitance="16.9277"/>
+		</cell>
+		<cell name="CEMUX_SLICE" type="GENERIC">
+			<property name="inv" value="CE_B"/>
+			<port name="O" direction="output" capacitance="11.7206">
+				<timing>
+					<related_pin value="CE_B"/>
+					<intrinsic_rise value="0.26490182373"/>
+					<intrinsic_fall value="0.3035740559"/>
+				</timing>
+				<timing>
+					<related_pin value="CE"/>
+					<intrinsic_rise value="0.37630882962"/>
+					<intrinsic_fall value="0.34953907855"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="3.7379"/>
+			<port name="CE" direction="input" capacitance="16.9277"/>
+			<port name="CE_B" direction="input" capacitance="16.9277"/>
+		</cell>
+		<cell name="CKINV" type="GENERIC">
+			<property name="inv" value="I0"/>
+			<port name="O" direction="output" capacitance="29.4099">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.3185374284"/>
+					<intrinsic_fall value="0.334240538352"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.41403378168"/>
+					<intrinsic_fall value="0.3517207527"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="16.9277"/>
+			<port name="I1" direction="input" capacitance="15.2197"/>
+		</cell>
+		<cell name="CY0F" type="GENERIC">
+			<port name="O" direction="output" capacitance="17.0873">
+				<timing>
+					<related_pin value="F1"/>
+					<intrinsic_rise value="0.1239853758"/>
+					<intrinsic_fall value="0.1489972704"/>
+				</timing>
+				<timing>
+					<related_pin value="PROD"/>
+					<intrinsic_rise value="0.1103669281"/>
+					<intrinsic_fall value="0.1404403392"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="3.7379"/>
+			<port name="F1" direction="input" capacitance="19.8101"/>
+			<port name="PROD" direction="input" capacitance="3.7277"/>
+		</cell>
+		<cell name="CY0G" type="GENERIC">
+			<port name="O" direction="output" capacitance="13.7490">
+				<timing>
+					<related_pin value="G1"/>
+					<intrinsic_rise value="0.254701392"/>
+					<intrinsic_fall value="0.216461805"/>
+				</timing>
+				<timing>
+					<related_pin value="PROD"/>
+					<intrinsic_rise value="0.254701392"/>
+					<intrinsic_fall value="0.216461805"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="6.1530"/>
+			<port name="G1" direction="input" capacitance="23.8650"/>
+			<port name="PROD" direction="input" capacitance="6.3524"/>
+		</cell>
+		<cell name="CYINIT" type="GENERIC">
+			<port name="O" direction="output" capacitance="27.5167">
+				<timing>
+					<related_pin value="CIN"/>
+					<intrinsic_rise value="0.04564450652"/>
+					<intrinsic_fall value="0.049218897338"/>
+				</timing>
+				<timing>
+					<related_pin value="BX"/>
+					<intrinsic_rise value="0.119393111127"/>
+					<intrinsic_fall value="0.1046047162811"/>
+				</timing>
+			</port>
+			<port name="CIN" direction="input" capacitance="25.2999"/>
+			<port name="BX" direction="input" capacitance="20.1679"/>
+		</cell>
+		<cell name="CYMUXF" type="GENERIC">
+			<port name="OUT" direction="output" capacitance="31.7784">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.101261881"/>
+					<intrinsic_fall value="0.109593491"/>
+				</timing>
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.2309016032"/>
+					<intrinsic_fall value="0.2239476657"/>
+				</timing>
+				<timing>
+					<related_pin value="S0"/>
+					<intrinsic_rise value="0.062917617"/>
+					<intrinsic_fall value="0.093920937"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="17.0873"/>
+			<port name="I1" direction="input" capacitance="27.5167"/>
+			<port name="S0" direction="input" capacitance="10.2901"/>
+		</cell>
+		<cell name="CYMUXG" type="GENERIC">
+			<port name="OUT" direction="output" capacitance="27.0079">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.101970313"/>
+					<intrinsic_fall value="0.103167236"/>
+				</timing>
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.161361936"/>
+					<intrinsic_fall value="0.182037669"/>
+				</timing>
+				<timing>
+					<related_pin value="S0"/>
+					<intrinsic_rise value="0.096907594"/>
+					<intrinsic_fall value="0.128183451"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="13.7490"/>
+			<port name="I1" direction="input" capacitance="31.8356"/>
+			<port name="S0" direction="input" capacitance="8.6034"/>
+		</cell>
+		<cell name="CYSELF" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.2901">
+				<timing>
+					<related_pin value="F"/>
+					<intrinsic_rise value="0.20644992"/>
+					<intrinsic_fall value="0.147267133"/>
+				</timing>
+			</port>
+			<port name="F" direction="input" capacitance="29.4654"/>
+			<port name="I1" direction="input" capacitance="2.3922"/>
+		</cell>
+		<cell name="CYSELG" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.2864">
+				<timing>
+					<related_pin value="G"/>
+					<intrinsic_rise value="0.15378935"/>
+					<intrinsic_fall value="0.116915104"/>
+				</timing>
+			</port>
+			<port name="G" direction="input" capacitance="29.4654"/>
+			<port name="I1" direction="input" capacitance="2.3922"/>
+		</cell>
+		<cell name="DFFSLICE" type="GENERIC">
+			<port name="D" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CE" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CK" direction="input" capacitance="0" type="clock"/>
+			<port name="A_SET" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_SET" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="A_RST" direction="input" capacitance="0">
+				<timing>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="S_RST" direction="input" capacitance="0">
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="setup_rising"/>
+					<intrinsic_rise value="0.5"/>
+					<intrinsic_fall value="0.5"/>
+				</timing>
+				<timing>
+					<related_pin value="CK"/>
+					<timing_type value="hold_rising"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="Q" direction="output">
+				<timing>
+					<timing_type value="rising_edge"/>
+					<intrinsic_rise value="1"/>
+					<intrinsic_fall value="1"/>
+					<related_pin value="CK"/>
+				</timing>
+				<timing>
+					<timing_type value="falling_edge"/>
+					<intrinsic_rise value="1"/>
+					<intrinsic_fall value="1"/>
+					<related_pin value="CK"/>
+				</timing>
+				<timing>
+					<timing_type value="preset"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="0"/>
+					<related_pin value="A_SET"/>
+				</timing>
+				<timing>
+					<timing_type value="clear"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_fall value="0"/>
+					<related_pin value="A_RST"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="DGEN" type="GENERIC">
+			<port name="BX" direction="input" capacitance="0"/>
+			<port name="BY" direction="input" capacitance="0"/>
+			<port name="DF" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="DXMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.1875">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.0244813248"/>
+					<intrinsic_fall value="0.0393975765"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.06757792577536"/>
+					<intrinsic_fall value="0.0698432188778"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="20.1679"/>
+			<port name="I1" direction="input" capacitance="12.5553"/>
+		</cell>
+		<cell name="DYMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.7314">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.029232196"/>
+					<intrinsic_fall value="0.03411280696"/>
+				</timing>
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.009434421375"/>
+					<intrinsic_fall value="0.022225658"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="24.7582"/>
+			<port name="I1" direction="input" capacitance="18.2341"/>
+		</cell>
+		<cell name="F" type="GENERIC">
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="A4" direction="input" capacitance="0"/>
+			<port name="WS" direction="input" capacitance="0"/>
+			<port name="DI" direction="input" capacitance="0"/>
+			<port name="D" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="F5MUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="19.5692">
+				<timing>
+					<related_pin value="F"/>
+					<intrinsic_rise value="0.086046196"/>
+					<intrinsic_fall value="0.080877777"/>
+				</timing>
+				<timing>
+					<related_pin value="G"/>
+					<intrinsic_rise value="0.063979247"/>
+					<intrinsic_fall value="0.05202943"/>
+				</timing>
+				<timing>
+					<related_pin value="S"/>
+					<intrinsic_rise value="0.172963824042"/>
+					<intrinsic_fall value="0.2021436348141"/>
+				</timing>
+			</port>
+			<port name="F" direction="input" capacitance="29.4653"/>
+			<port name="G" direction="input" capacitance="29.4654"/>
+			<port name="S" direction="input" capacitance="20.1679"/>
+		</cell>
+		<cell name="F5USED" type="GENERIC">
+			<port name="O" direction="output" capacitance="21.8543">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.13903054"/>
+					<intrinsic_fall value="0.136462885"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="19.5692"/>
+		</cell>
+		<cell name="F6MUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="11.5863">
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.0169877785"/>
+					<intrinsic_fall value="0.0268992405"/>
+				</timing>
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.024558218"/>
+					<intrinsic_fall value="0.029195149"/>
+				</timing>
+				<timing>
+					<related_pin value="S"/>
+					<intrinsic_rise value="0.086412109125"/>
+					<intrinsic_fall value="0.1257892525"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="21.8543"/>
+			<port name="I1" direction="input" capacitance="19.5692"/>
+			<port name="S" direction="input" capacitance="24.7582"/>
+		</cell>
+		<cell name="FAND" type="GENERIC">
+			<port name="O" direction="output" capacitance="13.1549">
+				<timing>
+					<related_pin value="A"/>
+					<intrinsic_rise value="0.259802677"/>
+					<intrinsic_fall value="0.208226931"/>
+				</timing>
+				<timing>
+					<related_pin value="B"/>
+					<intrinsic_rise value="0.253633415"/>
+					<intrinsic_fall value="0.242440638"/>
+				</timing>
+			</port>
+			<port name="A" direction="input" capacitance="19.8101"/>
+			<port name="B" direction="input" capacitance="20.4209"/>
+		</cell>
+		<cell name="FFX" type="GENERIC">
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0" type="clock"/>
+			<port name="INIT" direction="input" capacitance="0"/>
+			<port name="REV" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="FFY" type="GENERIC">
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0" type="clock"/>
+			<port name="INIT" direction="input" capacitance="0"/>
+			<port name="REV" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="FXMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="12.5553">
+				<timing>
+					<related_pin value="F"/>
+					<intrinsic_rise value="0.069167241"/>
+					<intrinsic_fall value="0.062874144"/>
+				</timing>
+				<timing>
+					<related_pin value="FXOR"/>
+					<intrinsic_rise value="0.2119569384"/>
+					<intrinsic_fall value="0.1031570438"/>
+				</timing>
+				<timing>
+					<related_pin value="F5"/>
+					<intrinsic_rise value="0.3719583872"/>
+					<intrinsic_fall value="0.3171807292"/>
+				</timing>
+			</port>
+			<port name="F" direction="input" capacitance="29.4653"/>
+			<port name="FXOR" direction="input" capacitance="9.5429"/>
+			<port name="F5" direction="input" capacitance="17.8612"/>
+		</cell>
+		<cell name="G" type="GENERIC">
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="A4" direction="input" capacitance="0"/>
+			<port name="WS" direction="input" capacitance="0"/>
+			<port name="DI" direction="input" capacitance="0"/>
+			<port name="D" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="GAND" type="GENERIC">
+			<port name="O" direction="output" capacitance="13.7490">
+				<timing>
+					<related_pin value="A"/>
+					<intrinsic_rise value="0.225189321"/>
+					<intrinsic_fall value="0.185748828375"/>
+				</timing>
+				<timing>
+					<related_pin value="B"/>
+					<intrinsic_rise value="0.225189321"/>
+					<intrinsic_fall value="0.185748828375"/>
+				</timing>
+			</port>
+			<port name="A" direction="input" capacitance="23.8650"/>
+			<port name="B" direction="input" capacitance="10.2279"/>
+		</cell>
+		<cell name="GYMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="18.2341">
+				<timing>
+					<related_pin value="G"/>
+					<intrinsic_rise value="0.069753995"/>
+					<intrinsic_fall value="0.054351192"/>
+				</timing>
+				<timing>
+					<related_pin value="GXOR"/>
+					<intrinsic_rise value="0.166857322"/>
+					<intrinsic_fall value="0.156958965"/>
+				</timing>
+				<timing>
+					<related_pin value="F6"/>
+					<intrinsic_rise value="0.385167333"/>
+					<intrinsic_fall value="0.342159118"/>
+				</timing>
+			</port>
+			<port name="G" direction="input" capacitance="29.4654"/>
+			<port name="GXOR" direction="input" capacitance="10.7749"/>
+			<port name="F6" direction="input" capacitance="11.5863"/>
+		</cell>
+		<cell name="LUT4" type="GENERIC">
+			<port name="O" direction="output" capacitance="29.4654">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.49507917525"/>
+					<intrinsic_fall value="0.55173655635"/>
+				</timing>
+				<timing>
+					<related_pin value="I2"/>
+					<intrinsic_rise value="0.51463906011"/>
+					<intrinsic_fall value="0.5472390343"/>
+				</timing>
+				<timing>
+					<related_pin value="I3"/>
+					<intrinsic_rise value="0.43682120973"/>
+					<intrinsic_fall value="0.47953309425"/>
+				</timing>
+				<timing>
+					<related_pin value="I4"/>
+					<intrinsic_rise value="0.43682120973"/>
+					<intrinsic_fall value="0.47953309425"/>
+				</timing>
+			</port>
+			<port name="I1" direction="input" capacitance="27.9220"/>
+			<port name="I2" direction="input" capacitance="24.4759"/>
+			<port name="I3" direction="input" capacitance="22.0547"/>
+			<port name="I4" direction="input" capacitance="22.8981"/>
+		</cell>
+		<cell name="RAM16X1D" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="DPRA0" direction="input" capacitance="0"/>
+			<port name="DPRA1" direction="input" capacitance="0"/>
+			<port name="DPRA2" direction="input" capacitance="0"/>
+			<port name="DPRA3" direction="input" capacitance="0"/>
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="WCLK" direction="input" capacitance="0" type="clock"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="DPO" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="SPO" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="RAM16X1S" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="WCLK" direction="input" capacitance="0" type="clock"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="RAM16X2S" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="D0" direction="input" capacitance="0"/>
+			<port name="D1" direction="input" capacitance="0"/>
+			<port name="WCLK" direction="input" capacitance="0" type="clock"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="O0" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="O1" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="RAM32X1S" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="A4" direction="input" capacitance="0"/>
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="WCLK" direction="input" capacitance="0" type="clock"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="WCLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="REVUSED" type="GENERIC">
+			<port name="O" direction="output" capacitance="7.2147">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.41443541575"/>
+					<intrinsic_fall value="0.4519670390625"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="24.7582"/>
+		</cell>
+		<cell name="ROM16X1" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="A0"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A3"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="ROM32X1" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="A4" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="A0"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A3"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="A4"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="SRFFMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.6255">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.37385978931"/>
+					<intrinsic_fall value="0.3848767518"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="9.8469"/>
+		</cell>
+		<cell name="SRL16" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CLK" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="SRL16E" type="GENERIC">
+			<port name="A0" direction="input" capacitance="0"/>
+			<port name="A1" direction="input" capacitance="0"/>
+			<port name="A2" direction="input" capacitance="0"/>
+			<port name="A3" direction="input" capacitance="0"/>
+			<port name="D" direction="input" capacitance="0"/>
+			<port name="CLK" direction="input" capacitance="0"/>
+			<port name="CE" direction="input" capacitance="0"/>
+			<port name="Q" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLK"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="SRMUX_SLICE" type="GENERIC">
+			<property name="inv" value="SR_B"/>
+			<port name="O" direction="output" capacitance="14.7906">
+				<timing>
+					<related_pin value="SR_B"/>
+					<intrinsic_rise value="0.096383522187"/>
+					<intrinsic_fall value="0.113519887635"/>
+				</timing>
+				<timing>
+					<related_pin value="SR"/>
+					<intrinsic_rise value="0.21995950122"/>
+					<intrinsic_fall value="0.17901526955"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="3.4456"/>
+			<port name="I1" direction="input" capacitance="3.7379"/>
+			<port name="SR" direction="input" capacitance="16.9277"/>
+			<port name="SR_B" direction="input" capacitance="16.9277"/>
+		</cell>
+		<cell name="WSGEN" type="GENERIC">
+			<port name="A5" direction="input" capacitance="0"/>
+			<port name="WE" direction="input" capacitance="0"/>
+			<port name="CK" direction="input" capacitance="0"/>
+			<port name="WSG" direction="output" capacitance="0"/>
+			<port name="WSF" direction="output" capacitance="0"/>
+		</cell>
+		<cell name="XBUSED" type="GENERIC">
+			<port name="O" direction="output" capacitance="31.7784">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="31.7784"/>
+		</cell>
+		<cell name="XORF" type="GENERIC">
+			<port name="O" direction="output" capacitance="9.5429">
+				<timing>
+					<related_pin value="A"/>
+					<intrinsic_rise value="0.160839888"/>
+					<intrinsic_fall value="0.097747559"/>
+				</timing>
+				<timing>
+					<related_pin value="B"/>
+					<intrinsic_rise value="0.120135936"/>
+					<intrinsic_fall value="0.21993641"/>
+				</timing>
+			</port>
+			<port name="A" direction="input" capacitance="29.4654"/>
+			<port name="B" direction="input" capacitance="27.5167"/>
+		</cell>
+		<cell name="XORG" type="GENERIC">
+			<port name="O" direction="output" capacitance="10.7749">
+				<timing>
+					<related_pin value="A"/>
+					<intrinsic_rise value="0.18104825"/>
+					<intrinsic_fall value="0.140520636"/>
+				</timing>
+				<timing>
+					<related_pin value="B"/>
+					<intrinsic_rise value="0.23467108"/>
+					<intrinsic_fall value="0.234870705"/>
+				</timing>
+			</port>
+			<port name="A" direction="input" capacitance="29.4654"/>
+			<port name="B" direction="input" capacitance="31.7784"/>
+		</cell>
+		<cell name="XQBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="14.8581">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.137539121"/>
+					<intrinsic_fall value="0.0884984793"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="17.1394"/>
+		</cell>
+		<cell name="XUSED" type="GENERIC">
+			<port name="O" direction="output" capacitance="18.8572">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.1033373228"/>
+					<intrinsic_fall value="0.1297712864"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="19.9416"/>
+		</cell>
+		<cell name="YBBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="14.8581">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="1.194965442"/>
+					<intrinsic_fall value="0.94852267"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="12.3857"/>
+		</cell>
+		<cell name="YBMUX" type="GENERIC">
+			<port name="O" direction="output" capacitance="12.3857">
+				<timing>
+					<related_pin value="I1"/>
+					<intrinsic_rise value="0.07274682"/>
+					<intrinsic_fall value="0.1380909"/>
+				</timing>
+				<timing>
+					<related_pin value="I0"/>
+					<intrinsic_rise value="0.015723129375"/>
+					<intrinsic_fall value="0.027044765"/>
+				</timing>
+			</port>
+			<port name="I0" direction="input" capacitance="17.8331"/>
+			<port name="I1" direction="input" capacitance="27.0079"/>
+		</cell>
+		<cell name="YQBUF" type="GENERIC">
+			<port name="O" direction="output" capacitance="14.8581">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.137539121"/>
+					<intrinsic_fall value="0.0884984793"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="17.1394"/>
+		</cell>
+		<cell name="YUSED" type="GENERIC">
+			<port name="O" direction="output" capacitance="18.8572">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0.15049715"/>
+					<intrinsic_fall value="0.171292632"/>
+				</timing>
+			</port>
+			<port name="I" direction="input" capacitance="18.2341"/>
+		</cell>
+		<cell name="IMUX_TBUF" type="GENERIC">
+			<property name="inv" value="I_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="I_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="I_B" direction="input" capacitance="0"/>
+			<port name="I" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="I0" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="TMUX" type="GENERIC">
+			<property name="inv" value="T_B"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="T"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="T_B"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="T_B" direction="input" capacitance="0"/>
+			<port name="T" direction="input" capacitance="0"/>
+			<port name="I1" direction="input" capacitance="0"/>
+			<port name="I0" direction="input" capacitance="0"/>
+		</cell>
+		<cell name="TRISTATE" type="GENERIC">
+			<port name="I" direction="input" capacitance="0"/>
+			<port name="S" direction="input" capacitance="0"/>
+			<port name="O" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="I"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_disable"/>
+					<related_pin value="S"/>
+					<timing_sense value="positive_unate"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<timing_type value="three_state_enable"/>
+					<related_pin value="S"/>
+					<timing_sense value="negative_unate"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="DLL" type="GENERIC">
+			<port name="RST" direction="input" capacitance="0"/>
+			<port name="CLKFB" direction="input" capacitance="0"/>
+			<port name="CLKIN" direction="input" capacitance="0" type="clock"/>
+			<port name="LOCKED" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK0" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK90" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK180" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK270" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK2X" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLK2X90" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="CLKDV" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="CLKIN"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+		<cell name="BSCAN_PRIM" type="GENERIC">
+			<port name="TDO1" direction="input" capacitance="0"/>
+			<port name="TDO2" direction="input" capacitance="0"/>
+			<port name="RESET" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DRCK1" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="DRCK2" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="UPDATE" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="SHIFT" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="TDI" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="SEL1" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+			<port name="SEL2" direction="output" capacitance="0">
+				<timing>
+					<related_pin value="TDO1"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+				<timing>
+					<related_pin value="TDO2"/>
+					<intrinsic_rise value="0"/>
+					<intrinsic_fall value="0"/>
+				</timing>
+			</port>
+		</cell>
+	</library>
+	<library name="template_work_lib">
+		<cell name="slice" type="SLICE">
+			<port name="CIN" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="CE" direction="input"/>
+			<port name="BX" direction="input"/>
+			<port name="F1" direction="input"/>
+			<port name="F2" direction="input"/>
+			<port name="F3" direction="input"/>
+			<port name="F4" direction="input"/>
+			<port name="F5IN" direction="input"/>
+			<port name="BY" direction="input"/>
+			<port name="G1" direction="input"/>
+			<port name="G2" direction="input"/>
+			<port name="G3" direction="input"/>
+			<port name="G4" direction="input"/>
+			<port name="XQ" direction="output"/>
+			<port name="X" direction="output"/>
+			<port name="F5" direction="output"/>
+			<port name="XB" direction="output"/>
+			<port name="YQ" direction="output"/>
+			<port name="Y" direction="output"/>
+			<port name="YB" direction="output"/>
+			<port name="COUT" direction="output"/>
+			<contents>
+				<instance name="srmux_slice" cellRef="SRMUX_SLICE" libraryRef="template_cell_lib"/>
+				<instance name="ckinv" cellRef="CKINV" libraryRef="template_cell_lib"/>
+				<instance name="cemux_slice" cellRef="CEMUX_SLICE" libraryRef="template_cell_lib"/>
+				<instance name="bxmux" cellRef="BXMUX" libraryRef="template_cell_lib"/>
+				<instance name="bymux" cellRef="BYMUX" libraryRef="template_cell_lib"/>
+				<instance name="srffmux" cellRef="SRFFMUX" libraryRef="template_cell_lib"/>
+				<instance name="fand" cellRef="FAND" libraryRef="template_cell_lib"/>
+				<instance name="f" cellRef="F" libraryRef="template_cell_lib"/>
+				<instance name="wsgen" cellRef="WSGEN" libraryRef="template_cell_lib"/>
+				<instance name="dgen" cellRef="DGEN" libraryRef="template_cell_lib"/>
+				<instance name="gand" cellRef="GAND" libraryRef="template_cell_lib"/>
+				<instance name="g" cellRef="G" libraryRef="template_cell_lib"/>
+				<instance name="cy0f" cellRef="CY0F" libraryRef="template_cell_lib"/>
+				<instance name="cyself" cellRef="CYSELF" libraryRef="template_cell_lib"/>
+				<instance name="cyinit" cellRef="CYINIT" libraryRef="template_cell_lib"/>
+				<instance name="cy0g" cellRef="CY0G" libraryRef="template_cell_lib"/>
+				<instance name="cyselg" cellRef="CYSELG" libraryRef="template_cell_lib"/>
+				<instance name="cymuxf" cellRef="CYMUXF" libraryRef="template_cell_lib"/>
+				<instance name="cymuxg" cellRef="CYMUXG" libraryRef="template_cell_lib"/>
+				<instance name="xorf" cellRef="XORF" libraryRef="template_cell_lib"/>
+				<instance name="xorg" cellRef="XORG" libraryRef="template_cell_lib"/>
+				<instance name="f5mux" cellRef="F5MUX" libraryRef="template_cell_lib"/>
+				<instance name="f6mux" cellRef="F6MUX" libraryRef="template_cell_lib"/>
+				<instance name="fxmux" cellRef="FXMUX" libraryRef="template_cell_lib"/>
+				<instance name="gymux" cellRef="GYMUX" libraryRef="template_cell_lib"/>
+				<instance name="dxmux" cellRef="DXMUX" libraryRef="template_cell_lib"/>
+				<instance name="revused" cellRef="REVUSED" libraryRef="template_cell_lib"/>
+				<instance name="dymux" cellRef="DYMUX" libraryRef="template_cell_lib"/>
+				<instance name="ybmux" cellRef="YBMUX" libraryRef="template_cell_lib"/>
+				<instance name="ybbuf" cellRef="YBBUF" libraryRef="template_cell_lib"/>
+				<instance name="ffx" cellRef="FFX" libraryRef="template_cell_lib"/>
+				<instance name="xqbuf" cellRef="XQBUF" libraryRef="template_cell_lib"/>
+				<instance name="ffy" cellRef="FFY" libraryRef="template_cell_lib"/>
+				<instance name="yqbuf" cellRef="YQBUF" libraryRef="template_cell_lib"/>
+				<instance name="xused" cellRef="XUSED" libraryRef="template_cell_lib"/>
+				<instance name="f5used" cellRef="F5USED" libraryRef="template_cell_lib"/>
+				<instance name="xbused" cellRef="XBUSED" libraryRef="template_cell_lib"/>
+				<instance name="yused" cellRef="YUSED" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="CIN">
+					<portRef name="CIN"/>
+					<portRef name="CIN" instanceRef="cyinit"/>
+				</net>
+				<net name="SR">
+					<portRef name="SR"/>
+					<portRef name="SR" instanceRef="srmux_slice"/>
+					<portRef name="SR_B" instanceRef="srmux_slice"/>
+				</net>
+				<net name="CLK">
+					<portRef name="CLK"/>
+					<portRef name="I0" instanceRef="ckinv"/>
+					<portRef name="I1" instanceRef="ckinv"/>
+				</net>
+				<net name="CE">
+					<portRef name="CE"/>
+					<portRef name="CE" instanceRef="cemux_slice"/>
+					<portRef name="CE_B" instanceRef="cemux_slice"/>
+				</net>
+				<net name="BX">
+					<portRef name="BX"/>
+					<portRef name="BX" instanceRef="bxmux"/>
+					<portRef name="BX_B" instanceRef="bxmux"/>
+				</net>
+				<net name="F1">
+					<portRef name="F1"/>
+					<portRef name="A" instanceRef="fand"/>
+					<portRef name="A1" instanceRef="f"/>
+					<portRef name="F1" instanceRef="cy0f"/>
+				</net>
+				<net name="F2">
+					<portRef name="F2"/>
+					<portRef name="B" instanceRef="fand"/>
+					<portRef name="A2" instanceRef="f"/>
+				</net>
+				<net name="F3">
+					<portRef name="F3"/>
+					<portRef name="A3" instanceRef="f"/>
+				</net>
+				<net name="F4">
+					<portRef name="F4"/>
+					<portRef name="A4" instanceRef="f"/>
+				</net>
+				<net name="F5IN">
+					<portRef name="F5IN"/>
+					<portRef name="I0" instanceRef="f6mux"/>
+				</net>
+				<net name="BY">
+					<portRef name="BY"/>
+					<portRef name="BY" instanceRef="bymux"/>
+					<portRef name="BY_B" instanceRef="bymux"/>
+				</net>
+				<net name="G1">
+					<portRef name="G1"/>
+					<portRef name="A" instanceRef="gand"/>
+					<portRef name="A1" instanceRef="g"/>
+					<portRef name="G1" instanceRef="cy0g"/>
+				</net>
+				<net name="G2">
+					<portRef name="G2"/>
+					<portRef name="B" instanceRef="gand"/>
+					<portRef name="A2" instanceRef="g"/>
+				</net>
+				<net name="G3">
+					<portRef name="G3"/>
+					<portRef name="A3" instanceRef="g"/>
+				</net>
+				<net name="G4">
+					<portRef name="G4"/>
+					<portRef name="A4" instanceRef="g"/>
+				</net>
+				<net name="XQ">
+					<portRef name="O" instanceRef="xqbuf"/>
+					<portRef name="XQ"/>
+				</net>
+				<net name="X">
+					<portRef name="O" instanceRef="xused"/>
+					<portRef name="X"/>
+				</net>
+				<net name="F5">
+					<portRef name="O" instanceRef="f5used"/>
+					<portRef name="F5"/>
+				</net>
+				<net name="XB">
+					<portRef name="O" instanceRef="xbused"/>
+					<portRef name="XB"/>
+				</net>
+				<net name="YQ">
+					<portRef name="O" instanceRef="yqbuf"/>
+					<portRef name="YQ"/>
+				</net>
+				<net name="Y">
+					<portRef name="O" instanceRef="yused"/>
+					<portRef name="Y"/>
+				</net>
+				<net name="YB">
+					<portRef name="O" instanceRef="ybbuf"/>
+					<portRef name="YB"/>
+				</net>
+				<net name="COUT">
+					<portRef name="OUT" instanceRef="cymuxg"/>
+					<portRef name="COUT"/>
+					<portRef name="I1" instanceRef="ybmux"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="srmux_slice"/>
+					<portRef name="I0" instanceRef="cemux_slice"/>
+					<portRef name="I0" instanceRef="bxmux"/>
+					<portRef name="I0" instanceRef="bymux"/>
+					<portRef name="I0" instanceRef="cy0f"/>
+					<portRef name="I0" instanceRef="cy0g"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="srmux_slice"/>
+					<portRef name="I1" instanceRef="cemux_slice"/>
+					<portRef name="I1" instanceRef="bxmux"/>
+					<portRef name="I1" instanceRef="bymux"/>
+					<portRef name="I1" instanceRef="cy0f"/>
+					<portRef name="I1" instanceRef="cyself"/>
+					<portRef name="I1" instanceRef="cy0g"/>
+					<portRef name="I1" instanceRef="cyselg"/>
+				</net>
+				<net name="srmux_o">
+					<portRef name="O" instanceRef="srmux_slice"/>
+					<portRef name="I" instanceRef="srffmux"/>
+					<portRef name="WE" instanceRef="wsgen"/>
+				</net>
+				<net name="ckinv_o">
+					<portRef name="O" instanceRef="ckinv"/>
+					<portRef name="CK" instanceRef="wsgen"/>
+					<portRef name="CK" instanceRef="ffx"/>
+					<portRef name="CK" instanceRef="ffy"/>
+				</net>
+				<net name="cemux_o">
+					<portRef name="O" instanceRef="cemux_slice"/>
+					<portRef name="CE" instanceRef="ffx"/>
+					<portRef name="CE" instanceRef="ffy"/>
+				</net>
+				<net name="bxmux_o">
+					<portRef name="O" instanceRef="bxmux"/>
+					<portRef name="A5" instanceRef="wsgen"/>
+					<portRef name="BX" instanceRef="dgen"/>
+					<portRef name="BX" instanceRef="cyinit"/>
+					<portRef name="S" instanceRef="f5mux"/>
+					<portRef name="I0" instanceRef="dxmux"/>
+				</net>
+				<net name="bymux_o">
+					<portRef name="O" instanceRef="bymux"/>
+					<portRef name="BY" instanceRef="dgen"/>
+					<portRef name="DI" instanceRef="g"/>
+					<portRef name="S" instanceRef="f6mux"/>
+					<portRef name="I" instanceRef="revused"/>
+					<portRef name="I0" instanceRef="dymux"/>
+					<portRef name="I0" instanceRef="ybmux"/>
+				</net>
+				<net name="srffmux_o">
+					<portRef name="O" instanceRef="srffmux"/>
+					<portRef name="INIT" instanceRef="ffx"/>
+					<portRef name="INIT" instanceRef="ffy"/>
+				</net>
+				<net name="wsg">
+					<portRef name="WSG" instanceRef="wsgen"/>
+					<portRef name="WS" instanceRef="g"/>
+				</net>
+				<net name="wsf">
+					<portRef name="WSF" instanceRef="wsgen"/>
+					<portRef name="WS" instanceRef="f"/>
+				</net>
+				<net name="df">
+					<portRef name="DF" instanceRef="dgen"/>
+					<portRef name="DI" instanceRef="f"/>
+				</net>
+				<net name="gprod">
+					<portRef name="O" instanceRef="gand"/>
+					<portRef name="PROD" instanceRef="cy0g"/>
+				</net>
+				<net name="fprod">
+					<portRef name="O" instanceRef="fand"/>
+					<portRef name="PROD" instanceRef="cy0f"/>
+				</net>
+				<net name="cy0f_o">
+					<portRef name="O" instanceRef="cy0f"/>
+					<portRef name="I0" instanceRef="cymuxf"/>
+				</net>
+				<net name="cy0g_o">
+					<portRef name="O" instanceRef="cy0g"/>
+					<portRef name="I0" instanceRef="cymuxg"/>
+				</net>
+				<net name="cyinit_o">
+					<portRef name="O" instanceRef="cyinit"/>
+					<portRef name="I1" instanceRef="cymuxf"/>
+					<portRef name="B" instanceRef="xorf"/>
+				</net>
+				<net name="cyself_o">
+					<portRef name="O" instanceRef="cyself"/>
+					<portRef name="S0" instanceRef="cymuxf"/>
+				</net>
+				<net name="cyselg_o">
+					<portRef name="O" instanceRef="cyselg"/>
+					<portRef name="S0" instanceRef="cymuxg"/>
+				</net>
+				<net name="cymuxf_out">
+					<portRef name="OUT" instanceRef="cymuxf"/>
+					<portRef name="I1" instanceRef="cymuxg"/>
+					<portRef name="B" instanceRef="xorg"/>
+					<portRef name="I" instanceRef="xbused"/>
+				</net>
+				<net name="xorf_o">
+					<portRef name="O" instanceRef="xorf"/>
+					<portRef name="FXOR" instanceRef="fxmux"/>
+				</net>
+				<net name="xorg_o">
+					<portRef name="O" instanceRef="xorg"/>
+					<portRef name="GXOR" instanceRef="gymux"/>
+				</net>
+				<net name="f_d">
+					<portRef name="D" instanceRef="f"/>
+					<portRef name="F" instanceRef="cyself"/>
+					<portRef name="A" instanceRef="xorf"/>
+					<portRef name="F" instanceRef="f5mux"/>
+					<portRef name="F" instanceRef="fxmux"/>
+				</net>
+				<net name="g_d">
+					<portRef name="D" instanceRef="g"/>
+					<portRef name="G" instanceRef="cyselg"/>
+					<portRef name="A" instanceRef="xorg"/>
+					<portRef name="G" instanceRef="f5mux"/>
+					<portRef name="G" instanceRef="gymux"/>
+				</net>
+				<net name="f5mux_o">
+					<portRef name="O" instanceRef="f5mux"/>
+					<portRef name="I1" instanceRef="f6mux"/>
+					<portRef name="F5" instanceRef="fxmux"/>
+					<portRef name="I" instanceRef="f5used"/>
+				</net>
+				<net name="f6mux_o">
+					<portRef name="O" instanceRef="f6mux"/>
+					<portRef name="F6" instanceRef="gymux"/>
+				</net>
+				<net name="fxmux_o">
+					<portRef name="O" instanceRef="fxmux"/>
+					<portRef name="I1" instanceRef="dxmux"/>
+					<portRef name="I" instanceRef="xused"/>
+				</net>
+				<net name="gymux_o">
+					<portRef name="O" instanceRef="gymux"/>
+					<portRef name="I1" instanceRef="dymux"/>
+					<portRef name="I" instanceRef="yused"/>
+				</net>
+				<net name="dxmux_o">
+					<portRef name="O" instanceRef="dxmux"/>
+					<portRef name="D" instanceRef="ffx"/>
+				</net>
+				<net name="dymux_o">
+					<portRef name="O" instanceRef="dymux"/>
+					<portRef name="D" instanceRef="ffy"/>
+				</net>
+				<net name="revused_o">
+					<portRef name="O" instanceRef="revused"/>
+					<portRef name="REV" instanceRef="ffx"/>
+					<portRef name="REV" instanceRef="ffy"/>
+				</net>
+				<net name="ybmux_o">
+					<portRef name="O" instanceRef="ybmux"/>
+					<portRef name="I" instanceRef="ybbuf"/>
+				</net>
+				<net name="ffy_o">
+					<portRef name="Q" instanceRef="ffy"/>
+					<portRef name="I" instanceRef="yqbuf"/>
+				</net>
+				<net name="ffx_o">
+					<portRef name="Q" instanceRef="ffx"/>
+					<portRef name="I" instanceRef="xqbuf"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="iob" type="IOB">
+			<port name="TRI" direction="input"/>
+			<port name="TRICE" direction="input"/>
+			<port name="OUT" direction="input"/>
+			<port name="OUTCE" direction="input"/>
+			<port name="INCE" direction="input"/>
+			<port name="CLK" direction="input"/>
+			<port name="SR" direction="input"/>
+			<port name="IN" direction="output"/>
+			<port name="IQ" direction="output"/>
+			<port name="PAD" direction="inout"/>
+			<contents>
+				<instance name="trimux" cellRef="TRIMUX" libraryRef="template_cell_lib"/>
+				<instance name="tcemux" cellRef="TCEMUX" libraryRef="template_cell_lib"/>
+				<instance name="tckinv" cellRef="TCKINV" libraryRef="template_cell_lib"/>
+				<instance name="tinitmux" cellRef="TINITMUX" libraryRef="template_cell_lib"/>
+				<instance name="omux" cellRef="OMUX" libraryRef="template_cell_lib"/>
+				<instance name="ocemux" cellRef="OCEMUX" libraryRef="template_cell_lib"/>
+				<instance name="ockinv" cellRef="OCKINV" libraryRef="template_cell_lib"/>
+				<instance name="oinitmux" cellRef="OINITMUX" libraryRef="template_cell_lib"/>
+				<instance name="icemux" cellRef="ICEMUX" libraryRef="template_cell_lib"/>
+				<instance name="srmux_iob" cellRef="SRMUX_IOB" libraryRef="template_cell_lib"/>
+				<instance name="tff" cellRef="TFF" libraryRef="template_cell_lib"/>
+				<instance name="off" cellRef="OFF" libraryRef="template_cell_lib"/>
+				<instance name="tsel" cellRef="TSEL" libraryRef="template_cell_lib"/>
+				<instance name="outmux" cellRef="OUTMUX" libraryRef="template_cell_lib"/>
+				<instance name="outbuf" cellRef="OUTBUF" libraryRef="template_cell_lib"/>
+				<instance name="inbuf" cellRef="INBUF" libraryRef="template_cell_lib"/>
+				<instance name="delay" cellRef="DELAY" libraryRef="template_cell_lib"/>
+				<instance name="imux_iob" cellRef="IMUX_IOB" libraryRef="template_cell_lib"/>
+				<instance name="ioutbuf_iq" cellRef="IOUTBUF" libraryRef="template_cell_lib"/>
+				<instance name="ickinv" cellRef="ICKINV" libraryRef="template_cell_lib"/>
+				<instance name="iinitmux" cellRef="IINITMUX" libraryRef="template_cell_lib"/>
+				<instance name="iff" cellRef="IFF" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="TRI">
+					<portRef name="TRI"/>
+					<portRef name="T_TB" instanceRef="trimux"/>
+					<portRef name="T" instanceRef="trimux"/>
+				</net>
+				<net name="TRICE">
+					<portRef name="TRICE"/>
+					<portRef name="TCE_B" instanceRef="tcemux"/>
+					<portRef name="TCE" instanceRef="tcemux"/>
+				</net>
+				<net name="OUT">
+					<portRef name="OUT"/>
+					<portRef name="O_B" instanceRef="omux"/>
+					<portRef name="O" instanceRef="omux"/>
+				</net>
+				<net name="OUTCE">
+					<portRef name="OUTCE"/>
+					<portRef name="OCE_B" instanceRef="ocemux"/>
+					<portRef name="OCE" instanceRef="ocemux"/>
+				</net>
+				<net name="INCE">
+					<portRef name="INCE"/>
+					<portRef name="ICE_B" instanceRef="icemux"/>
+					<portRef name="ICE" instanceRef="icemux"/>
+				</net>
+				<net name="CLK">
+					<portRef name="CLK"/>
+					<portRef name="I0" instanceRef="tckinv"/>
+					<portRef name="I1" instanceRef="tckinv"/>
+					<portRef name="I0" instanceRef="ockinv"/>
+					<portRef name="I1" instanceRef="ockinv"/>
+					<portRef name="I0" instanceRef="ickinv"/>
+					<portRef name="I1" instanceRef="ickinv"/>
+				</net>
+				<net name="SR">
+					<portRef name="SR"/>
+					<portRef name="SR_B" instanceRef="srmux_iob"/>
+					<portRef name="SR" instanceRef="srmux_iob"/>
+				</net>
+				<net name="IN">
+					<portRef name="O" instanceRef="imux_iob"/>
+					<portRef name="IN"/>
+				</net>
+				<net name="IQ">
+					<portRef name="O" instanceRef="ioutbuf_iq"/>
+					<portRef name="IQ"/>
+				</net>
+				<net name="outbuf_i">
+					<portRef name="O" instanceRef="outmux"/>
+					<portRef name="I" instanceRef="outbuf"/>
+				</net>
+				<net name="srmux_o">
+					<portRef name="O" instanceRef="srmux_iob"/>
+					<portRef name="I" instanceRef="tinitmux"/>
+					<portRef name="I" instanceRef="oinitmux"/>
+					<portRef name="I" instanceRef="iinitmux"/>
+				</net>
+				<net name="delay_o">
+					<portRef name="O" instanceRef="delay"/>
+					<portRef name="I" instanceRef="imux_iob"/>
+					<portRef name="D" instanceRef="iff"/>
+				</net>
+				<net name="inbuf_o">
+					<portRef name="O" instanceRef="inbuf"/>
+					<portRef name="I" instanceRef="delay"/>
+				</net>
+				<net name="tsel_o">
+					<portRef name="O" instanceRef="tsel"/>
+					<portRef name="S" instanceRef="outbuf"/>
+				</net>
+				<net name="tff_ck">
+					<portRef name="O" instanceRef="tckinv"/>
+					<portRef name="CK" instanceRef="tff"/>
+				</net>
+				<net name="tff_ce">
+					<portRef name="O" instanceRef="tcemux"/>
+					<portRef name="CE" instanceRef="tff"/>
+				</net>
+				<net name="tff_init">
+					<portRef name="O" instanceRef="tinitmux"/>
+					<portRef name="INIT" instanceRef="tff"/>
+				</net>
+				<net name="tff_q">
+					<portRef name="Q" instanceRef="tff"/>
+					<portRef name="I0" instanceRef="tsel"/>
+				</net>
+				<net name="tff_d">
+					<portRef name="O" instanceRef="trimux"/>
+					<portRef name="D" instanceRef="tff"/>
+					<portRef name="I1" instanceRef="tsel"/>
+				</net>
+				<net name="iff_ck">
+					<portRef name="O" instanceRef="ickinv"/>
+					<portRef name="CK" instanceRef="iff"/>
+				</net>
+				<net name="iff_ce">
+					<portRef name="O" instanceRef="icemux"/>
+					<portRef name="CE" instanceRef="iff"/>
+				</net>
+				<net name="iff_init">
+					<portRef name="O" instanceRef="iinitmux"/>
+					<portRef name="INIT" instanceRef="iff"/>
+				</net>
+				<net name="iff_q">
+					<portRef name="Q" instanceRef="iff"/>
+					<portRef name="I" instanceRef="ioutbuf_iq"/>
+				</net>
+				<net name="off_ck">
+					<portRef name="O" instanceRef="ockinv"/>
+					<portRef name="CK" instanceRef="off"/>
+				</net>
+				<net name="off_ce">
+					<portRef name="O" instanceRef="ocemux"/>
+					<portRef name="CE" instanceRef="off"/>
+				</net>
+				<net name="off_init">
+					<portRef name="O" instanceRef="oinitmux"/>
+					<portRef name="INIT" instanceRef="off"/>
+				</net>
+				<net name="off_q">
+					<portRef name="Q" instanceRef="off"/>
+					<portRef name="I0" instanceRef="outmux"/>
+				</net>
+				<net name="off_d">
+					<portRef name="OUT" instanceRef="omux"/>
+					<portRef name="D" instanceRef="off"/>
+					<portRef name="I1" instanceRef="outmux"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="trimux"/>
+					<portRef name="I1" instanceRef="tcemux"/>
+					<portRef name="I1" instanceRef="omux"/>
+					<portRef name="I1" instanceRef="ocemux"/>
+					<portRef name="I1" instanceRef="icemux"/>
+					<portRef name="I1" instanceRef="srmux_iob"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="trimux"/>
+					<portRef name="I0" instanceRef="tcemux"/>
+					<portRef name="I0" instanceRef="omux"/>
+					<portRef name="I0" instanceRef="ocemux"/>
+					<portRef name="I0" instanceRef="icemux"/>
+					<portRef name="I0" instanceRef="srmux_iob"/>
+				</net>
+				<net name="PAD">
+					<portRef name="O" instanceRef="outbuf"/>
+					<portRef name="PAD"/>
+					<portRef name="I" instanceRef="inbuf"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="gclk" type="GCLK">
+			<port name="CE" direction="input"/>
+			<port name="IN" direction="input"/>
+			<port name="OUT" direction="output"/>
+			<contents>
+				<instance name="cemux_gclk" cellRef="CEMUX_GCLK" libraryRef="template_cell_lib"/>
+				<instance name="gclk_buffer" cellRef="GCLK_BUFFER" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="CE">
+					<portRef name="CE"/>
+					<portRef name="CE" instanceRef="cemux_gclk"/>
+					<portRef name="CE_B" instanceRef="cemux_gclk"/>
+				</net>
+				<net name="IN">
+					<portRef name="IN"/>
+					<portRef name="I" instanceRef="gclk_buffer"/>
+				</net>
+				<net name="OUT">
+					<portRef name="O" instanceRef="gclk_buffer"/>
+					<portRef name="OUT"/>
+				</net>
+				<net name="cemux_o">
+					<portRef name="O" instanceRef="cemux_gclk"/>
+					<portRef name="S" instanceRef="gclk_buffer"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="cemux_gclk"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="cemux_gclk"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="tbuf" type="TBUF">
+			<port name="TRI" direction="input"/>
+			<port name="IN" direction="input"/>
+			<port name="OUT" direction="output"/>
+			<contents>
+				<instance name="imux_tbuf" cellRef="IMUX_TBUF" libraryRef="template_cell_lib"/>
+				<instance name="tmux" cellRef="TMUX" libraryRef="template_cell_lib"/>
+				<instance name="tristate" cellRef="TRISTATE" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="TRI">
+					<portRef name="TRI"/>
+					<portRef name="T" instanceRef="tmux"/>
+					<portRef name="T_B" instanceRef="tmux"/>
+				</net>
+				<net name="IN">
+					<portRef name="IN"/>
+					<portRef name="I" instanceRef="imux_tbuf"/>
+					<portRef name="I_B" instanceRef="imux_tbuf"/>
+				</net>
+				<net name="OUT">
+					<portRef name="O" instanceRef="tristate"/>
+					<portRef name="OUT"/>
+				</net>
+				<net name="imux_o">
+					<portRef name="O" instanceRef="imux_tbuf"/>
+					<portRef name="I" instanceRef="tristate"/>
+				</net>
+				<net name="tmux_o">
+					<portRef name="O" instanceRef="tmux"/>
+					<portRef name="S" instanceRef="tristate"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="imux_tbuf"/>
+					<portRef name="I0" instanceRef="tmux"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="imux_tbuf"/>
+					<portRef name="I1" instanceRef="tmux"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="blockram" type="BLOCKRAM">
+			<port name="CKA" direction="input"/>
+			<port name="AWE" direction="input"/>
+			<port name="AEN" direction="input"/>
+			<port name="RSTA" direction="input"/>
+			<port name="CKB" direction="input"/>
+			<port name="BWE" direction="input"/>
+			<port name="BEN" direction="input"/>
+			<port name="RSTB" direction="input"/>
+			<port name="ADDRA_0" direction="input"/>
+			<port name="ADDRA_1" direction="input"/>
+			<port name="ADDRA_2" direction="input"/>
+			<port name="ADDRA_3" direction="input"/>
+			<port name="ADDRA_4" direction="input"/>
+			<port name="ADDRA_5" direction="input"/>
+			<port name="ADDRA_6" direction="input"/>
+			<port name="ADDRA_7" direction="input"/>
+			<port name="ADDRA_8" direction="input"/>
+			<port name="ADDRA_9" direction="input"/>
+			<port name="ADDRA_10" direction="input"/>
+			<port name="ADDRA_11" direction="input"/>
+			<port name="ADDRB_0" direction="input"/>
+			<port name="ADDRB_1" direction="input"/>
+			<port name="ADDRB_2" direction="input"/>
+			<port name="ADDRB_3" direction="input"/>
+			<port name="ADDRB_4" direction="input"/>
+			<port name="ADDRB_5" direction="input"/>
+			<port name="ADDRB_6" direction="input"/>
+			<port name="ADDRB_7" direction="input"/>
+			<port name="ADDRB_8" direction="input"/>
+			<port name="ADDRB_9" direction="input"/>
+			<port name="ADDRB_10" direction="input"/>
+			<port name="ADDRB_11" direction="input"/>
+			<port name="DINA0" direction="input"/>
+			<port name="DINA1" direction="input"/>
+			<port name="DINA2" direction="input"/>
+			<port name="DINA3" direction="input"/>
+			<port name="DINA4" direction="input"/>
+			<port name="DINA5" direction="input"/>
+			<port name="DINA6" direction="input"/>
+			<port name="DINA7" direction="input"/>
+			<port name="DINA8" direction="input"/>
+			<port name="DINA9" direction="input"/>
+			<port name="DINA10" direction="input"/>
+			<port name="DINA11" direction="input"/>
+			<port name="DINA12" direction="input"/>
+			<port name="DINA13" direction="input"/>
+			<port name="DINA14" direction="input"/>
+			<port name="DINA15" direction="input"/>
+			<port name="DINB0" direction="input"/>
+			<port name="DINB1" direction="input"/>
+			<port name="DINB2" direction="input"/>
+			<port name="DINB3" direction="input"/>
+			<port name="DINB4" direction="input"/>
+			<port name="DINB5" direction="input"/>
+			<port name="DINB6" direction="input"/>
+			<port name="DINB7" direction="input"/>
+			<port name="DINB8" direction="input"/>
+			<port name="DINB9" direction="input"/>
+			<port name="DINB10" direction="input"/>
+			<port name="DINB11" direction="input"/>
+			<port name="DINB12" direction="input"/>
+			<port name="DINB13" direction="input"/>
+			<port name="DINB14" direction="input"/>
+			<port name="DINB15" direction="input"/>
+			<port name="DOUTA0" direction="output"/>
+			<port name="DOUTA1" direction="output"/>
+			<port name="DOUTA2" direction="output"/>
+			<port name="DOUTA3" direction="output"/>
+			<port name="DOUTA4" direction="output"/>
+			<port name="DOUTA5" direction="output"/>
+			<port name="DOUTA6" direction="output"/>
+			<port name="DOUTA7" direction="output"/>
+			<port name="DOUTA8" direction="output"/>
+			<port name="DOUTA9" direction="output"/>
+			<port name="DOUTA10" direction="output"/>
+			<port name="DOUTA11" direction="output"/>
+			<port name="DOUTA12" direction="output"/>
+			<port name="DOUTA13" direction="output"/>
+			<port name="DOUTA14" direction="output"/>
+			<port name="DOUTA15" direction="output"/>
+			<port name="DOUTB0" direction="output"/>
+			<port name="DOUTB1" direction="output"/>
+			<port name="DOUTB2" direction="output"/>
+			<port name="DOUTB3" direction="output"/>
+			<port name="DOUTB4" direction="output"/>
+			<port name="DOUTB5" direction="output"/>
+			<port name="DOUTB6" direction="output"/>
+			<port name="DOUTB7" direction="output"/>
+			<port name="DOUTB8" direction="output"/>
+			<port name="DOUTB9" direction="output"/>
+			<port name="DOUTB10" direction="output"/>
+			<port name="DOUTB11" direction="output"/>
+			<port name="DOUTB12" direction="output"/>
+			<port name="DOUTB13" direction="output"/>
+			<port name="DOUTB14" direction="output"/>
+			<port name="DOUTB15" direction="output"/>
+			<contents>
+				<instance name="clkamux" cellRef="CLKAMUX" libraryRef="template_cell_lib"/>
+				<instance name="weamux" cellRef="WEAMUX" libraryRef="template_cell_lib"/>
+				<instance name="enamux" cellRef="ENAMUX" libraryRef="template_cell_lib"/>
+				<instance name="rstamux" cellRef="RSTAMUX" libraryRef="template_cell_lib"/>
+				<instance name="blockrama" cellRef="BLOCKRAMA" libraryRef="template_cell_lib"/>
+				<instance name="clkbmux" cellRef="CLKBMUX" libraryRef="template_cell_lib"/>
+				<instance name="webmux" cellRef="WEBMUX" libraryRef="template_cell_lib"/>
+				<instance name="enbmux" cellRef="ENBMUX" libraryRef="template_cell_lib"/>
+				<instance name="rstbmux" cellRef="RSTBMUX" libraryRef="template_cell_lib"/>
+				<instance name="blockramb" cellRef="BLOCKRAMB" libraryRef="template_cell_lib"/>
+				<instance name="gnd" cellRef="GND" libraryRef="template_cell_lib"/>
+				<instance name="vcc" cellRef="VCC" libraryRef="template_cell_lib"/>
+				<net name="CKA">
+					<portRef name="CKA"/>
+					<portRef name="I0" instanceRef="clkamux"/>
+					<portRef name="I1" instanceRef="clkamux"/>
+				</net>
+				<net name="AWE">
+					<portRef name="AWE"/>
+					<portRef name="WEA_B" instanceRef="weamux"/>
+					<portRef name="WEA" instanceRef="weamux"/>
+				</net>
+				<net name="AEN">
+					<portRef name="AEN"/>
+					<portRef name="ENA_B" instanceRef="enamux"/>
+					<portRef name="ENA" instanceRef="enamux"/>
+				</net>
+				<net name="RSTA">
+					<portRef name="RSTA"/>
+					<portRef name="RSTA_B" instanceRef="rstamux"/>
+					<portRef name="RSTA" instanceRef="rstamux"/>
+				</net>
+				<net name="CKB">
+					<portRef name="CKB"/>
+					<portRef name="I0" instanceRef="clkbmux"/>
+					<portRef name="I1" instanceRef="clkbmux"/>
+				</net>
+				<net name="BWE">
+					<portRef name="BWE"/>
+					<portRef name="WEB_B" instanceRef="webmux"/>
+					<portRef name="WEB" instanceRef="webmux"/>
+				</net>
+				<net name="BEN">
+					<portRef name="BEN"/>
+					<portRef name="ENB_B" instanceRef="enbmux"/>
+					<portRef name="ENB" instanceRef="enbmux"/>
+				</net>
+				<net name="RSTB">
+					<portRef name="RSTB"/>
+					<portRef name="RSTB_B" instanceRef="rstbmux"/>
+					<portRef name="RSTB" instanceRef="rstbmux"/>
+				</net>
+				<net name="ADDRA_0">
+					<portRef name="ADDRA_0"/>
+					<portRef name="I16" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_1">
+					<portRef name="ADDRA_1"/>
+					<portRef name="I17" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_2">
+					<portRef name="ADDRA_2"/>
+					<portRef name="I18" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_3">
+					<portRef name="ADDRA_3"/>
+					<portRef name="I19" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_4">
+					<portRef name="ADDRA_4"/>
+					<portRef name="I20" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_5">
+					<portRef name="ADDRA_5"/>
+					<portRef name="I21" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_6">
+					<portRef name="ADDRA_6"/>
+					<portRef name="I22" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_7">
+					<portRef name="ADDRA_7"/>
+					<portRef name="I23" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_8">
+					<portRef name="ADDRA_8"/>
+					<portRef name="I24" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_9">
+					<portRef name="ADDRA_9"/>
+					<portRef name="I25" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_10">
+					<portRef name="ADDRA_10"/>
+					<portRef name="I26" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRA_11">
+					<portRef name="ADDRA_11"/>
+					<portRef name="I27" instanceRef="blockrama"/>
+				</net>
+				<net name="ADDRB_0">
+					<portRef name="ADDRB_0"/>
+					<portRef name="I16" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_1">
+					<portRef name="ADDRB_1"/>
+					<portRef name="I17" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_2">
+					<portRef name="ADDRB_2"/>
+					<portRef name="I18" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_3">
+					<portRef name="ADDRB_3"/>
+					<portRef name="I19" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_4">
+					<portRef name="ADDRB_4"/>
+					<portRef name="I20" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_5">
+					<portRef name="ADDRB_5"/>
+					<portRef name="I21" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_6">
+					<portRef name="ADDRB_6"/>
+					<portRef name="I22" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_7">
+					<portRef name="ADDRB_7"/>
+					<portRef name="I23" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_8">
+					<portRef name="ADDRB_8"/>
+					<portRef name="I24" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_9">
+					<portRef name="ADDRB_9"/>
+					<portRef name="I25" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_10">
+					<portRef name="ADDRB_10"/>
+					<portRef name="I26" instanceRef="blockramb"/>
+				</net>
+				<net name="ADDRB_11">
+					<portRef name="ADDRB_11"/>
+					<portRef name="I27" instanceRef="blockramb"/>
+				</net>
+				<net name="DINA0">
+					<portRef name="DINA0"/>
+					<portRef name="I0" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA1">
+					<portRef name="DINA1"/>
+					<portRef name="I1" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA2">
+					<portRef name="DINA2"/>
+					<portRef name="I2" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA3">
+					<portRef name="DINA3"/>
+					<portRef name="I3" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA4">
+					<portRef name="DINA4"/>
+					<portRef name="I4" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA5">
+					<portRef name="DINA5"/>
+					<portRef name="I5" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA6">
+					<portRef name="DINA6"/>
+					<portRef name="I6" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA7">
+					<portRef name="DINA7"/>
+					<portRef name="I7" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA8">
+					<portRef name="DINA8"/>
+					<portRef name="I8" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA9">
+					<portRef name="DINA9"/>
+					<portRef name="I9" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA10">
+					<portRef name="DINA10"/>
+					<portRef name="I10" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA11">
+					<portRef name="DINA11"/>
+					<portRef name="I11" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA12">
+					<portRef name="DINA12"/>
+					<portRef name="I12" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA13">
+					<portRef name="DINA13"/>
+					<portRef name="I13" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA14">
+					<portRef name="DINA14"/>
+					<portRef name="I14" instanceRef="blockrama"/>
+				</net>
+				<net name="DINA15">
+					<portRef name="DINA15"/>
+					<portRef name="I15" instanceRef="blockrama"/>
+				</net>
+				<net name="DINB0">
+					<portRef name="DINB0"/>
+					<portRef name="I0" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB1">
+					<portRef name="DINB1"/>
+					<portRef name="I1" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB2">
+					<portRef name="DINB2"/>
+					<portRef name="I2" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB3">
+					<portRef name="DINB3"/>
+					<portRef name="I3" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB4">
+					<portRef name="DINB4"/>
+					<portRef name="I4" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB5">
+					<portRef name="DINB5"/>
+					<portRef name="I5" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB6">
+					<portRef name="DINB6"/>
+					<portRef name="I6" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB7">
+					<portRef name="DINB7"/>
+					<portRef name="I7" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB8">
+					<portRef name="DINB8"/>
+					<portRef name="I8" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB9">
+					<portRef name="DINB9"/>
+					<portRef name="I9" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB10">
+					<portRef name="DINB10"/>
+					<portRef name="I10" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB11">
+					<portRef name="DINB11"/>
+					<portRef name="I11" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB12">
+					<portRef name="DINB12"/>
+					<portRef name="I12" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB13">
+					<portRef name="DINB13"/>
+					<portRef name="I13" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB14">
+					<portRef name="DINB14"/>
+					<portRef name="I14" instanceRef="blockramb"/>
+				</net>
+				<net name="DINB15">
+					<portRef name="DINB15"/>
+					<portRef name="I15" instanceRef="blockramb"/>
+				</net>
+				<net name="DOUTA0">
+					<portRef name="OUT0" instanceRef="blockrama"/>
+					<portRef name="DOUTA0"/>
+				</net>
+				<net name="DOUTA1">
+					<portRef name="OUT1" instanceRef="blockrama"/>
+					<portRef name="DOUTA1"/>
+				</net>
+				<net name="DOUTA2">
+					<portRef name="OUT2" instanceRef="blockrama"/>
+					<portRef name="DOUTA2"/>
+				</net>
+				<net name="DOUTA3">
+					<portRef name="OUT3" instanceRef="blockrama"/>
+					<portRef name="DOUTA3"/>
+				</net>
+				<net name="DOUTA4">
+					<portRef name="OUT4" instanceRef="blockrama"/>
+					<portRef name="DOUTA4"/>
+				</net>
+				<net name="DOUTA5">
+					<portRef name="OUT5" instanceRef="blockrama"/>
+					<portRef name="DOUTA5"/>
+				</net>
+				<net name="DOUTA6">
+					<portRef name="OUT6" instanceRef="blockrama"/>
+					<portRef name="DOUTA6"/>
+				</net>
+				<net name="DOUTA7">
+					<portRef name="OUT7" instanceRef="blockrama"/>
+					<portRef name="DOUTA7"/>
+				</net>
+				<net name="DOUTA8">
+					<portRef name="OUT8" instanceRef="blockrama"/>
+					<portRef name="DOUTA8"/>
+				</net>
+				<net name="DOUTA9">
+					<portRef name="OUT9" instanceRef="blockrama"/>
+					<portRef name="DOUTA9"/>
+				</net>
+				<net name="DOUTA10">
+					<portRef name="OUT10" instanceRef="blockrama"/>
+					<portRef name="DOUTA10"/>
+				</net>
+				<net name="DOUTA11">
+					<portRef name="OUT11" instanceRef="blockrama"/>
+					<portRef name="DOUTA11"/>
+				</net>
+				<net name="DOUTA12">
+					<portRef name="OUT12" instanceRef="blockrama"/>
+					<portRef name="DOUTA12"/>
+				</net>
+				<net name="DOUTA13">
+					<portRef name="OUT13" instanceRef="blockrama"/>
+					<portRef name="DOUTA13"/>
+				</net>
+				<net name="DOUTA14">
+					<portRef name="OUT14" instanceRef="blockrama"/>
+					<portRef name="DOUTA14"/>
+				</net>
+				<net name="DOUTA15">
+					<portRef name="OUT15" instanceRef="blockrama"/>
+					<portRef name="DOUTA15"/>
+				</net>
+				<net name="DOUTB0">
+					<portRef name="OUT0" instanceRef="blockramb"/>
+					<portRef name="DOUTB0"/>
+				</net>
+				<net name="DOUTB1">
+					<portRef name="OUT1" instanceRef="blockramb"/>
+					<portRef name="DOUTB1"/>
+				</net>
+				<net name="DOUTB2">
+					<portRef name="OUT2" instanceRef="blockramb"/>
+					<portRef name="DOUTB2"/>
+				</net>
+				<net name="DOUTB3">
+					<portRef name="OUT3" instanceRef="blockramb"/>
+					<portRef name="DOUTB3"/>
+				</net>
+				<net name="DOUTB4">
+					<portRef name="OUT4" instanceRef="blockramb"/>
+					<portRef name="DOUTB4"/>
+				</net>
+				<net name="DOUTB5">
+					<portRef name="OUT5" instanceRef="blockramb"/>
+					<portRef name="DOUTB5"/>
+				</net>
+				<net name="DOUTB6">
+					<portRef name="OUT6" instanceRef="blockramb"/>
+					<portRef name="DOUTB6"/>
+				</net>
+				<net name="DOUTB7">
+					<portRef name="OUT7" instanceRef="blockramb"/>
+					<portRef name="DOUTB7"/>
+				</net>
+				<net name="DOUTB8">
+					<portRef name="OUT8" instanceRef="blockramb"/>
+					<portRef name="DOUTB8"/>
+				</net>
+				<net name="DOUTB9">
+					<portRef name="OUT9" instanceRef="blockramb"/>
+					<portRef name="DOUTB9"/>
+				</net>
+				<net name="DOUTB10">
+					<portRef name="OUT10" instanceRef="blockramb"/>
+					<portRef name="DOUTB10"/>
+				</net>
+				<net name="DOUTB11">
+					<portRef name="OUT11" instanceRef="blockramb"/>
+					<portRef name="DOUTB11"/>
+				</net>
+				<net name="DOUTB12">
+					<portRef name="OUT12" instanceRef="blockramb"/>
+					<portRef name="DOUTB12"/>
+				</net>
+				<net name="DOUTB13">
+					<portRef name="OUT13" instanceRef="blockramb"/>
+					<portRef name="DOUTB13"/>
+				</net>
+				<net name="DOUTB14">
+					<portRef name="OUT14" instanceRef="blockramb"/>
+					<portRef name="DOUTB14"/>
+				</net>
+				<net name="DOUTB15">
+					<portRef name="OUT15" instanceRef="blockramb"/>
+					<portRef name="DOUTB15"/>
+				</net>
+				<net name="clkamux_o">
+					<portRef name="O" instanceRef="clkamux"/>
+					<portRef name="I31" instanceRef="blockrama"/>
+				</net>
+				<net name="clkbmux_o">
+					<portRef name="O" instanceRef="clkbmux"/>
+					<portRef name="I31" instanceRef="blockramb"/>
+				</net>
+				<net name="weamux_o">
+					<portRef name="O" instanceRef="weamux"/>
+					<portRef name="I30" instanceRef="blockrama"/>
+				</net>
+				<net name="webmux_o">
+					<portRef name="O" instanceRef="webmux"/>
+					<portRef name="I30" instanceRef="blockramb"/>
+				</net>
+				<net name="enamux_o">
+					<portRef name="O" instanceRef="enamux"/>
+					<portRef name="I29" instanceRef="blockrama"/>
+				</net>
+				<net name="enbmux_o">
+					<portRef name="O" instanceRef="enbmux"/>
+					<portRef name="I29" instanceRef="blockramb"/>
+				</net>
+				<net name="rstamux_o">
+					<portRef name="O" instanceRef="rstamux"/>
+					<portRef name="I28" instanceRef="blockrama"/>
+				</net>
+				<net name="rstbmux_o">
+					<portRef name="O" instanceRef="rstbmux"/>
+					<portRef name="I28" instanceRef="blockramb"/>
+				</net>
+				<net name="internal_gnd">
+					<portRef name="G" instanceRef="gnd"/>
+					<portRef name="I0" instanceRef="weamux"/>
+					<portRef name="I0" instanceRef="enamux"/>
+					<portRef name="I0" instanceRef="rstamux"/>
+					<portRef name="I0" instanceRef="webmux"/>
+					<portRef name="I0" instanceRef="enbmux"/>
+					<portRef name="I0" instanceRef="rstbmux"/>
+				</net>
+				<net name="internal_vcc">
+					<portRef name="P" instanceRef="vcc"/>
+					<portRef name="I1" instanceRef="weamux"/>
+					<portRef name="I1" instanceRef="enamux"/>
+					<portRef name="I1" instanceRef="rstamux"/>
+					<portRef name="I1" instanceRef="webmux"/>
+					<portRef name="I1" instanceRef="enbmux"/>
+					<portRef name="I1" instanceRef="rstbmux"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="gclkiob" type="GCLKIOB">
+			<port name="PAD" direction="inout"/>
+			<port name="GCLKOUT" direction="output"/>
+			<contents>
+				<instance name="gclk_buf" cellRef="GCLK_BUF" libraryRef="template_cell_lib"/>
+				<net name="PAD">
+					<portRef name="PAD"/>
+					<portRef name="I" instanceRef="gclk_buf"/>
+				</net>
+				<net name="GCLKOUT">
+					<portRef name="O" instanceRef="gclk_buf"/>
+					<portRef name="GCLKOUT"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="dll" type="DLL">
+			<port name="RST" direction="input"/>
+			<port name="CKFB" direction="input"/>
+			<port name="CKIN" direction="input"/>
+			<port name="LOCKED" direction="output"/>
+			<port name="CK0" direction="output"/>
+			<port name="CK90" direction="output"/>
+			<port name="CK180" direction="output"/>
+			<port name="CK270" direction="output"/>
+			<port name="CK2X" direction="output"/>
+			<port name="CK2X90" direction="output"/>
+			<port name="CKDV" direction="output"/>
+			<contents>
+				<instance name="dll" cellRef="DLL" libraryRef="template_cell_lib"/>
+				<net name="RST">
+					<portRef name="RST" instanceRef="dll"/>
+					<portRef name="RST"/>
+				</net>
+				<net name="CKFB">
+					<portRef name="CLKFB" instanceRef="dll"/>
+					<portRef name="CKFB"/>
+				</net>
+				<net name="CKIN">
+					<portRef name="CLKIN" instanceRef="dll"/>
+					<portRef name="CKIN"/>
+				</net>
+				<net name="LOCKED">
+					<portRef name="LOCKED" instanceRef="dll"/>
+					<portRef name="LOCKED"/>
+				</net>
+				<net name="CK0">
+					<portRef name="CLK0" instanceRef="dll"/>
+					<portRef name="CK0"/>
+				</net>
+				<net name="CK90">
+					<portRef name="CLK90" instanceRef="dll"/>
+					<portRef name="CK90"/>
+				</net>
+				<net name="CK180">
+					<portRef name="CLK180" instanceRef="dll"/>
+					<portRef name="CK180"/>
+				</net>
+				<net name="CK270">
+					<portRef name="CLK270" instanceRef="dll"/>
+					<portRef name="CK270"/>
+				</net>
+				<net name="CK2X">
+					<portRef name="CLK2X" instanceRef="dll"/>
+					<portRef name="CK2X"/>
+				</net>
+				<net name="CK2X90">
+					<portRef name="CLK2X90" instanceRef="dll"/>
+					<portRef name="CK2X90"/>
+				</net>
+				<net name="CKDV">
+					<portRef name="CLKDV" instanceRef="dll"/>
+					<portRef name="CKDV"/>
+				</net>
+			</contents>
+		</cell>
+		<cell name="bscan" type="BSCAN">
+			<port name="TDO1" direction="input"/>
+			<port name="TDO2" direction="input"/>
+			<port name="RESET" direction="output"/>
+			<port name="DRCK1" direction="output"/>
+			<port name="DRCK2" direction="output"/>
+			<port name="UPDATE" direction="output"/>
+			<port name="SHIFT" direction="output"/>
+			<port name="TDI" direction="output"/>
+			<port name="SEL1" direction="output"/>
+			<port name="SEL2" direction="output"/>
+			<contents>
+				<instance name="bscan" cellRef="BSCAN_PRIM" libraryRef="template_cell_lib"/>
+				<net name="TDO1">
+					<portRef name="TDO1" instanceRef="bscan"/>
+					<portRef name="TDO1"/>
+				</net>
+				<net name="TDO2">
+					<portRef name="TDO2" instanceRef="bscan"/>
+					<portRef name="TDO2"/>
+				</net>
+				<net name="RESET">
+					<portRef name="RESET" instanceRef="bscan"/>
+					<portRef name="RESET"/>
+				</net>
+				<net name="DRCK1">
+					<portRef name="DRCK1" instanceRef="bscan"/>
+					<portRef name="DRCK1"/>
+				</net>
+				<net name="DRCK2">
+					<portRef name="DRCK2" instanceRef="bscan"/>
+					<portRef name="DRCK2"/>
+				</net>
+				<net name="UPDATE">
+					<portRef name="UPDATE" instanceRef="bscan"/>
+					<portRef name="UPDATE"/>
+				</net>
+				<net name="SHIFT">
+					<portRef name="SHIFT" instanceRef="bscan"/>
+					<portRef name="SHIFT"/>
+				</net>
+				<net name="TDI">
+					<portRef name="TDI" instanceRef="bscan"/>
+					<portRef name="TDI"/>
+				</net>
+				<net name="SEL1">
+					<portRef name="SEL1" instanceRef="bscan"/>
+					<portRef name="SEL1"/>
+				</net>
+				<net name="SEL2">
+					<portRef name="SEL2" instanceRef="bscan"/>
+					<portRef name="SEL2"/>
+				</net>
+			</contents>
+		</cell>
+	</library>
+</device>

@@ -24,6 +24,7 @@ import { ProjectInfo, SourceFile, addRecentlyOpenedProject } from "../model/proj
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { createDir, writeTextFile } from "@tauri-apps/api/fs";
+import { platform } from "@tauri-apps/api/os";
 
 const newProject: ProjectInfo = {
   name: "",
@@ -171,7 +172,7 @@ function NewProjectStep2(props: StepProps) {
 
   const [sourceFiles, setSourceFiles] = useState<SourceFile[]>([]);
 
-  function getFileInfoByPath(path: string): SourceFile {
+  async function getFileInfoByPath(path: string): Promise<SourceFile> {
     function getTypeByExtension(ext: string) {
       switch (ext) {
         case "v":
@@ -184,7 +185,9 @@ function NewProjectStep2(props: StepProps) {
           return "unknown";
       }
     }
-    const arr = path.split("/");
+    const platformName = await platform();
+    const splitChar = /^win/i.test(platformName) ? "\\" : "/";
+    const arr = path.split(splitChar);
     const name = arr[arr.length - 1];
     const type = getTypeByExtension(name.split(".")[1]);
     return { name: name, path: path, type: type };
@@ -200,10 +203,17 @@ function NewProjectStep2(props: StepProps) {
     })) as string[];
 
     if (selectedSourcefiles) {
-      const files = selectedSourcefiles.map((path) => getFileInfoByPath(path));
-      setSourceFiles((prev) => {
-        const newFiles = files.filter((file) => prev.findIndex((f) => f.path === file.path) === -1);
-        return [...prev, ...newFiles];
+      const files = selectedSourcefiles.map(
+        (path) =>
+          new Promise<SourceFile>((resolve) => {
+            resolve(getFileInfoByPath(path));
+          })
+      );
+      Promise.all(files).then((files) => {
+        setSourceFiles((prev) => {
+          const newFiles = files.filter((file) => prev.findIndex((f) => f.path === file.path) === -1);
+          return [...prev, ...newFiles];
+        });
       });
     }
   };
@@ -289,7 +299,6 @@ function NewProjectModal(props: ModalProps) {
     showSuccessNotification({
       message: "",
       title: t("create_project.create_new_success_title"),
-      translation: t,
     });
   };
 
@@ -298,7 +307,6 @@ function NewProjectModal(props: ModalProps) {
     showFailedNotification({
       message: t("create_project.check_dir"),
       title: t("create_project.create_new_failed_title"),
-      translation: t,
     });
   };
 
@@ -308,7 +316,6 @@ function NewProjectModal(props: ModalProps) {
     if (extraConfig.createSubDir === true) {
       createDir(newProject.path + "/" + newProject.name).catch(() => {
         showFailedNotification({
-          translation: t,
           title: t("create_project.create_new_failed_title"),
           message: t("create_project.check_dir"),
         });

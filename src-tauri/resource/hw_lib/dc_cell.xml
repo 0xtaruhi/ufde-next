@@ -1,0 +1,1553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library name="cell_lib">
+	<cell name="AND2" type="COMB">
+		<property name="truthtable" value="11"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AND3" type="COMB">
+		<property name="truthtable" value="111"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AND4" type="COMB">
+		<property name="truthtable" value="1111"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI21" type="COMB">
+		<property name="truthtable" value="0-0|-00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI211" type="COMB">
+		<property name="truthtable" value="0-00|-000"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI22" type="COMB">
+		<property name="truthtable" value="0-0-|0--0|-00-|-0-0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI221" type="COMB">
+		<property name="truthtable" value="0-0-0|0--00|-00-0|-0-00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI222" type="COMB">
+		<property name="truthtable" value="0-0-0-|0-0--0|0--00-|0--0-0|-00-0-|-00--0|-0-00-|-0-0-0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="C1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI2BB1" type="COMB">
+		<property name="truthtable" value="1-0|-10"/>
+		<port name="A0N" direction="input"/>
+		<port name="A1N" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI2BB2" type="COMB">
+		<property name="truthtable" value="1-0-|1--0|-10-|-1-0"/>
+		<port name="A0N" direction="input"/>
+		<port name="A1N" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI31" type="COMB">
+		<property name="truthtable" value="0--0|-0-0|--00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI32" type="COMB">
+		<property name="truthtable" value="0--0-|0---0|-0-0-|-0--0|--00-|--0-0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="AOI33" type="COMB">
+		<property name="truthtable" value="0--0--|0---0-|0----0|-0-0--|-0--0-|-0---0|--00--|--0-0-|--0--0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="B2" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="BUF" type="COMB">
+		<property name="truthtable" value="1"/>
+		<port name="I" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="IBUF" type="COMB">
+		<property name="truthtable" value="1"/>
+		<port name="I" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="OBUF" type="COMB">
+		<property name="truthtable" value="1"/>
+		<port name="I" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="IOBUF" type="GENERIC">
+		<port name="O" direction="output"/>
+		<port name="IO" direction="inout"/>
+		<port name="I" direction="input"/>
+		<port name="T" direction="input"/>
+	</cell>
+	<cell name="CLKBUF" type="COMB">
+		<property name="truthtable" value="1"/>
+		<port name="I" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="DFFHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+		<port name="D" direction="input"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="DFFRHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+		<port name="D" direction="input"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="RN" direction="input" type="reset"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="DFFSHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="re"/-->
+		<port name="D" direction="input"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="SN" direction="input" type="reset"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="DFFNRHQ" type="FFLATCH">
+		<property name="edge" value="fall"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="fe"/-->
+		<port name="D" direction="input"/>
+		<port name="CKN" direction="input" type="clock"/>
+		<port name="RN" direction="input" type="reset"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="DFFNSHQ" type="FFLATCH">
+		<property name="edge" value="fall"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="fe"/-->
+		<port name="D" direction="input"/>
+		<port name="CKN" direction="input" type="clock"/>
+		<port name="SN" direction="input" type="reset"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="DFFNHQ" type="FFLATCH">
+		<property name="edge" value="fall"/>
+		<!--property name="init_state" value="0"/>
+		<property name="clock_type" value="fe"/-->
+		<port name="D" direction="input"/>
+		<port name="CKN" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="EDFFHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<port name="D" direction="input"/>
+		<port name="E" direction="input" type="enable"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="EDFFTRHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<port name="RN" direction="input" type="reset"/>
+		<port name="D" direction="input"/>
+		<port name="E" direction="input" type="enable"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="EDFFTSHQ" type="FFLATCH">
+		<property name="edge" value="rise"/>
+		<port name="SN" direction="input" type="reset"/>
+		<port name="D" direction="input"/>
+		<port name="E" direction="input" type="enable"/>
+		<port name="CK" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="INV" type="COMB">
+		<property name="truthtable" value="0"/>
+		<port name="A" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="MX2" type="COMB">
+		<property name="truthtable" value="1-0|-11"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="S0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="MXI2" type="COMB">
+		<property name="truthtable" value="-01|0-0|-00"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="S0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="MX4" type="COMB">
+		<property name="truthtable" value="1---00|-1--01|--1-10|---111"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="S0" direction="input"/>
+		<port name="S1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND2" type="COMB">
+		<property name="truthtable" value="0-|-0"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND2B" type="COMB">
+		<property name="truthtable" value="1-|-0"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND3" type="COMB">
+		<property name="truthtable" value="0--|-0-|--0"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND3B" type="COMB">
+		<property name="truthtable" value="1--|-0-|--0"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND4" type="COMB">
+		<property name="truthtable" value="0---|-0--|--0-|---0"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND4B" type="COMB">
+		<property name="truthtable" value="1---|-0--|--0-|---0"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NAND4BB" type="COMB">
+		<property name="truthtable" value="1---|-1--|--0-|---0"/>
+		<port name="AN" direction="input"/>
+		<port name="BN" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR2" type="COMB">
+		<property name="truthtable" value="00"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR2B" type="COMB">
+		<property name="truthtable" value="10"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR3" type="COMB">
+		<property name="truthtable" value="000"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR3B" type="COMB">
+		<property name="truthtable" value="100"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR4" type="COMB">
+		<property name="truthtable" value="0000"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR4B" type="COMB">
+		<property name="truthtable" value="1000"/>
+		<port name="AN" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="NOR4BB" type="COMB">
+		<property name="truthtable" value="1100"/>
+		<port name="AN" direction="input"/>
+		<port name="BN" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI21" type="COMB">
+		<property name="truthtable" value="00-|--0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI211" type="COMB">
+		<property name="truthtable" value="00--|--0-|---0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI22" type="COMB">
+		<property name="truthtable" value="00--|--00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI221" type="COMB">
+		<property name="truthtable" value="00---|--00-|----0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI222" type="COMB">
+		<property name="truthtable" value="00----|--00--|----00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="C0" direction="input"/>
+		<port name="C1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI2BB1" type="COMB">
+		<property name="truthtable" value="11-|--0"/>
+		<port name="A0N" direction="input"/>
+		<port name="A1N" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI2BB2" type="COMB">
+		<property name="truthtable" value="11--|--00"/>
+		<port name="A0N" direction="input"/>
+		<port name="A1N" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI31" type="COMB">
+		<property name="truthtable" value="000-|---0"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI32" type="COMB">
+		<property name="truthtable" value="000--|---00"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OAI33" type="COMB">
+		<property name="truthtable" value="000---|---000"/>
+		<port name="A0" direction="input"/>
+		<port name="A1" direction="input"/>
+		<port name="A2" direction="input"/>
+		<port name="B0" direction="input"/>
+		<port name="B1" direction="input"/>
+		<port name="B2" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OR2" type="COMB">
+		<property name="truthtable" value="1-|-1"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OR3" type="COMB">
+		<property name="truthtable" value="1--|-1-|--1"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="OR4" type="COMB">
+		<property name="truthtable" value="1---|-1--|--1-|---1"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="C" direction="input"/>
+		<port name="D" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="TBUF" type="TBUFFER">
+		<port name="A" direction="input"/>
+		<port name="OE" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="TLAT" type="FFLATCH">
+		<property name="level" value="high"/>
+		<port name="D" direction="input"/>
+		<port name="G" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+		<port name="QN" direction="output"/>
+	</cell>
+	<cell name="TLATHQ" type="FFLATCH">
+		<property name="level" value="high"/>
+		<port name="D" direction="input"/>
+		<port name="G" direction="input" type="clock"/>
+		<port name="Q" direction="output"/>
+	</cell>
+	<cell name="XNOR2" type="COMB">
+		<property name="truthtable" value="11|00"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="XOR2" type="COMB">
+		<property name="truthtable" value="01|10"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="ADDF" type="MACRO">
+		<property name="truthtable" value="1100001100111100"/>
+		<port name="A" direction="input"/>
+		<port name="B" direction="input"/>
+		<port name="CI" direction="input"/>
+		<port name="S" direction="output"/>
+		<port name="CO" direction="output" type="carry"/>
+	</cell>
+	<cell name="LOGIC_0" type="MACRO">
+		<property name="truthtable" value="|0"/>
+		<port name="LOGIC_0_PIN" direction="output"/>
+	</cell>
+	<cell name="LOGIC_1" type="MACRO">
+		<property name="truthtable" value="|1"/>
+		<port name="LOGIC_1_PIN" direction="output"/>
+	</cell>
+	<cell name="LUT2" type="LUT">
+		<port name="ADR0" direction="input"/>
+		<port name="ADR1" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="LUT3" type="LUT">
+		<port name="ADR0" direction="input"/>
+		<port name="ADR1" direction="input"/>
+		<port name="ADR2" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="LUT4" type="LUT">
+		<port name="ADR0" direction="input"/>
+		<port name="ADR1" direction="input"/>
+		<port name="ADR2" direction="input"/>
+		<port name="ADR3" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="LUT5" type="LUT">
+		<port name="ADR0" direction="input"/>
+		<port name="ADR1" direction="input"/>
+		<port name="ADR2" direction="input"/>
+		<port name="ADR3" direction="input"/>
+		<port name="ADR4" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="LUT6" type="LUT">
+		<port name="ADR0" direction="input"/>
+		<port name="ADR1" direction="input"/>
+		<port name="ADR2" direction="input"/>
+		<port name="ADR3" direction="input"/>
+		<port name="ADR4" direction="input"/>
+		<port name="ADR5" direction="input"/>
+		<port name="O" direction="output"/>
+	</cell>
+	<cell name="IPAD" type="MACRO">
+		<port name="PAD" direction="input"/>
+	</cell>
+	<cell name="OPAD" type="MACRO">
+		<port name="PAD" direction="output"/>
+	</cell>
+	<cell name="IOPAD" type="MACRO">
+		<port name="PAD" direction="inout"/>
+	</cell>
+	<cell name="X_INV" type="MACRO">
+		<port name="O" direction="output"/>
+		<port name="I" direction="input"/>
+	</cell>
+	<!-- Block RAM Cells -->
+	<cell name="RAMB4_S1" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DO"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDR"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DI"/>
+		<port name="EN" direction="input"/>
+		<port name="CLK" direction="input"/>
+		<port name="WE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S1_S1" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="0" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S1_S2" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="1" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S1_S4" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S1_S8" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S1_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="0" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="11" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="0" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S2" type="RAM">
+		<portGrp direction="output" lsb="0" msb="1" name="DO"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDR"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DI"/>
+		<port name="EN" direction="input"/>
+		<port name="CLK" direction="input"/>
+		<port name="WE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S2_S2" type="RAM">
+		<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="1" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S2_S4" type="RAM">
+		<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S2_S8" type="RAM">
+		<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S2_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="1" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="10" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="1" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S4" type="RAM">
+		<portGrp direction="output" lsb="0" msb="3" name="DO"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDR"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DI"/>
+		<port name="EN" direction="input"/>
+		<port name="CLK" direction="input"/>
+		<port name="WE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S4_S4" type="RAM">
+		<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="3" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S4_S8" type="RAM">
+		<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S4_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="3" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="9" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="3" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S8" type="RAM">
+		<portGrp direction="output" lsb="0" msb="7" name="DO"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDR"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DI"/>
+		<port name="EN" direction="input"/>
+		<port name="CLK" direction="input"/>
+		<port name="WE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S8_S8" type="RAM">
+		<portGrp direction="output" lsb="0" msb="7" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="7" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S8_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="7" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="8" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="7" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="15" name="DO"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDR"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DI"/>
+		<port name="EN" direction="input"/>
+		<port name="CLK" direction="input"/>
+		<port name="WE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+	<cell name="RAMB4_S16_S16" type="RAM">
+		<portGrp direction="output" lsb="0" msb="15" name="DOA"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRA"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIA"/>
+		<port name="ENA" direction="input"/>
+		<port name="CLKA" direction="input"/>
+		<port name="WEA" direction="input"/>
+		<port name="RSTA" direction="input"/>
+		<portGrp direction="output" lsb="0" msb="15" name="DOB"/>
+		<portGrp direction="input" lsb="0" msb="7" name="ADDRB"/>
+		<portGrp direction="input" lsb="0" msb="15" name="DIB"/>
+		<port name="ENB" direction="input"/>
+		<port name="CLKB" direction="input"/>
+		<port name="WEB" direction="input"/>
+		<port name="RSTB" direction="input"/>
+	</cell>
+	<cell name="DECEN1_0" type="COMB">
+		<property name="truthtable" value="01"/>
+		<port name="IN0" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN1_1" type="COMB">
+		<property name="truthtable" value="11"/>
+		<port name="IN0" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN2_0" type="COMB">
+		<property name="truthtable" value="001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN2_1" type="COMB">
+		<property name="truthtable" value="011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN2_2" type="COMB">
+		<property name="truthtable" value="101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN2_3" type="COMB">
+		<property name="truthtable" value="111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_0" type="COMB">
+		<property name="truthtable" value="0001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_1" type="COMB">
+		<property name="truthtable" value="0011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_2" type="COMB">
+		<property name="truthtable" value="0101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_3" type="COMB">
+		<property name="truthtable" value="0111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_4" type="COMB">
+		<property name="truthtable" value="1001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_5" type="COMB">
+		<property name="truthtable" value="1011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_6" type="COMB">
+		<property name="truthtable" value="1101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN3_7" type="COMB">
+		<property name="truthtable" value="1111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_0" type="COMB">
+		<property name="truthtable" value="00001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_1" type="COMB">
+		<property name="truthtable" value="00011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_2" type="COMB">
+		<property name="truthtable" value="00101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_3" type="COMB">
+		<property name="truthtable" value="00111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_4" type="COMB">
+		<property name="truthtable" value="01001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_5" type="COMB">
+		<property name="truthtable" value="01011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_6" type="COMB">
+		<property name="truthtable" value="01101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_7" type="COMB">
+		<property name="truthtable" value="01111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_8" type="COMB">
+		<property name="truthtable" value="10001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_9" type="COMB">
+		<property name="truthtable" value="10011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_A" type="COMB">
+		<property name="truthtable" value="10101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_B" type="COMB">
+		<property name="truthtable" value="10111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_C" type="COMB">
+		<property name="truthtable" value="11001"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_D" type="COMB">
+		<property name="truthtable" value="11011"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_E" type="COMB">
+		<property name="truthtable" value="11101"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN4_F" type="COMB">
+		<property name="truthtable" value="11111"/>
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT" direction="output"/>
+	</cell>
+	<cell name="DECEN12">
+		<port name="IN0" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT0" direction="output"/>
+		<port name="OUT1" direction="output"/>
+		<contents>
+			<instance name="DEC0" cellRef="DECEN1_0"/>
+			<instance name="DEC1" cellRef="DECEN1_1"/>
+			<net name="IN0">
+				<portRef name="IN0"/>
+				<portRef name="IN0" instanceRef="DEC0"/>
+				<portRef name="IN0" instanceRef="DEC1"/>
+			</net>
+			<net name="EN">
+				<portRef name="EN"/>
+				<portRef name="EN" instanceRef="DEC0"/>
+				<portRef name="EN" instanceRef="DEC1"/>
+			</net>
+			<net name="OUT0">
+				<portRef name="OUT" instanceRef="DEC0"/>
+				<portRef name="OUT0"/>
+			</net>
+			<net name="OUT1">
+				<portRef name="OUT" instanceRef="DEC1"/>
+				<portRef name="OUT1"/>
+			</net>
+		</contents>
+	</cell>
+	<cell name="DECEN24">
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT0" direction="output"/>
+		<port name="OUT1" direction="output"/>
+		<port name="OUT2" direction="output"/>
+		<port name="OUT3" direction="output"/>
+		<contents>
+			<instance name="DEC0" cellRef="DECEN2_0"/>
+			<instance name="DEC1" cellRef="DECEN2_1"/>
+			<instance name="DEC2" cellRef="DECEN2_2"/>
+			<instance name="DEC3" cellRef="DECEN2_3"/>
+			<net name="IN0">
+				<portRef name="IN0"/>
+				<portRef name="IN0" instanceRef="DEC0"/>
+				<portRef name="IN0" instanceRef="DEC1"/>
+				<portRef name="IN0" instanceRef="DEC2"/>
+				<portRef name="IN0" instanceRef="DEC3"/>
+			</net>
+			<net name="IN1">
+				<portRef name="IN1"/>
+				<portRef name="IN1" instanceRef="DEC0"/>
+				<portRef name="IN1" instanceRef="DEC1"/>
+				<portRef name="IN1" instanceRef="DEC2"/>
+				<portRef name="IN1" instanceRef="DEC3"/>
+			</net>
+			<net name="EN">
+				<portRef name="EN"/>
+				<portRef name="EN" instanceRef="DEC0"/>
+				<portRef name="EN" instanceRef="DEC1"/>
+				<portRef name="EN" instanceRef="DEC2"/>
+				<portRef name="EN" instanceRef="DEC3"/>
+			</net>
+			<net name="OUT0">
+				<portRef name="OUT" instanceRef="DEC0"/>
+				<portRef name="OUT0"/>
+			</net>
+			<net name="OUT1">
+				<portRef name="OUT" instanceRef="DEC1"/>
+				<portRef name="OUT1"/>
+			</net>
+			<net name="OUT2">
+				<portRef name="OUT" instanceRef="DEC2"/>
+				<portRef name="OUT2"/>
+			</net>
+			<net name="OUT3">
+				<portRef name="OUT" instanceRef="DEC3"/>
+				<portRef name="OUT3"/>
+			</net>
+		</contents>
+	</cell>
+	<cell name="DECEN38">
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT0" direction="output"/>
+		<port name="OUT1" direction="output"/>
+		<port name="OUT2" direction="output"/>
+		<port name="OUT3" direction="output"/>
+		<port name="OUT4" direction="output"/>
+		<port name="OUT5" direction="output"/>
+		<port name="OUT6" direction="output"/>
+		<port name="OUT7" direction="output"/>
+		<contents>
+			<instance name="DEC0" cellRef="DECEN3_0"/>
+			<instance name="DEC1" cellRef="DECEN3_1"/>
+			<instance name="DEC2" cellRef="DECEN3_2"/>
+			<instance name="DEC3" cellRef="DECEN3_3"/>
+			<instance name="DEC4" cellRef="DECEN3_4"/>
+			<instance name="DEC5" cellRef="DECEN3_5"/>
+			<instance name="DEC6" cellRef="DECEN3_6"/>
+			<instance name="DEC7" cellRef="DECEN3_7"/>
+			<net name="IN0">
+				<portRef name="IN0"/>
+				<portRef name="IN0" instanceRef="DEC0"/>
+				<portRef name="IN0" instanceRef="DEC1"/>
+				<portRef name="IN0" instanceRef="DEC2"/>
+				<portRef name="IN0" instanceRef="DEC3"/>
+				<portRef name="IN0" instanceRef="DEC4"/>
+				<portRef name="IN0" instanceRef="DEC5"/>
+				<portRef name="IN0" instanceRef="DEC6"/>
+				<portRef name="IN0" instanceRef="DEC7"/>
+			</net>
+			<net name="IN1">
+				<portRef name="IN1"/>
+				<portRef name="IN1" instanceRef="DEC0"/>
+				<portRef name="IN1" instanceRef="DEC1"/>
+				<portRef name="IN1" instanceRef="DEC2"/>
+				<portRef name="IN1" instanceRef="DEC3"/>
+				<portRef name="IN1" instanceRef="DEC4"/>
+				<portRef name="IN1" instanceRef="DEC5"/>
+				<portRef name="IN1" instanceRef="DEC6"/>
+				<portRef name="IN1" instanceRef="DEC7"/>
+			</net>
+			<net name="IN2">
+				<portRef name="IN2"/>
+				<portRef name="IN2" instanceRef="DEC0"/>
+				<portRef name="IN2" instanceRef="DEC1"/>
+				<portRef name="IN2" instanceRef="DEC2"/>
+				<portRef name="IN2" instanceRef="DEC3"/>
+				<portRef name="IN2" instanceRef="DEC4"/>
+				<portRef name="IN2" instanceRef="DEC5"/>
+				<portRef name="IN2" instanceRef="DEC6"/>
+				<portRef name="IN2" instanceRef="DEC7"/>
+			</net>
+			<net name="EN">
+				<portRef name="EN"/>
+				<portRef name="EN" instanceRef="DEC0"/>
+				<portRef name="EN" instanceRef="DEC1"/>
+				<portRef name="EN" instanceRef="DEC2"/>
+				<portRef name="EN" instanceRef="DEC3"/>
+				<portRef name="EN" instanceRef="DEC4"/>
+				<portRef name="EN" instanceRef="DEC5"/>
+				<portRef name="EN" instanceRef="DEC6"/>
+				<portRef name="EN" instanceRef="DEC7"/>
+			</net>
+			<net name="OUT0">
+				<portRef name="OUT" instanceRef="DEC0"/>
+				<portRef name="OUT0"/>
+			</net>
+			<net name="OUT1">
+				<portRef name="OUT" instanceRef="DEC1"/>
+				<portRef name="OUT1"/>
+			</net>
+			<net name="OUT2">
+				<portRef name="OUT" instanceRef="DEC2"/>
+				<portRef name="OUT2"/>
+			</net>
+			<net name="OUT3">
+				<portRef name="OUT" instanceRef="DEC3"/>
+				<portRef name="OUT3"/>
+			</net>
+			<net name="OUT4">
+				<portRef name="OUT" instanceRef="DEC4"/>
+				<portRef name="OUT4"/>
+			</net>
+			<net name="OUT5">
+				<portRef name="OUT" instanceRef="DEC5"/>
+				<portRef name="OUT5"/>
+			</net>
+			<net name="OUT6">
+				<portRef name="OUT" instanceRef="DEC6"/>
+				<portRef name="OUT6"/>
+			</net>
+			<net name="OUT7">
+				<portRef name="OUT" instanceRef="DEC7"/>
+				<portRef name="OUT7"/>
+			</net>
+		</contents>
+	</cell>
+	<cell name="DECEN416">
+		<port name="IN0" direction="input"/>
+		<port name="IN1" direction="input"/>
+		<port name="IN2" direction="input"/>
+		<port name="IN3" direction="input"/>
+		<port name="EN" direction="input"/>
+		<port name="OUT0" direction="output"/>
+		<port name="OUT1" direction="output"/>
+		<port name="OUT2" direction="output"/>
+		<port name="OUT3" direction="output"/>
+		<port name="OUT4" direction="output"/>
+		<port name="OUT5" direction="output"/>
+		<port name="OUT6" direction="output"/>
+		<port name="OUT7" direction="output"/>
+		<port name="OUT8" direction="output"/>
+		<port name="OUT9" direction="output"/>
+		<port name="OUTA" direction="output"/>
+		<port name="OUTB" direction="output"/>
+		<port name="OUTC" direction="output"/>
+		<port name="OUTD" direction="output"/>
+		<port name="OUTE" direction="output"/>
+		<port name="OUTF" direction="output"/>
+		<contents>
+			<instance name="DEC0" cellRef="DECEN4_0"/>
+			<instance name="DEC1" cellRef="DECEN4_1"/>
+			<instance name="DEC2" cellRef="DECEN4_2"/>
+			<instance name="DEC3" cellRef="DECEN4_3"/>
+			<instance name="DEC4" cellRef="DECEN4_4"/>
+			<instance name="DEC5" cellRef="DECEN4_5"/>
+			<instance name="DEC6" cellRef="DECEN4_6"/>
+			<instance name="DEC7" cellRef="DECEN4_7"/>
+			<instance name="DEC8" cellRef="DECEN4_8"/>
+			<instance name="DEC9" cellRef="DECEN4_9"/>
+			<instance name="DECA" cellRef="DECEN4_A"/>
+			<instance name="DECB" cellRef="DECEN4_B"/>
+			<instance name="DECC" cellRef="DECEN4_C"/>
+			<instance name="DECD" cellRef="DECEN4_D"/>
+			<instance name="DECE" cellRef="DECEN4_E"/>
+			<instance name="DECF" cellRef="DECEN4_F"/>
+			<net name="IN0">
+				<portRef name="IN0"/>
+				<portRef name="IN0" instanceRef="DEC0"/>
+				<portRef name="IN0" instanceRef="DEC1"/>
+				<portRef name="IN0" instanceRef="DEC2"/>
+				<portRef name="IN0" instanceRef="DEC3"/>
+				<portRef name="IN0" instanceRef="DEC4"/>
+				<portRef name="IN0" instanceRef="DEC5"/>
+				<portRef name="IN0" instanceRef="DEC6"/>
+				<portRef name="IN0" instanceRef="DEC7"/>
+				<portRef name="IN0" instanceRef="DEC8"/>
+				<portRef name="IN0" instanceRef="DEC9"/>
+				<portRef name="IN0" instanceRef="DECA"/>
+				<portRef name="IN0" instanceRef="DECB"/>
+				<portRef name="IN0" instanceRef="DECC"/>
+				<portRef name="IN0" instanceRef="DECD"/>
+				<portRef name="IN0" instanceRef="DECE"/>
+				<portRef name="IN0" instanceRef="DECF"/>
+			</net>
+			<net name="IN1">
+				<portRef name="IN1"/>
+				<portRef name="IN1" instanceRef="DEC0"/>
+				<portRef name="IN1" instanceRef="DEC1"/>
+				<portRef name="IN1" instanceRef="DEC2"/>
+				<portRef name="IN1" instanceRef="DEC3"/>
+				<portRef name="IN1" instanceRef="DEC4"/>
+				<portRef name="IN1" instanceRef="DEC5"/>
+				<portRef name="IN1" instanceRef="DEC6"/>
+				<portRef name="IN1" instanceRef="DEC7"/>
+				<portRef name="IN1" instanceRef="DEC8"/>
+				<portRef name="IN1" instanceRef="DEC9"/>
+				<portRef name="IN1" instanceRef="DECA"/>
+				<portRef name="IN1" instanceRef="DECB"/>
+				<portRef name="IN1" instanceRef="DECC"/>
+				<portRef name="IN1" instanceRef="DECD"/>
+				<portRef name="IN1" instanceRef="DECE"/>
+				<portRef name="IN1" instanceRef="DECF"/>
+			</net>
+			<net name="IN2">
+				<portRef name="IN2"/>
+				<portRef name="IN2" instanceRef="DEC0"/>
+				<portRef name="IN2" instanceRef="DEC1"/>
+				<portRef name="IN2" instanceRef="DEC2"/>
+				<portRef name="IN2" instanceRef="DEC3"/>
+				<portRef name="IN2" instanceRef="DEC4"/>
+				<portRef name="IN2" instanceRef="DEC5"/>
+				<portRef name="IN2" instanceRef="DEC6"/>
+				<portRef name="IN2" instanceRef="DEC7"/>
+				<portRef name="IN2" instanceRef="DEC8"/>
+				<portRef name="IN2" instanceRef="DEC9"/>
+				<portRef name="IN2" instanceRef="DECA"/>
+				<portRef name="IN2" instanceRef="DECB"/>
+				<portRef name="IN2" instanceRef="DECC"/>
+				<portRef name="IN2" instanceRef="DECD"/>
+				<portRef name="IN2" instanceRef="DECE"/>
+				<portRef name="IN2" instanceRef="DECF"/>
+			</net>
+			<net name="IN3">
+				<portRef name="IN3"/>
+				<portRef name="IN3" instanceRef="DEC0"/>
+				<portRef name="IN3" instanceRef="DEC1"/>
+				<portRef name="IN3" instanceRef="DEC2"/>
+				<portRef name="IN3" instanceRef="DEC3"/>
+				<portRef name="IN3" instanceRef="DEC4"/>
+				<portRef name="IN3" instanceRef="DEC5"/>
+				<portRef name="IN3" instanceRef="DEC6"/>
+				<portRef name="IN3" instanceRef="DEC7"/>
+				<portRef name="IN3" instanceRef="DEC8"/>
+				<portRef name="IN3" instanceRef="DEC9"/>
+				<portRef name="IN3" instanceRef="DECA"/>
+				<portRef name="IN3" instanceRef="DECB"/>
+				<portRef name="IN3" instanceRef="DECC"/>
+				<portRef name="IN3" instanceRef="DECD"/>
+				<portRef name="IN3" instanceRef="DECE"/>
+				<portRef name="IN3" instanceRef="DECF"/>
+			</net>
+			<net name="EN">
+				<portRef name="EN"/>
+				<portRef name="EN" instanceRef="DEC0"/>
+				<portRef name="EN" instanceRef="DEC1"/>
+				<portRef name="EN" instanceRef="DEC2"/>
+				<portRef name="EN" instanceRef="DEC3"/>
+				<portRef name="EN" instanceRef="DEC4"/>
+				<portRef name="EN" instanceRef="DEC5"/>
+				<portRef name="EN" instanceRef="DEC6"/>
+				<portRef name="EN" instanceRef="DEC7"/>
+				<portRef name="EN" instanceRef="DEC8"/>
+				<portRef name="EN" instanceRef="DEC9"/>
+				<portRef name="EN" instanceRef="DECA"/>
+				<portRef name="EN" instanceRef="DECB"/>
+				<portRef name="EN" instanceRef="DECC"/>
+				<portRef name="EN" instanceRef="DECD"/>
+				<portRef name="EN" instanceRef="DECE"/>
+				<portRef name="EN" instanceRef="DECF"/>
+			</net>
+			<net name="OUT0">
+				<portRef name="OUT" instanceRef="DEC0"/>
+				<portRef name="OUT0"/>
+			</net>
+			<net name="OUT1">
+				<portRef name="OUT" instanceRef="DEC1"/>
+				<portRef name="OUT1"/>
+			</net>
+			<net name="OUT2">
+				<portRef name="OUT" instanceRef="DEC2"/>
+				<portRef name="OUT2"/>
+			</net>
+			<net name="OUT3">
+				<portRef name="OUT" instanceRef="DEC3"/>
+				<portRef name="OUT3"/>
+			</net>
+			<net name="OUT4">
+				<portRef name="OUT" instanceRef="DEC4"/>
+				<portRef name="OUT4"/>
+			</net>
+			<net name="OUT5">
+				<portRef name="OUT" instanceRef="DEC5"/>
+				<portRef name="OUT5"/>
+			</net>
+			<net name="OUT6">
+				<portRef name="OUT" instanceRef="DEC6"/>
+				<portRef name="OUT6"/>
+			</net>
+			<net name="OUT7">
+				<portRef name="OUT" instanceRef="DEC7"/>
+				<portRef name="OUT7"/>
+			</net>
+			<net name="OUT8">
+				<portRef name="OUT" instanceRef="DEC8"/>
+				<portRef name="OUT8"/>
+			</net>
+			<net name="OUT9">
+				<portRef name="OUT" instanceRef="DEC9"/>
+				<portRef name="OUT9"/>
+			</net>
+			<net name="OUTA">
+				<portRef name="OUT" instanceRef="DECA"/>
+				<portRef name="OUTA"/>
+			</net>
+			<net name="OUTB">
+				<portRef name="OUT" instanceRef="DECB"/>
+				<portRef name="OUTB"/>
+			</net>
+			<net name="OUTC">
+				<portRef name="OUT" instanceRef="DECC"/>
+				<portRef name="OUTC"/>
+			</net>
+			<net name="OUTD">
+				<portRef name="OUT" instanceRef="DECD"/>
+				<portRef name="OUTD"/>
+			</net>
+			<net name="OUTE">
+				<portRef name="OUT" instanceRef="DECE"/>
+				<portRef name="OUTE"/>
+			</net>
+			<net name="OUTF">
+				<portRef name="OUT" instanceRef="DECF"/>
+				<portRef name="OUTF"/>
+			</net>
+		</contents>
+	</cell>
+	<cell name="MX8" type="COMB">
+		<property name="truthtable" value="1-------000|-1------001|--1-----010|---1----011|----1---100|-----1--101|------1-110|-------1111"/>
+		<port name="I0" direction="input"/>
+		<port name="I1" direction="input"/>
+		<port name="I2" direction="input"/>
+		<port name="I3" direction="input"/>
+		<port name="I4" direction="input"/>
+		<port name="I5" direction="input"/>
+		<port name="I6" direction="input"/>
+		<port name="I7" direction="input"/>
+		<port name="S0" direction="input"/>
+		<port name="S1" direction="input"/>
+		<port name="S2" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="MX16" type="COMB">
+		<property name="truthtable" value="1---------------0000|-1--------------0001|--1-------------0010|---1------------0011|----1-----------0100|-----1----------0101|------1---------0110|-------1--------0111|--------1-------1000|---------1------1001|----------1-----1010|-----------1----1011|------------1---1100|-------------1--1101|--------------1-1110|---------------11111"/>
+		<port name="I0" direction="input"/>
+		<port name="I1" direction="input"/>
+		<port name="I2" direction="input"/>
+		<port name="I3" direction="input"/>
+		<port name="I4" direction="input"/>
+		<port name="I5" direction="input"/>
+		<port name="I6" direction="input"/>
+		<port name="I7" direction="input"/>
+		<port name="I8" direction="input"/>
+		<port name="I9" direction="input"/>
+		<port name="IA" direction="input"/>
+		<port name="IB" direction="input"/>
+		<port name="IC" direction="input"/>
+		<port name="ID" direction="input"/>
+		<port name="IE" direction="input"/>
+		<port name="IF" direction="input"/>
+		<port name="S0" direction="input"/>
+		<port name="S1" direction="input"/>
+		<port name="S2" direction="input"/>
+		<port name="S3" direction="input"/>
+		<port name="Y" direction="output"/>
+	</cell>
+	<cell name="DLL" type="MACRO">
+		<port name="CK" direction="input"/>
+		<port name="CLKFB" direction="input"/>
+		<port name="RST" direction="input"/>
+		<port name="CLKDV" direction="output"/>
+		<port name="CLK0" direction="output"/>
+		<port name="CLK90" direction="output"/>
+		<port name="CLK180" direction="output"/>
+		<port name="CLK270" direction="output"/>
+		<port name="CLK2X" direction="output"/>
+		<port name="CLK2X90" direction="output"/>
+		<port name="LOCKED" direction="output"/>
+	</cell>
+	<cell name="DCM" type="MACRO">
+		<port name="CK" direction="input" type="clock"/>
+		<port name="CLKFB" direction="input"/>
+		<port name="RST" direction="input"/>
+		<port name="CLKDV" direction="output"/>
+		<port name="CLK0" direction="output"/>
+		<port name="CLK90" direction="output"/>
+		<port name="CLK180" direction="output"/>
+		<port name="CLK270" direction="output"/>
+		<port name="CLK2X" direction="output"/>
+		<port name="CLK2X180" direction="output"/>
+		<port name="LOCKED" direction="output"/>
+		<port name="CTLMODE" direction="input"/>
+		<port name="CTLSEL2" direction="input"/>
+		<port name="CTLSEL1" direction="input"/>
+		<port name="CTLSEL0" direction="input"/>
+		<port name="CTLGO" direction="input"/>
+		<port name="CTLOSC1" direction="input"/>
+		<port name="CTLOSC2" direction="input"/>
+		<port name="PSINCDEC" direction="input"/>
+		<port name="PSEN" direction="input"/>
+		<port name="PSCLK" direction="input"/>
+		<port name="STSADRS3" direction="input"/>
+		<port name="STSADRS2" direction="input"/>
+		<port name="STSADRS1" direction="input"/>
+		<port name="STSADRS0" direction="input"/>
+		<port name="FREEZEDFS" direction="input"/>
+		<port name="FREEZEDLL" direction="input"/>
+		<port name="CONCUR" direction="output"/>
+		<port name="PSDONE" direction="output"/>
+		<port name="STATUS0" direction="output"/>
+		<port name="STATUS1" direction="output"/>
+		<port name="STATUS2" direction="output"/>
+		<port name="STATUS3" direction="output"/>
+		<port name="STATUS4" direction="output"/>
+		<port name="STATUS5" direction="output"/>
+		<port name="STATUS6" direction="output"/>
+		<port name="STATUS7" direction="output"/>
+		<port name="CLKFX180" direction="output"/>
+		<port name="CLKFX" direction="output"/>
+		<port name="DSSEN" direction="input"/>
+	</cell>
+	<cell name="MULT18X18" type="MACRO">
+		<portGrp direction="output" lsb="0" msb="35" name="P"/>
+		<portGrp direction="input" lsb="0" msb="17" name="B"/>
+		<portGrp direction="input" lsb="0" msb="17" name="A"/>
+		<port name="CLK" direction="input" type="clock"/>
+		<port name="CE" direction="input"/>
+		<port name="RST" direction="input"/>
+	</cell>
+</library>

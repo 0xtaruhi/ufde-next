@@ -1,0 +1,2859 @@
+<libraries name="pattern_lib">
+	<library name="device_lib">
+		<layer name="FF">
+			<rule name="DFFHQ">
+				<left>
+					<cell name="DFFHQ">
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<contents>
+							<instance name="dffhq" cellRef="DFFHQ" libraryRef="cell_lib"/>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffhq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="dffhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}dffhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffhq,CLKINV::CLK)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffhq.Q,ff{0}dffhq.Q)</op>
+							<op>reconnect (dffhq.D,ff{0}dffhq.D)</op>
+							<op>reconnect (dffhq.CK,ff{0}dffhq.CK)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="DFFNHQ">
+				<left>
+					<cell name="DFFNHQ">
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CKN" direction="input"/>
+						<contents>
+							<instance name="dffnhq" cellRef="DFFNHQ" libraryRef="cell_lib"/>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffnhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffnhq"/>
+							</net>
+							<net name="CKN">
+								<portRef name="CKN"/>
+								<portRef name="CKN" instanceRef="dffnhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffnhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffnhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffnhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}dffnhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnhq,CLKINV::CLK_B)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffnhq.Q,ff{0}dffnhq.Q)</op>
+							<op>reconnect (dffnhq.D,ff{0}dffnhq.D)</op>
+							<op>reconnect (dffnhq.CKN,ff{0}dffnhq.CK)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="DFFRHQ">
+				<left>
+					<cell name="DFFRHQ">
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<port name="RN" direction="input"/>
+						<contents>
+							<instance name="dffrhq" cellRef="DFFRHQ" libraryRef="cell_lib"/>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffrhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffrhq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="dffrhq"/>
+							</net>
+							<net name="RN">
+								<portRef name="RN"/>
+								<portRef name="RN" instanceRef="dffrhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffrhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffrhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffrhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}dffrhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffrhq,CLKINV::CLK)</op>
+							<op>set_property (ff{0}dffrhq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}dffrhq,SRFFMUX::0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffrhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffrhq.Q,ff{0}dffrhq.Q)</op>
+							<op>reconnect (dffrhq.D,ff{0}dffrhq.D)</op>
+							<op>reconnect (dffrhq.CK,ff{0}dffrhq.CK)</op>
+							<op>reconnect (dffrhq.RN,ff{0}dffrhq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="DFFNRHQ">
+				<left>
+					<cell name="DFFNRHQ">
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CKN" direction="input"/>
+						<port name="RN" direction="input"/>
+						<contents>
+							<instance name="dffnrhq" cellRef="DFFNRHQ" libraryRef="cell_lib"/>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffnrhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffnrhq"/>
+							</net>
+							<net name="CKN">
+								<portRef name="CKN"/>
+								<portRef name="CKN" instanceRef="dffnrhq"/>
+							</net>
+							<net name="RN">
+								<portRef name="RN"/>
+								<portRef name="RN" instanceRef="dffnrhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffnrhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffnrhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffnrhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}dffnrhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnrhq,CLKINV::CLK_B)</op>
+							<op>set_property (ff{0}dffnrhq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}dffnrhq,SRFFMUX::0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnrhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffnrhq.Q,ff{0}dffnrhq.Q)</op>
+							<op>reconnect (dffnrhq.D,ff{0}dffnrhq.D)</op>
+							<op>reconnect (dffnrhq.CKN,ff{0}dffnrhq.CK)</op>
+							<op>reconnect (dffnrhq.RN,ff{0}dffnrhq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="DFFSHQ">
+				<left>
+					<cell name="DFFSHQ">
+						<port name="SN" direction="input"/>
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<contents>
+							<instance name="dffshq" cellRef="DFFSHQ" libraryRef="cell_lib"/>
+							<net name="SN">
+								<portRef name="SN"/>
+								<portRef name="SN" instanceRef="dffshq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffshq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffshq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="dffshq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffshq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffshq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffshq,FFXY_INIT_ATTR::INIT1)</op>
+							<op>set_property (ff{0}dffshq,FFXY_SR_ATTR::SRHIGH)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffshq,CLKINV::CLK)</op>
+							<op>set_property (ff{0}dffshq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}dffshq,SRFFMUX::0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffshq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffshq.Q,ff{0}dffshq.Q)</op>
+							<op>reconnect (dffshq.D,ff{0}dffshq.D)</op>
+							<op>reconnect (dffshq.CK,ff{0}dffshq.CK)</op>
+							<op>reconnect (dffshq.SN,ff{0}dffshq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="DFFNSHQ">
+				<left>
+					<cell name="DFFNSHQ">
+						<port name="SN" direction="input"/>
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CKN" direction="input"/>
+						<contents>
+							<instance name="dffnshq" cellRef="DFFNSHQ" libraryRef="cell_lib"/>
+							<net name="SN">
+								<portRef name="SN"/>
+								<portRef name="SN" instanceRef="dffnshq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="dffnshq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="dffnshq"/>
+							</net>
+							<net name="CKN">
+								<portRef name="CKN"/>
+								<portRef name="CKN" instanceRef="dffnshq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}dffnshq,FF,cell_lib)</op>
+							<op>set_property (ff{0}dffnshq,FFXY::#FF)</op>
+							<op>set_property (ff{0}dffnshq,FFXY_INIT_ATTR::INIT1)</op>
+							<op>set_property (ff{0}dffnshq,FFXY_SR_ATTR::SRHIGH)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnshq,CLKINV::CLK_B)</op>
+							<op>set_property (ff{0}dffnshq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}dffnshq,SRFFMUX::0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}dffnshq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dffnshq.Q,ff{0}dffnshq.Q)</op>
+							<op>reconnect (dffnshq.D,ff{0}dffnshq.D)</op>
+							<op>reconnect (dffnshq.CKN,ff{0}dffnshq.CK)</op>
+							<op>reconnect (dffnshq.SN,ff{0}dffnshq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="EDFFHQ">
+				<left>
+					<cell name="EDFFHQ">
+						<port name="E" direction="input"/>
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<contents>
+							<instance name="edffhq" cellRef="EDFFHQ" libraryRef="cell_lib"/>
+							<net name="E">
+								<portRef name="E"/>
+								<portRef name="E" instanceRef="edffhq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="edffhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="edffhq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="edffhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}edffhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}edffhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}edffhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}edffhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edffhq,CLKINV::CLK)</op>
+							<op>set_property (ff{0}edffhq,CEINV::CE)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edffhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (edffhq.Q,ff{0}edffhq.Q)</op>
+							<op>reconnect (edffhq.D,ff{0}edffhq.D)</op>
+							<op>reconnect (edffhq.CK,ff{0}edffhq.CK)</op>
+							<op>reconnect (edffhq.E,ff{0}edffhq.CE)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="EDFFTRHQ">
+				<left>
+					<cell name="EDFFTRHQ">
+						<port name="E" direction="input"/>
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<port name="RN" direction="input"/>
+						<contents>
+							<instance name="edfftrhq" cellRef="EDFFTRHQ" libraryRef="cell_lib"/>
+							<net name="RN">
+								<portRef name="RN"/>
+								<portRef name="RN" instanceRef="edfftrhq"/>
+							</net>
+							<net name="E">
+								<portRef name="E"/>
+								<portRef name="E" instanceRef="edfftrhq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="edfftrhq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="edfftrhq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="edfftrhq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}edfftrhq,FF,cell_lib)</op>
+							<op>set_property (ff{0}edfftrhq,FFXY::#FF)</op>
+							<op>set_property (ff{0}edfftrhq,FFXY_INIT_ATTR::INIT0)</op>
+							<op>set_property (ff{0}edfftrhq,FFXY_SR_ATTR::SRLOW)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edfftrhq,CLKINV::CLK)</op>
+							<op>set_property (ff{0}edfftrhq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}edfftrhq,SRFFMUX::0)</op>
+							<op>set_property (ff{0}edfftrhq,CEINV::CE)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edfftrhq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (edfftrhq.Q,ff{0}edfftrhq.Q)</op>
+							<op>reconnect (edfftrhq.D,ff{0}edfftrhq.D)</op>
+							<op>reconnect (edfftrhq.CK,ff{0}edfftrhq.CK)</op>
+							<op>reconnect (edfftrhq.E,ff{0}edfftrhq.CE)</op>
+							<op>reconnect (edfftrhq.RN,ff{0}edfftrhq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="EDFFTSHQ">
+				<left>
+					<cell name="EDFFTSHQ">
+						<port name="E" direction="input"/>
+						<port name="Q" direction="output"/>
+						<port name="D" direction="input"/>
+						<port name="CK" direction="input"/>
+						<port name="SN" direction="input"/>
+						<contents>
+							<instance name="edfftshq" cellRef="EDFFTSHQ" libraryRef="cell_lib"/>
+							<net name="SN">
+								<portRef name="SN"/>
+								<portRef name="SN" instanceRef="edfftshq"/>
+							</net>
+							<net name="E">
+								<portRef name="E"/>
+								<portRef name="E" instanceRef="edfftshq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="edfftshq"/>
+							</net>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="edfftshq"/>
+							</net>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="edfftshq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}edfftshq,FF,cell_lib)</op>
+							<op>set_property (ff{0}edfftshq,FFXY::#FF)</op>
+							<op>set_property (ff{0}edfftshq,FFXY_INIT_ATTR::INIT1)</op>
+							<op>set_property (ff{0}edfftshq,FFXY_SR_ATTR::SRHIGH)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edfftshq,CLKINV::CLK)</op>
+							<op>set_property (ff{0}edfftshq,SRINV::SR_B)</op>
+							<op>set_property (ff{0}edfftshq,SRFFMUX::0)</op>
+							<op>set_property (ff{0}edfftshq,CEINV::CE)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}edfftshq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (edfftshq.Q,ff{0}edfftshq.Q)</op>
+							<op>reconnect (edfftshq.D,ff{0}edfftshq.D)</op>
+							<op>reconnect (edfftshq.CK,ff{0}edfftshq.CK)</op>
+							<op>reconnect (edfftshq.E,ff{0}edfftshq.CE)</op>
+							<op>reconnect (edfftshq.SN,ff{0}edfftshq.SR)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="TLATHQ">
+				<left>
+					<cell name="TLATHQ">
+						<port name="D" direction="input"/>
+						<port name="G" direction="input"/>
+						<port name="Q" direction="output"/>
+						<contents>
+							<instance name="tlathq" cellRef="TLATHQ" libraryRef="cell_lib"/>
+							<net name="D">
+								<portRef name="D"/>
+								<portRef name="D" instanceRef="tlathq"/>
+							</net>
+							<net name="G">
+								<portRef name="G"/>
+								<portRef name="G" instanceRef="tlathq"/>
+							</net>
+							<net name="Q">
+								<portRef name="Q"/>
+								<portRef name="Q" instanceRef="tlathq"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (ff{0}tlathq,FF,cell_lib)</op>
+							<op>set_property (ff{0}tlathq,FFXY::#LATCH)</op>
+							<op>set_property (ff{0}tlathq,FFXY_INIT_ATTR::INIT0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}tlathq,CLKINV::CLK)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (ff{0}tlathq,SYNC_ATTR::ASYNC)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (tlathq.Q,ff{0}tlathq.Q)</op>
+							<op>reconnect (tlathq.D,ff{0}tlathq.D)</op>
+							<op>reconnect (tlathq.G,ff{0}tlathq.CK)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="LUT">
+			<rule name="LUT2">
+				<left>
+					<cell name="LUT2">
+						<port name="O" direction="output"/>
+						<port name="ADR0" direction="input"/>
+						<port name="ADR1" direction="input"/>
+						<contents>
+							<instance name="lut2" cellRef="LUT2" libraryRef="cell_lib"/>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="lut2"/>
+							</net>
+							<net name="ADR0">
+								<portRef name="ADR0"/>
+								<portRef name="ADR0" instanceRef="lut2"/>
+							</net>
+							<net name="ADR1">
+								<portRef name="ADR1"/>
+								<portRef name="ADR1" instanceRef="lut2"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}lut2,LUT,cell_lib)</op>
+							<op>reconnect (lut2.ADR0,lut{0}lut2.A1)</op>
+							<op>reconnect (lut2.ADR1,lut{0}lut2.A2)</op>
+							<op>reconnect (lut2.O,lut{0}lut2.D)</op>
+							<op>copy_property (lut2,INIT,lut{0}lut2,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="LUT3">
+				<left>
+					<cell name="LUT3">
+						<port name="O" direction="output"/>
+						<port name="ADR0" direction="input"/>
+						<port name="ADR2" direction="input"/>
+						<port name="ADR1" direction="input"/>
+						<contents>
+							<instance name="lut3" cellRef="LUT3" libraryRef="cell_lib"/>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="lut3"/>
+							</net>
+							<net name="ADR0">
+								<portRef name="ADR0"/>
+								<portRef name="ADR0" instanceRef="lut3"/>
+							</net>
+							<net name="ADR2">
+								<portRef name="ADR2"/>
+								<portRef name="ADR2" instanceRef="lut3"/>
+							</net>
+							<net name="ADR1">
+								<portRef name="ADR1"/>
+								<portRef name="ADR1" instanceRef="lut3"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}lut3,LUT,cell_lib)</op>
+							<op>reconnect (lut3.ADR0,lut{0}lut3.A1)</op>
+							<op>reconnect (lut3.ADR1,lut{0}lut3.A2)</op>
+							<op>reconnect (lut3.ADR2,lut{0}lut3.A3)</op>
+							<op>reconnect (lut3.O,lut{0}lut3.D)</op>
+							<op>copy_property (lut3,INIT,lut{0}lut3,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="LUT4">
+				<left>
+					<cell name="LUT4">
+						<port name="O" direction="output"/>
+						<port name="ADR0" direction="input"/>
+						<port name="ADR3" direction="input"/>
+						<port name="ADR2" direction="input"/>
+						<port name="ADR1" direction="input"/>
+						<contents>
+							<instance name="lut4" cellRef="LUT4" libraryRef="cell_lib"/>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="lut4"/>
+							</net>
+							<net name="ADR0">
+								<portRef name="ADR0"/>
+								<portRef name="ADR0" instanceRef="lut4"/>
+							</net>
+							<net name="ADR3">
+								<portRef name="ADR3"/>
+								<portRef name="ADR3" instanceRef="lut4"/>
+							</net>
+							<net name="ADR2">
+								<portRef name="ADR2"/>
+								<portRef name="ADR2" instanceRef="lut4"/>
+							</net>
+							<net name="ADR1">
+								<portRef name="ADR1"/>
+								<portRef name="ADR1" instanceRef="lut4"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}lut4,LUT,cell_lib)</op>
+							<op>reconnect (lut4.ADR0,lut{0}lut4.A1)</op>
+							<op>reconnect (lut4.ADR1,lut{0}lut4.A2)</op>
+							<op>reconnect (lut4.ADR2,lut{0}lut4.A3)</op>
+							<op>reconnect (lut4.ADR3,lut{0}lut4.A4)</op>
+							<op>reconnect (lut4.O,lut{0}lut4.D)</op>
+							<op>copy_property (lut4,INIT,lut{0}lut4,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="SINGLE_OBJ2">
+			<rule name="INV">
+				<left>
+					<cell name="INV">
+						<port name="O" direction="output"/>
+						<port name="I" direction="input"/>
+						<contents>
+							<instance name="inv" cellRef="INV" libraryRef="cell_lib"/>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="Y" instanceRef="inv"/>
+							</net>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="A" instanceRef="inv"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}inv,LUT,cell_lib)</op>
+							<op>reconnect (inv.A,lut{0}inv.A1)</op>
+							<op>reconnect (inv.Y,lut{0}inv.D)</op>
+							<op>set_property (inv,INIT::1)</op>
+							<op>copy_property (inv,INIT,lut{0}inv,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="VCC">
+				<left>
+					<cell name="VCC">
+						<port name="LOGIC_1_PIN" direction="output"/>
+						<contents>
+							<instance name="vcc" cellRef="LOGIC_1" libraryRef="cell_lib"/>
+							<net name="LOGIC_1_PIN">
+								<portRef name="LOGIC_1_PIN"/>
+								<portRef name="LOGIC_1_PIN" instanceRef="vcc"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}vcc,LUT,cell_lib)</op>
+							<op>reconnect (vcc.LOGIC_1_PIN,lut{0}vcc.D)</op>
+							<op>set_property (vcc,INIT::#1)</op>
+							<op>copy_property (vcc,INIT,lut{0}vcc,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="GND">
+				<left>
+					<cell name="GND">
+						<port name="LOGIC_0_PIN" direction="output"/>
+						<contents>
+							<instance name="gnd" cellRef="LOGIC_0" libraryRef="cell_lib"/>
+							<net name="LOGIC_0_PIN">
+								<portRef name="LOGIC_0_PIN"/>
+								<portRef name="LOGIC_0_PIN" instanceRef="gnd"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_inst (lut{0}gnd,LUT,cell_lib)</op>
+							<op>reconnect (gnd.LOGIC_0_PIN,lut{0}gnd.D)</op>
+							<op>set_property (gnd,INIT::#0)</op>
+							<op>copy_property (gnd,INIT,lut{0}gnd,INIT)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="BLOCKRAM"/>
+	</library>
+	<library name="macro_lib"/>
+	<library name="normal_lib">
+		<layer name="BRAM"/>
+		<layer name="DRAM"/>
+		<layer name="MULTIPLIER">
+			<rule name="MULT18X18">
+				<left>
+					<cell name="MULT18X18">
+						<portGrp direction="input" lsb="0" msb="17" name="A"/>
+						<portGrp direction="input" lsb="0" msb="17" name="B"/>
+						<portGrp direction="output" lsb="0" msb="35" name="P"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="RST" direction="input"/>
+						<contents>
+							<instance name="mult18x18" cellRef="MULT18X18" libraryRef="cell_lib"/>
+							<net name="A[0]">
+								<portRef name="A[0]" instanceRef="mult18x18"/>
+								<portRef name="A[0]"/>
+							</net>
+							<net name="A[1]">
+								<portRef name="A[1]" instanceRef="mult18x18"/>
+								<portRef name="A[1]"/>
+							</net>
+							<net name="A[2]">
+								<portRef name="A[2]" instanceRef="mult18x18"/>
+								<portRef name="A[2]"/>
+							</net>
+							<net name="A[3]">
+								<portRef name="A[3]" instanceRef="mult18x18"/>
+								<portRef name="A[3]"/>
+							</net>
+							<net name="A[4]">
+								<portRef name="A[4]" instanceRef="mult18x18"/>
+								<portRef name="A[4]"/>
+							</net>
+							<net name="A[5]">
+								<portRef name="A[5]" instanceRef="mult18x18"/>
+								<portRef name="A[5]"/>
+							</net>
+							<net name="A[6]">
+								<portRef name="A[6]" instanceRef="mult18x18"/>
+								<portRef name="A[6]"/>
+							</net>
+							<net name="A[7]">
+								<portRef name="A[7]" instanceRef="mult18x18"/>
+								<portRef name="A[7]"/>
+							</net>
+							<net name="A[8]">
+								<portRef name="A[8]" instanceRef="mult18x18"/>
+								<portRef name="A[8]"/>
+							</net>
+							<net name="A[9]">
+								<portRef name="A[9]" instanceRef="mult18x18"/>
+								<portRef name="A[9]"/>
+							</net>
+							<net name="A[10]">
+								<portRef name="A[10]" instanceRef="mult18x18"/>
+								<portRef name="A[10]"/>
+							</net>
+							<net name="A[11]">
+								<portRef name="A[11]" instanceRef="mult18x18"/>
+								<portRef name="A[11]"/>
+							</net>
+							<net name="A[12]">
+								<portRef name="A[12]" instanceRef="mult18x18"/>
+								<portRef name="A[12]"/>
+							</net>
+							<net name="A[13]">
+								<portRef name="A[13]" instanceRef="mult18x18"/>
+								<portRef name="A[13]"/>
+							</net>
+							<net name="A[14]">
+								<portRef name="A[14]" instanceRef="mult18x18"/>
+								<portRef name="A[14]"/>
+							</net>
+							<net name="A[15]">
+								<portRef name="A[15]" instanceRef="mult18x18"/>
+								<portRef name="A[15]"/>
+							</net>
+							<net name="A[16]">
+								<portRef name="A[16]" instanceRef="mult18x18"/>
+								<portRef name="A[16]"/>
+							</net>
+							<net name="A[17]">
+								<portRef name="A[17]" instanceRef="mult18x18"/>
+								<portRef name="A[17]"/>
+							</net>
+							<net name="B[0]">
+								<portRef name="B[0]" instanceRef="mult18x18"/>
+								<portRef name="B[0]"/>
+							</net>
+							<net name="B[1]">
+								<portRef name="B[1]" instanceRef="mult18x18"/>
+								<portRef name="B[1]"/>
+							</net>
+							<net name="B[2]">
+								<portRef name="B[2]" instanceRef="mult18x18"/>
+								<portRef name="B[2]"/>
+							</net>
+							<net name="B[3]">
+								<portRef name="B[3]" instanceRef="mult18x18"/>
+								<portRef name="B[3]"/>
+							</net>
+							<net name="B[4]">
+								<portRef name="B[4]" instanceRef="mult18x18"/>
+								<portRef name="B[4]"/>
+							</net>
+							<net name="B[5]">
+								<portRef name="B[5]" instanceRef="mult18x18"/>
+								<portRef name="B[5]"/>
+							</net>
+							<net name="B[6]">
+								<portRef name="B[6]" instanceRef="mult18x18"/>
+								<portRef name="B[6]"/>
+							</net>
+							<net name="B[7]">
+								<portRef name="B[7]" instanceRef="mult18x18"/>
+								<portRef name="B[7]"/>
+							</net>
+							<net name="B[8]">
+								<portRef name="B[8]" instanceRef="mult18x18"/>
+								<portRef name="B[8]"/>
+							</net>
+							<net name="B[9]">
+								<portRef name="B[9]" instanceRef="mult18x18"/>
+								<portRef name="B[9]"/>
+							</net>
+							<net name="B[10]">
+								<portRef name="B[10]" instanceRef="mult18x18"/>
+								<portRef name="B[10]"/>
+							</net>
+							<net name="B[11]">
+								<portRef name="B[11]" instanceRef="mult18x18"/>
+								<portRef name="B[11]"/>
+							</net>
+							<net name="B[12]">
+								<portRef name="B[12]" instanceRef="mult18x18"/>
+								<portRef name="B[12]"/>
+							</net>
+							<net name="B[13]">
+								<portRef name="B[13]" instanceRef="mult18x18"/>
+								<portRef name="B[13]"/>
+							</net>
+							<net name="B[14]">
+								<portRef name="B[14]" instanceRef="mult18x18"/>
+								<portRef name="B[14]"/>
+							</net>
+							<net name="B[15]">
+								<portRef name="B[15]" instanceRef="mult18x18"/>
+								<portRef name="B[15]"/>
+							</net>
+							<net name="B[16]">
+								<portRef name="B[16]" instanceRef="mult18x18"/>
+								<portRef name="B[16]"/>
+							</net>
+							<net name="B[17]">
+								<portRef name="B[17]" instanceRef="mult18x18"/>
+								<portRef name="B[17]"/>
+							</net>
+							<net name="P[0]">
+								<portRef name="P[0]" instanceRef="mult18x18"/>
+								<portRef name="P[0]"/>
+							</net>
+							<net name="P[1]">
+								<portRef name="P[1]" instanceRef="mult18x18"/>
+								<portRef name="P[1]"/>
+							</net>
+							<net name="P[2]">
+								<portRef name="P[2]" instanceRef="mult18x18"/>
+								<portRef name="P[2]"/>
+							</net>
+							<net name="P[3]">
+								<portRef name="P[3]" instanceRef="mult18x18"/>
+								<portRef name="P[3]"/>
+							</net>
+							<net name="P[4]">
+								<portRef name="P[4]" instanceRef="mult18x18"/>
+								<portRef name="P[4]"/>
+							</net>
+							<net name="P[5]">
+								<portRef name="P[5]" instanceRef="mult18x18"/>
+								<portRef name="P[5]"/>
+							</net>
+							<net name="P[6]">
+								<portRef name="P[6]" instanceRef="mult18x18"/>
+								<portRef name="P[6]"/>
+							</net>
+							<net name="P[7]">
+								<portRef name="P[7]" instanceRef="mult18x18"/>
+								<portRef name="P[7]"/>
+							</net>
+							<net name="P[8]">
+								<portRef name="P[8]" instanceRef="mult18x18"/>
+								<portRef name="P[8]"/>
+							</net>
+							<net name="P[9]">
+								<portRef name="P[9]" instanceRef="mult18x18"/>
+								<portRef name="P[9]"/>
+							</net>
+							<net name="P[10]">
+								<portRef name="P[10]" instanceRef="mult18x18"/>
+								<portRef name="P[10]"/>
+							</net>
+							<net name="P[11]">
+								<portRef name="P[11]" instanceRef="mult18x18"/>
+								<portRef name="P[11]"/>
+							</net>
+							<net name="P[12]">
+								<portRef name="P[12]" instanceRef="mult18x18"/>
+								<portRef name="P[12]"/>
+							</net>
+							<net name="P[13]">
+								<portRef name="P[13]" instanceRef="mult18x18"/>
+								<portRef name="P[13]"/>
+							</net>
+							<net name="P[14]">
+								<portRef name="P[14]" instanceRef="mult18x18"/>
+								<portRef name="P[14]"/>
+							</net>
+							<net name="P[15]">
+								<portRef name="P[15]" instanceRef="mult18x18"/>
+								<portRef name="P[15]"/>
+							</net>
+							<net name="P[16]">
+								<portRef name="P[16]" instanceRef="mult18x18"/>
+								<portRef name="P[16]"/>
+							</net>
+							<net name="P[17]">
+								<portRef name="P[17]" instanceRef="mult18x18"/>
+								<portRef name="P[17]"/>
+							</net>
+							<net name="P[18]">
+								<portRef name="P[18]" instanceRef="mult18x18"/>
+								<portRef name="P[18]"/>
+							</net>
+							<net name="P[19]">
+								<portRef name="P[19]" instanceRef="mult18x18"/>
+								<portRef name="P[19]"/>
+							</net>
+							<net name="P[20]">
+								<portRef name="P[20]" instanceRef="mult18x18"/>
+								<portRef name="P[20]"/>
+							</net>
+							<net name="P[21]">
+								<portRef name="P[21]" instanceRef="mult18x18"/>
+								<portRef name="P[21]"/>
+							</net>
+							<net name="P[22]">
+								<portRef name="P[22]" instanceRef="mult18x18"/>
+								<portRef name="P[22]"/>
+							</net>
+							<net name="P[23]">
+								<portRef name="P[23]" instanceRef="mult18x18"/>
+								<portRef name="P[23]"/>
+							</net>
+							<net name="P[24]">
+								<portRef name="P[24]" instanceRef="mult18x18"/>
+								<portRef name="P[24]"/>
+							</net>
+							<net name="P[25]">
+								<portRef name="P[25]" instanceRef="mult18x18"/>
+								<portRef name="P[25]"/>
+							</net>
+							<net name="P[26]">
+								<portRef name="P[26]" instanceRef="mult18x18"/>
+								<portRef name="P[26]"/>
+							</net>
+							<net name="P[27]">
+								<portRef name="P[27]" instanceRef="mult18x18"/>
+								<portRef name="P[27]"/>
+							</net>
+							<net name="P[28]">
+								<portRef name="P[28]" instanceRef="mult18x18"/>
+								<portRef name="P[28]"/>
+							</net>
+							<net name="P[29]">
+								<portRef name="P[29]" instanceRef="mult18x18"/>
+								<portRef name="P[29]"/>
+							</net>
+							<net name="P[30]">
+								<portRef name="P[30]" instanceRef="mult18x18"/>
+								<portRef name="P[30]"/>
+							</net>
+							<net name="P[31]">
+								<portRef name="P[31]" instanceRef="mult18x18"/>
+								<portRef name="P[31]"/>
+							</net>
+							<net name="P[32]">
+								<portRef name="P[32]" instanceRef="mult18x18"/>
+								<portRef name="P[32]"/>
+							</net>
+							<net name="P[33]">
+								<portRef name="P[33]" instanceRef="mult18x18"/>
+								<portRef name="P[33]"/>
+							</net>
+							<net name="P[34]">
+								<portRef name="P[34]" instanceRef="mult18x18"/>
+								<portRef name="P[34]"/>
+							</net>
+							<net name="P[35]">
+								<portRef name="P[35]" instanceRef="mult18x18"/>
+								<portRef name="P[35]"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK" instanceRef="mult18x18"/>
+								<portRef name="CLK"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE" instanceRef="mult18x18"/>
+								<portRef name="CE"/>
+							</net>
+							<net name="RST">
+								<portRef name="RST" instanceRef="mult18x18"/>
+								<portRef name="RST"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cMult18x18{0},work_lib,mult18x18,template_work_lib)</op-->
+							<op>create_slice (iMult18x18{0},mult18,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (mult18x18.A[0],iMult18x18{0}.A0)</op>
+							<op>reconnect (mult18x18.A[1],iMult18x18{0}.A1)</op>
+							<op>reconnect (mult18x18.A[2],iMult18x18{0}.A2)</op>
+							<op>reconnect (mult18x18.A[3],iMult18x18{0}.A3)</op>
+							<op>reconnect (mult18x18.A[4],iMult18x18{0}.A4)</op>
+							<op>reconnect (mult18x18.A[5],iMult18x18{0}.A5)</op>
+							<op>reconnect (mult18x18.A[6],iMult18x18{0}.A6)</op>
+							<op>reconnect (mult18x18.A[7],iMult18x18{0}.A7)</op>
+							<op>reconnect (mult18x18.A[8],iMult18x18{0}.A8)</op>
+							<op>reconnect (mult18x18.A[9],iMult18x18{0}.A9)</op>
+							<op>reconnect (mult18x18.A[10],iMult18x18{0}.A10)</op>
+							<op>reconnect (mult18x18.A[11],iMult18x18{0}.A11)</op>
+							<op>reconnect (mult18x18.A[12],iMult18x18{0}.A12)</op>
+							<op>reconnect (mult18x18.A[13],iMult18x18{0}.A13)</op>
+							<op>reconnect (mult18x18.A[14],iMult18x18{0}.A14)</op>
+							<op>reconnect (mult18x18.A[15],iMult18x18{0}.A15)</op>
+							<op>reconnect (mult18x18.A[16],iMult18x18{0}.A16)</op>
+							<op>reconnect (mult18x18.A[17],iMult18x18{0}.A17)</op>
+							<op>reconnect (mult18x18.B[0],iMult18x18{0}.B0)</op>
+							<op>reconnect (mult18x18.B[1],iMult18x18{0}.B1)</op>
+							<op>reconnect (mult18x18.B[2],iMult18x18{0}.B2)</op>
+							<op>reconnect (mult18x18.B[3],iMult18x18{0}.B3)</op>
+							<op>reconnect (mult18x18.B[4],iMult18x18{0}.B4)</op>
+							<op>reconnect (mult18x18.B[5],iMult18x18{0}.B5)</op>
+							<op>reconnect (mult18x18.B[6],iMult18x18{0}.B6)</op>
+							<op>reconnect (mult18x18.B[7],iMult18x18{0}.B7)</op>
+							<op>reconnect (mult18x18.B[8],iMult18x18{0}.B8)</op>
+							<op>reconnect (mult18x18.B[9],iMult18x18{0}.B9)</op>
+							<op>reconnect (mult18x18.B[10],iMult18x18{0}.B10)</op>
+							<op>reconnect (mult18x18.B[11],iMult18x18{0}.B11)</op>
+							<op>reconnect (mult18x18.B[12],iMult18x18{0}.B12)</op>
+							<op>reconnect (mult18x18.B[13],iMult18x18{0}.B13)</op>
+							<op>reconnect (mult18x18.B[14],iMult18x18{0}.B14)</op>
+							<op>reconnect (mult18x18.B[15],iMult18x18{0}.B15)</op>
+							<op>reconnect (mult18x18.B[16],iMult18x18{0}.B16)</op>
+							<op>reconnect (mult18x18.B[17],iMult18x18{0}.B17)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (mult18x18.P[0],iMult18x18{0}.P0)</op>
+							<op>reconnect (mult18x18.P[1],iMult18x18{0}.P1)</op>
+							<op>reconnect (mult18x18.P[2],iMult18x18{0}.P2)</op>
+							<op>reconnect (mult18x18.P[3],iMult18x18{0}.P3)</op>
+							<op>reconnect (mult18x18.P[4],iMult18x18{0}.P4)</op>
+							<op>reconnect (mult18x18.P[5],iMult18x18{0}.P5)</op>
+							<op>reconnect (mult18x18.P[6],iMult18x18{0}.P6)</op>
+							<op>reconnect (mult18x18.P[7],iMult18x18{0}.P7)</op>
+							<op>reconnect (mult18x18.P[8],iMult18x18{0}.P8)</op>
+							<op>reconnect (mult18x18.P[9],iMult18x18{0}.P9)</op>
+							<op>reconnect (mult18x18.P[10],iMult18x18{0}.P10)</op>
+							<op>reconnect (mult18x18.P[11],iMult18x18{0}.P11)</op>
+							<op>reconnect (mult18x18.P[12],iMult18x18{0}.P12)</op>
+							<op>reconnect (mult18x18.P[13],iMult18x18{0}.P13)</op>
+							<op>reconnect (mult18x18.P[14],iMult18x18{0}.P14)</op>
+							<op>reconnect (mult18x18.P[15],iMult18x18{0}.P15)</op>
+							<op>reconnect (mult18x18.P[16],iMult18x18{0}.P16)</op>
+							<op>reconnect (mult18x18.P[17],iMult18x18{0}.P17)</op>
+							<op>reconnect (mult18x18.P[18],iMult18x18{0}.P18)</op>
+							<op>reconnect (mult18x18.P[19],iMult18x18{0}.P19)</op>
+							<op>reconnect (mult18x18.P[20],iMult18x18{0}.P20)</op>
+							<op>reconnect (mult18x18.P[21],iMult18x18{0}.P21)</op>
+							<op>reconnect (mult18x18.P[22],iMult18x18{0}.P22)</op>
+							<op>reconnect (mult18x18.P[23],iMult18x18{0}.P23)</op>
+							<op>reconnect (mult18x18.P[24],iMult18x18{0}.P24)</op>
+							<op>reconnect (mult18x18.P[25],iMult18x18{0}.P25)</op>
+							<op>reconnect (mult18x18.P[26],iMult18x18{0}.P26)</op>
+							<op>reconnect (mult18x18.P[27],iMult18x18{0}.P27)</op>
+							<op>reconnect (mult18x18.P[28],iMult18x18{0}.P28)</op>
+							<op>reconnect (mult18x18.P[29],iMult18x18{0}.P29)</op>
+							<op>reconnect (mult18x18.P[30],iMult18x18{0}.P30)</op>
+							<op>reconnect (mult18x18.P[31],iMult18x18{0}.P31)</op>
+							<op>reconnect (mult18x18.P[32],iMult18x18{0}.P32)</op>
+							<op>reconnect (mult18x18.P[33],iMult18x18{0}.P33)</op>
+							<op>reconnect (mult18x18.P[34],iMult18x18{0}.P34)</op>
+							<op>reconnect (mult18x18.P[35],iMult18x18{0}.P35)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (mult18x18.CLK,iMult18x18{0}.CLK)</op>
+							<op>reconnect (mult18x18.CE,iMult18x18{0}.CE)</op>
+							<op>reconnect (mult18x18.RST,iMult18x18{0}.RST)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iMult18x18{0},CLKINV::#OFF)</op>
+							<op>set_property (iMult18x18{0},CEINV::#OFF)</op>
+							<op>set_property (iMult18x18{0},RSTINV::#OFF)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="CARRY_CHAIN">
+			<rule name="ADDF">
+				<left>
+					<cell name="ADDF">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="CIN" direction="input"/>
+						<port name="X" direction="output"/>
+						<port name="COUT" direction="output"/>
+						<contents>
+							<instance name="addf" cellRef="ADDF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A" instanceRef="addf"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="B" instanceRef="addf"/>
+							</net>
+							<net name="CIN">
+								<portRef name="CIN"/>
+								<portRef name="CI" instanceRef="addf"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="S" instanceRef="addf"/>
+							</net>
+							<net name="COUT">
+								<portRef name="COUT"/>
+								<portRef name="CO" instanceRef="addf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="if_slice_full">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>set_index (slice_inst,INDEX::F,INDEX::G)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>copy_property (addf,NAME,slice_inst,FNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,F)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.F1)</op>
+							<op>reconnect (addf.B,slice_inst.F2)</op>
+							<op>reconnect (addf.CI,slice_inst.CIN)</op>
+							<op>reconnect (addf.S,slice_inst.X)</op>
+							<op>reconnect (addf.CO,slice_inst.COUT)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>copy_property (addf,NAME,slice_inst,GNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,G)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.G1)</op>
+							<op>reconnect (addf.B,slice_inst.G2)</op>
+							<op>unhook (addf.CI)</op>
+							<op>reconnect (addf.S,slice_inst.Y)</op>
+							<op>reconnect (addf.CO,slice_inst.COUT)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>set_property (slice_inst,FXMUX::FXOR)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,CY0F::F1)</op>
+							<op>set_property (slice_inst,CYSELF::F)</op>
+							<op>set_property (slice_inst,COUTUSED::0)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>set_property (slice_inst,GYMUX::GXOR)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,CY0G::G1)</op>
+							<op>set_property (slice_inst,CYSELG::G)</op>
+							<op>set_property (slice_inst,YBMUX::1)</op>
+							<op>set_property (slice_inst,YBUSED::0)</op>
+							<op>set_property (slice_inst,COUTUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="ADDF_NO_SUM">
+				<left>
+					<cell name="ADDF_NO_SUM">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="CIN" direction="input"/>
+						<port name="COUT" direction="output"/>
+						<contents>
+							<instance name="addf" cellRef="ADDF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A" instanceRef="addf"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="B" instanceRef="addf"/>
+							</net>
+							<net name="CIN">
+								<portRef name="CIN"/>
+								<portRef name="CI" instanceRef="addf"/>
+							</net>
+							<net name="COUT">
+								<portRef name="COUT"/>
+								<portRef name="CO" instanceRef="addf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="if_slice_full">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>set_index (slice_inst,INDEX::F,INDEX::G)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>copy_property (addf,NAME,slice_inst,FNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,F)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.F1)</op>
+							<op>reconnect (addf.B,slice_inst.F2)</op>
+							<op>reconnect (addf.CI,slice_inst.CIN)</op>
+							<op>reconnect (addf.CO,slice_inst.COUT)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>copy_property (addf,NAME,slice_inst,GNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,G)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.G1)</op>
+							<op>reconnect (addf.B,slice_inst.G2)</op>
+							<op>unhook (addf.CI)</op>
+							<op>reconnect (addf.CO,slice_inst.COUT)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>set_property (slice_inst,FXMUX::#OFF)</op>
+							<op>set_property (slice_inst,XUSED::#OFF)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,CY0F::F1)</op>
+							<op>set_property (slice_inst,CYSELF::F)</op>
+							<op>set_property (slice_inst,COUTUSED::0)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>set_property (slice_inst,GYMUX::#OFF)</op>
+							<op>set_property (slice_inst,YUSED::#OFF)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,CY0G::G1)</op>
+							<op>set_property (slice_inst,CYSELG::G)</op>
+							<op>set_property (slice_inst,YBMUX::1)</op>
+							<op>set_property (slice_inst,YBUSED::0)</op>
+							<op>set_property (slice_inst,COUTUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="ADDF_NO_COUT">
+				<left>
+					<cell name="ADDF_NO_COUT">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="CIN" direction="input"/>
+						<port name="X" direction="output"/>
+						<contents>
+							<instance name="addf" cellRef="ADDF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A" instanceRef="addf"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="B" instanceRef="addf"/>
+							</net>
+							<net name="CIN">
+								<portRef name="CIN"/>
+								<portRef name="CI" instanceRef="addf"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="S" instanceRef="addf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="if_slice_full">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>set_index (slice_inst,INDEX::F,INDEX::G)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>copy_property (addf,NAME,slice_inst,FNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,F)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.F1)</op>
+							<op>reconnect (addf.B,slice_inst.F2)</op>
+							<op>reconnect (addf.CI,slice_inst.CIN)</op>
+							<op>reconnect (addf.S,slice_inst.X)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>copy_property (addf,NAME,slice_inst,GNAME)</op>
+							<op>set_property (addf,INIT::6)</op>
+							<op>copy_property (addf,INIT,addf,INIT)</op>
+							<op>copy_property (addf,INIT,slice_inst,G)</op>
+							<op>copy_property (addf,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>reconnect (addf.A,slice_inst.G1)</op>
+							<op>reconnect (addf.B,slice_inst.G2)</op>
+							<op>unhook (addf.CI)</op>
+							<op>reconnect (addf.S,slice_inst.Y)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==F)">
+							<op>set_property (slice_inst,FXMUX::FXOR)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,COUTUSED::#OFF)</op>
+						</test>
+						<test cond="current_process (slice_inst,INDEX==G)">
+							<op>set_property (slice_inst,GYMUX::GXOR)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+							<op>set_property (slice_inst,CYINIT::CIN)</op>
+							<op>set_property (slice_inst,YBMUX::1)</op>
+							<op>set_property (slice_inst,YBUSED::0)</op>
+							<op>set_property (slice_inst,COUTUSED::#OFF)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="LUT6"/>
+		<layer name="LUT5">
+			<rule name="LUT5_DOUBLE">
+				<left>
+					<cell name="LUT5_DOUBLE">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="G1" direction="input"/>
+						<port name="G2" direction="input"/>
+						<port name="G3" direction="input"/>
+						<port name="G4" direction="input"/>
+						<port name="F5SEL" direction="input"/>
+						<port name="G5SEL" direction="input"/>
+						<port name="FOUT" direction="output" connected="true"/>
+						<port name="GOUT" direction="output" connected="true"/>
+						<contents>
+							<instance name="lut5_f" cellRef="LUT5" libraryRef="cell_lib"/>
+							<instance name="lut5_g" cellRef="LUT5" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="ADR0" instanceRef="lut5_f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="ADR1" instanceRef="lut5_f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="ADR2" instanceRef="lut5_f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="ADR3" instanceRef="lut5_f"/>
+							</net>
+							<net name="F5SEL">
+								<portRef name="F5SEL"/>
+								<portRef name="ADR4" instanceRef="lut5_f"/>
+							</net>
+							<net name="FOUT">
+								<portRef name="FOUT"/>
+								<portRef name="O" instanceRef="lut5_f"/>
+							</net>
+							<net name="G1">
+								<portRef name="G1"/>
+								<portRef name="ADR0" instanceRef="lut5_g"/>
+							</net>
+							<net name="G2">
+								<portRef name="G2"/>
+								<portRef name="ADR1" instanceRef="lut5_g"/>
+							</net>
+							<net name="G3">
+								<portRef name="G3"/>
+								<portRef name="ADR2" instanceRef="lut5_g"/>
+							</net>
+							<net name="G4">
+								<portRef name="G4"/>
+								<portRef name="ADR3" instanceRef="lut5_g"/>
+							</net>
+							<net name="G5SEL">
+								<portRef name="G5SEL"/>
+								<portRef name="ADR4" instanceRef="lut5_g"/>
+							</net>
+							<net name="GOUT">
+								<portRef name="GOUT"/>
+								<portRef name="O" instanceRef="lut5_g"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (lut5_f.ADR0,slice_inst.F1)</op>
+							<op>reconnect (lut5_f.ADR1,slice_inst.F2)</op>
+							<op>reconnect (lut5_f.ADR2,slice_inst.F3)</op>
+							<op>reconnect (lut5_f.ADR3,slice_inst.F4)</op>
+							<op>reconnect (lut5_f.ADR4,slice_inst.BX)</op>
+							<op>reconnect (lut5_f.O,slice_inst.X)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (lut5_g.ADR0,slice_inst.G1)</op>
+							<op>reconnect (lut5_g.ADR1,slice_inst.G2)</op>
+							<op>reconnect (lut5_g.ADR2,slice_inst.G3)</op>
+							<op>reconnect (lut5_g.ADR3,slice_inst.G4)</op>
+							<op>reconnect (lut5_g.ADR4,slice_inst.BY)</op>
+							<op>reconnect (lut5_g.O,slice_inst.Y)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (lut5_f,INIT_1,lut5_f,INIT)</op>
+							<op>copy_property (lut5_f,INIT,slice_inst,U)</op>
+							<op>copy_property (lut5_f,INIT_HEX,slice_inst,U#INIT_HEX)</op>
+							<op>copy_property (lut5_f,INIT_2,lut5_f,INIT)</op>
+							<op>copy_property (lut5_f,INIT,slice_inst,F)</op>
+							<op>copy_property (lut5_f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (lut5_f,NAME,slice_inst,FNAME)</op>
+							<op>set_property (slice_inst,UNAME::lut5_faux_lut_u)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (lut5_g,INIT_1,lut5_g,INIT)</op>
+							<op>copy_property (lut5_g,INIT,slice_inst,V)</op>
+							<op>copy_property (lut5_g,INIT_HEX,slice_inst,V#INIT_HEX)</op>
+							<op>copy_property (lut5_g,INIT_2,lut5_g,INIT)</op>
+							<op>copy_property (lut5_g,INIT,slice_inst,G)</op>
+							<op>copy_property (lut5_g,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>copy_property (lut5_g,NAME,slice_inst,GNAME)</op>
+							<op>set_property (slice_inst,VNAME::lut5_gaux_lut_v)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,BXINV::BX)</op>
+							<op>set_property (slice_inst,FXMUX::P5)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,BYINV::BY)</op>
+							<op>set_property (slice_inst,GYMUX::Q5)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="LUT5_STD">
+				<left>
+					<cell name="LUT5_STD">
+						<port name="A1" direction="input"/>
+						<port name="A2" direction="input"/>
+						<port name="A3" direction="input"/>
+						<port name="A4" direction="input"/>
+						<port name="S" direction="input"/>
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="lut5" cellRef="LUT5" libraryRef="cell_lib"/>
+							<net name="A1">
+								<portRef name="A1"/>
+								<portRef name="ADR0" instanceRef="lut5"/>
+							</net>
+							<net name="A2">
+								<portRef name="A2"/>
+								<portRef name="ADR1" instanceRef="lut5"/>
+							</net>
+							<net name="A3">
+								<portRef name="A3"/>
+								<portRef name="ADR2" instanceRef="lut5"/>
+							</net>
+							<net name="A4">
+								<portRef name="A4"/>
+								<portRef name="ADR3" instanceRef="lut5"/>
+							</net>
+							<net name="S">
+								<portRef name="S"/>
+								<portRef name="ADR4" instanceRef="lut5"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="lut5"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>dupconnect (lut5.ADR0,slice_inst.F1)</op>
+							<op>dupconnect (lut5.ADR1,slice_inst.F2)</op>
+							<op>dupconnect (lut5.ADR2,slice_inst.F3)</op>
+							<op>dupconnect (lut5.ADR3,slice_inst.F4)</op>
+							<op>reconnect (lut5.ADR0,slice_inst.G1)</op>
+							<op>reconnect (lut5.ADR1,slice_inst.G2)</op>
+							<op>reconnect (lut5.ADR2,slice_inst.G3)</op>
+							<op>reconnect (lut5.ADR3,slice_inst.G4)</op>
+							<op>reconnect (lut5.ADR4,slice_inst.BX)</op>
+							<op>reconnect (lut5.O,slice_inst.X)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (lut5,INIT_1,lut5,INIT)</op>
+							<op>copy_property (lut5,INIT,slice_inst,F)</op>
+							<op>copy_property (lut5,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (lut5,INIT_2,lut5,INIT)</op>
+							<op>copy_property (lut5,INIT,slice_inst,G)</op>
+							<op>copy_property (lut5,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>copy_property (lut5,NAME,slice_inst,FNAME)</op>
+							<op>set_property (slice_inst,GNAME::lut5_g)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,BXINV::BX)</op>
+							<op>set_property (slice_inst,FXMUX::F5)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="SLICE">
+			<!--rule name="LUT_2_FF_2_CS">
+				<left>
+					<cell name="LUT_2_FF_2_CS">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="G1" direction="input"/>
+						<port name="G2" direction="input"/>
+						<port name="G3" direction="input"/>
+						<port name="G4" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="X" direction="output" connected="true"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<port name="Y" direction="output" connected="true"/>
+						<port name="YQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<instance name="g" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffy" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="G1">
+								<portRef name="G1"/>
+								<portRef name="A1" instanceRef="g"/>
+							</net>
+							<net name="G2">
+								<portRef name="G2"/>
+								<portRef name="A2" instanceRef="g"/>
+							</net>
+							<net name="G3">
+								<portRef name="G3"/>
+								<portRef name="A3" instanceRef="g"/>
+							</net>
+							<net name="G4">
+								<portRef name="G4"/>
+								<portRef name="A4" instanceRef="g"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+								<portRef name="CK" instanceRef="ffy"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+								<portRef name="CE" instanceRef="ffy"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+								<portRef name="SR" instanceRef="ffy"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="D" instanceRef="f"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+							<net name="Y">
+								<portRef name="Y"/>
+								<portRef name="D" instanceRef="g"/>
+								<portRef name="D" instanceRef="ffy"/>
+							</net>
+							<net name="YQ">
+								<portRef name="YQ"/>
+								<portRef name="Q" instanceRef="ffy"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op>
+							<op>create_slice (iSlice{0},cSlice{0},work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (f.D,slice_inst.X)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (g.A1,slice_inst.G1)</op>
+							<op>reconnect (g.A2,slice_inst.G2)</op>
+							<op>reconnect (g.A3,slice_inst.G3)</op>
+							<op>reconnect (g.A4,slice_inst.G4)</op>
+							<op>reconnect (g.D,slice_inst.Y)</op>
+							<op>reconnect (ffy.Q,slice_inst.YQ)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+							<op>copy_property (g,INIT,slice_inst,G)</op>
+							<op>copy_property (g,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>copy_property (g,NAME,slice_inst,GNAME)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+							<op>copy_property (ffy,FFXY,slice_inst,FFY)</op>
+							<op>copy_property (ffy,FFXY_INIT_ATTR,slice_inst,FFY_INIT_ATTR)</op>
+							<op>copy_property (ffy,FFXY_SR_ATTR,slice_inst,FFY_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,DXMUX::1)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<op>set_property (slice_inst,GYMUX::G)</op>
+							<op>set_property (slice_inst,DYMUX::1)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule-->
+			<rule name="LUT_2_FF_2_S">
+				<left>
+					<cell name="LUT_2_FF_2_S">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="G1" direction="input"/>
+						<port name="G2" direction="input"/>
+						<port name="G3" direction="input"/>
+						<port name="G4" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<port name="YQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<instance name="g" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffy" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="G1">
+								<portRef name="G1"/>
+								<portRef name="A1" instanceRef="g"/>
+							</net>
+							<net name="G2">
+								<portRef name="G2"/>
+								<portRef name="A2" instanceRef="g"/>
+							</net>
+							<net name="G3">
+								<portRef name="G3"/>
+								<portRef name="A3" instanceRef="g"/>
+							</net>
+							<net name="G4">
+								<portRef name="G4"/>
+								<portRef name="A4" instanceRef="g"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+								<portRef name="CK" instanceRef="ffy"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+								<portRef name="CE" instanceRef="ffy"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+								<portRef name="SR" instanceRef="ffy"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+							<net name="YQ">
+								<portRef name="YQ"/>
+								<portRef name="Q" instanceRef="ffy"/>
+							</net>
+							<net name="lut_f_o">
+								<portRef name="D" instanceRef="f"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+							<net name="lut_g_o">
+								<portRef name="D" instanceRef="g"/>
+								<portRef name="D" instanceRef="ffy"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (g.A1,slice_inst.G1)</op>
+							<op>reconnect (g.A2,slice_inst.G2)</op>
+							<op>reconnect (g.A3,slice_inst.G3)</op>
+							<op>reconnect (g.A4,slice_inst.G4)</op>
+							<op>reconnect (ffy.Q,slice_inst.YQ)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+							<op>copy_property (g,INIT,slice_inst,G)</op>
+							<op>copy_property (g,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>copy_property (g,NAME,slice_inst,GNAME)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+							<op>copy_property (ffy,FFXY,slice_inst,FFY)</op>
+							<op>copy_property (ffy,FFXY_INIT_ATTR,slice_inst,FFY_INIT_ATTR)</op>
+							<op>copy_property (ffy,FFXY_SR_ATTR,slice_inst,FFY_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,DXMUX::1)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<op>set_property (slice_inst,GYMUX::G)</op>
+							<op>set_property (slice_inst,DYMUX::1)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+						</test>
+						<test cond="true">
+							<op>connect (slice_inst.X,slice_inst.DX)</op>
+							<op>connect (slice_inst.Y,slice_inst.DY)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<!--rule name="LUT_1_FF_1_CS">
+				<left>
+					<cell name="LUT_1_FF_1_CS">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="X" direction="output" connected="true"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="D" instanceRef="f"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op>
+							<op>create_slice (iSlice{0},cSlice{0},work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (f.D,slice_inst.X)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,DXMUX::1)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule-->
+			<rule name="LUT_1_FF_1_S">
+				<left>
+					<cell name="LUT_1_FF_1_S">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+							<net name="lut_o">
+								<portRef name="D" instanceRef="f"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,DXMUX::1)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+						</test>
+						<test cond="true">
+							<op>connect (slice_inst.X,slice_inst.DX)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="LUT_2_C">
+				<left>
+					<cell name="LUT_2_C">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="G1" direction="input"/>
+						<port name="G2" direction="input"/>
+						<port name="G3" direction="input"/>
+						<port name="G4" direction="input"/>
+						<port name="X" direction="output" connected="true"/>
+						<port name="Y" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<instance name="g" cellRef="LUT" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="G1">
+								<portRef name="G1"/>
+								<portRef name="A1" instanceRef="g"/>
+							</net>
+							<net name="G2">
+								<portRef name="G2"/>
+								<portRef name="A2" instanceRef="g"/>
+							</net>
+							<net name="G3">
+								<portRef name="G3"/>
+								<portRef name="A3" instanceRef="g"/>
+							</net>
+							<net name="G4">
+								<portRef name="G4"/>
+								<portRef name="A4" instanceRef="g"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="D" instanceRef="f"/>
+							</net>
+							<net name="Y">
+								<portRef name="Y"/>
+								<portRef name="D" instanceRef="g"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (f.D,slice_inst.X)</op>
+							<op>reconnect (g.A1,slice_inst.G1)</op>
+							<op>reconnect (g.A2,slice_inst.G2)</op>
+							<op>reconnect (g.A3,slice_inst.G3)</op>
+							<op>reconnect (g.A4,slice_inst.G4)</op>
+							<op>reconnect (g.D,slice_inst.Y)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+							<op>copy_property (g,INIT,slice_inst,G)</op>
+							<op>copy_property (g,INIT_HEX,slice_inst,G#INIT_HEX)</op>
+							<op>copy_property (g,NAME,slice_inst,GNAME)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<op>set_property (slice_inst,GYMUX::G)</op>
+							<op>set_property (slice_inst,YUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="FF_2_S">
+				<left>
+					<cell name="FF_2_S">
+						<port name="BX" direction="input"/>
+						<port name="BY" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<port name="YQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<instance name="ffy" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="BX">
+								<portRef name="BX"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+							<net name="BY">
+								<portRef name="BY"/>
+								<portRef name="D" instanceRef="ffy"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+								<portRef name="CK" instanceRef="ffy"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+								<portRef name="CE" instanceRef="ffy"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+								<portRef name="SR" instanceRef="ffy"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+							<net name="YQ">
+								<portRef name="YQ"/>
+								<portRef name="Q" instanceRef="ffy"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (ffx.D,slice_inst.BX)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (ffy.D,slice_inst.BY)</op>
+							<op>reconnect (ffy.Q,slice_inst.YQ)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,F::#OFF)</op>
+							<op>set_property (slice_inst,G::#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffy,FFXY,slice_inst,FFY)</op>
+							<op>copy_property (ffy,FFXY_INIT_ATTR,slice_inst,FFY_INIT_ATTR)</op>
+							<op>copy_property (ffy,FFXY_SR_ATTR,slice_inst,FFY_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,DXMUX::0)</op>
+							<!--op>set_property (slice_inst,XUSED::0)</op-->
+							<op>set_property (slice_inst,DYMUX::0)</op>
+							<!--op>set_property (slice_inst,YUSED::0)</op-->
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,BXINV::BX)</op>
+							<op>set_property (slice_inst,BYINV::BY)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="LUT_1_C">
+				<left>
+					<cell name="LUT_1_C">
+						<port name="F1" direction="input"/>
+						<port name="F2" direction="input"/>
+						<port name="F3" direction="input"/>
+						<port name="F4" direction="input"/>
+						<port name="X" direction="output" connected="true"/>
+						<contents>
+							<instance name="f" cellRef="LUT" libraryRef="cell_lib"/>
+							<net name="F1">
+								<portRef name="F1"/>
+								<portRef name="A1" instanceRef="f"/>
+							</net>
+							<net name="F2">
+								<portRef name="F2"/>
+								<portRef name="A2" instanceRef="f"/>
+							</net>
+							<net name="F3">
+								<portRef name="F3"/>
+								<portRef name="A3" instanceRef="f"/>
+							</net>
+							<net name="F4">
+								<portRef name="F4"/>
+								<portRef name="A4" instanceRef="f"/>
+							</net>
+							<net name="X">
+								<portRef name="X"/>
+								<portRef name="D" instanceRef="f"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (f.A1,slice_inst.F1)</op>
+							<op>reconnect (f.A2,slice_inst.F2)</op>
+							<op>reconnect (f.A3,slice_inst.F3)</op>
+							<op>reconnect (f.A4,slice_inst.F4)</op>
+							<op>reconnect (f.D,slice_inst.X)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (f,INIT,slice_inst,F)</op>
+							<op>copy_property (f,INIT_HEX,slice_inst,F#INIT_HEX)</op>
+							<op>copy_property (f,NAME,slice_inst,FNAME)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="FF_1_S">
+				<left>
+					<cell name="FF_1_S">
+						<port name="BX" direction="input"/>
+						<port name="CLK" direction="input"/>
+						<port name="CE" direction="input"/>
+						<port name="SR" direction="input"/>
+						<port name="XQ" direction="output" connected="true"/>
+						<contents>
+							<instance name="ffx" cellRef="FF" libraryRef="cell_lib"/>
+							<net name="BX">
+								<portRef name="BX"/>
+								<portRef name="D" instanceRef="ffx"/>
+							</net>
+							<net name="CLK">
+								<portRef name="CLK"/>
+								<portRef name="CK" instanceRef="ffx"/>
+							</net>
+							<net name="CE">
+								<portRef name="CE"/>
+								<portRef name="CE" instanceRef="ffx"/>
+							</net>
+							<net name="SR">
+								<portRef name="SR"/>
+								<portRef name="SR" instanceRef="ffx"/>
+							</net>
+							<net name="XQ">
+								<portRef name="XQ"/>
+								<portRef name="Q" instanceRef="ffx"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (ffx.D,slice_inst.BX)</op>
+							<op>reconnect (ffx.CK,slice_inst.CLK)</op>
+							<op>reconnect (ffx.CE,slice_inst.CE)</op>
+							<op>reconnect (ffx.SR,slice_inst.SR)</op>
+							<op>reconnect (ffx.Q,slice_inst.XQ)</op>
+						</test>
+						<test cond="true">
+							<op>copy_property (ffx,FFXY,slice_inst,FFX)</op>
+							<op>copy_property (ffx,FFXY_INIT_ATTR,slice_inst,FFX_INIT_ATTR)</op>
+							<op>copy_property (ffx,FFXY_SR_ATTR,slice_inst,FFX_SR_ATTR)</op>
+						</test>
+						<test cond="true">
+							<op>clone_property (ffx,slice_inst,SYNC_ATTR,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CEINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,CLKINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRINV,#OFF)</op>
+							<op>clone_property (ffx,slice_inst,SRFFMUX,#OFF)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,BXINV::BX)</op>
+							<op>set_property (slice_inst,DXMUX::0)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="IOB">
+			<rule name="INOUT_IOB">
+				<left>
+					<cell name="INOUT_IOB">
+						<port name="I" direction="input" connected="true"/>
+						<port name="T" direction="input" connected="true"/>
+						<port name="O" direction="output" connected="true"/>
+						<port name="IO" direction="inout" connected="true"/>
+						<contents>
+							<instance name="tbuf" cellRef="TBUF" libraryRef="cell_lib"/>
+							<instance name="ibuf" cellRef="IBUF" libraryRef="cell_lib"/>
+							<instance name="iopad" cellRef="IOPAD" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="A" instanceRef="tbuf"/>
+							</net>
+							<net name="T">
+								<portRef name="T"/>
+								<portRef name="OE" instanceRef="tbuf"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="ibuf"/>
+							</net>
+							<net name="IO">
+								<portRef name="PAD" instanceRef="iopad"/>
+								<portRef name="Y" instanceRef="tbuf"/>
+								<portRef name="I" instanceRef="ibuf"/>
+								<portRef name="IO"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,iopad,PAD)</op>
+							<op>reconnect (tbuf.A,iIob{0}.OUT1)</op>
+							<op>reconnect (tbuf.OE,iIob{0}.TRI1)</op>
+							<op>reconnect (ibuf.I,iIob{0}.PAD)</op>
+							<op>reconnect (ibuf.O,iIob{0}.IN)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iIob{0},IOATTRBOX::LVTTL)</op>
+							<op>set_property (iIob{0},SLEW::SLOW)</op>
+							<op>set_property (iIob{0},DRIVEATTRBOX::12)</op>
+							<op>set_property (iIob{0},IDELMUX::1)</op>
+							<op>set_property (iIob{0},IMUX::1)</op>
+							<op>set_property (iIob{0},O1INV::O1)</op>
+							<op>set_property (iIob{0},OMUX::O1)</op>
+							<op>set_property (iIob{0},TMUX::T1)</op>
+							<op>set_property (iIob{0},T1INV::T1)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="IN_IOB">
+				<left>
+					<cell name="IN_IOB">
+						<port name="I" direction="input" connected="true"/>
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="ibuf" cellRef="IBUF" libraryRef="cell_lib"/>
+							<instance name="ipad" cellRef="IPAD" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="I" instanceRef="ibuf"/>
+								<portRef name="PAD" instanceRef="ipad"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="ibuf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,ibuf,I)</op>
+							<op>reconnect (ibuf.O,iIob{0}.IN)</op>
+							<op>reconnect (ibuf.I,iIob{0}.PAD)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iIob{0},IOATTRBOX::LVTTL)</op>
+							<op>set_property (iIob{0},IDELMUX::1)</op>
+							<op>set_property (iIob{0},IMUX::1)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="OUT_IOB">
+				<left>
+					<cell name="OUT_IOB">
+						<port name="I" direction="input" connected="true"/>
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="obuf" cellRef="OBUF" libraryRef="cell_lib"/>
+							<instance name="opad" cellRef="OPAD" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="I" instanceRef="obuf"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="obuf"/>
+								<portRef name="PAD" instanceRef="opad"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,obuf,O)</op>
+							<op>reconnect (obuf.I,iIob{0}.OUT1)</op>
+							<op>reconnect (obuf.O,iIob{0}.PAD)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iIob{0},DRIVEATTRBOX::12)</op>
+							<op>set_property (iIob{0},IOATTRBOX::LVTTL)</op>
+							<op>set_property (iIob{0},O1INV::O1)</op>
+							<op>set_property (iIob{0},OMUX::O1)</op>
+							<op>set_property (iIob{0},SLEW::SLOW)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="BUFGMUX">
+			<rule name="BUFGMUX">
+				<left>
+					<cell name="BUFGMUX">
+						<port name="I" direction="input" connected="true"/>
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="iclkbuf" cellRef="CLKBUF" libraryRef="cell_lib"/>
+							<instance name="clkbuf" cellRef="CLKBUF" libraryRef="cell_lib"/>
+							<instance name="ipad" cellRef="IPAD" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="I" instanceRef="clkbuf"/>
+								<portRef name="PAD" instanceRef="ipad"/>
+							</net>
+							<net name="O1">
+								<portRef name="O" instanceRef="clkbuf"/>
+								<portRef name="I" instanceRef="iclkbuf"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="O" instanceRef="iclkbuf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cBufgmux{0},work_lib,bufgmux,template_work_lib)</op-->
+							<op>create_slice (iBufgmux{0},bufgmux,template_work_lib)</op>
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,clkbuf,I)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (clkbuf.I,iIob{0}.PAD)</op>
+							<op>reconnect (clkbuf.O,iIob{0}.IN)</op>
+							<op>reconnect (iclkbuf.I,iBufgmux{0}.IN0)</op>
+							<op>reconnect (iclkbuf.O,iBufgmux{0}.OUT)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iIob{0},IOATTRBOX::LVTTL)</op>
+							<op>set_property (iIob{0},IDELMUX::1)</op>
+							<op>set_property (iIob{0},IMUX::1)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iBufgmux{0},SINV::S_B)</op>
+							<op>set_property (iBufgmux{0},I0_USED::0)</op>
+							<op>set_property (iBufgmux{0},I1_USED::#OFF)</op>
+							<op>set_property (iBufgmux{0},DISABLE_ATTR::LOW)</op>
+						</test>
+						<test cond="true">
+							<!--op>clone_cell (cSlice{0},work_lib,slice,template_work_lib)</op-->
+							<op>create_slice (iSlice{0},slice,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,F::#LUT:D=1)</op>
+							<op>set_property (slice_inst,F#INIT_HEX::#1)</op>
+							<op>set_property (slice_inst,FNAME::BUFGMUX_S_1)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (slice_inst,FXMUX::F)</op>
+							<op>set_property (slice_inst,XUSED::0)</op>
+							<!--op>set_property (slice_inst,F::#LUT:1)</op-->
+						</test>
+						<test cond="true">
+							<op>connect (slice_inst.X,iBufgmux{0}.SEL)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="GCLKIOB">
+			<rule name="EMPTY_IN_IOB">
+				<left>
+					<cell name="EMPTY_IN_IOB">
+						<port name="I" direction="input" connected="true"/>
+						<contents>
+							<instance name="ipad" cellRef="IPAD" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="PAD" instanceRef="ipad"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,ipad,PAD)</op>
+							<!--op>reconnect (ipad.PAD,iIob{0}.PAD)</op-->
+						</test>
+					</operations>
+				</right>
+			</rule>
+			<rule name="EMPTY_OUT_IOB">
+				<left>
+					<cell name="EMPTY_OUT_IOB">
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="opad" cellRef="OPAD" libraryRef="cell_lib"/>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="PAD" instanceRef="opad"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cIob{0},work_lib,iob,template_work_lib)</op-->
+							<op>create_iob (iIob{0},iob,template_work_lib,opad,PAD)</op>
+							<!--op>reconnect (opad.PAD,iIob{0}.PAD)</op-->
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="TBUF">
+			<rule name="TBUF_STD">
+				<left>
+					<cell name="TBUF_STD">
+						<port name="I" direction="input" connected="true"/>
+						<port name="T" direction="input" connected="true"/>
+						<port name="O" direction="output" connected="true"/>
+						<contents>
+							<instance name="tbuf" cellRef="TBUF" libraryRef="cell_lib"/>
+							<net name="I">
+								<portRef name="I"/>
+								<portRef name="A" instanceRef="tbuf"/>
+							</net>
+							<net name="T">
+								<portRef name="T"/>
+								<portRef name="OE" instanceRef="tbuf"/>
+							</net>
+							<net name="O">
+								<portRef name="O"/>
+								<portRef name="Y" instanceRef="tbuf"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<!--op>clone_cell (cTbuf{0},work_lib,tbuf,template_work_lib)</op-->
+							<op>create_slice (iTbuf{0},tbuf,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (tbuf.A,iTbuf{0}.I)</op>
+							<op>reconnect (tbuf.OE,iTbuf{0}.T)</op>
+							<op>reconnect (tbuf.Y,iTbuf{0}.O)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iTbuf{0},TINV::T)</op>
+							<op>set_property (iTbuf{0},IINV::I)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+		<layer name="DLL">
+			<rule name="DCM_STD">
+				<left>
+					<cell name="DCM_STD">
+						<port name="CK" direction="input" connected="true"/>
+						<port name="CLKFB" direction="input" connected="true"/>
+						<port name="CTLMODE" direction="input" connected="true"/>
+						<port name="CTLSEL2" direction="input" connected="true"/>
+						<port name="CTLSEL1" direction="input" connected="true"/>
+						<port name="CTLSEL0" direction="input" connected="true"/>
+						<port name="CTLGO" direction="input" connected="true"/>
+						<port name="CTLOSC1" direction="input" connected="true"/>
+						<port name="CTLOSC2" direction="input" connected="true"/>
+						<port name="RST" direction="input" connected="true"/>
+						<port name="PSINCDEC" direction="input" connected="true"/>
+						<port name="PSEN" direction="input" connected="true"/>
+						<port name="PSCLK" direction="input" connected="true"/>
+						<port name="STSADRS3" direction="input" connected="true"/>
+						<port name="STSADRS2" direction="input" connected="true"/>
+						<port name="STSADRS1" direction="input" connected="true"/>
+						<port name="STSADRS0" direction="input" connected="true"/>
+						<port name="FREEZEDFS" direction="input" connected="true"/>
+						<port name="FREEZEDLL" direction="input" connected="true"/>
+						<port name="DSSEN" direction="input" connected="true"/>
+						<contents>
+							<instance name="dcm" cellRef="DCM" libraryRef="cell_lib"/>
+							<net name="CK">
+								<portRef name="CK"/>
+								<portRef name="CK" instanceRef="dcm"/>
+							</net>
+							<net name="RST">
+								<portRef name="RST" instanceRef="dcm"/>
+								<portRef name="RST"/>
+							</net>
+							<net name="CLKFB">
+								<portRef name="CLKFB" instanceRef="dcm"/>
+								<portRef name="CLKFB"/>
+							</net>
+							<net name="CTLMODE">
+								<portRef name="CTLMODE" instanceRef="dcm"/>
+								<portRef name="CTLMODE"/>
+							</net>
+							<net name="CTLSEL2">
+								<portRef name="CTLSEL2" instanceRef="dcm"/>
+								<portRef name="CTLSEL2"/>
+							</net>
+							<net name="CTLSEL1">
+								<portRef name="CTLSEL1" instanceRef="dcm"/>
+								<portRef name="CTLSEL1"/>
+							</net>
+							<net name="CTLSEL0">
+								<portRef name="CTLSEL0" instanceRef="dcm"/>
+								<portRef name="CTLSEL0"/>
+							</net>
+							<net name="CTLGO">
+								<portRef name="CTLGO" instanceRef="dcm"/>
+								<portRef name="CTLGO"/>
+							</net>
+							<net name="CTLOSC1">
+								<portRef name="CTLOSC1" instanceRef="dcm"/>
+								<portRef name="CTLOSC1"/>
+							</net>
+							<net name="CTLOSC2">
+								<portRef name="CTLOSC2" instanceRef="dcm"/>
+								<portRef name="CTLOSC2"/>
+							</net>
+							<net name="PSINCDEC">
+								<portRef name="PSINCDEC" instanceRef="dcm"/>
+								<portRef name="PSINCDEC"/>
+							</net>
+							<net name="PSEN">
+								<portRef name="PSEN" instanceRef="dcm"/>
+								<portRef name="PSEN"/>
+							</net>
+							<net name="PSCLK">
+								<portRef name="PSCLK" instanceRef="dcm"/>
+								<portRef name="PSCLK"/>
+							</net>
+							<net name="STSADRS3">
+								<portRef name="STSADRS3" instanceRef="dcm"/>
+								<portRef name="STSADRS3"/>
+							</net>
+							<net name="STSADRS2">
+								<portRef name="STSADRS2" instanceRef="dcm"/>
+								<portRef name="STSADRS2"/>
+							</net>
+							<net name="STSADRS1">
+								<portRef name="STSADRS1" instanceRef="dcm"/>
+								<portRef name="STSADRS1"/>
+							</net>
+							<net name="STSADRS0">
+								<portRef name="STSADRS0" instanceRef="dcm"/>
+								<portRef name="STSADRS0"/>
+							</net>
+							<net name="FREEZEDFS">
+								<portRef name="FREEZEDFS" instanceRef="dcm"/>
+								<portRef name="FREEZEDFS"/>
+							</net>
+							<net name="FREEZEDLL">
+								<portRef name="FREEZEDLL" instanceRef="dcm"/>
+								<portRef name="FREEZEDLL"/>
+							</net>
+							<net name="DSSEN">
+								<portRef name="DSSEN" instanceRef="dcm"/>
+								<portRef name="DSSEN"/>
+							</net>
+						</contents>
+					</cell>
+				</left>
+				<right>
+					<operations target="TopCell">
+						<test cond="true">
+							<op>create_slice ((iDcm{0},dcm,template_work_lib)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dcm.CK,iDcm{0}.CKIN)</op>
+							<op>reconnect (dcm.CLKFB,iDcm{0}.CKFB)</op>
+							<op>reconnect (dcm.RST,iDcm{0}.RST)</op>
+							<op>reconnect (dcm.CTLMODE,iDcm{0}.CTRLMODE)</op>
+							<op>reconnect (dcm.CTLSEL2,iDcm{0}.CTRLSEL2)</op>
+							<op>reconnect (dcm.CTLSEL1,iDcm{0}.CTRLSEL1)</op>
+							<op>reconnect (dcm.CTLSEL0,iDcm{0}.CTRLSEL0)</op>
+							<op>reconnect (dcm.CTLGO,iDcm{0}.CTRLGO)</op>
+							<op>reconnect (dcm.CTLOSC1,iDcm{0}.CTRLOSC1)</op>
+							<op>reconnect (dcm.CTLOSC2,iDcm{0}.CTRLOSC2)</op>
+							<op>reconnect (dcm.PSINCDEC,iDcm{0}.PSINCDEC)</op>
+							<op>reconnect (dcm.PSEN,iDcm{0}.PSEN)</op>
+							<op>reconnect (dcm.PSCLK,iDcm{0}.PSCK)</op>
+							<op>reconnect (dcm.STSADRS3,iDcm{0}.STSADRS3)</op>
+							<op>reconnect (dcm.STSADRS2,iDcm{0}.STSADRS2)</op>
+							<op>reconnect (dcm.STSADRS1,iDcm{0}.STSADRS1)</op>
+							<op>reconnect (dcm.STSADRS0,iDcm{0}.STSADRS0)</op>
+							<op>reconnect (dcm.FREEZEDFS,iDcm{0}.FRZDFS)</op>
+							<op>reconnect (dcm.FREEZEDLL,iDcm{0}.FRZDLL)</op>
+							<op>reconnect (dcm.DSSEN,iDcm{0}.DSSEN)</op>
+						</test>
+						<test cond="true">
+							<op>set_property (iDcm{0},RSTINV::RST)</op>
+							<op>copy_property (dcm,CLKDV_DIVIDE,iDcm{0},CLKDV_DIVIDE)</op>
+							<op>copy_property (dcm,FACTORY_JF1,iDcm{0},FACTORY_JF1)</op>
+							<op>copy_property (dcm,FACTORY_JF2,iDcm{0},FACTORY_JF2)</op>
+							<op>copy_property (dcm,STARTUP_WAIT,iDcm{0},STARTUP_WAIT)</op>
+						</test>
+						<test cond="true">
+							<op>reconnect (dcm.CLK0,iDcm{0}.CK0)</op>
+							<op>reconnect (dcm.CLK90,iDcm{0}.CK90)</op>
+							<op>reconnect (dcm.CLK180,iDcm{0}.CK180)</op>
+							<op>reconnect (dcm.CLK270,iDcm{0}.CK270)</op>
+							<op>reconnect (dcm.CLK2X180,iDcm{0}.CK2X180)</op>
+							<op>reconnect (dcm.CLK2X,iDcm{0}.CK2X)</op>
+							<op>reconnect (dcm.LOCKED,iDcm{0}.LOCKED)</op>
+							<op>reconnect (dcm.CLKDV,iDcm{0}.CKDV)</op>
+							<op>reconnect (dcm.CONCUR,iDcm{0}.CONCUR)</op>
+							<op>reconnect (dcm.PSDONE,iDcm{0}.PSDONE)</op>
+							<op>reconnect (dcm.STATUS0,iDcm{0}.STS0)</op>
+							<op>reconnect (dcm.STATUS1,iDcm{0}.STS1)</op>
+							<op>reconnect (dcm.STATUS2,iDcm{0}.STS2)</op>
+							<op>reconnect (dcm.STATUS3,iDcm{0}.STS3)</op>
+							<op>reconnect (dcm.STATUS4,iDcm{0}.STS4)</op>
+							<op>reconnect (dcm.STATUS5,iDcm{0}.STS5)</op>
+							<op>reconnect (dcm.STATUS6,iDcm{0}.STS6)</op>
+							<op>reconnect (dcm.STATUS7,iDcm{0}.STS7)</op>
+							<op>reconnect (dcm.CLKFX180,iDcm{0}.CKFX180)</op>
+							<op>reconnect (dcm.CLKFX,iDcm{0}.CKFX)</op>
+						</test>
+					</operations>
+				</right>
+			</rule>
+		</layer>
+	</library>
+</libraries>

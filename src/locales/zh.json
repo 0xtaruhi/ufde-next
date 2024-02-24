@@ -32,7 +32,8 @@
     "file_type": "文件类型",
     "source_files": "源文件",
     "no_files": "没有文件",
-    "import_files": "导入文件"
+    "import_files": "导入文件",
+    "double_click_to_open": "双击打开文件"
   },
   "create_project": {
     "basic_info": "基本信息",
@@ -119,5 +120,8 @@
         "description": "生成目标设备的位流文件"
       }
     }
+  },
+  "other": {
+    "vscode_not_found": "未找到 Visual Studio Code，请安装后并将其添加到环境变量后重试。"
   }
 }

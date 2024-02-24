@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library name="FDP1000K">
+<block name="iob">
+	<primitive name="DRIVEATTRBOX" libname="DRIVEATTRBOX" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive>
+	<primitive name="FFATTRBOX" libname="TFF|IFF|OFF" pos="1">
+		<config bit="OFF" op="attr:trigger"/>
+		<config bit="SYNC" op="attr:trigger"/>
+		<config bit="ASYNC" op="attr:trigger"/>
+	</primitive>
+	<primitive name="ICEMUX" libname="ICEMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="ICE" op="mux"/>
+		<config bit="ICE_B" op="mux"/>
+	</primitive>
+	<primitive name="ICKINV" libname="ICKINV" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive>
+	<primitive name="IFF" libname="IFF" pos="1|2">
+		<config bit="OFF" op="remove"/>
+		<config bit="FF" op="attr:type"/>
+		<config bit="LATCH" op="attr:type"/>
+	</primitive>
+	<primitive name="IFFINITATTR" libname="IFF" pos="1">
+		<config bit="OFF" op="none"/>
+		<config bit="HIGH" op="attr:init"/>
+		<config bit="LOW" op="attr:init"/>
+	</primitive>
+	<primitive name="IFFMUX" libname="IFFMUX" pos="0">
+		<config bit="any" op="none"/>
+		<!-- only name, no config bit -->
+	</primitive>
+	<primitive name="IINITMUX" libname="IINITMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="none"/>
+	</primitive>
+	<primitive name="IMUX" libname="IMUX_IOB" pos="1">  <!-- special here -->
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="none"/>
+		<config bit="1" op="none"/>
+	</primitive>
+	<primitive name="IOATTRBOX" libname="IOATTRBOX" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive>
+	<primitive name="OCEMUX" libname="OCEMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="OCE" op="mux"/>
+		<config bit="OCE_B" op="mux"/>
+	</primitive>
+	<primitive name="OCKINV" libname="OCKINV" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive>
+	<primitive name="OFF" libname="OFF" pos="1|2">
+		<config bit="OFF" op="remove"/>
+		<config bit="FF" op="attr:type"/>
+		<config bit="LATCH" op="attr:type"/>
+	</primitive>
+	<primitive name="OFFATTRBOX" libname="OFF" pos="1">
+		<config bit="OFF" op="none"/>
+		<config bit="HIGH" op="attr:init"/>
+		<config bit="LOW" op="attr:init"/>
+	</primitive>
+	<primitive name="OINITMUX" libname="OINITMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="none"/>
+	</primitive>
+	<primitive name="OMUX" libname="OMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="O" op="mux"/>
+		<config bit="O_B" op="mux"/>
+	</primitive>
+	<primitive name="OUTMUX" libname="OUTMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive>
+	<primitive name="PULL" libname="PULL" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive>
+	<primitive name="SLEW" libname="SLEW" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive>
+	<primitive name="SRMUX" libname="SRMUX_IOB" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="SR" op="mux"/>
+		<config bit="SR_B" op="mux"/>
+	</primitive>
+	<primitive name="TCEMUX" libname="TCEMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="TCE" op="mux"/>
+		<config bit="TCE_B" op="mux"/>
+	</primitive>
+	<primitive name="TCKINV" libname="TCKINV" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive>
+	<primitive name="TFF" libname="TFF" pos="1|2">
+		<config bit="OFF" op="remove"/>
+		<config bit="FF" op="attr:type"/>
+		<config bit="LATCH" op="attr:type"/>
+	</primitive>
+	<primitive name="TFFATTRBOX" libname="TFF" pos="1">
+		<config bit="OFF" op="none"/>
+		<config bit="HIGH" op="attr:init"/>
+		<config bit="LOW" op="attr:init"/>
+	</primitive>
+	<primitive name="TINITMUX" libname="TINITMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="none"/>
+	</primitive>
+	<primitive name="TRIMUX" libname="TRIMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="T" op="mux"/>
+		<config bit="T_TB" op="mux"/>
+	</primitive>
+	<primitive name="TSEL" libname="TSEL" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive>
+	<primitive name="OUTBUF" libname="OUTBUF" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="INBUF" libname="INBUF" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="PAD" libname="PAD" pos="0">
+		<config bit="any" op="none"/>
+		<!-- PAD is port, not an instance/cell -->
+	</primitive>
+	<primitive name="DELAY" libname="DELAY" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="O_GND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="O_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="O_VCC" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+</block>
+
+<block name="slice"> 
+	<primitive name="BXMUX" libname="BXMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="BX" op="mux"/>
+		<config bit="BX_B" op="mux"/>	
+	</primitive>
+	<primitive name="BYMUX" libname="BYMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="BY" op="mux"/> 
+		<config bit="BY_B" op="mux"/>
+	</primitive> 
+	<primitive name="CEMUX" libname="CEMUX_SLICE" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="CE" op="mux"/> 
+		<config bit="CE_B" op="mux"/>
+	</primitive>
+	<primitive name="CKINV" libname="CKINV" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="COUTUSED" libname="COUTUSED" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive> 
+	<primitive name="CY0F" libname="CY0F" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="F1" op="mux"/> 
+		<config bit="PROD" op="mux"/>
+	</primitive> 
+	<primitive name="CY0G" libname="CY0G" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="G1" op="mux"/> 
+		<config bit="PROD" op="mux"/>
+	</primitive>
+	<primitive name="CYINIT" libname="CYINIT" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="CIN" op="mux"/> 
+		<config bit="BX" op="mux"/>
+	</primitive> 
+	<primitive name="CYSELF" libname="CYSELF" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="F" op="mux"/> 
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="CYSELG" libname="CYSELG" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="G" op="mux"/> 
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="DXMUX" libname="DXMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="DYMUX" libname="DYMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="F" libname="F" pos="1|2"> 
+		<config bit="OFF" op="remove"/> 
+		<config bit="LUT" op="attr:type"/>  <!-- actually needs to be handled -->
+		<config bit="RAM" op="attr:type"/>  <!-- actually needs to be handled -->
+		<config bit="ROM" op="attr:type"/>
+	</primitive> 
+	<primitive name="F5USED" libname="F5USED" pos="1"> 
+		<config bit="OFF" op="remove"/>
+  	<config bit="0" op="none"/>
+ 	</primitive>
+	<primitive name="FFX" libname="FFX" pos="1|2">
+  	<config bit="OFF" op="remove"/>
+  	<config bit="FF" op="attr:type"/> 
+  	<config bit="LATCH" op="attr:type"/>
+	</primitive>
+	<primitive name="FFY" libname="FFY" pos="1|2">
+		<config bit="OFF" op="remove"/>
+		<config bit="FF" op="attr:type"/> 
+		<config bit="LATCH" op="attr:type"/>
+	</primitive>
+	<primitive name="FXMUX" libname="FXMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="F" op="mux"/> 
+		<config bit="FXOR" op="mux"/> 
+		<config bit="F5" op="mux"/>
+	</primitive> 
+	<primitive name="G" libname="G" pos="1|2">
+		<config bit="OFF" op="remove"/> 
+		<config bit="LUT" op="attr:type"/>  <!-- actually needs to be handled -->
+		<config bit="RAM" op="attr:type"/>  <!-- actually needs to be handled -->
+		<config bit="ROM" op="attr:type"/>
+	</primitive> 
+	<primitive name="GYMUX" libname="GYMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="G" op="mux"/> 
+		<config bit="GXOR" op="mux"/> 
+		<config bit="F6" op="mux"/>
+	</primitive> 
+	<primitive name="INITX" libname="FFX" pos="1">
+		<config bit="OFF" op="none"/> 
+		<config bit="HIGH" op="attr:init"/> 
+		<config bit="LOW" op="attr:init"/>
+	</primitive> 
+	<primitive name="INITY" libname="FFY" pos="1">
+		<config bit="OFF" op="none"/> 
+		<config bit="HIGH" op="attr:init"/> 
+		<config bit="LOW" op="attr:init"/>
+	</primitive>
+	<primitive name="RAMCONFIG" libname="RAMCONFIG" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive> 
+	<primitive name="REVUSED" libname="REVUSED" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="none"/> 
+	</primitive> 
+	<primitive name="SRFFMUX" libname="SRFFMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="none"/>
+	</primitive> 
+	<primitive name="SRMUX" libname="SRMUX_SLICE" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="SR" op="mux"/> 
+		<config bit="SR_B" op="mux"/>
+	</primitive> 
+	<primitive name="SYNC_ATTR" libname="FFX|FFY" pos="1">
+		<config bit="OFF" op="attr:trigger"/> 
+		<config bit="SYNC" op="attr:trigger"/> 
+		<config bit="ASYNC" op="attr:trigger"/>
+	</primitive>
+	<primitive name="XBUSED" libname="XBUSED" pos="1">
+		<config bit="OFF" op="remove"/>
+  	<config bit="0" op="none"/>
+ 	</primitive> 
+	<primitive name="XUSED" libname="XUSED" pos="1">
+		<config bit="OFF" op="remove"/>
+  	<config bit="0" op="none"/>
+ 	</primitive> 
+	<primitive name="YBMUX" libname="YBMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="YUSED" libname="YUSED" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="none"/>
+	</primitive> 
+	<primitive name="DGEN" libname="DGEN" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="WSGEN" libname="WSGEN" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive> 
+	<primitive name="_VCC_SOURCE" libname="VCC" pos="1">
+		<config bit="X" op="vcc"/>
+		<config bit="Y" op="vcc"/>
+	</primitive>
+	<primitive name="_GND_SOURCE" libname="GND" pos="1">
+		<config bit="X" op="gnd"/>
+		<config bit="Y" op="gnd"/>
+	</primitive>
+	<primitive name="F5MUX" libname="F5MUX" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="F6MUX" libname="F6MUX" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive> 
+	<primitive name="CYMUXF" libname="CYMUXF" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive> 
+	<primitive name="CYMUXG" libname="CYMUXG" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="XORF" libname="XORF" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive> 
+	<primitive name="XORG" libname="XORG" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="FAND" libname="FAND" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="GAND" libname="GAND" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive> 
+	<!-- components which do not exist -->
+	<primitive name="GNDG" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="VCCG" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="GNDF" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="VCCG" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="C1VDD" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="C2VDD" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="CY0" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="CY1" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="BY0" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="BY1" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+ 	<primitive name="SR0" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="SR1" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="_NO_USER_LOGIC" libname="cell" pos="0">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="_ROUTETHROUGH-COUT-YB" libname="cell" pos="1">
+		<config bit="SHARED" op="none"/>
+	</primitive>
+	<primitive name="_ROUTETHROUGH-F5-X" libname="cell" pos="1">
+		<config bit="SHARED" op="none"/>
+	</primitive>
+</block>
+
+<block name="gclk">
+	<primitive name="CEMUX" libname="CEMUX_GCLK" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="CE" op="mux"/>
+		<config bit="CE_B" op="mux"/>
+	</primitive> 
+	<primitive name="DISABLE_ATTR" libname="DISABLE_ATTR" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive> 
+	<primitive name="CE_POWER" libname="CE_POWER" pos="0"> 
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive>
+	<primitive name="GCLK_BUFFER" libname="GCLK_BUFFER" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+</block>
+
+<block name="gclkiob">
+	<primitive name="IOATTRBOX" libname="IOATTRBOX" pos="0">
+		<config bit="any" op="none"/>
+		<!-- no related cell -->
+	</primitive> 
+	<primitive name="GCLK_BUF" libname="GCLK_BUF" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+	<primitive name="PAD" libname="PAD" pos="1">
+		<config bit="any" op="attr:name"/>
+	</primitive>
+ </block>
+
+<block name="blockram">
+	<primitive name="CLKAMUX" libname="CLKAMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="CLKBMUX" libname="CLKBMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+	</primitive> 
+	<primitive name="ENAMUX" libname="ENAMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/>
+		<config bit="1" op="mux"/>
+		<config bit="ENA" op="mux"/>
+		<config bit="ENA_B" op="mux"/>
+	</primitive> 
+	<primitive name="ENBMUX" libname="ENBMUX" pos="1">
+		<config bit="OFF" op="remove"/>
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="ENB" op="mux"/> 
+		<config bit="ENB_B" op="mux"/>
+	</primitive> 
+	<primitive name="PORTA_ATTR" libname="BLOCKRAMA" pos="1">
+		<config bit="any" op="attr:porta"/>
+	</primitive> 
+	<primitive name="PORTB_ATTR" libname="BLOCKRAMB" pos="1">
+		<config bit="any" op="attr:portb"/>
+	</primitive> 
+	<primitive name="RSTAMUX" libname="RSTAMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="RSTA" op="mux"/> 
+		<config bit="RSTA_B" op="mux"/>
+	</primitive> 
+	<primitive name="RSTBMUX" libname="RSTBMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="RSTB" op="mux"/> 
+		<config bit="RSTB_B" op="mux"/>
+	</primitive> 
+	<primitive name="WEAMUX" libname="WEAMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="WEA" op="mux"/> 
+		<config bit="WEA_B" op="mux"/>
+	</primitive> 
+	<primitive name="WEBMUX" libname="WEBMUX" pos="1">
+		<config bit="OFF" op="remove"/> 
+		<config bit="0" op="mux"/> 
+		<config bit="1" op="mux"/> 
+		<config bit="WEB" op="mux"/> 
+		<config bit="WEB_B" op="mux"/>
+	</primitive>
+	<primitive name="BLOCKRAM" libname="cell" pos="1">  <!-- cell can be the cell itself -->
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="BLOCKRAMA" libname="BLOCKRAMA" pos="1">
+		<config bit="any" op="attr:blockrama"/>
+	</primitive> 
+	<primitive name="BLOCKRAMB" libname="BLOCKRAMB" pos="1">
+		<config bit="any" op="attr:blockramb"/>
+	</primitive>
+	<primitive name="WEA_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="WEB_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="ENA_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="ENB_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="RSTA_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="RSTB_POWER" libname="VCC" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="WEA_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="WEB_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="ENA_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="ENB_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="RSTA_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="RSTB_GROUND" libname="GND" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="INIT_00" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+	<primitive name="INIT_01" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_02" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_03" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_04" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_05" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_06" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_07" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_08" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_09" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0A" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0B" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0C" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0D" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0E" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive> 
+	<primitive name="INIT_0F" libname="cell" pos="1">
+		<config bit="any" op="none"/>
+	</primitive>
+</block>
+
+<block name="tbuf">
+	<primitive name="TMUX" libname="TMUX" pos="1">
+  	<config bit="OFF" op="remove"/>
+  	<config bit="0" op="mux"/>
+  	<config bit="1" op="mux"/> 
+  	<config bit="T" op="mux"/> 
+  	<config bit="T_B" op="mux"/>
+ 	</primitive>  
+ 	<primitive name="IMUX" libname="IMUX_TBUF" pos="1">
+  	<config bit="OFF" op="remove"/>
+  	<config bit="0" op="mux"/>
+  	<config bit="1" op="mux"/> 
+  	<config bit="I" op="mux"/> 
+  	<config bit="I_B" op="mux"/>
+ 	</primitive>
+ 	<primitive name="TRISTATE" libname="TRISTATE" pos="1">
+ 		<config bit="any" op="attr:name"/>
+ 	</primitive>
+</block>
+
+<block name="dll">
+	<primitive name="DIVIDE_ATTR" libname="DIVIDE_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive>
+ 	<primitive name="DUTY_ATTR" libname="DUTY_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="HIGH_FREQ_ATTR" libname="HIGH_FREQ_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="JF_ZD1_ATTR" libname="JF_ZD1_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="JF_ZD2_ATTR" libname="JF_ZD2_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+	<primitive name="RSTMUX" libname="RSTMUX" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="STARTUP_ATTR" libname="STARTUP_ATTR" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive>  
+ 	<primitive name="DLL" libname="DLL_PRIM" pos="1">
+ 		<config bit="any" op="attr:name"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+</block>
+
+<block name="bscan">
+	<primitive name="TDO1MUX" libname="TDO1MUX" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive>
+ 	<primitive name="TDO2MUX" libname="TDO2MUX" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="BSCAN_VIRTEX" libname="BSCAN_VIRTEX" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive> 
+ 	<primitive name="TDO2_GND" libname="TDO2_GND" pos="0">
+ 		<config bit="any" op="none"/>
+ 		<!-- no related cell -->
+ 	</primitive>
+</block>
+
+</library>
