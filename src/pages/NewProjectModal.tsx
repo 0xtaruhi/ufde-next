@@ -25,6 +25,7 @@ import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { createDir, writeTextFile } from "@tauri-apps/api/fs";
 import { platform } from "@tauri-apps/api/os";
+import { getDirOfFile } from "../utils/utils";
 
 const newProject: ProjectInfo = {
   name: "",
@@ -310,7 +311,7 @@ function NewProjectModal(props: ModalProps) {
     });
   };
 
-  const handleCompleteButtonClicked = () => {
+  const handleCompleteButtonClicked = async () => {
     var filepath = newProject.path + "/";
 
     if (extraConfig.createSubDir === true) {
@@ -324,6 +325,7 @@ function NewProjectModal(props: ModalProps) {
     }
 
     filepath += newProject.name + ".json";
+    newProject.path = await getDirOfFile(filepath);
 
     const { path, ...rest } = newProject;
     writeTextFile(filepath, JSON.stringify(rest))

@@ -23,7 +23,7 @@ import { ProjectContext } from "../App";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import { showSuccessNotification } from "./Notifies";
+import { showFailedNotification, showSuccessNotification } from "./Notifies";
 
 const flowData = [
   { value: "DC", label: "DC" },
@@ -126,7 +126,7 @@ function DCImportFlow(props: FlowProps) {
       showSuccessNotification({ title: "Import", message: "Import completed successfully" });
     }, (err) => {
       console.error(err);
-      showSuccessNotification({ title: "Import", message: "Import failed" });
+      showFailedNotification({ title: "Import", message: "Import failed" });
     });
   };
 
