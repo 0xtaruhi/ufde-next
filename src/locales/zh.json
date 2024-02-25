@@ -119,6 +119,26 @@
         "title": "生成位流",
         "description": "生成目标设备的位流文件"
       }
+    },
+    "notify": {
+      "running": {
+        "title": "正在运行",
+        "message_prefix": "正在运行",
+        "message_suffix": "，请稍等"
+      },
+      "success": {
+        "title": "运行成功",
+        "message_prefix": "",
+        "message_suffix": "运行成功"
+      },
+      "failed": {
+        "title": "运行失败",
+        "message_prefix": "",
+        "message_suffix": "运行失败",
+        "reason": {
+          "constraint_file_not_found": "约束文件未找到"
+        }
+      }
     }
   },
   "other": {

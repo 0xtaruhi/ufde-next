@@ -23,7 +23,13 @@ import { ProjectContext } from "../App";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import { showFailedNotification, showSuccessNotification } from "./Notifies";
+import {
+  showFailedNotification,
+  showSuccessNotification,
+  update2FailedNotification,
+  update2SuccessNotification,
+} from "./Notifies";
+import { notifications } from "@mantine/notifications";
 
 const flowData = [
   { value: "DC", label: "DC" },
@@ -44,17 +50,10 @@ function Flow(props: AbstractFlowProps) {
 
   return (
     <>
-      <Drawer
-        opened={opened}
-        onClose={close}
-        padding="md"
-        size={350}
-        position="right"
-      >
+      <Drawer opened={opened} onClose={close} padding="md" size={350} position="right">
         <Stack gap="md">
           <Text size="md" className="flowSettingsTitle">
-            <b>{t("flow.settings")}</b> -{" "}
-            {t("flow." + props.flowName + ".title")}
+            <b>{t("flow.settings")}</b> - {t("flow." + props.flowName + ".title")}
           </Text>
           {props.settingsPage}
         </Stack>
@@ -64,12 +63,7 @@ function Flow(props: AbstractFlowProps) {
           {t("flow." + props.flowName + ".description")}
         </Text>
         <Group>
-          <ActionIcon
-            size="md"
-            variant="subtle"
-            onClick={open}
-            style={{ padding: "5px" }}
-          >
+          <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
             <TbSettings size={20} />
           </ActionIcon>
           <ActionIcon
@@ -97,13 +91,7 @@ function EmptySettingsHint() {
   return <Text c="dimmed">{t("flow.no-settings-available")}</Text>;
 }
 
-function SettingsItem({
-  label,
-  component,
-}: {
-  label: string;
-  component: React.ReactNode;
-}) {
+function SettingsItem({ label, component }: { label: string; component: React.ReactNode }) {
   return (
     <Group justify="space-between">
       <Text size="md">{label}</Text>
@@ -126,47 +114,56 @@ function DCImportFlow(props: FlowProps) {
 
   const run = async () => {
     const files = projectContext.project?.file_lists
-      ?.filter(
-        (file) => file.type === "verilog" || file.type === "systemverilog"
-      )
+      ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
       .map((file) => file.path);
 
-    const celllibfilePath = await resolveResource(
-      "resource/hw_lib/dc_cell.xml"
-    );
+    const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
     console.log(celllibfilePath);
     const outputFileName = projectContext.project?.name + "_dc_" + "imp.xml";
 
     const command = Command.sidecar(
       "binaries/fde-cli/import",
-      [
-        "-x",
-        outputFileName,
-        "-l",
-        celllibfilePath,
-        "-e",
-        files?.join(" ") ?? "",
-      ],
+      ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
       { cwd: projectContext.project?.path }
     );
 
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.import.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: t("Import"),
-          message: t("Import completed successfully"),
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.notify.success.title"),
+          message:
+            t("flow.notify.success.message_prefix") +
+            t("flow.dc.import.title") +
+            t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
-        console.error(err);
-        showFailedNotification({
-          title: t("Import"),
-          message: t("Import failed"),
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.import.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.import.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
         });
       }
     );
@@ -191,14 +188,10 @@ function DCMapFlow(props: FlowProps) {
 
   const run = async () => {
     const files = projectContext.project?.file_lists
-      ?.filter(
-        (file) => file.type === "verilog" || file.type === "systemverilog"
-      )
+      ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
       .map((file) => file.path);
 
-    const celllibfilePath = await resolveResource(
-      "resource/hw_lib/dc_cell.xml"
-    );
+    const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
     const mapArgs = "";
     const mapFileMode = "";
 
@@ -225,18 +218,39 @@ function DCMapFlow(props: FlowProps) {
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.map.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: t("Map"),
-          message: t("Map completed successfully"),
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.dc.map.title"),
+          message:
+            t("flow.notify.success.message_prefix") + t("flow.dc.map.title") + t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
-        console.error(err);
-        showFailedNotification({ title: t("Map"), message: t("Map failed") });
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.map.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.map.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
+        });
       }
     );
   };
@@ -260,15 +274,9 @@ function DCPackFlow(props: FlowProps) {
 
   const run = async () => {
     const family = "fdp3";
-    const dccelllibfilePath = await resolveResource(
-      "resource/hw_lib/fdp3_cell.xml"
-    );
-    const dcplibfilePath = await resolveResource(
-      "resource/hw_lib/fdp3_dcplib.xml"
-    );
-    const xdlcfgfilePath = await resolveResource(
-      "resource/hw_lib/fdp3_config.xml"
-    );
+    const dccelllibfilePath = await resolveResource("resource/hw_lib/fdp3_cell.xml");
+    const dcplibfilePath = await resolveResource("resource/hw_lib/fdp3_dcplib.xml");
+    const xdlcfgfilePath = await resolveResource("resource/hw_lib/fdp3_config.xml");
     const packFileMode = "";
 
     const inputFileName = projectContext.project?.name + "_dc_" + "map.xml";
@@ -316,18 +324,39 @@ function DCPackFlow(props: FlowProps) {
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.pack.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: t("Pack"),
-          message: t("Pack completed successfully"),
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.dc.pack.title"),
+          message:
+            t("flow.notify.success.message_prefix") + t("flow.dc.pack.title") + t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
-        console.error(err);
-        showFailedNotification({ title: t("Pack"), message: t("Pack failed") });
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.pack.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.pack.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
+        });
       }
     );
   };
@@ -350,12 +379,7 @@ function DCPlaceFlow(props: FlowProps) {
     <>
       <SettingsItem
         label={t("flow.mode")}
-        component={
-          <SegmentedControl
-            data={["Timing Driven", "Bounding Box"]}
-            onChange={() => {}}
-          />
-        }
+        component={<SegmentedControl data={["Timing Driven", "Bounding Box"]} onChange={() => {}} />}
       />
     </>
   );
@@ -364,20 +388,22 @@ function DCPlaceFlow(props: FlowProps) {
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const archfilePath = await resolveResource(
-      "resource/hw_lib/fdp3p7_arch.xml"
-    );
-    const plcdelayfilePath = await resolveResource(
-      "resource/hw_lib/fdp3p7_dly.xml.xml"
-    );
+    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+    const plcdelayfilePath = await resolveResource("resource/hw_lib/fdp3p7_dly.xml");
     const placecst = "-c";
-    const placecstFilePath = projectContext.project?.file_lists.filter(
-      (file) => file.type === "constraint"
-    )[0].path;
+    const placecstFilePath = projectContext.project?.file_lists.filter((file) => file.type === "constraint")[0].path;
     const placeMode = "-b";
 
     const inputFileName = projectContext.project?.name + "_dc_" + "pack.xml";
     const outputFileName = projectContext.project?.name + "_dc_" + "place.xml";
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.place.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     const command = Command.sidecar(
       "binaries/fde-cli/place",
@@ -401,11 +427,14 @@ function DCPlaceFlow(props: FlowProps) {
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
 
     if (placecstFilePath === undefined) {
       showFailedNotification({
-        title: t("Place"),
-        message: t("Constraint file not found."),
+        title: t("flow.notyfy.failed.title"),
+        message: t("flow.notify.faild.reason.constraint_file_not_found"),
       });
       return;
     }
@@ -413,16 +442,25 @@ function DCPlaceFlow(props: FlowProps) {
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: t("Place"),
-          message: t("Place completed successfully"),
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.dc.place.title"),
+          message:
+            t("flow.notify.success.message_prefix") +
+            t("flow.dc.place.title") +
+            t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
-        console.error(err);
-        showFailedNotification({
-          title: t("Place"),
-          message: t("Place failed"),
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.place.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.place.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
         });
       }
     );
@@ -493,9 +531,7 @@ function DCRouteFlow(props: FlowProps) {
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const archfilePath = await resolveResource(
-      "resource/hw_lib/fdp3p7_arch.xml"
-    );
+    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
     const routeMode = "-d";
     const routecst = "-c";
     const routecstFilePath = "";
@@ -505,36 +541,50 @@ function DCRouteFlow(props: FlowProps) {
 
     const command = Command.sidecar(
       "binaries/fde-cli/route",
-      [
-        "-a",
-        archfilePath,
-        "-n",
-        inputFileName,
-        "-o",
-        outputFileName,
-        routeMode,
-        routecst,
-        routecstFilePath,
-        "-e",
-      ],
+      ["-a", archfilePath, "-n", inputFileName, "-o", outputFileName, routeMode, routecst, routecstFilePath, "-e"],
       { cwd: projectContext.project?.path }
     );
 
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.route.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: "Route",
-          message: "Route completed successfully",
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.dc.route.title"),
+          message:
+            t("flow.notify.success.message_prefix") +
+            t("flow.dc.route.title") +
+            t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
         console.error(err);
-        showFailedNotification({ title: "Route", message: "Route failed" });
+        // showFailedNotification({ title: "Route", message: "Route failed" });
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.route.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.route.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
+        });
       }
     );
   };
@@ -553,11 +603,10 @@ function DCRouteFlow(props: FlowProps) {
 function DCGenBitFlow(props: FlowProps) {
   const projectContext = useContext(ProjectContext);
   const [statusText, setStatusText] = useState<string>("");
+  const { t } = useTranslation();
 
   const run = async () => {
-    const archfilePath = await resolveResource(
-      "resource/hw_lib/fdp3p7_arch.xml"
-    );
+    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
     const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
 
     const inputFileName = projectContext.project?.name + "_dc_" + "route.xml";
@@ -565,35 +614,48 @@ function DCGenBitFlow(props: FlowProps) {
 
     const command = Command.sidecar(
       "binaries/fde-cli/bitgen",
-      [
-        "-a",
-        archfilePath,
-        "-c",
-        cilfilePath,
-        "-n",
-        inputFileName,
-        "-b",
-        outputFileName,
-        "-e",
-      ],
+      ["-a", archfilePath, "-c", cilfilePath, "-n", inputFileName, "-b", outputFileName, "-e"],
       { cwd: projectContext.project?.path }
     );
 
     command.stdout.on("data", (data) => {
       setStatusText(data);
     });
+    command.stderr.on("data", (data) => {
+      setStatusText(data);
+    });
+
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") + t("flow.dc.genbit.title") + t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
 
     command.execute().then(
       () => {
         props.setActive(props.index + 1);
-        showSuccessNotification({
-          title: "GenBit",
-          message: "GenBit completed successfully",
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow.dc.genbit.title"),
+          message:
+            t("flow.notify.success.message_prefix") +
+            t("flow.dc.genbit.title") +
+            t("flow.notify.success.message_suffix"),
         });
       },
       (err) => {
-        console.error(err);
-        showFailedNotification({ title: "GenBit", message: "GenBit failed" });
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow.dc.genbit.title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow.dc.genbit.title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
+        });
       }
     );
   };
@@ -651,18 +713,9 @@ function DCFlows() {
     <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={active}>
       {flows.map((flow, index) => {
         return (
-          <Timeline.Item
-            title={t("flow." + flow.name + ".title")}
-            color="blue"
-            className="flowItem"
-            key={index}
-          >
+          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
             {flow.component ? (
-              <flow.component
-                runAvailable={active >= index}
-                index={index}
-                setActive={setActive}
-              />
+              <flow.component runAvailable={active >= index} index={index} setActive={setActive} />
             ) : (
               <></>
             )}
@@ -676,12 +729,12 @@ function DCFlows() {
 function FlowPage() {
   const [flow, setFlow] = useState("DC");
   return (
-    <Stack gap="md">
-      <SegmentedControl data={flowData} value={flow} onChange={setFlow} />
-      <ScrollArea style={{ height: "calc(100vh - 150px)" }}>
-        {flow === "DC" && <DCFlows />}
-      </ScrollArea>
-    </Stack>
+    <>
+      <Stack gap="md">
+        <SegmentedControl data={flowData} value={flow} onChange={setFlow} />
+        <ScrollArea style={{ height: "calc(100vh - 150px)" }}>{flow === "DC" && <DCFlows />}</ScrollArea>
+      </Stack>
+    </>
   );
 }
 
