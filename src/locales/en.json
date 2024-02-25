@@ -82,5 +82,39 @@
     "verilog": "Verilog File",
     "systemverilog": "SystemVerilog File",
     "constraint": "Constraint File"
+  },
+  "flow": {
+    "settings": "Settings",
+    "no-settings-available": "No settings available",
+    "mode": "Mode",
+    "dc": {
+      "import": {
+        "title": "Import",
+        "description": "Import circuit netlist from RTL file and convert to XML format."
+      },
+      "map": {
+        "title": "Map",
+        "description": "Map the logical netlist to the target device's native language."
+      },
+      "pack": {
+        "title": "Pack",
+        "description": "Pack LUTs into logical blocks."
+      },
+      "place": {
+        "title": "Place",
+        "description": "Place logical Blocks to target devices"
+      },
+      "route": {
+        "title": "Route",
+        "description": "Route the placed netlist on the target device."
+      },
+      "genbit": {
+        "title": "Generate Bitstream",
+        "description": "Generate bitstream file for the target device."
+      }
+    }
+  },
+  "other": {
+    "vscode_not_found": "VSCode not found, please install it and add it to the environment variable and retry!"
   }
 }
