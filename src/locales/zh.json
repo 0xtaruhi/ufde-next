@@ -94,6 +94,7 @@
     "settings": "设置",
     "no-settings-available": "没有可用的设置",
     "mode": "模式",
+    "run_all": "运行全部",
     "dc": {
       "import": {
         "title": "导入 RTL 文件",

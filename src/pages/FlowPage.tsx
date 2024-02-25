@@ -11,8 +11,9 @@ import {
   Combobox,
   InputBase,
   useCombobox,
+  Button,
 } from "@mantine/core";
-import { TbSettings, TbPlayerPlay, TbChevronDown } from "react-icons/tb";
+import { TbSettings, TbPlayerPlay, TbChevronDown, TbPlayerPlayFilled } from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import "./FlowPage.css";
@@ -23,13 +24,10 @@ import { ProjectContext } from "../App";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import {
-  showFailedNotification,
-  showSuccessNotification,
-  update2FailedNotification,
-  update2SuccessNotification,
-} from "./Notifies";
+import { update2FailedNotification, update2SuccessNotification } from "./Notifies";
 import { notifications } from "@mantine/notifications";
+import { ProjectInfo } from "../model/project";
+import { useCallback } from "react";
 
 const flowData = [
   { value: "DC", label: "DC" },
@@ -106,183 +104,67 @@ interface FlowProps {
   setActive: (index: number) => void;
 }
 
-function DCImportFlow(props: FlowProps) {
-  const { t } = useTranslation();
+async function runDCImportFlowCommand(project: ProjectInfo) {
+  const files = project.file_lists
+    ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
+    .map((file) => file.path);
 
-  const projectContext = useContext(ProjectContext);
-  const [statusText, setStatusText] = useState<string>("");
+  const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
+  const outputFileName = project.name + "_dc_" + "imp.xml";
 
-  const run = async () => {
-    const files = projectContext.project?.file_lists
-      ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
-      .map((file) => file.path);
-
-    const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
-    console.log(celllibfilePath);
-    const outputFileName = projectContext.project?.name + "_dc_" + "imp.xml";
-
-    const command = Command.sidecar(
-      "binaries/fde-cli/import",
-      ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
-      { cwd: projectContext.project?.path }
-    );
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.import.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.notify.success.title"),
-          message:
-            t("flow.notify.success.message_prefix") +
-            t("flow.dc.import.title") +
-            t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.import.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.import.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
-  };
-
-  return (
-    <Flow
-      flowName="dc.import"
-      onRun={run}
-      settingsPage={<EmptySettingsHint />}
-      runAvailable={props.runAvailable}
-      status={statusText}
-    />
+  const command = Command.sidecar(
+    "binaries/fde-cli/import",
+    ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
+    { cwd: project.path }
   );
+
+  return command;
 }
 
-function DCMapFlow(props: FlowProps) {
-  const { t } = useTranslation();
+async function runDCMapFlowCommand(project: ProjectInfo) {
+  const files = project?.file_lists
+    ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
+    .map((file) => file.path);
 
-  const projectContext = useContext(ProjectContext);
-  const [statusText, setStatusText] = useState<string>("");
+  const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
+  const mapArgs = "";
+  const mapFileMode = "";
 
-  const run = async () => {
-    const files = projectContext.project?.file_lists
-      ?.filter((file) => file.type === "verilog" || file.type === "systemverilog")
-      .map((file) => file.path);
+  const inputFileName = project?.name + "_dc_" + "imp.xml";
+  const outputFileName = project?.name + "_dc_" + "map.xml";
 
-    const celllibfilePath = await resolveResource("resource/hw_lib/dc_cell.xml");
-    const mapArgs = "";
-    const mapFileMode = "";
-
-    const inputFileName = projectContext.project?.name + "_dc_" + "imp.xml";
-    const outputFileName = projectContext.project?.name + "_dc_" + "map.xml";
-
-    const command = Command.sidecar(
-      "binaries/fde-cli/map",
-      [
-        "-i",
-        inputFileName,
-        "-o",
-        outputFileName,
-        "-c",
-        celllibfilePath,
-        mapArgs,
-        mapFileMode,
-        "-e",
-        files?.join(" ") ?? "",
-      ],
-      { cwd: projectContext.project?.path }
-    );
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.map.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.dc.map.title"),
-          message:
-            t("flow.notify.success.message_prefix") + t("flow.dc.map.title") + t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.map.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.map.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
-  };
-
-  return (
-    <Flow
-      flowName="dc.map"
-      onRun={run}
-      settingsPage={<EmptySettingsHint />}
-      runAvailable={props.runAvailable}
-      status={statusText}
-    />
+  const command = Command.sidecar(
+    "binaries/fde-cli/map",
+    [
+      "-i",
+      inputFileName,
+      "-o",
+      outputFileName,
+      "-c",
+      celllibfilePath,
+      mapArgs,
+      mapFileMode,
+      "-e",
+      files?.join(" ") ?? "",
+    ],
+    { cwd: project?.path }
   );
+
+  return command;
 }
 
-function DCPackFlow(props: FlowProps) {
-  const { t } = useTranslation();
+async function runDCPackFlowCommand(project: ProjectInfo) {
+  const family = "fdp3";
+  const dccelllibfilePath = await resolveResource("resource/hw_lib/fdp3_cell.xml");
+  const dcplibfilePath = await resolveResource("resource/hw_lib/fdp3_dcplib.xml");
+  const xdlcfgfilePath = await resolveResource("resource/hw_lib/fdp3_config.xml");
 
-  const projectContext = useContext(ProjectContext);
-  const [statusText, setStatusText] = useState<string>("");
+  const inputFileName = project.name + "_dc_" + "map.xml";
+  const outputFileName = project.name + "_dc_" + "pack.xml";
 
-  const run = async () => {
-    const family = "fdp3";
-    const dccelllibfilePath = await resolveResource("resource/hw_lib/fdp3_cell.xml");
-    const dcplibfilePath = await resolveResource("resource/hw_lib/fdp3_dcplib.xml");
-    const xdlcfgfilePath = await resolveResource("resource/hw_lib/fdp3_config.xml");
-    const packFileMode = "";
-
-    const inputFileName = projectContext.project?.name + "_dc_" + "map.xml";
-    const outputFileName = projectContext.project?.name + "_dc_" + "pack.xml";
-
-    const args = [
+  const command = Command.sidecar(
+    "binaries/fde-cli/pack",
+    [
       "-c",
       family,
       "-n",
@@ -295,84 +177,15 @@ function DCPackFlow(props: FlowProps) {
       outputFileName,
       "-g",
       xdlcfgfilePath,
-      packFileMode,
       "-e",
-    ];
-
-    const command = Command.sidecar(
-      "binaries/fde-cli/pack",
-      [
-        "-c",
-        family,
-        "-n",
-        inputFileName,
-        "-l",
-        dccelllibfilePath,
-        "-r",
-        dcplibfilePath,
-        "-o",
-        outputFileName,
-        "-g",
-        xdlcfgfilePath,
-        "-e",
-      ],
-      { cwd: projectContext.project?.path }
-    );
-
-    console.log(args);
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.pack.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.dc.pack.title"),
-          message:
-            t("flow.notify.success.message_prefix") + t("flow.dc.pack.title") + t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.pack.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.pack.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
-  };
-
-  return (
-    <Flow
-      flowName="dc.pack"
-      onRun={run}
-      settingsPage={<EmptySettingsHint />}
-      runAvailable={props.runAvailable}
-      status={statusText}
-    />
+    ],
+    { cwd: project.path }
   );
+
+  return command;
 }
 
-function DCPlaceFlow(props: FlowProps) {
+function DCPlaceFlowSettingsPage() {
   const { t } = useTranslation();
 
   const settings = (
@@ -383,101 +196,60 @@ function DCPlaceFlow(props: FlowProps) {
       />
     </>
   );
-
-  const projectContext = useContext(ProjectContext);
-  const [statusText, setStatusText] = useState<string>("");
-
-  const run = async () => {
-    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
-    const plcdelayfilePath = await resolveResource("resource/hw_lib/fdp3p7_dly.xml");
-    const placecst = "-c";
-    const placecstFilePath = projectContext.project?.file_lists.filter((file) => file.type === "constraint")[0].path;
-    const placeMode = "-b";
-
-    const inputFileName = projectContext.project?.name + "_dc_" + "pack.xml";
-    const outputFileName = projectContext.project?.name + "_dc_" + "place.xml";
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.place.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    const command = Command.sidecar(
-      "binaries/fde-cli/place",
-      [
-        "-a",
-        archfilePath,
-        "-d",
-        plcdelayfilePath,
-        "-i",
-        inputFileName,
-        "-o",
-        outputFileName,
-        placecst,
-        placecstFilePath ?? "",
-        placeMode,
-        "-e",
-      ],
-      { cwd: projectContext.project?.path }
-    );
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    if (placecstFilePath === undefined) {
-      showFailedNotification({
-        title: t("flow.notyfy.failed.title"),
-        message: t("flow.notify.faild.reason.constraint_file_not_found"),
-      });
-      return;
-    }
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.dc.place.title"),
-          message:
-            t("flow.notify.success.message_prefix") +
-            t("flow.dc.place.title") +
-            t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.place.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.place.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
-  };
-
-  return (
-    <Flow
-      flowName="dc.place"
-      onRun={run}
-      settingsPage={settings}
-      runAvailable={props.runAvailable}
-      status={statusText}
-    />
-  );
+  return settings;
 }
 
-function DCRouteFlow(props: FlowProps) {
+async function runDCPlaceFlowCommand(project: ProjectInfo) {
+  const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const plcdelayfilePath = await resolveResource("resource/hw_lib/fdp3p7_dly.xml");
+  const placecst = "-c";
+  const placecstFilePath = project.file_lists.filter((file) => file.type === "constraint")[0].path;
+  const placeMode = "-b";
+
+  const inputFileName = project.name + "_dc_" + "pack.xml";
+  const outputFileName = project.name + "_dc_" + "place.xml";
+
+  const command = Command.sidecar(
+    "binaries/fde-cli/place",
+    [
+      "-a",
+      archfilePath,
+      "-d",
+      plcdelayfilePath,
+      "-i",
+      inputFileName,
+      "-o",
+      outputFileName,
+      placecst,
+      placecstFilePath,
+      placeMode,
+      "-e",
+    ],
+    { cwd: project.path }
+  );
+
+  return command;
+}
+
+async function runDCRouteFlowCommand(project: ProjectInfo) {
+  const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const routeMode = "-d";
+  const routecst = "-c";
+  const routecstFilePath = project.file_lists.filter((file) => file.type === "constraint")[0].path;
+
+  const inputFileName = project.name + "_dc_" + "place.xml";
+  const outputFileName = project.name + "_dc_" + "route.xml";
+
+  const command = Command.sidecar(
+    "binaries/fde-cli/route",
+    ["-a", archfilePath, "-n", inputFileName, "-o", outputFileName, routeMode, routecst, routecstFilePath, "-e"],
+    { cwd: project.path }
+  );
+
+  return command;
+}
+
+function DCRouteFlowSettingsPage() {
   function ModeSettingItem() {
     const combobox = useCombobox({
       onDropdownClose: () => combobox.resetSelectedOption(),
@@ -519,183 +291,142 @@ function DCRouteFlow(props: FlowProps) {
     );
   }
 
-  const { t } = useTranslation();
-
   const settings = (
     <>
-      <SettingsItem label={t("flow.mode")} component={<ModeSettingItem />} />
+      <SettingsItem label="Mode" component={<ModeSettingItem />} />
     </>
   );
 
+  return settings;
+}
+
+async function runDCGenBitFlowCommand(project: ProjectInfo) {
+  const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
+
+  const inputFileName = project.name + "_dc_" + "route.xml";
+  const outputFileName = project.name + "_dc_" + "bit.xml";
+
+  const command = Command.sidecar(
+    "binaries/fde-cli/bitgen",
+    ["-a", archfilePath, "-c", cilfilePath, "-n", inputFileName, "-b", outputFileName, "-e"],
+    { cwd: project.path }
+  );
+
+  return command;
+}
+
+interface FlowInfo {
+  name: string;
+  target_file?: string;
+  runFunc?: (project: ProjectInfo) => Promise<Command>;
+  settingsPage?: React.ReactNode;
+}
+
+function FlowInstance(props: FlowInfo & FlowProps) {
+  const { t } = useTranslation();
   const projectContext = useContext(ProjectContext);
+
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
-    const routeMode = "-d";
-    const routecst = "-c";
-    const routecstFilePath = "";
+    const command = props.runFunc ? await props.runFunc(projectContext.project!) : undefined;
+    if (command) {
+      command.stdout.on("data", (data) => {
+        setStatusText(data);
+      });
+      command.stderr.on("data", (data) => {
+        setStatusText(data);
+      });
 
-    const inputFileName = projectContext.project?.name + "_dc_" + "place.xml";
-    const outputFileName = projectContext.project?.name + "_dc_" + "route.xml";
+      const notifyId = notifications.show({
+        title: t("flow.notify.running.title"),
+        message:
+          t("flow.notify.running.message_prefix") +
+          t("flow." + props.name + ".title") +
+          t("flow.notify.running.message_suffix"),
+        autoClose: false,
+        loading: true,
+      });
 
-    const command = Command.sidecar(
-      "binaries/fde-cli/route",
-      ["-a", archfilePath, "-n", inputFileName, "-o", outputFileName, routeMode, routecst, routecstFilePath, "-e"],
-      { cwd: projectContext.project?.path }
-    );
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.route.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.dc.route.title"),
-          message:
-            t("flow.notify.success.message_prefix") +
-            t("flow.dc.route.title") +
-            t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        console.error(err);
-        // showFailedNotification({ title: "Route", message: "Route failed" });
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.route.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.route.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
+      command.execute().then(
+        () => {
+          props.setActive(props.index + 1);
+          update2SuccessNotification({
+            id: notifyId,
+            title: t("flow." + props.name + ".title"),
+            message:
+              t("flow.notify.success.message_prefix") +
+              t("flow." + props.name + ".title") +
+              t("flow.notify.success.message_suffix"),
+          });
+        },
+        (err) => {
+          update2FailedNotification({
+            id: notifyId,
+            title: t("flow." + props.name + ".title"),
+            message:
+              t("flow.notify.failed.message_prefix") +
+              t("flow." + props.name + ".title") +
+              t("flow.notify.failed.message_suffix") +
+              ": " +
+              err,
+          });
+        }
+      );
+    }
   };
 
   return (
     <Flow
-      flowName="dc.route"
+      flowName={props.name}
       onRun={run}
-      settingsPage={settings}
-      runAvailable={props.runAvailable}
+      settingsPage={props.settingsPage ? props.settingsPage : <EmptySettingsHint />}
+      runAvailable={true}
       status={statusText}
     />
   );
 }
 
-function DCGenBitFlow(props: FlowProps) {
-  const projectContext = useContext(ProjectContext);
-  const [statusText, setStatusText] = useState<string>("");
+const dcFlows = [
+  { name: "dc.import", target_file: "dc_imp.xml", runFunc: runDCImportFlowCommand },
+  { name: "dc.map", target_file: "dc_map.xml", runFunc: runDCMapFlowCommand },
+  { name: "dc.pack", target_file: "dc_pack.xml", runFunc: runDCPackFlowCommand },
+  {
+    name: "dc.place",
+    target_file: "dc_place.xml",
+    runFunc: runDCPlaceFlowCommand,
+    SettingsPage: <DCPlaceFlowSettingsPage />,
+  },
+  {
+    name: "dc.route",
+    target_file: "dc_route.xml",
+    runFunc: runDCRouteFlowCommand,
+    settingsPage: <DCRouteFlowSettingsPage />,
+  },
+  {
+    name: "dc.genbit",
+    target_file: "dc_genbit.xml",
+    runFunc: runDCGenBitFlowCommand,
+  },
+];
+
+const flowsNameMap: { [key: string]: FlowInfo[] } = {
+  DC: dcFlows,
+  Yosys: [],
+};
+
+function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index: number) => void }) {
   const { t } = useTranslation();
-
-  const run = async () => {
-    const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
-    const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
-
-    const inputFileName = projectContext.project?.name + "_dc_" + "route.xml";
-    const outputFileName = projectContext.project?.name + "_dc_" + "bit.xml";
-
-    const command = Command.sidecar(
-      "binaries/fde-cli/bitgen",
-      ["-a", archfilePath, "-c", cilfilePath, "-n", inputFileName, "-b", outputFileName, "-e"],
-      { cwd: projectContext.project?.path }
-    );
-
-    command.stdout.on("data", (data) => {
-      setStatusText(data);
-    });
-    command.stderr.on("data", (data) => {
-      setStatusText(data);
-    });
-
-    const notifyId = notifications.show({
-      title: t("flow.notify.running.title"),
-      message:
-        t("flow.notify.running.message_prefix") + t("flow.dc.genbit.title") + t("flow.notify.running.message_suffix"),
-      autoClose: false,
-      loading: true,
-    });
-
-    command.execute().then(
-      () => {
-        props.setActive(props.index + 1);
-        update2SuccessNotification({
-          id: notifyId,
-          title: t("flow.dc.genbit.title"),
-          message:
-            t("flow.notify.success.message_prefix") +
-            t("flow.dc.genbit.title") +
-            t("flow.notify.success.message_suffix"),
-        });
-      },
-      (err) => {
-        update2FailedNotification({
-          id: notifyId,
-          title: t("flow.dc.genbit.title"),
-          message:
-            t("flow.notify.failed.message_prefix") +
-            t("flow.dc.genbit.title") +
-            t("flow.notify.failed.message_suffix") +
-            ": " +
-            err,
-        });
-      }
-    );
-  };
-
-  return (
-    <Flow
-      flowName="dc.genbit"
-      onRun={run}
-      settingsPage={<EmptySettingsHint />}
-      runAvailable={props.runAvailable}
-      status={statusText}
-    />
-  );
-}
-
-function DCFlows() {
-  const { t } = useTranslation();
-  const [active, setActive] = useState(0);
   const projectContext = useContext(ProjectContext);
   const project = projectContext.project;
-
-  const flows = [
-    { name: "dc.import", component: DCImportFlow, target_file: "dc_imp.xml" },
-    { name: "dc.map", component: DCMapFlow, target_file: "dc_map.xml" },
-    { name: "dc.pack", component: DCPackFlow, target_file: "dc_pack.xml" },
-    { name: "dc.place", component: DCPlaceFlow, target_file: "dc_place.xml" },
-    { name: "dc.route", component: DCRouteFlow, target_file: "dc_route.xml" },
-    {
-      name: "dc.genbit",
-      component: DCGenBitFlow,
-      target_file: "dc_genbit.xml",
-    },
-  ];
 
   useEffect(() => {
     const projectName = project?.name;
     let tmpActive = 0;
     (async () => {
-      for (let i = 0; i < flows.length; i++) {
-        const flow = flows[i];
+      for (let i = 0; i < props.flows.length; i++) {
+        const flow = props.flows[i];
         if (flow.target_file) {
           const fileName = projectName + "_" + flow.target_file;
           if (await exists(project?.path + "/" + fileName)) {
@@ -705,20 +436,23 @@ function DCFlows() {
           break;
         }
       }
-      setActive(tmpActive);
+      props.setActive(tmpActive);
     })();
   });
 
   return (
-    <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={active}>
-      {flows.map((flow, index) => {
+    <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={props.active}>
+      {props.flows.map((flow, index) => {
         return (
           <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
-            {flow.component ? (
-              <flow.component runAvailable={active >= index} index={index} setActive={setActive} />
-            ) : (
-              <></>
-            )}
+            <FlowInstance
+              name={flow.name}
+              runFunc={flow.runFunc}
+              runAvailable={props.active >= index}
+              index={index}
+              setActive={props.setActive}
+              settingsPage={flow.settingsPage}
+            />
           </Timeline.Item>
         );
       })}
@@ -727,12 +461,89 @@ function DCFlows() {
 }
 
 function FlowPage() {
-  const [flow, setFlow] = useState("DC");
+  const [flowName, setFlowName] = useState("DC");
+  const projectContext = useContext(ProjectContext);
+  const project = projectContext.project;
+  const { t } = useTranslation();
+
+  const run = async (flow: FlowInfo) => {
+    const notifyId = notifications.show({
+      title: t("flow.notify.running.title"),
+      message:
+        t("flow.notify.running.message_prefix") +
+        t("flow." + flow.name + ".title") +
+        t("flow.notify.running.message_suffix"),
+      autoClose: false,
+      loading: true,
+    });
+
+    const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
+
+    if (command) {
+      command.execute().then(
+        () => {
+          update2SuccessNotification({
+            id: notifyId,
+            title: t("flow." + flow.name + ".title"),
+            message:
+              t("flow.notify.success.message_prefix") +
+              t("flow." + flow.name + ".title") +
+              t("flow.notify.success.message_suffix"),
+          });
+        },
+        (err) => {
+          update2FailedNotification({
+            id: notifyId,
+            title: t("flow." + flow.name + ".title"),
+            message:
+              t("flow.notify.failed.message_prefix") +
+              t("flow." + flow.name + ".title") +
+              t("flow.notify.failed.message_suffix") +
+              ": " +
+              err,
+          });
+        }
+      );
+    }
+  };
+
+  const [active, setActive] = useState(0);
+
+  const runAll = useCallback(async () => {
+    const flows = flowsNameMap[flowName];
+    setActive(0);
+
+    for (let i = 0; i < flows.length; i++) {
+      const flow = flows[i];
+      await run(flow);
+      setActive(i + 1);
+    }
+  }, []);
+
   return (
     <>
       <Stack gap="md">
-        <SegmentedControl data={flowData} value={flow} onChange={setFlow} />
-        <ScrollArea style={{ height: "calc(100vh - 150px)" }}>{flow === "DC" && <DCFlows />}</ScrollArea>
+        <Flex style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+          <SegmentedControl
+            data={flowData}
+            value={flowName}
+            onChange={setFlowName}
+            style={{ width: "500px", marginRight: "auto" }}
+          />
+          <Button
+            size="sm"
+            color="green"
+            variant="filled"
+            style={{ marginLeft: "auto" }}
+            leftSection={<TbPlayerPlayFilled size={20} />}
+            onClick={runAll}
+          >
+            {useTranslation().t("flow.run_all")}
+          </Button>
+        </Flex>
+        <ScrollArea style={{ height: "calc(100vh - 150px)" }}>
+          {<FlowItems flows={flowsNameMap[flowName]} active={active} setActive={setActive} />}
+        </ScrollArea>
       </Stack>
     </>
   );
