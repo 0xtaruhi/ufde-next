@@ -133,18 +133,6 @@ function ProjectPage() {
         >
           {t("program.program")}
         </Button>
-        <Button
-          variant="subtle"
-          onClick={() => {
-            const mapCommand = Command.sidecar("binaries/fde-cli/import", ["--help"]);
-            mapCommand.stdout.on("data", (data) => {
-              console.log(data);
-            });
-            mapCommand.execute();
-          }}
-        >
-          test command
-        </Button>
       </Stack>
     );
   } else {

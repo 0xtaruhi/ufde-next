@@ -1,6 +1,5 @@
 import { open } from "@tauri-apps/api/dialog";
-import { BaseDirectory, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
-import { getDirOfFile } from "../utils/utils";
+import { readTextFile } from "@tauri-apps/api/fs";
 
 export type SourceFile = {
   name: string;
@@ -15,34 +14,45 @@ export type ProjectInfo = {
   target_device: "FDP3P7";
 };
 
-type recentlyOpenedProjectsType = {
+export type RecentlyOpenedProjectsType = {
   name: string;
   path: string;
 };
 
-const recentlyOpenedProjects: recentlyOpenedProjectsType[] = [];
 
-export function getRecentlyOpenedProjects(): recentlyOpenedProjectsType[] {
-  return recentlyOpenedProjects;
-}
+const maxRecentlyOpenedProjects = 7;
 
-export function addRecentlyOpenedProject(project: ProjectInfo) {
-  const index = recentlyOpenedProjects.findIndex((p) => p.path === project.path);
-  if (index !== -1) {
-    recentlyOpenedProjects.splice(index, 1);
+export function updateRecentlyOpenedProjects(
+  project: ProjectInfo,
+  recentlyOpenedProjects: RecentlyOpenedProjectsType[],
+  setRecentlyOpenedProjects: (projects: RecentlyOpenedProjectsType[]) => void
+) {
+  // if the project is already in the list, don't add it again
+  if (recentlyOpenedProjects.find((p) => p.path === project.path)) {
+    return;
   }
-  recentlyOpenedProjects.unshift({ name: project.name, path: project.path });
-  saveRecentlyOpenedProjects();
+
+  const newProject: RecentlyOpenedProjectsType = {
+    name: project.name,
+    path: project.path,
+  };
+
+  let updatedResult = [];
+
+  if (recentlyOpenedProjects.length >= maxRecentlyOpenedProjects) {
+    updatedResult = [newProject, ...recentlyOpenedProjects.slice(1)];
+  } else {
+    updatedResult = [newProject, ...recentlyOpenedProjects];
+  }
+  setRecentlyOpenedProjects(updatedResult);
+
+  localStorage.setItem("recentlyOpenedProjects", JSON.stringify(updatedResult));
 }
 
-export function saveRecentlyOpenedProjects() {
-  writeTextFile("recent_projects.json", JSON.stringify(recentlyOpenedProjects),
-    { dir: BaseDirectory.AppLocalData }
-  );
-}
-
-export async function openProject() {
-  const path = await open({
+export async function openProject(
+  { recentlyOpenedProjects, setRecentlyOpenedProjects }: { recentlyOpenedProjects: RecentlyOpenedProjectsType[], setRecentlyOpenedProjects: (projects: RecentlyOpenedProjectsType[]) => void }
+) {
+  const validPath = await open({
     multiple: false,
     filters: [
       {
@@ -50,14 +60,25 @@ export async function openProject() {
         extensions: ["json"],
       },
     ],
-  });
+  }) as string;
 
-  if (path && !Array.isArray(path)) {
-    const content = await readTextFile(path);
+  if (validPath) {
+    const content = await readTextFile(validPath);
     const openedProject = JSON.parse(content) as ProjectInfo;
-    openedProject.path = await getDirOfFile(path);
-    addRecentlyOpenedProject(openedProject);
+    openedProject.path = validPath;
+    updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
     return openedProject;
   }
   return null;
+}
+
+export async function openProjectWithSpecificPath(
+  path: string,
+  { recentlyOpenedProjects, setRecentlyOpenedProjects }: { recentlyOpenedProjects: RecentlyOpenedProjectsType[], setRecentlyOpenedProjects: (projects: RecentlyOpenedProjectsType[]) => void }
+) {
+  const content = await readTextFile(path);
+  const openedProject = JSON.parse(content) as ProjectInfo;
+  openedProject.path = path;
+  updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
+  return openedProject;
 }

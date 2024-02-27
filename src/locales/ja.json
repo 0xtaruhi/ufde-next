@@ -75,7 +75,8 @@
     "tag2": {
       "title": "オーペンソース",
       "content": "UFDE+ は、オープンソースであり、MIT ライセンスで提供されています。コードは GitHub で公開されており、誰でも自由に利用できます。"
-    }
+    },
+    "recent_projects": "最近のプロジェクト"
   },
   "program": {
     "program": "書き込む",

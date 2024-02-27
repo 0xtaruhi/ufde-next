@@ -27,7 +27,7 @@ function LightDarkToggleButton() {
 
 function MenuArea() {
   const { t } = useTranslation();
-  const { project, setProject, setNavLabel } = useContext(ProjectContext);
+  const { project, setProject, setNavLabel, recentlyOpenedProjects, setRecentlyOpenedProjects } = useContext(ProjectContext);
 
   const [opened, { open, close }] = useDisclosure();
 
@@ -41,7 +41,7 @@ function MenuArea() {
       icon: <VscFolderOpened />,
       label: "menu.open_project",
       onClick: () => {
-        openProject().then(
+        openProject({recentlyOpenedProjects, setRecentlyOpenedProjects}).then(
           (p) => {
             if (p) {
               setProject(p);

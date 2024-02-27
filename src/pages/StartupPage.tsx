@@ -1,6 +1,5 @@
 import {
   Button,
-  Container,
   Title,
   Text,
   Image,
@@ -8,6 +7,8 @@ import {
   List,
   ThemeIcon,
   Group,
+  Menu,
+  Center,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
@@ -18,7 +19,7 @@ import "./StartupPage.css";
 import light_image from "../assets/startup.svg";
 import dark_image from "../assets/startup-dark.svg";
 import NewProjectModal from "./NewProjectModal";
-import { openProject } from "../model/project";
+import { RecentlyOpenedProjectsType, openProject, openProjectWithSpecificPath } from "../model/project";
 import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { showFailedNotification } from "./Notifies";
@@ -28,11 +29,45 @@ function StartUpPage() {
   const computedColorScheme = useComputedColorScheme("light");
 
   const [opened, { open, close }] = useDisclosure();
-  const { setProject } = useContext(ProjectContext);
+  const { setProject, recentlyOpenedProjects, setRecentlyOpenedProjects } = useContext(ProjectContext);
+
+  const openOtherProject = () => {
+    openProject({ recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
+      (p) => {
+        if (p) {
+          setProject(p);
+        }
+      },
+      (err) => {
+        console.error(err);
+        showFailedNotification({
+          message: err,
+          title: t("project.open_project_failed_title"),
+        });
+      }
+    );
+  };
+
+  const openSelectedProject = (project: RecentlyOpenedProjectsType) => {
+    // const fileName = project.path + "/" + project.name + ".json";
+    openProjectWithSpecificPath(project.path, { recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
+      (p) => {
+        if (p) {
+          setProject(p);
+        }
+      },
+      (err) => {
+        showFailedNotification({
+          message: err,
+          title: t("project.open_project_failed_title"),
+        });
+      }
+    );
+  };
 
   return (
     <>
-      <Container size="lg">
+      <Center style={{height: "100vh", padding: "20px"}}>
         <div className="inner">
           <div className="content">
             <Title className="title">
@@ -68,29 +103,29 @@ function StartUpPage() {
                 <Button variant="filled" size="md" onClick={open} leftSection={<VscNewFile />}>
                   {t("project.new_project")}
                 </Button>
-                <Button
-                  size="md"
-                  variant="outline"
-                  leftSection={<VscFolderOpened />}
-                  onClick={() => {
-                    openProject().then(
-                      (p) => {
-                        if (p) {
-                          setProject(p);
-                        }
-                      },
-                      (err) => {
-                        console.error(err);
-                        showFailedNotification({
-                          message: err,
-                          title: t("project.open_project_failed_title"),
-                        });
-                      }
-                    );
-                  }}
-                >
-                  {t("project.open_project")}
-                </Button>
+                <Menu shadow="md" width={300} trigger="hover">
+                  <Menu.Target>
+                    <Button size="md" variant="outline" leftSection={<VscFolderOpened />} onClick={openOtherProject}>
+                      {t("project.open_project")}
+                    </Button>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    {recentlyOpenedProjects.length !== 0 && (
+                      <>
+                        <Menu.Label>{t("startup.recent_projects")}</Menu.Label>
+                        {recentlyOpenedProjects.map((project) => (
+                          <Menu.Item key={project.path} onClick={() => openSelectedProject(project)}>
+                            {/* {project.name} */}
+                            <Text size="sm">{project.name}</Text>
+                            <Text size="xs" c="dimmed">
+                              {project.path}
+                            </Text>
+                          </Menu.Item>
+                        ))}
+                      </>
+                    )}
+                  </Menu.Dropdown>
+                </Menu>
               </Group>
             </div>
           </div>
@@ -100,7 +135,7 @@ function StartUpPage() {
             <Image src={light_image} alt="Startup" className="image" />
           )}
         </div>
-      </Container>
+      </Center>
       <NewProjectModal
         opened={opened}
         onClose={close}

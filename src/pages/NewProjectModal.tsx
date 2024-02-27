@@ -20,12 +20,11 @@ import { DialogFilter, open } from "@tauri-apps/api/dialog";
 
 import "./NewProjectModal.css";
 import { t } from "i18next";
-import { ProjectInfo, SourceFile, addRecentlyOpenedProject } from "../model/project";
+import { ProjectInfo, SourceFile, updateRecentlyOpenedProjects } from "../model/project";
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { createDir, writeTextFile } from "@tauri-apps/api/fs";
 import { platform } from "@tauri-apps/api/os";
-import { getDirOfFile } from "../utils/utils";
 
 const newProject: ProjectInfo = {
   name: "",
@@ -285,7 +284,7 @@ const steps: StepContent[] = [
 function NewProjectModal(props: ModalProps) {
   const { t } = useTranslation();
 
-  const { setProject } = useContext(ProjectContext);
+  const { setProject, recentlyOpenedProjects, setRecentlyOpenedProjects } = useContext(ProjectContext);
   const [active, setActive] = useState(0);
 
   const nextStep = () => {
@@ -295,7 +294,7 @@ function NewProjectModal(props: ModalProps) {
 
   const handleProjectCreatedSuccess = () => {
     setProject(newProject);
-    addRecentlyOpenedProject(newProject);
+    updateRecentlyOpenedProjects(newProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
 
     showSuccessNotification({
       message: "",
@@ -325,7 +324,7 @@ function NewProjectModal(props: ModalProps) {
     }
 
     filepath += newProject.name + ".json";
-    newProject.path = await getDirOfFile(filepath);
+    newProject.path = filepath;
 
     const { path, ...rest } = newProject;
     writeTextFile(filepath, JSON.stringify(rest))

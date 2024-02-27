@@ -4,18 +4,27 @@ import { useTranslation } from "react-i18next";
 import { createContext, useState, useContext } from "react";
 import { TbSettings, TbChevronRight, TbFile, TbActivity } from "react-icons/tb";
 
-import { ProjectInfo } from "./model/project";
+import { ProjectInfo, RecentlyOpenedProjectsType } from "./model/project";
 
 import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
+import { useEffect } from "react";
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
   setProject: (project: ProjectInfo | null) => void;
+  recentlyOpenedProjects: RecentlyOpenedProjectsType[];
+  setRecentlyOpenedProjects: (projects: RecentlyOpenedProjectsType[]) => void;
   setNavLabel: (navLabel: string) => void;
-}>({ project: null, setProject: () => {}, setNavLabel: () => {} });
+}>({
+  project: null,
+  setProject: () => {},
+  setNavLabel: () => {},
+  recentlyOpenedProjects: [],
+  setRecentlyOpenedProjects: () => {},
+});
 
 type NavLinkData = {
   label: string;
@@ -72,10 +81,20 @@ function App() {
   const [opened, { toggle }] = useDisclosure(true);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [navLabel, setNavLabel] = useState<string>("nav.project");
+  const [recentlyOpenedProjects, setRecentlyOpenedProjects] = useState<RecentlyOpenedProjectsType[]>([]);
+
+  useEffect(() => {
+    const projects = localStorage.getItem("recentlyOpenedProjects");
+    if (projects) {
+      setRecentlyOpenedProjects(JSON.parse(projects));
+    }
+  });
 
   return (
     <div className="App">
-      <ProjectContext.Provider value={{ project, setProject, setNavLabel }}>
+      <ProjectContext.Provider
+        value={{ project, setProject, setNavLabel, recentlyOpenedProjects, setRecentlyOpenedProjects }}
+      >
         <AppShell
           header={{ height: 50 }}
           navbar={{
