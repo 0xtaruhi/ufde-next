@@ -88,7 +88,7 @@ function App() {
     if (projects) {
       setRecentlyOpenedProjects(JSON.parse(projects));
     }
-  });
+  }, []);
 
   return (
     <div className="App">
