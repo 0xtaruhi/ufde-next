@@ -103,7 +103,7 @@ function NewProjectStep1(props: StepProps) {
       projectName: (value) => {
         if (value === "") {
           return t("create_project.empty_project_name_error");
-        } else if (value.match('[$-/:-?{-~!"^_`\\\\\\[\\]]') !== null) {
+        } else if (value.match('[$-/:-?{-~!"^`\\\\\\[\\]]') !== null) {
           return t("create_project.invalid_project_name_error");
         }
         return null;

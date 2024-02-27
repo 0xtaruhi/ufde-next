@@ -106,7 +106,7 @@ function StartUpPage() {
         onClose={close}
         size="lg"
         overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
-        transitionProps={{ transition: "rotate-left", duration: 300 }}
+        transitionProps={{ transition: "pop", duration: 400 }}
       />
     </>
   );
