@@ -23,7 +23,7 @@
     "open_project": "打开项目",
     "open_project_failed_title": "打开项目失败",
     "close_project_no_project_title": "没有打开的项目",
-    "close_project_no_project_content": "当前没有打开的项目。请先打开一个项目。",
+    "close_project_no_project_content": "当前没有打开的项目，请先打开一个项目。",
     "basic_info": "基本信息",
     "project_name": "项目名称",
     "project_path": "项目路径",
