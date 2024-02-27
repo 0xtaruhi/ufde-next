@@ -69,7 +69,9 @@
       "title": "Open Source",
       "content": "UFDE+ is open source under the MIT license. You can view the source code on GitHub and use it freely."
     },
-    "recent_projects": "Recent Projects"
+    "recent_projects": "Recent Projects",
+    "no_recent_projects": "No recent projects",
+    "remove_recent_projects": "Remove recent projects"
   },
   "program": {
     "program": "Program",

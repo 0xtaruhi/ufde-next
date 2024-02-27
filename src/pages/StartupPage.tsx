@@ -122,7 +122,19 @@ function StartUpPage() {
                             </Text>
                           </Menu.Item>
                         ))}
+                        <Menu.Divider />
+                        <Menu.Item onClick={() => {
+                          setRecentlyOpenedProjects([]);
+                          localStorage.removeItem("recentlyOpenedProjects");
+                        }}>{t("startup.remove_recent_projects")}</Menu.Item>
                       </>
+                    )}
+                    {recentlyOpenedProjects.length === 0 && (
+                      <Menu.Item disabled>
+                        <Text size="sm" c="dimmed">
+                          {t("startup.no_recent_projects")}
+                        </Text>
+                      </Menu.Item>
                     )}
                   </Menu.Dropdown>
                 </Menu>

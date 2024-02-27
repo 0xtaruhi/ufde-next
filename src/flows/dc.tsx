@@ -6,6 +6,7 @@ import { useState } from "react";
 import { TbChevronDown } from "react-icons/tb";
 import { SettingsItem } from "../pages/FlowPage";
 import { useTranslation } from "react-i18next";
+import { getDirOfFile } from "../utils/utils";
 
 export async function runDCImportFlowCommand(project: ProjectInfo) {
   const files = project.file_lists
@@ -18,7 +19,7 @@ export async function runDCImportFlowCommand(project: ProjectInfo) {
   const command = Command.sidecar(
     "binaries/fde-cli/import",
     ["-x", outputFileName, "-l", celllibfilePath, "-e", files?.join(" ") ?? ""],
-    { cwd: project.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;
@@ -50,7 +51,7 @@ export async function runDCMapFlowCommand(project: ProjectInfo) {
       "-e",
       files?.join(" ") ?? "",
     ],
-    { cwd: project?.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;
@@ -82,7 +83,7 @@ export async function runDCPackFlowCommand(project: ProjectInfo) {
       xdlcfgfilePath,
       "-e",
     ],
-    { cwd: project.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;
@@ -128,7 +129,7 @@ export async function runDCPlaceFlowCommand(project: ProjectInfo) {
       placeMode,
       "-e",
     ],
-    { cwd: project.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;
@@ -146,7 +147,7 @@ export async function runDCRouteFlowCommand(project: ProjectInfo) {
   const command = Command.sidecar(
     "binaries/fde-cli/route",
     ["-a", archfilePath, "-n", inputFileName, "-o", outputFileName, routeMode, routecst, routecstFilePath, "-e"],
-    { cwd: project.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;
@@ -213,7 +214,7 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
   const command = Command.sidecar(
     "binaries/fde-cli/bitgen",
     ["-a", archfilePath, "-c", cilfilePath, "-n", inputFileName, "-b", outputFileName, "-e"],
-    { cwd: project.path }
+    { cwd: await getDirOfFile(project.path) }
   );
 
   return command;

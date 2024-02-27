@@ -25,6 +25,7 @@ import { notifications } from "@mantine/notifications";
 import { ProjectInfo } from "../model/project";
 import { useCallback } from "react";
 import { dcFlows } from "../flows/dc";
+import { getDirOfFile } from "../utils/utils";
 
 const flowData: {
   value: string;
@@ -112,7 +113,7 @@ export interface FlowProps {
 interface FlowInfo {
   name: string;
   target_file?: string;
-  runFunc?: (project: ProjectInfo) => Promise<Command>;
+  runFunc?: (project: ProjectInfo) => (Promise<Command> | Promise<undefined>);
   settingsPage?: React.ReactNode;
 }
 
@@ -127,9 +128,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
     if (command) {
       command.stdout.on("data", (data) => {
         setStatusText(data);
+        console.log(data);
       });
       command.stderr.on("data", (data) => {
         setStatusText(data);
+        console.log(data);
       });
 
       const notifyId = notifications.show({
@@ -190,11 +193,12 @@ function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index
     const projectName = project?.name;
     let tmpActive = 0;
     (async () => {
+      const projectDir = await getDirOfFile(project?.path!);
       for (let i = 0; i < props.flows.length; i++) {
         const flow = props.flows[i];
         if (flow.target_file) {
           const fileName = projectName + "_" + flow.target_file;
-          if (await exists(project?.path + "/" + fileName)) {
+          if (await exists(projectDir + "/" + fileName)) {
             tmpActive = i + 1;
           }
         } else {

@@ -40,7 +40,7 @@ export function updateRecentlyOpenedProjects(
   let updatedResult = [];
 
   if (recentlyOpenedProjects.length >= maxRecentlyOpenedProjects) {
-    updatedResult = [newProject, ...recentlyOpenedProjects.slice(1)];
+    updatedResult = [newProject, ...recentlyOpenedProjects.slice(0, maxRecentlyOpenedProjects - 1)];
   } else {
     updatedResult = [newProject, ...recentlyOpenedProjects];
   }
