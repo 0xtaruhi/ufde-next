@@ -27,7 +27,7 @@ function LightDarkToggleButton() {
 
 function MenuArea() {
   const { t } = useTranslation();
-  const { project, setProject } = useContext(ProjectContext);
+  const { project, setProject, setNavLabel } = useContext(ProjectContext);
 
   const [opened, { open, close }] = useDisclosure();
 
@@ -78,6 +78,7 @@ function MenuArea() {
           });
         } else {
           setProject(null);
+          setNavLabel("nav.project");
         }
       },
     },

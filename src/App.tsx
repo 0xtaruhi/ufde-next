@@ -14,7 +14,8 @@ import FlowPage from "./pages/FlowPage";
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
   setProject: (project: ProjectInfo | null) => void;
-}>({ project: null, setProject: () => {} });
+  setNavLabel: (navLabel: string) => void;
+}>({ project: null, setProject: () => {}, setNavLabel: () => {} });
 
 type NavLinkData = {
   label: string;
@@ -37,20 +38,21 @@ function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: 
   const { t } = useTranslation();
   const { project } = useContext(ProjectContext);
 
-  const items = navLinksData.map((item) => (
-    project === null && item.label === "nav.flow" ? null :
-    <NavLink
-      active={navLabel === item.label}
-      label={t(item.label)}
-      key={item.label}
-      leftSection={item.icon && <item.icon size={15} />}
-      rightSection={item.rightSection && <item.rightSection size={15} />}
-      description={item.description}
-      onClick={() => {
-        setNavLabel(item.label);
-      }}
-    />
-  ));
+  const items = navLinksData.map((item) =>
+    project === null && item.label === "nav.flow" ? null : (
+      <NavLink
+        active={navLabel === item.label}
+        label={t(item.label)}
+        key={item.label}
+        leftSection={item.icon && <item.icon size={15} />}
+        rightSection={item.rightSection && <item.rightSection size={15} />}
+        description={item.description}
+        onClick={() => {
+          setNavLabel(item.label);
+        }}
+      />
+    )
+  );
 
   return <>{items}</>;
 }
@@ -73,7 +75,7 @@ function App() {
 
   return (
     <div className="App">
-      <ProjectContext.Provider value={{ project, setProject }}>
+      <ProjectContext.Provider value={{ project, setProject, setNavLabel }}>
         <AppShell
           header={{ height: 50 }}
           navbar={{
