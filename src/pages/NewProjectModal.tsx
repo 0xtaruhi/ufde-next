@@ -198,8 +198,8 @@ function NewProjectStep2(props: StepProps) {
     const selectedSourcefiles = (await getSourceFilesByDialog({
       dialogFilter: [
         { name: t("sourcefile.verilog"), extensions: ["v"] },
-        { name: t("sourcefile.systemverilog"), extensions: [".sv"] },
-        { name: t("sourcefile.constraint"), extensions: [".xml"] },
+        { name: t("sourcefile.systemverilog"), extensions: ["sv"] },
+        { name: t("sourcefile.constraint"), extensions: ["xml"] },
       ],
     })) as string[];
 

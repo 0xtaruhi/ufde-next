@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { ProjectContext } from "./App";
 import { openProject } from "./model/project";
 import { showFailedNotification, showWarningNotification } from "./pages/Notifies";
+import { useDisclosure } from "@mantine/hooks";
+import NewProjectModal from "./pages/NewProjectModal";
 
 function LightDarkToggleButton() {
   const { setColorScheme } = useMantineColorScheme();
@@ -27,11 +29,13 @@ function MenuArea() {
   const { t } = useTranslation();
   const { project, setProject } = useContext(ProjectContext);
 
+  const [opened, { open, close }] = useDisclosure();
+
   const menuItems = [
     {
       icon: <VscNewFile />,
       label: "menu.new_project",
-      onClick: () => {},
+      onClick: open,
     },
     {
       icon: <VscFolderOpened />,
@@ -80,24 +84,33 @@ function MenuArea() {
   ];
 
   return (
-    <Group>
-      <Menu>
-        <Menu.Target>
-          <Button variant="subtle">
-            <TbFile size={18} /> {t("menu.file")}
-          </Button>
-        </Menu.Target>
-        <Menu.Dropdown>
-          <Menu.Label>{t("menu.project")}</Menu.Label>
-          {menuItems.map((item) => (
-            <Menu.Item key={item.label} leftSection={item.icon} onClick={item.onClick}>
-              {" "}
-              {t(item.label)}
-            </Menu.Item>
-          ))}
-        </Menu.Dropdown>
-      </Menu>
-    </Group>
+    <>
+      <Group>
+        <Menu>
+          <Menu.Target>
+            <Button variant="subtle">
+              <TbFile size={18} /> {t("menu.file")}
+            </Button>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Label>{t("menu.project")}</Menu.Label>
+            {menuItems.map((item) => (
+              <Menu.Item key={item.label} leftSection={item.icon} onClick={item.onClick}>
+                {" "}
+                {t(item.label)}
+              </Menu.Item>
+            ))}
+          </Menu.Dropdown>
+        </Menu>
+      </Group>
+      <NewProjectModal
+        opened={opened}
+        onClose={close}
+        size="lg"
+        overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
+        transitionProps={{ transition: "rotate-left", duration: 300 }}
+      />
+    </>
   );
 }
 
