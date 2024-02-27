@@ -249,7 +249,7 @@ function FlowPage() {
     const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
 
     if (command) {
-      command.execute().then(
+      await command.execute().then(
         () => {
           update2SuccessNotification({
             id: notifyId,
