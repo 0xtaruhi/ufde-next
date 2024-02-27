@@ -36,7 +36,9 @@ export function addRecentlyOpenedProject(project: ProjectInfo) {
 }
 
 export function saveRecentlyOpenedProjects() {
-  writeTextFile("recent_projects.json", JSON.stringify(recentlyOpenedProjects), { dir: BaseDirectory.AppData });
+  writeTextFile("recent_projects.json", JSON.stringify(recentlyOpenedProjects),
+    { dir: BaseDirectory.AppLocalData }
+  );
 }
 
 export async function openProject() {
