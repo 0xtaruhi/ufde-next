@@ -20,10 +20,7 @@ import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import {
-  update2FailedNotification,
-  update2SuccessNotification,
-} from "./Notifies";
+import { update2FailedNotification, update2SuccessNotification } from "./Notifies";
 import { notifications } from "@mantine/notifications";
 import { ProjectInfo } from "../model/project";
 import { useCallback } from "react";
@@ -57,17 +54,10 @@ export function Flow(props: AbstractFlowProps) {
 
   return (
     <>
-      <Drawer
-        opened={opened}
-        onClose={close}
-        padding="md"
-        size={350}
-        position="right"
-      >
+      <Drawer opened={opened} onClose={close} padding="md" size={350} position="right">
         <Stack gap="md">
           <Text size="md" className="flowSettingsTitle">
-            <b>{t("flow.settings")}</b> -{" "}
-            {t("flow." + props.flowName + ".title")}
+            <b>{t("flow.settings")}</b> - {t("flow." + props.flowName + ".title")}
           </Text>
           {props.settingsPage}
         </Stack>
@@ -77,12 +67,7 @@ export function Flow(props: AbstractFlowProps) {
           {t("flow." + props.flowName + ".description")}
         </Text>
         <Group>
-          <ActionIcon
-            size="md"
-            variant="subtle"
-            onClick={open}
-            style={{ padding: "5px" }}
-          >
+          <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
             <TbSettings size={20} />
           </ActionIcon>
           <ActionIcon
@@ -110,13 +95,7 @@ export function EmptySettingsHint() {
   return <Text c="dimmed">{t("flow.no-settings-available")}</Text>;
 }
 
-export function SettingsItem({
-  label,
-  component,
-}: {
-  label: string;
-  component: React.ReactNode;
-}) {
+export function SettingsItem({ label, component }: { label: string; component: React.ReactNode }) {
   return (
     <Group justify="space-between">
       <Text size="md">{label}</Text>
@@ -145,9 +124,7 @@ function FlowInstance(props: FlowInfo & FlowProps) {
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const command = props.runFunc
-      ? await props.runFunc(projectContext.project!)
-      : undefined;
+    const command = props.runFunc ? await props.runFunc(projectContext.project!) : undefined;
     if (command) {
       command.stdout.on("data", (data) => {
         setStatusText(data);
@@ -207,9 +184,7 @@ function FlowInstance(props: FlowInfo & FlowProps) {
     <Flow
       flowName={props.name}
       onRun={run}
-      settingsPage={
-        props.settingsPage ? props.settingsPage : <EmptySettingsHint />
-      }
+      settingsPage={props.settingsPage ? props.settingsPage : <EmptySettingsHint />}
       // runAvailable={true}
       runAvailable={props.runAvailable}
       status={statusText}
@@ -217,11 +192,7 @@ function FlowInstance(props: FlowInfo & FlowProps) {
   );
 }
 
-function FlowItems(props: {
-  flows: FlowInfo[];
-  active: number;
-  setActive: (index: number) => void;
-}) {
+function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index: number) => void }) {
   const { t } = useTranslation();
   const projectContext = useContext(ProjectContext);
   const project = projectContext.project;
@@ -247,19 +218,10 @@ function FlowItems(props: {
   });
 
   return (
-    <Timeline
-      bulletSize={24}
-      style={{ padding: "20px 20px" }}
-      active={props.active}
-    >
+    <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={props.active}>
       {props.flows.map((flow, index) => {
         return (
-          <Timeline.Item
-            title={t("flow." + flow.name + ".title")}
-            color="blue"
-            className="flowItem"
-            key={index}
-          >
+          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
             <FlowInstance
               name={flow.name}
               runFunc={flow.runFunc}
@@ -317,9 +279,11 @@ function FlowPage() {
               t("flow." + flow.name + ".title") +
               t("flow.notify.success.message_suffix"),
           });
+          return true;
         }
       });
     }
+    return false;
   };
 
   const [active, setActive] = useState(0);
@@ -330,7 +294,9 @@ function FlowPage() {
 
     for (let i = 0; i < flows.length; i++) {
       const flow = flows[i];
-      await run(flow);
+      if (!(await run(flow))) {
+        break;
+      }
       setActive(i + 1);
     }
   }, []);
@@ -357,13 +323,7 @@ function FlowPage() {
           </Button>
         </Flex>
         <ScrollArea style={{ height: "calc(100vh - 150px)" }}>
-          {
-            <FlowItems
-              flows={flowsNameMap(flowName)!}
-              active={active}
-              setActive={setActive}
-            />
-          }
+          {<FlowItems flows={flowsNameMap(flowName)!} active={active} setActive={setActive} />}
         </ScrollArea>
       </Stack>
     </>
