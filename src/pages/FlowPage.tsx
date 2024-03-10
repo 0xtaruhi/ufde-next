@@ -128,11 +128,9 @@ function FlowInstance(props: FlowInfo & FlowProps) {
     if (command) {
       command.stdout.on("data", (data) => {
         setStatusText(data);
-        console.log(data);
       });
       command.stderr.on("data", (data) => {
         setStatusText(data);
-        console.log(data);
       });
 
       const notifyId = notifications.show({
@@ -256,32 +254,40 @@ function FlowPage() {
 
     const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
 
+    const onSuccess = () => {
+      setActive(active + 1);
+      update2SuccessNotification({
+        id: notifyId,
+        title: t("flow." + flow.name + ".title"),
+        message:
+          t("flow.notify.success.message_prefix") +
+          t("flow." + flow.name + ".title") +
+          t("flow.notify.success.message_suffix"),
+      });
+    };
+
+    const onError = (err: any) => {
+      update2FailedNotification({
+        id: notifyId,
+        title: t("flow." + flow.name + ".title"),
+        message:
+          t("flow.notify.failed.message_prefix") +
+          t("flow." + flow.name + ".title") +
+          t("flow.notify.failed.message_suffix") +
+          ": " +
+          err,
+      });
+    };
+
     if (command) {
-      await command.execute().then((res) => {
+      command.execute().then((res) => {
         if (res.code !== 0) {
-          update2FailedNotification({
-            id: notifyId,
-            title: t("flow." + flow.name + ".title"),
-            message:
-              t("flow.notify.failed.message_prefix") +
-              t("flow." + flow.name + ".title") +
-              t("flow.notify.failed.message_suffix") +
-              ": " +
-              "Code = " +
-              res.code,
-          });
+          onError("Code = " + res.code);
         } else {
-          update2SuccessNotification({
-            id: notifyId,
-            title: t("flow." + flow.name + ".title"),
-            message:
-              t("flow.notify.success.message_prefix") +
-              t("flow." + flow.name + ".title") +
-              t("flow.notify.success.message_suffix"),
-          });
+          onSuccess();
           return true;
         }
-      });
+      }, onError);
     }
     return false;
   };
