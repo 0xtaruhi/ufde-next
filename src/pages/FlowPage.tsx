@@ -20,7 +20,10 @@ import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import { update2FailedNotification, update2SuccessNotification } from "./Notifies";
+import {
+  update2FailedNotification,
+  update2SuccessNotification,
+} from "./Notifies";
 import { notifications } from "@mantine/notifications";
 import { ProjectInfo } from "../model/project";
 import { useCallback } from "react";
@@ -54,10 +57,17 @@ export function Flow(props: AbstractFlowProps) {
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} padding="md" size={350} position="right">
+      <Drawer
+        opened={opened}
+        onClose={close}
+        padding="md"
+        size={350}
+        position="right"
+      >
         <Stack gap="md">
           <Text size="md" className="flowSettingsTitle">
-            <b>{t("flow.settings")}</b> - {t("flow." + props.flowName + ".title")}
+            <b>{t("flow.settings")}</b> -{" "}
+            {t("flow." + props.flowName + ".title")}
           </Text>
           {props.settingsPage}
         </Stack>
@@ -67,7 +77,12 @@ export function Flow(props: AbstractFlowProps) {
           {t("flow." + props.flowName + ".description")}
         </Text>
         <Group>
-          <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
+          <ActionIcon
+            size="md"
+            variant="subtle"
+            onClick={open}
+            style={{ padding: "5px" }}
+          >
             <TbSettings size={20} />
           </ActionIcon>
           <ActionIcon
@@ -95,7 +110,13 @@ export function EmptySettingsHint() {
   return <Text c="dimmed">{t("flow.no-settings-available")}</Text>;
 }
 
-export function SettingsItem({ label, component }: { label: string; component: React.ReactNode }) {
+export function SettingsItem({
+  label,
+  component,
+}: {
+  label: string;
+  component: React.ReactNode;
+}) {
   return (
     <Group justify="space-between">
       <Text size="md">{label}</Text>
@@ -113,7 +134,7 @@ export interface FlowProps {
 interface FlowInfo {
   name: string;
   target_file?: string;
-  runFunc?: (project: ProjectInfo) => (Promise<Command> | Promise<undefined>);
+  runFunc?: (project: ProjectInfo) => Promise<Command> | Promise<undefined>;
   settingsPage?: React.ReactNode;
 }
 
@@ -124,7 +145,9 @@ function FlowInstance(props: FlowInfo & FlowProps) {
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const command = props.runFunc ? await props.runFunc(projectContext.project!) : undefined;
+    const command = props.runFunc
+      ? await props.runFunc(projectContext.project!)
+      : undefined;
     if (command) {
       command.stdout.on("data", (data) => {
         setStatusText(data);
@@ -145,31 +168,38 @@ function FlowInstance(props: FlowInfo & FlowProps) {
         loading: true,
       });
 
-      command.execute().then(
-        () => {
-          props.setActive(props.index + 1);
-          update2SuccessNotification({
-            id: notifyId,
-            title: t("flow." + props.name + ".title"),
-            message:
-              t("flow.notify.success.message_prefix") +
-              t("flow." + props.name + ".title") +
-              t("flow.notify.success.message_suffix"),
-          });
-        },
-        (err) => {
-          update2FailedNotification({
-            id: notifyId,
-            title: t("flow." + props.name + ".title"),
-            message:
-              t("flow.notify.failed.message_prefix") +
-              t("flow." + props.name + ".title") +
-              t("flow.notify.failed.message_suffix") +
-              ": " +
-              err,
-          });
+      const onSuccess = () => {
+        props.setActive(props.index + 1);
+        update2SuccessNotification({
+          id: notifyId,
+          title: t("flow." + props.name + ".title"),
+          message:
+            t("flow.notify.success.message_prefix") +
+            t("flow." + props.name + ".title") +
+            t("flow.notify.success.message_suffix"),
+        });
+      };
+
+      const onError = (err: any) => {
+        update2FailedNotification({
+          id: notifyId,
+          title: t("flow." + props.name + ".title"),
+          message:
+            t("flow.notify.failed.message_prefix") +
+            t("flow." + props.name + ".title") +
+            t("flow.notify.failed.message_suffix") +
+            ": " +
+            err,
+        });
+      };
+
+      command.execute().then((res) => {
+        if (res.code !== 0) {
+          onError("Code = " + res.code);
+        } else {
+          onSuccess();
         }
-      );
+      }, onError);
     }
   };
 
@@ -177,14 +207,21 @@ function FlowInstance(props: FlowInfo & FlowProps) {
     <Flow
       flowName={props.name}
       onRun={run}
-      settingsPage={props.settingsPage ? props.settingsPage : <EmptySettingsHint />}
-      runAvailable={true}
+      settingsPage={
+        props.settingsPage ? props.settingsPage : <EmptySettingsHint />
+      }
+      // runAvailable={true}
+      runAvailable={props.runAvailable}
       status={statusText}
     />
   );
 }
 
-function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index: number) => void }) {
+function FlowItems(props: {
+  flows: FlowInfo[];
+  active: number;
+  setActive: (index: number) => void;
+}) {
   const { t } = useTranslation();
   const projectContext = useContext(ProjectContext);
   const project = projectContext.project;
@@ -210,10 +247,19 @@ function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index
   });
 
   return (
-    <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={props.active}>
+    <Timeline
+      bulletSize={24}
+      style={{ padding: "20px 20px" }}
+      active={props.active}
+    >
       {props.flows.map((flow, index) => {
         return (
-          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
+          <Timeline.Item
+            title={t("flow." + flow.name + ".title")}
+            color="blue"
+            className="flowItem"
+            key={index}
+          >
             <FlowInstance
               name={flow.name}
               runFunc={flow.runFunc}
@@ -249,18 +295,8 @@ function FlowPage() {
     const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
 
     if (command) {
-      await command.execute().then(
-        () => {
-          update2SuccessNotification({
-            id: notifyId,
-            title: t("flow." + flow.name + ".title"),
-            message:
-              t("flow.notify.success.message_prefix") +
-              t("flow." + flow.name + ".title") +
-              t("flow.notify.success.message_suffix"),
-          });
-        },
-        (err) => {
+      await command.execute().then((res) => {
+        if (res.code !== 0) {
           update2FailedNotification({
             id: notifyId,
             title: t("flow." + flow.name + ".title"),
@@ -269,10 +305,20 @@ function FlowPage() {
               t("flow." + flow.name + ".title") +
               t("flow.notify.failed.message_suffix") +
               ": " +
-              err,
+              "Code = " +
+              res.code,
+          });
+        } else {
+          update2SuccessNotification({
+            id: notifyId,
+            title: t("flow." + flow.name + ".title"),
+            message:
+              t("flow.notify.success.message_prefix") +
+              t("flow." + flow.name + ".title") +
+              t("flow.notify.success.message_suffix"),
           });
         }
-      );
+      });
     }
   };
 
@@ -311,7 +357,13 @@ function FlowPage() {
           </Button>
         </Flex>
         <ScrollArea style={{ height: "calc(100vh - 150px)" }}>
-          {<FlowItems flows={flowsNameMap(flowName)!} active={active} setActive={setActive} />}
+          {
+            <FlowItems
+              flows={flowsNameMap(flowName)!}
+              active={active}
+              setActive={setActive}
+            />
+          }
         </ScrollArea>
       </Stack>
     </>
