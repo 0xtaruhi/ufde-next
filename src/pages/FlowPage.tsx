@@ -253,6 +253,7 @@ function FlowPage() {
     });
 
     const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
+    let runSuccess = false;
 
     const onSuccess = () => {
       setActive(active + 1);
@@ -264,6 +265,7 @@ function FlowPage() {
           t("flow." + flow.name + ".title") +
           t("flow.notify.success.message_suffix"),
       });
+      runSuccess = true;
     };
 
     const onError = (err: any) => {
@@ -280,16 +282,15 @@ function FlowPage() {
     };
 
     if (command) {
-      command.execute().then((res) => {
+      await command.execute().then((res) => {
         if (res.code !== 0) {
           onError("Code = " + res.code);
         } else {
           onSuccess();
-          return true;
         }
       }, onError);
     }
-    return false;
+    return runSuccess;
   };
 
   const [active, setActive] = useState(0);
