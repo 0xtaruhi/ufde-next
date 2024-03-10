@@ -1,6 +1,8 @@
 .flowItem {
   background-color: transparent;
-  border-radius: var(--mantine-radius-md);
+  /* border-radius: var(--mantine-radius-md); */
+  border-top-right-radius: var(--mantine-radius-md);
+  border-bottom-right-radius: var(--mantine-radius-md);
   padding: 10px;
   transition: 0.3s;
 }

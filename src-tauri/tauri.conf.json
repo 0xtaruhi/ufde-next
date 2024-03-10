@@ -59,16 +59,6 @@
             "args": true
           },
           {
-            "name": "binaries/yosys",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/yosys-abc",
-            "sidecar": true,
-            "args": true
-          },
-          {
             "name": "vscode.cmd",
             "cmd": "code.cmd",
             "args": true
@@ -135,14 +125,11 @@
         "binaries/fde-cli/pack",
         "binaries/fde-cli/place",
         "binaries/fde-cli/route",
-        "binaries/fde-cli/sta",
-        "binaries/yosys",
-        "binaries/yosys-abc"
+        "binaries/fde-cli/sta"
       ],
       "resources": [
-        "resource/**",
-        "share/**"
-      ]
+        "resource/**"
+       ]
     },
     "security": {
       "csp": null
