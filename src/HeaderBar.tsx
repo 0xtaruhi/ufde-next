@@ -10,6 +10,8 @@ import { openProject } from "./model/project";
 import { showFailedNotification, showWarningNotification } from "./pages/Notifies";
 import { useDisclosure } from "@mantine/hooks";
 import NewProjectModal from "./pages/NewProjectModal";
+import { writeTextFile } from "@tauri-apps/api/fs";
+import { confirm } from "@tauri-apps/api/dialog";
 
 function LightDarkToggleButton() {
   const { setColorScheme } = useMantineColorScheme();
@@ -27,7 +29,15 @@ function LightDarkToggleButton() {
 
 function MenuArea() {
   const { t } = useTranslation();
-  const { project, setProject, setNavLabel, recentlyOpenedProjects, setRecentlyOpenedProjects } = useContext(ProjectContext);
+  const {
+    project,
+    setProject,
+    setNavLabel,
+    recentlyOpenedProjects,
+    setRecentlyOpenedProjects,
+    projectModified,
+    setProjectModified,
+  } = useContext(ProjectContext);
 
   const [opened, { open, close }] = useDisclosure();
 
@@ -41,10 +51,11 @@ function MenuArea() {
       icon: <VscFolderOpened />,
       label: "menu.open_project",
       onClick: () => {
-        openProject({recentlyOpenedProjects, setRecentlyOpenedProjects}).then(
+        openProject({ recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
           (p) => {
             if (p) {
               setProject(p);
+              setProjectModified(false);
             }
           },
           (err) => {
@@ -60,12 +71,16 @@ function MenuArea() {
     {
       icon: <VscSave />,
       label: "menu.save_project",
-      onClick: () => {
+      onClick: async () => {
         if (project === null) {
           showWarningNotification({
             message: t("project.close_project_no_project_content"),
             title: t("project.close_project_no_project_title"),
           });
+        } else {
+          const { path, ...rest } = project;
+          await writeTextFile(path, JSON.stringify(rest));
+          setProjectModified(false);
         }
       },
     },
@@ -84,15 +99,24 @@ function MenuArea() {
     {
       icon: <VscClose />,
       label: "menu.close_project",
-      onClick: () => {
+      onClick: async () => {
         if (project === null) {
           showWarningNotification({
             message: t("project.close_project_no_project_content"),
             title: t("project.close_project_no_project_title"),
           });
         } else {
+          if (projectModified) {
+            const yes = await confirm(t("project.modified_close_project_confirm"), {
+              type: "warning",
+            });
+            if (!yes) {
+              return;
+            }
+          }
           setProject(null);
           setNavLabel("nav.project");
+          setProjectModified(false);
         }
       },
     },

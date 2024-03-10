@@ -33,7 +33,11 @@
     "source_files": "源文件",
     "no_files": "没有文件",
     "import_files": "导入文件",
-    "double_click_to_open": "双击打开文件"
+    "delete_files": "移除文件",
+    "generate_constraint": "生成约束文件",
+    "delete_files_confirm": "确认要移除选中的文件吗？",
+    "double_click_to_open": "双击打开文件",
+    "modified_close_project_confirm": "项目已被修改，是否仍要关闭项目？（未保存的修改将会丢失）"
   },
   "create_project": {
     "basic_info": "基本信息",

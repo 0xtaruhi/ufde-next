@@ -228,7 +228,7 @@ export const dcFlows = [
     name: "dc.place",
     target_file: "dc_place.xml",
     runFunc: runDCPlaceFlowCommand,
-    SettingsPage: <DCPlaceFlowSettingsPage />,
+    settingsPage: <DCPlaceFlowSettingsPage />,
   },
   {
     name: "dc.route",

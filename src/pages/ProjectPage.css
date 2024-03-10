@@ -12,3 +12,12 @@
     margin-right: auto;
     font-weight: 600;
 }
+
+.projectCard {
+    box-shadow: 0rem 0.375rem 0.75rem rgba(140, 152, 164, 0.075);
+    transition: 0.5s;
+}
+
+.projectCard:hover {
+    box-shadow: 2px 0.1875rem 0.75rem rgba(140, 152, 164, 0.25)
+}

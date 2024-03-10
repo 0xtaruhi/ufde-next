@@ -29,13 +29,15 @@ function StartUpPage() {
   const computedColorScheme = useComputedColorScheme("light");
 
   const [opened, { open, close }] = useDisclosure();
-  const { setProject, recentlyOpenedProjects, setRecentlyOpenedProjects } = useContext(ProjectContext);
+  const { setProject, recentlyOpenedProjects, setRecentlyOpenedProjects, setProjectModified } =
+    useContext(ProjectContext);
 
   const openOtherProject = () => {
     openProject({ recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
       (p) => {
         if (p) {
           setProject(p);
+          setProjectModified(false);
         }
       },
       (err) => {
@@ -67,7 +69,7 @@ function StartUpPage() {
 
   return (
     <>
-      <Center style={{height: "100vh", padding: "20px"}}>
+      <Center style={{ height: "100vh", padding: "20px" }}>
         <div className="inner">
           <div className="content">
             <Title className="title">
@@ -123,10 +125,14 @@ function StartUpPage() {
                           </Menu.Item>
                         ))}
                         <Menu.Divider />
-                        <Menu.Item onClick={() => {
-                          setRecentlyOpenedProjects([]);
-                          localStorage.removeItem("recentlyOpenedProjects");
-                        }}>{t("startup.remove_recent_projects")}</Menu.Item>
+                        <Menu.Item
+                          onClick={() => {
+                            setRecentlyOpenedProjects([]);
+                            localStorage.removeItem("recentlyOpenedProjects");
+                          }}
+                        >
+                          {t("startup.remove_recent_projects")}
+                        </Menu.Item>
                       </>
                     )}
                     {recentlyOpenedProjects.length === 0 && (

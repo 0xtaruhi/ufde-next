@@ -59,6 +59,16 @@
             "args": true
           },
           {
+            "name": "binaries/yosys",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/yosys-abc",
+            "sidecar": true,
+            "args": true
+          },
+          {
             "name": "vscode.cmd",
             "cmd": "code.cmd",
             "args": true
@@ -73,7 +83,7 @@
       "dialog": {
         "all": false,
         "ask": false,
-        "confirm": false,
+        "confirm": true,
         "message": false,
         "open": true,
         "save": false
@@ -90,7 +100,8 @@
         "renameFile": false,
         "scope": [
           "**",
-          "$APPDATA/*",
+          "$APPDATA",
+          "$APPDATA/**",
           "$RESOURCE/**"
         ],
         "writeFile": true
@@ -124,10 +135,13 @@
         "binaries/fde-cli/pack",
         "binaries/fde-cli/place",
         "binaries/fde-cli/route",
-        "binaries/fde-cli/sta"
+        "binaries/fde-cli/sta",
+        "binaries/yosys",
+        "binaries/yosys-abc"
       ],
       "resources": [
-        "resource/**"
+        "resource/**",
+        "share/**"
       ]
     },
     "security": {

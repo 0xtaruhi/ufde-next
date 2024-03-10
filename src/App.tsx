@@ -11,6 +11,7 @@ import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
 import { useEffect } from "react";
+import { appWindow } from "@tauri-apps/api/window";
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
@@ -18,12 +19,16 @@ const ProjectContext = createContext<{
   recentlyOpenedProjects: RecentlyOpenedProjectsType[];
   setRecentlyOpenedProjects: (projects: RecentlyOpenedProjectsType[]) => void;
   setNavLabel: (navLabel: string) => void;
+  projectModified: boolean;
+  setProjectModified: (modified: boolean) => void;
 }>({
   project: null,
   setProject: () => {},
   setNavLabel: () => {},
   recentlyOpenedProjects: [],
   setRecentlyOpenedProjects: () => {},
+  projectModified: false,
+  setProjectModified: () => {},
 });
 
 type NavLinkData = {
@@ -59,6 +64,7 @@ function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: 
         onClick={() => {
           setNavLabel(item.label);
         }}
+        style={{ transition: "200ms" }}
       />
     )
   );
@@ -83,6 +89,8 @@ function App() {
   const [navLabel, setNavLabel] = useState<string>("nav.project");
   const [recentlyOpenedProjects, setRecentlyOpenedProjects] = useState<RecentlyOpenedProjectsType[]>([]);
 
+  const [projectModified, setProjectModified] = useState<boolean>(false);
+
   useEffect(() => {
     const projects = localStorage.getItem("recentlyOpenedProjects");
     if (projects) {
@@ -90,10 +98,26 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (project) {
+      appWindow.setTitle("UFDE+ - " + project.name + (projectModified ? "*" : ""));
+    } else {
+      appWindow.setTitle("UFDE+");
+    }
+  }, [project, projectModified]);
+
   return (
     <div className="App">
       <ProjectContext.Provider
-        value={{ project, setProject, setNavLabel, recentlyOpenedProjects, setRecentlyOpenedProjects }}
+        value={{
+          project,
+          setProject,
+          setNavLabel,
+          recentlyOpenedProjects,
+          setRecentlyOpenedProjects,
+          projectModified,
+          setProjectModified,
+        }}
       >
         <AppShell
           header={{ height: 50 }}
