@@ -33,7 +33,11 @@
     "source_file": "ソースファイル",
     "no_files": "ファイルがありません",
     "import_files": "ファイルインポート",
-    "double_click_to_open": "ダブルクリックで開く"
+    "double_click_to_open": "ファイルをダブルクリックして開きます",
+    "delete_files": "ファイルを削除します",
+    "delete_files_confirm": "選択されたファイルを削除してもよろしいですか？",
+    "generate_constraint": "制約ファイルの生成",
+    "modified_close_project_confirm": "プロジェクトが変更されています。プロジェクトを閉じますか？"
   },
   "create_project": {
     "basic_info": "基本情報",
@@ -76,7 +80,9 @@
       "title": "オーペンソース",
       "content": "UFDE+ は、オープンソースであり、MIT ライセンスで提供されています。コードは GitHub で公開されており、誰でも自由に利用できます。"
     },
-    "recent_projects": "最近のプロジェクト"
+    "recent_projects": "最近のプロジェクト",
+    "no_recent_projects": "最近のプロジェクトがありません",
+    "remove_recent_projects": "最近のプロジェクトを削除"
   },
   "program": {
     "program": "書き込む",
@@ -88,7 +94,55 @@
   },
   "flow": {
     "settings": "設定",
-    "no-settings-available": "利用可能な設定がありません"
+    "no-settings-available": "利用可能な設定がありません",
+    "mode": "モード",
+    "run_all": "全て実行",
+    "dc": {
+      "import": {
+        "title": "RTL ファイルのインポート",
+        "description": "RTL ファイルから回路ネットリストをインポートし、それを XML 形式に変換します"
+      },
+      "map": {
+        "title": "プロセス・マッピング",
+        "description": "将逻辑ネットリストを対象デバイスのプリミティブにマッピングする"
+      },
+      "pack": {
+        "title": "論理パッケージング",
+        "description": "ルックアップテーブルを論理ブロックにパッケージングする"
+      },
+      "place": {
+        "title": "レイアウト",
+        "description": "論理ブロックを対象デバイスに配置"
+      },
+      "route": {
+        "title": "ワイヤリング",
+        "description": "論理ブロック間の接続を対象デバイスにワイヤリングする"
+      },
+      "genbit": {
+        "title": "ビットストリームの生成",
+        "description": "対象デバイスのビットストリームファイルの生成"
+      }
+    },
+    "notify": {
+      "running": {
+        "title": "稼働中",
+        "message_prefix": "稼働中",
+        "message_suffix": "、お待ちください"
+      },
+      "success": {
+        "title": "実行が成功しました",
+        "message_prefix": "",
+        "message_suffix": "実行が成功しました"
+      },
+      "failed": {
+        "title": "実行に失敗しました",
+        "message_prefix": "",
+        "message_suffix": "実行に失敗しました",
+        "reason": {
+          "constraint_file_not_found": "制約ファイルが見つかりません"
+        }
+      }
+    }
   },
   "sourcefile": {
     "verilog": "Verilog ファイル",
