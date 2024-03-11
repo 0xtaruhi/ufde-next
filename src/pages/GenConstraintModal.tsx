@@ -22,7 +22,8 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
     if (props.opened) {
       fetchPortsMap();
     }
-  }, [props.opened])
+    setSelectedModule(undefined);
+  }, [props.opened, props.file])
 
   return <>
     <Modal {...props}>

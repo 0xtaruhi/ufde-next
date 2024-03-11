@@ -35,9 +35,12 @@ export async function getAllPorts(file: string): Promise<Map<string, PortInfo[]>
             const direction = port[1] as "input" | "output" | "inout";
             const leftBound = port[4] ? Number(port[4].match(/\d+/)) : 0;
             const rightBound = port[4] ? Number(port[4].match(/:(\d+)/)) : 0;
-            const names = port[5].split(",").map((name: string) => name.trim().replace(/[;,]/, ""));
+            const names = port[5].split(",").map((name: string) => name.match(/\w+/)?.[0] ?? "");
 
             for (const name of names) {
+                if (name === "") {
+                    continue;
+                }
                 portInfo.push({
                     direction,
                     leftBound,
