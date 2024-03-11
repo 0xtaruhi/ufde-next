@@ -90,18 +90,18 @@ function MenuArea() {
         }
       },
     },
-    {
-      icon: <VscSaveAs />,
-      label: "menu.save_project_as",
-      onClick: () => {
-        if (project === null) {
-          showWarningNotification({
-            message: t("project.close_project_no_project_content"),
-            title: t("project.close_project_no_project_title"),
-          });
-        }
-      },
-    },
+    // {
+    //   icon: <VscSaveAs />,
+    //   label: "menu.save_project_as",
+    //   onClick: () => {
+    //     if (project === null) {
+    //       showWarningNotification({
+    //         message: t("project.close_project_no_project_content"),
+    //         title: t("project.close_project_no_project_title"),
+    //       });
+    //     }
+    //   },
+    // },
     {
       icon: <VscClose />,
       label: "menu.close_project",

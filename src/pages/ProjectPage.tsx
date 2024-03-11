@@ -152,11 +152,10 @@ function SourceFileSection() {
           onClose={() => {
             setGenConstraintModalOpened(false);
           }}
-          // title={t("project.generate_constraint")}
           title={(
-            <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#333' }}>
+            <Text size="lg" fw={700}>
               {t("project.generate_constraint")}
-            </div>
+            </Text>
           )}
         />
         <Flex justify="flex-end">
