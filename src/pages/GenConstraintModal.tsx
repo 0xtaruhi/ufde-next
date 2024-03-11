@@ -2,6 +2,7 @@ import { Button, Modal, ModalProps, Select, Stack, Table } from "@mantine/core";
 import { SourceFile } from "../model/project";
 import { PortInfo, getAllPorts } from "../utils/VerilogParser";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface GenConstraintModalProps extends ModalProps {
   file: SourceFile | undefined;
@@ -10,6 +11,7 @@ interface GenConstraintModalProps extends ModalProps {
 export default function GenConstraintModal(props: GenConstraintModalProps) {
   const [portsMap, setPortsMap] = useState<Map<string, PortInfo[]>>(new Map());
   const [selectedModule, setSelectedModule] = useState<string>();
+  const { t } = useTranslation(); 
 
   useEffect(() => {
     const fetchPortsMap = async () => {
@@ -31,7 +33,6 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
       if (port.leftBound !== port.rightBound) {
         const small = Math.min(port.leftBound, port.rightBound);
         const large = Math.max(port.leftBound, port.rightBound);
-
         for (let i = small; i <= large; i++) {
           expandedPorts.push({ ...port, name: port.name + "[" + i + "]" });
         }
@@ -51,9 +52,9 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
       <Modal {...props}>
         <Stack gap="sm">
           <Select
-            placeholder="Select module"
+            placeholder={t("constraint.select_module")}
             data={Array.from(portsMap.keys())}
-            label="Module"
+            label={t("constraint.module")}
             value={selectedModule}
             onChange={(e) => setSelectedModule(e ?? undefined)}
           />
@@ -62,9 +63,9 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
               <Table>
                 <Table.Thead>
                   <Table.Tr>
-                    <Table.Th>Direction</Table.Th>
-                    <Table.Th>Port Name</Table.Th>
-                    <Table.Th>Pin</Table.Th>
+                    <Table.Th>{t("constraint.direction")}</Table.Th>
+                    <Table.Th>{t("constraint.port_name")}</Table.Th>
+                    <Table.Th>{t("constraint.pin")}</Table.Th>
                   </Table.Tr>
                 </Table.Thead>
                 {selectedModule &&
@@ -78,7 +79,7 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
                     );
                   })}
               </Table>
-              <Button variant="subtle">Generate</Button>
+              <Button variant="subtle">{t("constraint.generate")}</Button>
             </>
           )}
         </Stack>

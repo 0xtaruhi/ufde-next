@@ -40,6 +40,14 @@
     "modified_close_project_confirm": "项目已被修改，是否仍要关闭项目？（未保存的修改将会丢失）",
     "close_project": "关闭项目"
   },
+  "constraint": {
+    "module": "模块",
+    "direction":"输入/输出",
+    "port_name": "端口名称",
+    "pin":"引脚",
+    "select_module": "选择模块",
+    "generate": "生成"
+  },
   "create_project": {
     "basic_info": "基本信息",
     "import_files": "导入文件",

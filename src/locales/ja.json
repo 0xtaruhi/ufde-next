@@ -40,6 +40,14 @@
     "modified_close_project_confirm": "プロジェクトが変更されていますが、それでもプロジェクトを閉じますか？（変更は棄却されます）",
     "close_project": "プロジェクトを閉じる"
   },
+  "constraint": {
+    "module": "モジュール",
+    "direction": "入力/出力",
+    "port_name": "ポート名",
+    "pin": "ピン",
+    "select_module": "選択モジュール",
+    "generate": "生成"
+  },
   "create_project": {
     "basic_info": "基本情報",
     "import_files": "ファイルインポート",

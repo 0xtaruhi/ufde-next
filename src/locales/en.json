@@ -61,6 +61,14 @@
     "check_dir": "Please check the permissions of the program or project path.",
     "create_new_success_title": "Successfully created new project."
   },
+  "constraint": {
+    "module": "Module",
+    "direction": "Input/Output",
+    "port_name": "Port Name",
+    "pin": "Pin",
+    "select_module": "Select Module",
+    "generate": "Generate"
+  },
   "common": {
     "first_step": "First Step",
     "second_step": "Second Step",
