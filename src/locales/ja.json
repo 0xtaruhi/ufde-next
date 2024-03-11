@@ -37,7 +37,7 @@
     "delete_files": "ファイルを削除",
     "delete_files_confirm": "選択されたファイルを削除してもよろしいですか？",
     "generate_constraint": "制約ファイルの生成",
-    "modified_close_project_confirm": "プロジェクトが変更されていますが、それでもプロジェクトを閉じますか？",
+    "modified_close_project_confirm": "プロジェクトが変更されていますが、それでもプロジェクトを閉じますか？（変更は棄却されます）",
     "close_project": "プロジェクトを閉じる"
   },
   "create_project": {
