@@ -46,6 +46,7 @@ interface AbstractFlowProps {
   runAvailable: boolean;
   settingsPage: React.ReactNode;
   status: string;
+  extraActions?: React.ReactNode;
 }
 
 export function Flow(props: AbstractFlowProps) {
@@ -67,6 +68,7 @@ export function Flow(props: AbstractFlowProps) {
           {t("flow." + props.flowName + ".description")}
         </Text>
         <Group>
+          {props.extraActions}
           <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
             <TbSettings size={20} />
           </ActionIcon>
@@ -115,6 +117,7 @@ interface FlowInfo {
   target_file?: string;
   runFunc?: (project: ProjectInfo) => Promise<Command> | Promise<undefined>;
   settingsPage?: React.ReactNode;
+  extraActions?: React.ReactNode;
 }
 
 function FlowInstance(props: FlowInfo & FlowProps) {
@@ -186,6 +189,7 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       // runAvailable={true}
       runAvailable={props.runAvailable}
       status={statusText}
+      extraActions={props.extraActions}
     />
   );
 }
@@ -227,6 +231,7 @@ function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index
               index={index}
               setActive={props.setActive}
               settingsPage={flow.settingsPage}
+              extraActions={flow.extraActions}
             />
           </Timeline.Item>
         );

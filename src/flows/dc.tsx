@@ -1,12 +1,15 @@
 import { resolveResource } from "@tauri-apps/api/path";
 import { ProjectInfo } from "../model/project";
 import { Command } from "@tauri-apps/api/shell";
-import { Combobox, InputBase, SegmentedControl, useCombobox } from "@mantine/core";
-import { useState } from "react";
-import { TbChevronDown } from "react-icons/tb";
+import { ActionIcon, Combobox, InputBase, SegmentedControl, Tooltip, useCombobox } from "@mantine/core";
+import { useContext, useState } from "react";
+import { TbArrowAutofitDown, TbChevronDown } from "react-icons/tb";
 import { SettingsItem } from "../pages/FlowPage";
 import { useTranslation } from "react-i18next";
 import { getDirOfFile } from "../utils/utils";
+import { ProjectContext } from "../App";
+import { invoke } from "@tauri-apps/api";
+import { showFailedNotification, showSuccessNotification } from "../pages/Notifies";
 
 export async function runDCImportFlowCommand(project: ProjectInfo) {
   const files = project.file_lists
@@ -220,6 +223,35 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
   return command;
 }
 
+function DCDownloadBitAction() {
+  const { project } = useContext(ProjectContext);
+
+  const bitFile = project?.name + "_dc_" + "bit.xml";
+
+  const { t } = useTranslation();
+
+  const downloadBitFile = async () => {
+    if (project) {
+      invoke("program_fpga", { bitfile: bitFile }).then(
+        () => {
+          showSuccessNotification({ title: t("program.success"), message: "" });
+        },
+        (err) => {
+          showFailedNotification({ title: t("program.failed"), message: t("program.error." + err) });
+        }
+      );
+    }
+  };
+
+  return (
+    <Tooltip label={t("program.program")}>
+      <ActionIcon size="md" variant="subtle" onClick={downloadBitFile} style={{ padding: "5px" }}>
+        <TbArrowAutofitDown size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
 export const dcFlows = [
   { name: "dc.import", target_file: "dc_imp.xml", runFunc: runDCImportFlowCommand },
   { name: "dc.map", target_file: "dc_map.xml", runFunc: runDCMapFlowCommand },
@@ -240,5 +272,6 @@ export const dcFlows = [
     name: "dc.genbit",
     target_file: "dc_genbit.xml",
     runFunc: runDCGenBitFlowCommand,
+    extraActions: <DCDownloadBitAction />,
   },
 ];

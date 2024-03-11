@@ -1,8 +1,7 @@
 import { Button, Card, Stack, Title, Text, Flex, ScrollArea, Table, Checkbox, Group } from "@mantine/core";
-import { invoke } from "@tauri-apps/api";
 
 import StartUpPage from "./StartupPage";
-import { showFailedNotification, showSuccessNotification } from "./Notifies";
+import { showFailedNotification } from "./Notifies";
 import { useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
 import { ProjectContext } from "../App";
@@ -50,11 +49,7 @@ function SourceFileSection() {
     modals.openConfirmModal({
       title: t("project.delete_files"),
       centered: true,
-      children: (
-        <Text size="sm">
-          {t("project.delete_files_confirm")}
-        </Text>
-      ),
+      children: <Text size="sm">{t("project.delete_files_confirm")}</Text>,
       labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
       confirmProps: { color: "red" },
       onConfirm: () => {
@@ -151,7 +146,9 @@ function SourceFileSection() {
       <Title className="sectionTitle">{t("project.source_files")}</Title>
       <Card withBorder radius={10} p="md" className="projectCard">
         <SourceFileTable />
-        <GenConstraintModal opened={genConstraintModalOpened} file={project?.file_lists[selectedRows[0]]}
+        <GenConstraintModal
+          opened={genConstraintModalOpened}
+          file={project?.file_lists[selectedRows[0]]}
           onClose={() => {
             setGenConstraintModalOpened(false);
           }}
@@ -225,7 +222,6 @@ function ProjectInfoSection() {
 }
 
 function ProjectPage() {
-  const { t } = useTranslation();
   const { project } = useContext(ProjectContext);
 
   if (project !== null) {
@@ -233,21 +229,6 @@ function ProjectPage() {
       <Stack gap="sm">
         <ProjectInfoSection />
         <SourceFileSection />
-        <Button
-          variant="subtle"
-          onClick={() => {
-            invoke("program_fpga", { bitfile: "/Users/taruhi/Desktop/Dino/Dino_fde_yosys.bit" }).then(
-              () => {
-                showSuccessNotification({ title: t("program.success"), message: "" });
-              },
-              (err) => {
-                showFailedNotification({ title: t("program.failed"), message: t("program.error." + err) });
-              }
-            );
-          }}
-        >
-          {t("program.program")}
-        </Button>
       </Stack>
     );
   } else {
