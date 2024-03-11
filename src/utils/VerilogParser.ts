@@ -17,12 +17,15 @@ export async function getAllPorts(file: string): Promise<Map<string, PortInfo[]>
     }
 
     const ports: Map<string, PortInfo[]> = new Map();
-    for (const module of modules) {
+    for (let module of modules) {
         const moduleName = module.match(/module\s+(\w+)\s*\(/);
         if (!moduleName) {
             continue;
         }
 
+        // remove comments
+        module = module.replace(/\/\/.*\n/g, "").replace(/\/\*[\s\S]*?\*\//g, "");
+        
         const regExpPorts = /(input|output|inout)\s+((reg|wire|logic)\s+)?(\[\d+:\d+\]\s+)?((\w+\s*,\s*)*\w+\s*[;,\)])/g;
         const modulePorts = module.matchAll(regExpPorts);
 
