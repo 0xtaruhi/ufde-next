@@ -12,7 +12,8 @@ import { TbFileCode, TbFileImport, TbTrash } from "react-icons/tb";
 import { platform } from "@tauri-apps/api/os";
 import { getFileInfoByPath, getSourceFilesByDialog } from "../utils/utils";
 import { SourceFile } from "../model/project";
-import { confirm } from "@tauri-apps/api/dialog";
+import { modals } from "@mantine/modals";
+import { getAllPorts } from "../utils/VerilogParser";
 
 function SourceFileSection() {
   const { t } = useTranslation();
@@ -46,17 +47,24 @@ function SourceFileSection() {
   };
 
   const onDeleteFiles = async () => {
-    const yes = await confirm(t("project.delete_files_confirm"), {
-      type: "warning",
+    modals.openConfirmModal({
+      title: t("project.delete_files"),
+      centered: true,
+      children: (
+        <Text size="sm">
+          {t("project.delete_files_confirm")}
+        </Text>
+      ),
+      labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
+      confirmProps: { color: "red" },
+      onConfirm: () => {
+        let newProject = { ...project! };
+        newProject.file_lists = newProject.file_lists.filter((_, index) => !selectedRows.includes(index));
+        setProject(newProject);
+        setProjectModified(true);
+        setSelectedRows([]);
+      },
     });
-    if (!yes) {
-      return;
-    }
-    let newProject = { ...project! };
-    newProject.file_lists = newProject.file_lists.filter((_, index) => !selectedRows.includes(index));
-    setProject(newProject);
-    setProjectModified(true);
-    setSelectedRows([]);
   };
 
   function SourceFileTable() {
@@ -132,6 +140,15 @@ function SourceFileSection() {
     return selectedRows.length === 1 && project?.file_lists.filter((file) => file.type === "constraint").length === 0;
   };
 
+  const onGenerateConstraint = async () => {
+    const selectedFile = project!.file_lists[selectedRows[0]];
+    getAllPorts(selectedFile.path).then((ports) => {
+      ports.forEach((port, name) => {
+        console.log(port, name);
+      });
+    });
+  };
+
   return (
     <>
       <Title className="sectionTitle">{t("project.source_files")}</Title>
@@ -151,7 +168,7 @@ function SourceFileSection() {
                   )
                 }
                 hidden={true}
-                onClick={() => {}}
+                onClick={onGenerateConstraint}
               >
                 {t("project.generate_constraint")}
               </Button>
