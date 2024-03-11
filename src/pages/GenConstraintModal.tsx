@@ -11,7 +11,7 @@ interface GenConstraintModalProps extends ModalProps {
 export default function GenConstraintModal(props: GenConstraintModalProps) {
   const [portsMap, setPortsMap] = useState<Map<string, PortInfo[]>>(new Map());
   const [selectedModule, setSelectedModule] = useState<string>();
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchPortsMap = async () => {
@@ -49,7 +49,7 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
 
   return (
     <>
-      <Modal {...props}>
+      <Modal {...props} size="lg">
         <Stack gap="sm">
           <Select
             placeholder={t("constraint.select_module")}
