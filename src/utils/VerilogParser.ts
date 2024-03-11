@@ -1,19 +1,19 @@
 import { readTextFile } from "@tauri-apps/api/fs";
 
-interface PortInfo {
-    direction: "input" | "output" | "inout" | unknown;
+export interface PortInfo {
+    direction: "input" | "output" | "inout" | "unknown";
     leftBound: number;
     rightBound: number;
     name: string;
 }
 
-export async function getAllPorts(file: string) {
+export async function getAllPorts(file: string): Promise<Map<string, PortInfo[]>> {
     const fileContent = await readTextFile(file);
 
     // split by module
     const modules = fileContent.match(/module[\s\S]*?endmodule/g);
     if (!modules) {
-        return [];
+        return new Map();
     }
 
     const ports: Map<string, PortInfo[]> = new Map();

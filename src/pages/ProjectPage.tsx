@@ -13,7 +13,7 @@ import { platform } from "@tauri-apps/api/os";
 import { getFileInfoByPath, getSourceFilesByDialog } from "../utils/utils";
 import { SourceFile } from "../model/project";
 import { modals } from "@mantine/modals";
-import { getAllPorts } from "../utils/VerilogParser";
+import GenConstraintModal from "./GenConstraintModal";
 
 function SourceFileSection() {
   const { t } = useTranslation();
@@ -141,19 +141,22 @@ function SourceFileSection() {
   };
 
   const onGenerateConstraint = async () => {
-    const selectedFile = project!.file_lists[selectedRows[0]];
-    getAllPorts(selectedFile.path).then((ports) => {
-      ports.forEach((port, name) => {
-        console.log(port, name);
-      });
-    });
+    setGenConstraintModalOpened(true);
   };
+
+  const [genConstraintModalOpened, setGenConstraintModalOpened] = useState(false);
 
   return (
     <>
       <Title className="sectionTitle">{t("project.source_files")}</Title>
       <Card withBorder radius={10} p="md" className="projectCard">
         <SourceFileTable />
+        <GenConstraintModal opened={genConstraintModalOpened} file={project?.file_lists[selectedRows[0]]}
+          onClose={() => {
+            setGenConstraintModalOpened(false);
+          }}
+          title={t("project.generate_constraint")}
+        />
         <Flex justify="flex-end">
           <Group>
             {canGenerateConstraint() && (
