@@ -13,8 +13,16 @@ fn main() {
 #[tauri::command]
 async fn program_fpga(bitfile: String) -> Result<(), String> {
     let mut program_handler = vlfd::ProgramHandler::new();
-    program_handler.open_device()?;
-    program_handler.program(std::path::Path::new(&bitfile))?;
+    program_handler.open_device().or_else(|e| {
+        program_handler.close_device()?;
+        Err(e)
+    })?;
+    program_handler
+        .program(std::path::Path::new(&bitfile))
+        .or_else(|e| {
+            program_handler.close_device()?;
+            Err(e)
+        })?;
     program_handler.close_device()?;
     Ok(())
 }
