@@ -41,6 +41,12 @@ function MenuArea() {
 
   const [opened, { open, close }] = useDisclosure();
 
+  const onCloseProject = () => {
+    setProject(null);
+    setNavLabel("nav.project");
+    setProjectModified(false);
+  }
+
   const menuItems = [
     {
       icon: <VscNewFile />,
@@ -118,11 +124,11 @@ function MenuArea() {
               labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
               confirmProps: { color: "red" },
               onConfirm: () => {
-                setProject(null);
-                setNavLabel("nav.project");
-                setProjectModified(false);
-              },
+                onCloseProject();
+              }
             });
+          } else {
+            onCloseProject();
           }
         }
       },
