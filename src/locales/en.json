@@ -24,9 +24,20 @@
     "open_project_failed_title": "Open project failed.",
     "close_project_no_project_title": "No project is currently open.",
     "close_project_no_project_content": "Please open a project first.",
-    "basic_info":"Basic Information",
-    "project_name":"Project Name",
-    "project_path":"Project Path"
+    "basic_info": "Basic Information",
+    "project_name": "Project Name",
+    "project_path": "Project Path",
+    "file_name": "File Name",
+    "file_path": "File Path",
+    "file_type": "File Type",
+    "source_files": "Source Files",
+    "no_files": "No File Found",
+    "double_click_to_open": "Double click to open file",
+    "delete_files": "Delete Files",
+    "import_files": "Import Files",
+    "generate_constraint": "Generate Constraint",
+    "delete_files_confirm": "Are you sure you want to delete the selected files?",
+    "modified_close_project_confirm": "The project has been modified, do you want to save it before closing?"
   },
   "create_project": {
     "basic_info": "Basic Information",
@@ -90,6 +101,7 @@
     "settings": "Settings",
     "no-settings-available": "No settings available",
     "mode": "Mode",
+    "run_all": "Run All",
     "dc": {
       "import": {
         "title": "Import",
@@ -114,6 +126,26 @@
       "genbit": {
         "title": "Generate Bitstream",
         "description": "Generate bitstream file for the target device."
+      }
+    },
+    "notify": {
+      "running": {
+        "title": "Runing",
+        "message_prefix": "Running ",
+        "message_suffix": ", Please wait."
+      },
+      "success": {
+        "title": "Running Successfully",
+        "message_prefix": "",
+        "message_suffix": " runs successfully."
+      },
+      "failed": {
+        "title": "Running Failed",
+        "message_prefix": "",
+        "message_suffix": " runs failed. ",
+        "reason": {
+          "constraint_file_not_found": "Constraint file not found."
+        }
       }
     }
   },
