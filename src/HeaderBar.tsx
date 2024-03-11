@@ -3,7 +3,7 @@ import { TbSun, TbMoon, TbFile } from "react-icons/tb";
 import { ActionIcon } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { Group, Menu, Button, Burger } from "@mantine/core";
-import { VscClose, VscFolderOpened, VscNewFile, VscSave, VscSaveAs } from "react-icons/vsc";
+import { VscClose, VscFolderOpened, VscNewFile, VscSave } from "react-icons/vsc";
 import { useContext } from "react";
 import { ProjectContext } from "./App";
 import { openProject } from "./model/project";
