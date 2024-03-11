@@ -68,8 +68,8 @@
     "next": "次へ",
     "back": "戻る",
     "finish": "完了",
-    "comfirm_no": "いいえ",
-    "comfirm_yes": "はい"
+    "confirm_no": "いいえ",
+    "confirm_yes": "はい"
   },
   "startup": {
     "welcome_head": "",

@@ -68,8 +68,8 @@
     "next": "Next",
     "back": "Back",
     "finish": "Finish",
-    "comfirm_no": "No",
-    "comfirm_yes": "Yes"
+    "confirm_no": "No",
+    "confirm_yes": "Yes"
   },
   "startup": {
     "welcome_head": "Welcome to",
