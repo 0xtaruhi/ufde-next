@@ -212,7 +212,7 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
   const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
 
   const inputFileName = project.name + "_dc_" + "route.xml";
-  const outputFileName = project.name + "_dc_" + "bit.xml";
+  const outputFileName = project.name + "_dc_" + "bit.bit";
 
   const command = Command.sidecar(
     "binaries/fde-cli/bitgen",
@@ -226,15 +226,19 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
 function DCDownloadBitAction() {
   const { project } = useContext(ProjectContext);
 
-  const bitFile = project?.name + "_dc_" + "bit.xml";
+  if (!project || !project.path) {
+    return null;
+  }
 
   const { t } = useTranslation();
 
   const downloadBitFile = async () => {
     if (project) {
+      const bitFile = (await getDirOfFile(project.path)) + project.name + "_dc_" + "bit.bit";
+
       invoke("program_fpga", { bitfile: bitFile }).then(
         () => {
-          showSuccessNotification({ title: t("program.success"), message: "" });
+          showSuccessNotification({ title: t("program.success"), message: bitFile });
         },
         (err) => {
           showFailedNotification({ title: t("program.failed"), message: t("program.error." + err) });
@@ -270,7 +274,7 @@ export const dcFlows = [
   },
   {
     name: "dc.genbit",
-    target_file: "dc_genbit.xml",
+    target_file: "dc_genbit.bit",
     runFunc: runDCGenBitFlowCommand,
     extraActions: <DCDownloadBitAction />,
   },

@@ -14,7 +14,7 @@ import { writeTextFile } from "@tauri-apps/api/fs";
 import { modals } from "@mantine/modals";
 
 function LightDarkToggleButton() {
-  const { setColorScheme } = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme({ keepTransitions: true });
   const computedColorScheme = useComputedColorScheme("light");
   const toggleColorScheme = () => {
     setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
@@ -45,7 +45,7 @@ function MenuArea() {
     setProject(null);
     setNavLabel("nav.project");
     setProjectModified(false);
-  }
+  };
 
   const menuItems = [
     {
@@ -116,16 +116,12 @@ function MenuArea() {
             modals.openConfirmModal({
               title: t("project.close_project"),
               centered: true,
-              children: (
-                <Text size="sm">
-                  {t("project.modified_close_project_confirm")}
-                </Text>
-              ),
+              children: <Text size="sm">{t("project.modified_close_project_confirm")}</Text>,
               labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
               confirmProps: { color: "red" },
               onConfirm: () => {
                 onCloseProject();
-              }
+              },
             });
           } else {
             onCloseProject();

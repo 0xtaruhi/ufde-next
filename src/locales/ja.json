@@ -30,7 +30,7 @@
     "file_name": "ファイル名",
     "file_path": "ファイルパス",
     "file_type": "ファイルタイプ",
-    "source_file": "ソースファイル",
+    "source_files": "ソースファイル",
     "no_files": "ファイルがありません",
     "import_files": "ファイルインポート",
     "double_click_to_open": "ファイルをダブルクリックして開く",
@@ -99,7 +99,8 @@
     "program": "書き込む",
     "failed": "書き込み失敗",
     "error": {
-      "device open failed": "デバイスオープンに失敗にしました、接続状態をもう一度確認してください。"
+      "device open failed": "デバイスオープンに失敗にしました、接続状態をもう一度確認してください。",
+      "device not opened": "デバイスがオープンされていません、デバイスは稼働中または接続されていない可能性があります。"
     },
     "success": "書き込み成功"
   },

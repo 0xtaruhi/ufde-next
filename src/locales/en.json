@@ -38,7 +38,7 @@
     "generate_constraint": "Generate Constraint",
     "delete_files_confirm": "Are you sure you want to delete the selected files?",
     "modified_close_project_confirm": "The project has been modified, do you still want to close it? (Unsaved changes will be lost)",
-    "close_project":"Close Project"
+    "close_project": "Close Project"
   },
   "create_project": {
     "basic_info": "Basic Information",
@@ -99,7 +99,8 @@
     "program": "Program",
     "failed": "Program Failed",
     "error": {
-      "device open failed": "Open device failed. Please check the connection status."
+      "device open failed": "Open device failed. Please check the connection status.",
+      "device not opened": "Device is not opened. This may be caused by the device is currently running or the device is not connected."
     },
     "success": "Program Successful"
   },

@@ -11,9 +11,9 @@ export default async function isWindowsPlatform() {
 export
     async function getDirOfFile(path: string) {
     if (await isWindowsPlatform()) {
-        return path.split("\\").slice(0, -1).join("\\");
+        return path.split("\\").slice(0, -1).join("\\") + "\\";
     } else {
-        return path.split("/").slice(0, -1).join("/");
+        return path.split("/").slice(0, -1).join("/") + "/";
     }
 }
 

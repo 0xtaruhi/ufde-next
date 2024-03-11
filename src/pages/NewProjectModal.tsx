@@ -24,7 +24,7 @@ import { ProjectInfo, SourceFile, updateRecentlyOpenedProjects } from "../model/
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
 import { createDir, writeTextFile } from "@tauri-apps/api/fs";
-import { getFileInfoByPath, getSourceFilesByDialog } from "../utils/utils";
+import isWindowsPlatform, { getFileInfoByPath, getSourceFilesByDialog } from "../utils/utils";
 
 const newProject: ProjectInfo = {
   name: "",
@@ -163,7 +163,6 @@ function NewProjectStep2(props: StepProps) {
 
   const [sourceFiles, setSourceFiles] = useState<SourceFile[]>([]);
 
-
   const onImportFilesClick = async () => {
     const selectedSourcefiles = (await getSourceFilesByDialog({
       dialogFilter: [
@@ -282,16 +281,17 @@ function NewProjectModal(props: ModalProps) {
   };
 
   const handleCompleteButtonClicked = async () => {
-    var filepath = newProject.path + "/";
+    const splitChar = (await isWindowsPlatform()) ? "\\" : "/";
+    var filepath = newProject.path + splitChar;
 
     if (extraConfig.createSubDir === true) {
-      createDir(newProject.path + "/" + newProject.name).catch(() => {
+      createDir(newProject.path + splitChar + newProject.name).catch(() => {
         showFailedNotification({
           title: t("create_project.create_new_failed_title"),
           message: t("create_project.check_dir"),
         });
       });
-      filepath = newProject.path + "/" + newProject.name + "/";
+      filepath = newProject.path + splitChar + newProject.name + splitChar;
     }
 
     filepath += newProject.name + ".json";

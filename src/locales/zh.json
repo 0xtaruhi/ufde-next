@@ -99,7 +99,8 @@
     "program": "下载位流",
     "failed": "下载失败",
     "error": {
-      "device open failed": "打开设备失败，请检查设备连接情况。"
+      "device open failed": "打开设备失败，请检查设备连接情况。",
+      "device not opened": "设备未打开，出现该错误可能是由于设备正在运行或者设备未连接。"
     },
     "success": "下载成功"
   },
