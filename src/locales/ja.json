@@ -33,11 +33,12 @@
     "source_file": "ソースファイル",
     "no_files": "ファイルがありません",
     "import_files": "ファイルインポート",
-    "double_click_to_open": "ファイルをダブルクリックして開きます",
-    "delete_files": "ファイルを削除します",
+    "double_click_to_open": "ファイルをダブルクリックして開く",
+    "delete_files": "ファイルを削除",
     "delete_files_confirm": "選択されたファイルを削除してもよろしいですか？",
     "generate_constraint": "制約ファイルの生成",
-    "modified_close_project_confirm": "プロジェクトが変更されています。プロジェクトを閉じますか？"
+    "modified_close_project_confirm": "プロジェクトが変更されていますが、それでもプロジェクトを閉じますか？",
+    "close_project": "プロジェクトを閉じる"
   },
   "create_project": {
     "basic_info": "基本情報",
@@ -66,7 +67,9 @@
     "third_step": "ステップ3",
     "next": "次へ",
     "back": "戻る",
-    "finish": "完了"
+    "finish": "完了",
+    "comfirm_no": "いいえ",
+    "comfirm_yes": "はい"
   },
   "startup": {
     "welcome_head": "",
@@ -100,15 +103,15 @@
     "dc": {
       "import": {
         "title": "RTL ファイルのインポート",
-        "description": "RTL ファイルから回路ネットリストをインポートし、それを XML 形式に変換します"
+        "description": "RTL ファイルから回路ネットリストをインポートし、それを XML 形式に変換する"
       },
       "map": {
         "title": "プロセス・マッピング",
-        "description": "将逻辑ネットリストを対象デバイスのプリミティブにマッピングする"
+        "description": "逻辑ネットリストを対象デバイスのプリミティブにマッピングする"
       },
       "pack": {
         "title": "論理パッケージング",
-        "description": "ルックアップテーブルを論理ブロックにパッケージングする"
+        "description": "LUT を論理ブロックにパッケージングする"
       },
       "place": {
         "title": "レイアウト",
@@ -130,9 +133,9 @@
         "message_suffix": "、お待ちください"
       },
       "success": {
-        "title": "実行が成功しました",
+        "title": "実行に成功しました",
         "message_prefix": "",
-        "message_suffix": "実行が成功しました"
+        "message_suffix": "実行に成功しました"
       },
       "failed": {
         "title": "実行に失敗しました",

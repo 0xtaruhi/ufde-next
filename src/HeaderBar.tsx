@@ -1,4 +1,4 @@
-import { useMantineColorScheme, useComputedColorScheme, Flex } from "@mantine/core";
+import { useMantineColorScheme, useComputedColorScheme, Flex, Text } from "@mantine/core";
 import { TbSun, TbMoon, TbFile } from "react-icons/tb";
 import { ActionIcon } from "@mantine/core";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ import { showFailedNotification, showWarningNotification } from "./pages/Notifie
 import { useDisclosure } from "@mantine/hooks";
 import NewProjectModal from "./pages/NewProjectModal";
 import { writeTextFile } from "@tauri-apps/api/fs";
-import { confirm } from "@tauri-apps/api/dialog";
+import { modals } from "@mantine/modals";
 
 function LightDarkToggleButton() {
   const { setColorScheme } = useMantineColorScheme();
@@ -107,16 +107,23 @@ function MenuArea() {
           });
         } else {
           if (projectModified) {
-            const yes = await confirm(t("project.modified_close_project_confirm"), {
-              type: "warning",
+            modals.openConfirmModal({
+              title: t("project.close_project"),
+              centered: true,
+              children: (
+                <Text size="sm">
+                  {t("project.modified_close_project_confirm")}
+                </Text>
+              ),
+              labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
+              confirmProps: { color: "red" },
+              onConfirm: () => {
+                setProject(null);
+                setNavLabel("nav.project");
+                setProjectModified(false);
+              },
             });
-            if (!yes) {
-              return;
-            }
           }
-          setProject(null);
-          setNavLabel("nav.project");
-          setProjectModified(false);
         }
       },
     },

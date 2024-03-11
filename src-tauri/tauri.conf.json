@@ -73,7 +73,7 @@
       "dialog": {
         "all": false,
         "ask": false,
-        "confirm": true,
+        "confirm": false,
         "message": false,
         "open": true,
         "save": false

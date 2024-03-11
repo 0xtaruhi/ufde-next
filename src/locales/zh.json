@@ -37,7 +37,8 @@
     "generate_constraint": "生成约束文件",
     "delete_files_confirm": "确认要移除选中的文件吗？",
     "double_click_to_open": "双击打开文件",
-    "modified_close_project_confirm": "项目已被修改，是否仍要关闭项目？（未保存的修改将会丢失）"
+    "modified_close_project_confirm": "项目已被修改，是否仍要关闭项目？（未保存的修改将会丢失）",
+    "close_project": "关闭项目"
   },
   "create_project": {
     "basic_info": "基本信息",
@@ -66,7 +67,9 @@
     "third_step": "步骤三",
     "next": "下一步",
     "back": "上一步",
-    "finish": "完成"
+    "finish": "完成",
+    "confirm_no": "否",
+    "confirm_yes": "是"
   },
   "startup": {
     "welcome_head": "欢迎使用",
