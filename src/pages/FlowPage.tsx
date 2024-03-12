@@ -33,7 +33,7 @@ const flowData: {
   data: FlowInfo[];
 }[] = [
   { value: "DC", label: "DC", data: dcFlows },
-  { value: "Yosys", label: "Yosys", data: [] },
+  // { value: "Yosys", label: "Yosys", data: [] },
 ];
 
 const flowsNameMap = (name: string) => {
@@ -321,7 +321,7 @@ function FlowPage() {
             data={flowData}
             value={flowName}
             onChange={setFlowName}
-            style={{ width: "500px", marginRight: "auto" }}
+            style={{ width: "200px", marginRight: "auto" }}
           />
           <Button
             size="sm"
