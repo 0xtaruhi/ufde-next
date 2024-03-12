@@ -67,7 +67,9 @@
     "port_name": "Port Name",
     "pin": "Pin",
     "select_module": "Select Module",
-    "generate": "Generate"
+    "generate": "Generate",
+    "select_pin": "Select Pin",
+    "auto_assign": "Auto Assign"
   },
   "common": {
     "first_step": "First Step",

@@ -1,8 +1,13 @@
-import { Button, Modal, ModalProps, Select, Stack, Table } from "@mantine/core";
-import { SourceFile } from "../model/project";
+import { Button, Group, Modal, ModalProps, ScrollArea, Select, Stack, Table } from "@mantine/core";
+import { ProjectInfo, SourceFile } from "../model/project";
 import { PortInfo, getAllPorts } from "../utils/VerilogParser";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { devicePorts, maybeClockNames } from "../utils/Pins";
+import { writeTextFile } from "@tauri-apps/api/fs";
+import { ProjectContext } from "../App";
+import { getDirOfFile } from "../utils/utils";
+import { TbFileReport, TbRobot } from "react-icons/tb";
 
 interface GenConstraintModalProps extends ModalProps {
   file: SourceFile | undefined;
@@ -43,47 +48,139 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
     return expandedPorts;
   };
 
-  const tableData = expandPorts(portsMap.get(selectedModule ?? "") ?? []).map((port) => {
-    return { name: port.name, direction: port.direction, pin: "" };
+  const inputPortList = devicePorts.FDP3P7.input.concat(devicePorts.FDP3P7.clock);
+  const outputPortList = devicePorts.FDP3P7.output;
+  const clockPort = devicePorts.FDP3P7.clock;
+
+  const [mappedPins, setMappedPins] = useState<Map<string, string>>(new Map());
+
+  const expandedPorts = useMemo(() => {
+    return expandPorts(portsMap.get(selectedModule ?? "") ?? []);
+  }, [selectedModule]);
+
+  const tableDataRaw = expandedPorts.map((port) => {
+    return {
+      direction: port.direction,
+      name: port.name,
+    };
   });
 
+  const { project, setProject, setProjectModified } = useContext(ProjectContext);
+
+  const onGenerateBtnClick = async () => {
+    const xml = `<design name="${selectedModule}">
+  ${expandedPorts
+    .map((port) => {
+      return `<port name="${port.name}" position="${mappedPins.get(port.name)}"/>`;
+    })
+    .join("\n")}
+    </design>`;
+    const xmlFileName = project?.name + "_cons.xml";
+    const xmlPath = (await getDirOfFile(project?.path ?? "")) + xmlFileName;
+    writeTextFile(xmlPath, xml);
+
+    const fileList = project?.file_lists;
+    const newFileList = fileList?.concat([{ name: xmlFileName, path: xmlPath, type: "constraint" }]);
+    setProject({ ...project, file_lists: newFileList } as ProjectInfo);
+    setProjectModified(true);
+    props.onClose();
+  };
+
+  const onAutoAssignBtnClick = () => {
+    const mappedPins = new Map<string, string>();
+    let inputIdx = 0,
+      outputIdx = 0;
+    for (let i = 0; i < expandedPorts.length; i++) {
+      const port = expandedPorts[i];
+      if (maybeClockNames.includes(port.name)) {
+        mappedPins.set(port.name, clockPort);
+        continue;
+      }
+      if (port.direction === "input") {
+        if (inputIdx >= inputPortList.length) {
+          break;
+        }
+        mappedPins.set(port.name, inputPortList[inputIdx]);
+        inputIdx++;
+      } else {
+        if (outputIdx >= outputPortList.length) {
+          break;
+        }
+        mappedPins.set(port.name, outputPortList[outputIdx]);
+        outputIdx++;
+      }
+    }
+    setMappedPins(mappedPins);
+  };
+
   return (
-    <>
-      <Modal {...props} size="lg">
-        <Stack gap="sm">
+    <Modal {...props} size="lg">
+      <Stack gap="sm">
+        <Group gap="sm">
           <Select
             placeholder={t("constraint.select_module")}
             data={Array.from(portsMap.keys())}
-            label={t("constraint.module")}
             value={selectedModule}
             onChange={(e) => setSelectedModule(e ?? undefined)}
+            allowDeselect={false}
           />
-          {selectedModule && (
-            <>
-              <Table>
-                <Table.Thead>
-                  <Table.Tr>
-                    <Table.Th>{t("constraint.direction")}</Table.Th>
-                    <Table.Th>{t("constraint.port_name")}</Table.Th>
-                    <Table.Th>{t("constraint.pin")}</Table.Th>
-                  </Table.Tr>
-                </Table.Thead>
-                {selectedModule &&
-                  tableData.map((port) => {
-                    return (
-                      <Table.Tr key={port.name}>
-                        <Table.Td>{port.direction}</Table.Td>
-                        <Table.Td>{port.name}</Table.Td>
-                        <Table.Td>{port.pin}</Table.Td>
-                      </Table.Tr>
-                    );
-                  })}
-              </Table>
-              <Button variant="subtle">{t("constraint.generate")}</Button>
-            </>
-          )}
-        </Stack>
-      </Modal>
-    </>
+          <Button
+            variant="subtle"
+            onClick={onAutoAssignBtnClick}
+            style={{ marginLeft: "auto" }}
+            disabled={!selectedModule}
+            leftSection={<TbRobot size={18} />}
+          >
+            {t("constraint.auto_assign")}
+          </Button>
+        </Group>
+        {selectedModule && (
+          <>
+            <ScrollArea h={400}>
+              <Table.ScrollContainer minWidth={500}>
+                <Table highlightOnHover withTableBorder withColumnBorders>
+                  <Table.Thead>
+                    <Table.Tr>
+                      <Table.Th>{t("constraint.direction")}</Table.Th>
+                      <Table.Th>{t("constraint.port_name")}</Table.Th>
+                      <Table.Th>{t("constraint.pin")}</Table.Th>
+                    </Table.Tr>
+                  </Table.Thead>
+                  <Table.Tbody>
+                    {selectedModule &&
+                      tableDataRaw.map((data) => {
+                        return (
+                          <Table.Tr key={data.name}>
+                            <Table.Td>{data.direction}</Table.Td>
+                            <Table.Td>{data.name}</Table.Td>
+                            <Table.Td>
+                              <Select
+                                data={data.direction === "input" ? inputPortList : outputPortList}
+                                withScrollArea
+                                searchable
+                                placeholder={t("constraint.select_pin")}
+                                onChange={(e) => {
+                                  if (e) {
+                                    setMappedPins(new Map(mappedPins.set(data.name, e)));
+                                  }
+                                }}
+                                allowDeselect={false}
+                                value={mappedPins.get(data.name)}
+                              />
+                            </Table.Td>
+                          </Table.Tr>
+                        );
+                      })}
+                  </Table.Tbody>
+                </Table>
+              </Table.ScrollContainer>
+            </ScrollArea>
+            <Button variant="subtle" onClick={onGenerateBtnClick} leftSection={<TbFileReport size={18} />}>
+              {t("constraint.generate")}
+            </Button>
+          </>
+        )}
+      </Stack>
+    </Modal>
   );
 }

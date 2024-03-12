@@ -45,8 +45,10 @@
     "direction": "入力/出力",
     "port_name": "ポート名",
     "pin": "ピン",
-    "select_module": "選択モジュール",
-    "generate": "生成"
+    "select_module": "モジュールを選択",
+    "generate": "作る",
+    "select_pin": "ピンを選択",
+    "auto_assign": "自動分配"
   },
   "create_project": {
     "basic_info": "基本情報",
