@@ -33,9 +33,11 @@ const newProject: ProjectInfo = {
   target_device: "FDP3P7",
 };
 
-const extraConfig = {
-  createSubDir: true,
-};
+interface ExtraConfig {
+  createSubDir: boolean;
+}
+
+let extraConfig: ExtraConfig = { createSubDir: false };
 
 async function getSelectedDirectory() {
   const result = open({
@@ -87,7 +89,6 @@ function NewProjectStep1(props: StepProps) {
     initialValues: {
       projectName: newProject.name,
       projectPath: newProject.path,
-      createSubDir: extraConfig.createSubDir,
     },
     validate: {
       projectName: (value) => {
@@ -115,7 +116,6 @@ function NewProjectStep1(props: StepProps) {
   };
 
   const handleNextClick = () => {
-    // setNewProject({ ...newProject, name: form.values.projectName, path: form.values.projectPath });
     newProject.name = form.values.projectName;
     newProject.path = form.values.projectPath;
     if (!form.validate().hasErrors) {
@@ -147,7 +147,6 @@ function NewProjectStep1(props: StepProps) {
         </Flex>
       </Input.Wrapper>
       <Checkbox
-        checked={extraConfig.createSubDir}
         label={t("create_project.create_sub_dir")}
         onChange={(event) => {
           extraConfig.createSubDir = event.currentTarget.checked;
