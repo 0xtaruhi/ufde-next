@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "ufde-next",
-    "version": "0.0.0"
+    "productName": "UFDE+",
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {

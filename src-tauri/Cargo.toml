@@ -1,6 +1,6 @@
 [package]
-name = "ufde-next"
-version = "0.0.0"
+name = "ufde-plus"
+version = "1.0.0"
 description = "Unified Fudan Development Kit"
 authors = ["you"]
 license = ""

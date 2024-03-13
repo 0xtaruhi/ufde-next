@@ -1,4 +1,4 @@
-import { Button, Group, Modal, ModalProps, ScrollArea, Select, Stack, Table } from "@mantine/core";
+import { Button, Group, Modal, ModalProps, ScrollArea, Select, Stack, Table, Text } from "@mantine/core";
 import { ProjectInfo, SourceFile } from "../model/project";
 import { PortInfo, getAllPorts } from "../utils/VerilogParser";
 import { useContext, useEffect, useMemo, useState } from "react";
@@ -152,7 +152,15 @@ export default function GenConstraintModal(props: GenConstraintModalProps) {
                         return (
                           <Table.Tr key={data.name}>
                             <Table.Td>{data.direction}</Table.Td>
-                            <Table.Td>{data.name}</Table.Td>
+                            {/* <Table.Td>{data.name}</Table.Td> */}
+                            <Table.Td>
+                              {data.name}
+                              {mappedPins.get(data.name) === clockPort && (
+                                <Text c="dimmed" fs="italic">
+                                  clock
+                                </Text>
+                              )}
+                            </Table.Td>
                             <Table.Td>
                               <Select
                                 data={data.direction === "input" ? inputPortList : outputPortList}
