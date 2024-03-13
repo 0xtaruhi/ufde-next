@@ -1,6 +1,6 @@
 import { Combobox, useCombobox, InputBase, Input, Divider, ScrollArea, Card } from "@mantine/core";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactCountryFlag from "react-country-flag";
 import i18n from "i18next";
@@ -12,7 +12,7 @@ function LanguageSelector() {
     onDropdownClose: () => comboBox.resetSelectedOption(),
   });
 
-  const initLanugage = useMemo(() => getCurrentLanguage(), []);
+  const initLanugage = getCurrentLanguage();
 
   const [value, setValue] = useState(initLanugage?.name);
   const { t } = useTranslation();
