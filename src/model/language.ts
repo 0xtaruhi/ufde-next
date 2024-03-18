@@ -9,7 +9,7 @@ export type Language = {
 const languages: Language[] = [
   { name: "English", countryCode: "US", code: "en" },
   { name: "简体中文", countryCode: "CN", code: "zh" },
-  { name: "日本語", countryCode: "JP", code: "ja" },
+  // { name: "日本語", countryCode: "JP", code: "ja" },
 ];
 
 function getCurrentLanguage(): Language | undefined {
