@@ -95,11 +95,25 @@ export async function runDCPackFlowCommand(project: ProjectInfo) {
 export function DCPlaceFlowSettingsPage() {
   const { t } = useTranslation();
 
+  const projectContext = useContext(ProjectContext);
+  const { project, setProject, setProjectModified } = projectContext;
+
   const settings = (
     <>
       <SettingsItem
         label={t("flow.mode")}
-        component={<SegmentedControl data={["Timing Driven", "Bounding Box"]} onChange={() => {}} />}
+        component={
+          <SegmentedControl
+            data={["Timing Driven", "Bounding Box"]}
+            onChange={(value) => {
+              var newProject = project!;
+              newProject.settings.place.mode = value as "Timing Driven" | "Bounding Box";
+              setProject(newProject);
+              setProjectModified(true);
+            }}
+            defaultValue={project?.settings.place.mode}
+          />
+        }
       />
     </>
   );
@@ -111,7 +125,14 @@ export async function runDCPlaceFlowCommand(project: ProjectInfo) {
   const plcdelayfilePath = await resolveResource("resource/hw_lib/fdp3p7_dly.xml");
   const placecst = "-c";
   const placecstFilePath = project.file_lists.filter((file) => file.type === "constraint")[0].path;
-  const placeMode = "-b";
+  const getPlaceMode = () => {
+    if (project.settings.place.mode === "Bounding Box") {
+      return "-b";
+    } else {
+      return "-t";
+    }
+  };
+  const placeMode = getPlaceMode();
 
   const inputFileName = project.name + "_dc_" + "pack.xml";
   const outputFileName = project.name + "_dc_" + "place.xml";
@@ -140,7 +161,16 @@ export async function runDCPlaceFlowCommand(project: ProjectInfo) {
 
 export async function runDCRouteFlowCommand(project: ProjectInfo) {
   const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
-  const routeMode = "-d";
+  const getRouteMode = () => {
+    if (project.settings.route.mode === "Direct Search") {
+      return "-d";
+    } else if (project.settings.route.mode === "Breath First") {
+      return "-b";
+    } else {
+      return "-t";
+    }
+  }
+  const routeMode = getRouteMode();
   const routecst = "-c";
   const routecstFilePath = project.file_lists.filter((file) => file.type === "constraint")[0].path;
 
@@ -162,6 +192,9 @@ export function DCRouteFlowSettingsPage() {
       onDropdownClose: () => combobox.resetSelectedOption(),
     });
 
+    const projectContext = useContext(ProjectContext);
+    const { project, setProject, setProjectModified } = projectContext;
+
     const modes = ["Direct Search", "Breath First", "Timing Driven"];
     const options = modes.map((mode) => (
       <Combobox.Option key={mode} value={mode}>
@@ -169,12 +202,14 @@ export function DCRouteFlowSettingsPage() {
       </Combobox.Option>
     ));
 
-    const [value, setValue] = useState<string>("Direct Search");
-
     return (
       <Combobox
         onOptionSubmit={(value) => {
-          setValue(value);
+          const newValue = value as "Direct Search" | "Breath First" | "Timing Driven";
+          var newProject = project!;
+          newProject.settings.route.mode = newValue;
+          setProject(newProject);
+          setProjectModified(true);
           combobox.closeDropdown();
         }}
         store={combobox}
@@ -188,7 +223,7 @@ export function DCRouteFlowSettingsPage() {
             pointer
             onClick={() => combobox.toggleDropdown()}
           >
-            {value}
+            {project?.settings.route.mode}
           </InputBase>
         </Combobox.Target>
         <Combobox.Dropdown>

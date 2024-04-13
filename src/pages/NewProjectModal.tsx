@@ -31,6 +31,14 @@ const newProject: ProjectInfo = {
   path: "",
   file_lists: [],
   target_device: "FDP3P7",
+  settings: {
+    route: {
+      mode: "Direct Search",
+    },
+    place: {
+      mode: "Timing Driven",
+    },
+  },
 };
 
 interface ExtraConfig {

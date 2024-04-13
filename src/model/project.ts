@@ -7,11 +7,21 @@ export type SourceFile = {
   type: "verilog" | "systemverilog" | "constraint" | "unknown";
 };
 
+export type ProjectSettings = {
+  route: {
+    mode: "Direct Search" | "Breath First" | "Timing Driven";
+  };
+  place: {
+    mode: "Timing Driven" | "Bounding Box";
+  }
+}
+
 export type ProjectInfo = {
   name: string;
   path: string;
   file_lists: SourceFile[];
   target_device: "FDP3P7";
+  settings: ProjectSettings;
 };
 
 export type RecentlyOpenedProjectsType = {
