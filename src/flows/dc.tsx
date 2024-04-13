@@ -2,7 +2,7 @@ import { resolveResource } from "@tauri-apps/api/path";
 import { ProjectInfo } from "../model/project";
 import { Command } from "@tauri-apps/api/shell";
 import { ActionIcon, Combobox, InputBase, SegmentedControl, Tooltip, useCombobox } from "@mantine/core";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TbArrowAutofitDown, TbChevronDown } from "react-icons/tb";
 import { SettingsItem } from "../pages/FlowPage";
 import { useTranslation } from "react-i18next";
