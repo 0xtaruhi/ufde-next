@@ -12,6 +12,8 @@ import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
 import { useEffect } from "react";
 import { appWindow } from "@tauri-apps/api/window";
+import { modals } from "@mantine/modals";
+import { writeTextFile } from "@tauri-apps/api/fs";
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;
@@ -97,6 +99,37 @@ function App() {
       setRecentlyOpenedProjects(JSON.parse(projects));
     }
   }, []);
+
+  useEffect(() => {
+    const unlisten = appWindow.onCloseRequested((e) => {
+      e.preventDefault();
+      if (project != null && projectModified) {
+        console.log("Save project before exit");
+        modals.openConfirmModal({
+          title: "Save Project",
+          centered: true,
+          children: "Do you want to save the project before exit?",
+          labels: { confirm: "Yes", cancel: "No" },
+          confirmProps: { color: "red" },
+          onConfirm: () => {
+            const { path, ...rest } = project;
+            writeTextFile(path, JSON.stringify(rest)).then(() => {
+              appWindow.close();
+            });
+          },
+          onCancel: () => {
+            appWindow.close();
+          },
+        });
+      } else {
+        appWindow.close();
+      }
+    });
+
+    return () => {
+      unlisten.then((fn) => fn());
+    };
+  }, [project, projectModified]);
 
   useEffect(() => {
     if (project) {
