@@ -142,6 +142,32 @@
         "description": "Generate bitstream file for the target device."
       }
     },
+    "yosys": {
+      "yosys": {
+        "title": "Synthesis",
+        "description": "Perform synthesis using the Yosys tool to generate a logical netlist."
+      },
+      "map": {
+        "title": "Map",
+        "description": "Map the logical netlist to the target device's native language."
+      },
+      "pack": {
+        "title": "Pack",
+        "description": "Pack LUTs into logical blocks."
+      },
+      "place": {
+        "title": "Place",
+        "description": "Place logical Blocks to target devices"
+      },
+      "route": {
+        "title": "Route",
+        "description": "Route the placed netlist on the target device."
+      },
+      "genbit": {
+        "title": "Generate Bitstream",
+        "description": "Generate bitstream file for the target device."
+      }
+    },
     "notify": {
       "running": {
         "title": "Runing",

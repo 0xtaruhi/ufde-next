@@ -19,7 +19,11 @@ import "./StartupPage.css";
 import light_image from "../assets/startup.svg";
 import dark_image from "../assets/startup-dark.svg";
 import NewProjectModal from "./NewProjectModal";
-import { RecentlyOpenedProjectsType, openProject, openProjectWithSpecificPath } from "../model/project";
+import {
+  RecentlyOpenedProjectsType,
+  openProject,
+  openProjectWithSpecificPath,
+} from "../model/project";
 import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { showFailedNotification } from "./Notifies";
@@ -29,8 +33,12 @@ function StartUpPage() {
   const computedColorScheme = useComputedColorScheme("light");
 
   const [opened, { open, close }] = useDisclosure();
-  const { setProject, recentlyOpenedProjects, setRecentlyOpenedProjects, setProjectModified } =
-    useContext(ProjectContext);
+  const {
+    setProject,
+    recentlyOpenedProjects,
+    setRecentlyOpenedProjects,
+    setProjectModified,
+  } = useContext(ProjectContext);
 
   const openOtherProject = () => {
     openProject({ recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
@@ -52,7 +60,10 @@ function StartUpPage() {
 
   const openSelectedProject = (project: RecentlyOpenedProjectsType) => {
     // const fileName = project.path + "/" + project.name + ".json";
-    openProjectWithSpecificPath(project.path, { recentlyOpenedProjects, setRecentlyOpenedProjects }).then(
+    openProjectWithSpecificPath(project.path, {
+      recentlyOpenedProjects,
+      setRecentlyOpenedProjects,
+    }).then(
       (p) => {
         if (p) {
           setProject(p);
@@ -74,7 +85,12 @@ function StartUpPage() {
           <div className="content">
             <Title className="title">
               {t("startup.welcome_head")}{" "}
-              <Text component="span" variant="gradient" gradient={{ from: "blue", to: "cyan" }} inherit>
+              <Text
+                component="span"
+                variant="gradient"
+                gradient={{ from: "indigo", to: "cyan" }}
+                inherit
+              >
                 UFDE+
               </Text>{" "}
               {t("startup.welcome_tail")}
@@ -102,12 +118,22 @@ function StartUpPage() {
             </List>
             <div style={{ paddingTop: 20 }}>
               <Group gap={10}>
-                <Button variant="filled" size="md" onClick={open} leftSection={<VscNewFile />}>
+                <Button
+                  variant="filled"
+                  size="md"
+                  onClick={open}
+                  leftSection={<VscNewFile />}
+                >
                   {t("project.new_project")}
                 </Button>
                 <Menu shadow="md" width={300} trigger="hover">
                   <Menu.Target>
-                    <Button size="md" variant="outline" leftSection={<VscFolderOpened />} onClick={openOtherProject}>
+                    <Button
+                      size="md"
+                      variant="outline"
+                      leftSection={<VscFolderOpened />}
+                      onClick={openOtherProject}
+                    >
                       {t("project.open_project")}
                     </Button>
                   </Menu.Target>
@@ -116,7 +142,10 @@ function StartUpPage() {
                       <>
                         <Menu.Label>{t("startup.recent_projects")}</Menu.Label>
                         {recentlyOpenedProjects.map((project) => (
-                          <Menu.Item key={project.path} onClick={() => openSelectedProject(project)}>
+                          <Menu.Item
+                            key={project.path}
+                            onClick={() => openSelectedProject(project)}
+                          >
                             {/* {project.name} */}
                             <Text size="sm">{project.name}</Text>
                             <Text size="xs" c="dimmed">

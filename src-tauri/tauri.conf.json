@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "UFDE+",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -55,6 +55,11 @@
           },
           {
             "name": "binaries/fde-cli/sta",
+            "sidecar": true,
+            "args": true
+          },
+          {
+            "name": "binaries/yosys",
             "sidecar": true,
             "args": true
           },
@@ -125,10 +130,15 @@
         "binaries/fde-cli/pack",
         "binaries/fde-cli/place",
         "binaries/fde-cli/route",
-        "binaries/fde-cli/sta"
+        "binaries/fde-cli/sta",
+        "binaries/yosys",
+        "binaries/yosys-abc"
       ],
       "resources": [
-        "resource/**"
+        "resource/**",
+        "pthreadVC2.dll",
+        "share/*",
+        "share/**"
        ]
     },
     "security": {

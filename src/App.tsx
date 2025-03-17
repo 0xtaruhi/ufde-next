@@ -50,7 +50,13 @@ const navLinksData: NavLinkData[] = [
   { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
 ];
 
-function NavbarArea({ navLabel, setNavLabel }: { navLabel: string; setNavLabel: (arg0: string) => void }) {
+function NavbarArea({
+  navLabel,
+  setNavLabel,
+}: {
+  navLabel: string;
+  setNavLabel: (arg0: string) => void;
+}) {
   const { t } = useTranslation();
   const { project } = useContext(ProjectContext);
 
@@ -89,7 +95,9 @@ function App() {
   const [opened, { toggle }] = useDisclosure(true);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [navLabel, setNavLabel] = useState<string>("nav.project");
-  const [recentlyOpenedProjects, setRecentlyOpenedProjects] = useState<RecentlyOpenedProjectsType[]>([]);
+  const [recentlyOpenedProjects, setRecentlyOpenedProjects] = useState<
+    RecentlyOpenedProjectsType[]
+  >([]);
 
   const [projectModified, setProjectModified] = useState<boolean>(false);
 
@@ -104,7 +112,6 @@ function App() {
     const unlisten = appWindow.onCloseRequested((e) => {
       e.preventDefault();
       if (project != null && projectModified) {
-        console.log("Save project before exit");
         modals.openConfirmModal({
           title: "Save Project",
           centered: true,
@@ -133,7 +140,9 @@ function App() {
 
   useEffect(() => {
     if (project) {
-      appWindow.setTitle("UFDE+ - " + project.name + (projectModified ? "*" : ""));
+      appWindow.setTitle(
+        "UFDE+ - " + project.name + (projectModified ? "*" : "")
+      );
     } else {
       appWindow.setTitle("UFDE+");
     }

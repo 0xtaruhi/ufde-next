@@ -9,10 +9,18 @@ import {
   ActionIcon,
   Group,
   Button,
+  Collapse,
+  Textarea,
 } from "@mantine/core";
-import { TbSettings, TbPlayerPlay, TbPlayerPlayFilled } from "react-icons/tb";
+import {
+  TbSettings,
+  TbPlayerPlay,
+  TbPlayerPlayFilled,
+  TbInfoCircle,
+  TbInfoCircleFilled,
+} from "react-icons/tb";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { createRef, useState } from "react";
 import "./FlowPage.css";
 import { useTranslation } from "react-i18next";
 import { Command } from "@tauri-apps/api/shell";
@@ -20,12 +28,16 @@ import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { useEffect } from "react";
 import { exists } from "@tauri-apps/api/fs";
-import { update2FailedNotification, update2SuccessNotification } from "./Notifies";
+import {
+  update2FailedNotification,
+  update2SuccessNotification,
+} from "./Notifies";
 import { notifications } from "@mantine/notifications";
 import { ProjectInfo } from "../model/project";
 import { useCallback } from "react";
 import { dcFlows } from "../flows/dc";
 import { getDirOfFile } from "../utils/utils";
+import { yosysFlows } from "../flows/yosys";
 
 const flowData: {
   value: string;
@@ -33,7 +45,7 @@ const flowData: {
   data: FlowInfo[];
 }[] = [
   { value: "DC", label: "DC", data: dcFlows },
-  // { value: "Yosys", label: "Yosys", data: [] },
+  { value: "Yosys", label: "Yosys", data: yosysFlows },
 ];
 
 const flowsNameMap = (name: string) => {
@@ -52,13 +64,22 @@ interface AbstractFlowProps {
 export function Flow(props: AbstractFlowProps) {
   const { t } = useTranslation();
   const [opened, { open, close }] = useDisclosure(false);
+  const [collapaseOpened, { toggle: toggleCollapse }] = useDisclosure(false);
+  const textAreaRef = createRef<HTMLTextAreaElement>();
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} padding="md" size={350} position="right">
+      <Drawer
+        opened={opened}
+        onClose={close}
+        padding="md"
+        size={350}
+        position="right"
+      >
         <Stack gap="md">
           <Text size="md" className="flowSettingsTitle">
-            <b>{t("flow.settings")}</b> - {t("flow." + props.flowName + ".title")}
+            <b>{t("flow.settings")}</b> -{" "}
+            {t("flow." + props.flowName + ".title")}
           </Text>
           {props.settingsPage}
         </Stack>
@@ -69,7 +90,30 @@ export function Flow(props: AbstractFlowProps) {
         </Text>
         <Group>
           {props.extraActions}
-          <ActionIcon size="md" variant="subtle" onClick={open} style={{ padding: "5px" }}>
+          <ActionIcon
+            size="md"
+            variant="subtle"
+            onClick={() => {
+              toggleCollapse();
+              if (textAreaRef.current) {
+                textAreaRef.current.scrollTop =
+                  textAreaRef.current.scrollHeight;
+              }
+            }}
+            style={{ padding: "5px" }}
+          >
+            {collapaseOpened ? (
+              <TbInfoCircleFilled size={20} />
+            ) : (
+              <TbInfoCircle size={20} />
+            )}
+          </ActionIcon>
+          <ActionIcon
+            size="md"
+            variant="subtle"
+            onClick={open}
+            style={{ padding: "5px" }}
+          >
             <TbSettings size={20} />
           </ActionIcon>
           <ActionIcon
@@ -84,9 +128,15 @@ export function Flow(props: AbstractFlowProps) {
         </Group>
       </Flex>
       {props.status && (
-        <Text size="sm" c="dimmed">
-          {props.status}
-        </Text>
+        <Collapse in={collapaseOpened}>
+          <Textarea
+            value={props.status}
+            size="sm"
+            readOnly
+            rows={5}
+            ref={textAreaRef}
+          />
+        </Collapse>
       )}
     </>
   );
@@ -97,7 +147,13 @@ export function EmptySettingsHint() {
   return <Text c="dimmed">{t("flow.no-settings-available")}</Text>;
 }
 
-export function SettingsItem({ label, component }: { label: string; component: React.ReactNode }) {
+export function SettingsItem({
+  label,
+  component,
+}: {
+  label: string;
+  component: React.ReactNode;
+}) {
   return (
     <Group justify="space-between">
       <Text size="md">{label}</Text>
@@ -127,13 +183,16 @@ function FlowInstance(props: FlowInfo & FlowProps) {
   const [statusText, setStatusText] = useState<string>("");
 
   const run = async () => {
-    const command = props.runFunc ? await props.runFunc(projectContext.project!) : undefined;
+    setStatusText("");
+    const command = props.runFunc
+      ? await props.runFunc(projectContext.project!)
+      : undefined;
     if (command) {
       command.stdout.on("data", (data) => {
-        setStatusText(data);
+        setStatusText((prevTest) => prevTest + data);
       });
       command.stderr.on("data", (data) => {
-        setStatusText(data);
+        setStatusText((prevTest) => prevTest + data);
       });
 
       const notifyId = notifications.show({
@@ -185,7 +244,9 @@ function FlowInstance(props: FlowInfo & FlowProps) {
     <Flow
       flowName={props.name}
       onRun={run}
-      settingsPage={props.settingsPage ? props.settingsPage : <EmptySettingsHint />}
+      settingsPage={
+        props.settingsPage ? props.settingsPage : <EmptySettingsHint />
+      }
       // runAvailable={true}
       runAvailable={props.runAvailable}
       status={statusText}
@@ -194,7 +255,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
   );
 }
 
-function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index: number) => void }) {
+function FlowItems(props: {
+  flows: FlowInfo[];
+  active: number;
+  setActive: (index: number) => void;
+}) {
   const { t } = useTranslation();
   const projectContext = useContext(ProjectContext);
   const project = projectContext.project;
@@ -220,10 +285,18 @@ function FlowItems(props: { flows: FlowInfo[]; active: number; setActive: (index
   });
 
   return (
-    <Timeline bulletSize={24} style={{ padding: "20px 20px" }} active={props.active}>
+    <Timeline
+      bulletSize={24}
+      style={{ padding: "20px 20px" }}
+      active={props.active}
+    >
       {props.flows.map((flow, index) => {
         return (
-          <Timeline.Item title={t("flow." + flow.name + ".title")} color="blue" className="flowItem" key={index}>
+          <Timeline.Item
+            title={t("flow." + flow.name + ".title")}
+            className="flowItem"
+            key={index}
+          >
             <FlowInstance
               name={flow.name}
               runFunc={flow.runFunc}
@@ -335,7 +408,13 @@ function FlowPage() {
           </Button>
         </Flex>
         <ScrollArea style={{ height: "calc(100vh - 150px)" }}>
-          {<FlowItems flows={flowsNameMap(flowName)!} active={active} setActive={setActive} />}
+          {
+            <FlowItems
+              flows={flowsNameMap(flowName)!}
+              active={active}
+              setActive={setActive}
+            />
+          }
         </ScrollArea>
       </Stack>
     </>

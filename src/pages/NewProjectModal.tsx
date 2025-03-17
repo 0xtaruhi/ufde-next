@@ -279,8 +279,7 @@ function NewProjectModal(props: ModalProps) {
     });
   };
 
-  const handleProjectCreatedFailed = (err: any) => {
-    console.log(err);
+  const handleProjectCreatedFailed = (_: any) => {
     showFailedNotification({
       message: t("create_project.check_dir"),
       title: t("create_project.create_new_failed_title"),

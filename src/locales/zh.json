@@ -142,6 +142,32 @@
         "description": "生成目标设备的位流文件"
       }
     },
+    "yosys": {
+      "yosys": {
+        "title": "综合",
+        "description": "使用 Yosys 工具进行综合，生成逻辑网表"
+      },
+      "map": {
+        "title": "工艺映射",
+        "description": "将逻辑网表映射到目标设备的原语上"
+      },
+      "pack": {
+        "title": "逻辑打包",
+        "description": "将查找表打包至逻辑块中"
+      },
+      "place": {
+        "title": "布局",
+        "description": "将逻辑块布局至目标设备上"
+      },
+      "route": {
+        "title": "布线",
+        "description": "将逻辑块之间的连接布线至目标设备上"
+      },
+      "genbit": {
+        "title": "生成位流",
+        "description": "生成目标设备的位流文件"
+      }
+    },
     "notify": {
       "running": {
         "title": "正在运行",

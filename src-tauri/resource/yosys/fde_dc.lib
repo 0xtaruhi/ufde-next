@@ -1,0 +1,1131 @@
+library(fde_dc) {
+
+cell(AND2) {
+  area : 2;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A*B";
+  }
+}
+
+cell(AND3) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A*B*C";
+  }
+}
+cell(AND4) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A*B*C*D";
+  }
+}
+cell(AOI21) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0*A1)+B0)'";
+  }
+}
+cell(AOI211) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0*A1)+B0+C0)'";
+  }
+}
+cell(AOI22) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1+B0*B1)'";
+  }
+}
+cell(AOI221) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1+B0*B1+C0)'";
+  }
+}
+cell(AOI222) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(C1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1+B0*B1+C0*C1)'";
+  }
+}
+cell(AOI2BB1) {
+  area : 2;
+  pin(A0N) {
+    direction : input;
+  }
+  pin(A1N) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0N'*A1N')+B0)'";
+  }
+}
+cell(AOI2BB2) {
+  area : 2;
+  pin(A0N) {
+    direction : input;
+  }
+  pin(A1N) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0N'*A1N' + B0*B1)'";
+  }
+}
+cell(AOI31) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1*A2+B0)'";
+  }
+}
+cell(AOI32) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1*A2+B0*B1)'";
+  }
+}
+cell(AOI33) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(B2) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A0*A1*A2+B0*B1*B2)'";
+  }
+}
+cell(BUF) {
+  area : 1;
+  pin(I) {
+    direction : input;
+  }
+  pin(O) {
+    direction : output;
+    function : "I";
+  }
+}
+cell(CLKBUF) {
+  area : 1;
+  pin(I) {
+    direction : input;
+  }
+  pin(O) {
+    direction : output;
+    function : "I";
+  }
+}
+
+
+
+cell(DFFHQ) {
+  area : 3;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  ff(IQ,IQN) {
+    next_state : "D";
+    clocked_on : "CK";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(DFFRHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  pin(RN) {
+    direction : input;
+  }
+  ff("IQ","IQN") {
+    clocked_on : "CK";
+    next_state : "D";
+    clear  : "RN'";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(DFFNRHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CKN) {
+    direction : input;
+    clock : true;
+  }
+  pin(RN) {
+    direction : input;
+  }
+  ff("IQ","IQN") {
+    clocked_on : "CKN'";
+    next_state : "D";
+    clear  : "RN'";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(DFFSHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  pin(SN) {
+    direction : input;
+  }
+  ff("IQ","IQN") {
+    next_state : "D";
+    clocked_on : "CK";
+    preset  : "SN'";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(DFFNSHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CKN) {
+    direction : input;
+    clock : true;
+  }
+  pin(SN) {
+    direction : input;
+  }
+  ff("IQ","IQN") {
+    next_state : "D";
+    clocked_on : "CKN'";
+    preset  : "SN'";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(DFFNHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CKN) {
+    direction : input;
+    clock : true;
+  }
+  ff(IQ,IQN) {
+    next_state : "D";
+    clocked_on : "CKN'";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(EDFFHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  pin(E) {
+    direction : input;
+  }
+  ff(IQ,IQN) {
+    next_state : "(E*D) + (E'*IQ)";
+    clocked_on : "CK";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(EDFFTRHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  pin(E) {
+    direction : input;
+  }
+  pin(RN) {
+    direction : input;
+  }
+  ff(IQ,IQN) {
+    next_state : "(E*RN*D) + (E'*RN*IQ)";
+    clocked_on : "CK";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(EDFFTSHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(CK) {
+    direction : input;
+    clock : true;
+  }
+  pin(E) {
+    direction : input;
+  }
+  pin(SN) {
+    direction : input;
+  }
+  ff(IQ,IQN) {
+    next_state : "(E*D) + (E'*IQ) + SN'";
+    clocked_on : "CK";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}/*
+cell(DLY) {
+  area : 1;
+  pin(A) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A";
+  }
+}
+cell(DLYI) {
+  area : 1;
+  pin(A) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A'";
+  }
+}*/
+cell(INV) {
+  area : 1;
+  pin(A) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A'";
+  }
+}
+cell(MX2) {
+  area : 1;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(S0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(S0'*A+S0*B)";
+  }
+}
+cell(MXI2) {
+  area : 4;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(S0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(!((S0*B) | ((!S0)*A)))";
+  }
+}
+cell(MX4) {
+  area : 4;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(S0) {
+    direction : input;
+  }
+  pin(S1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((S1*((S0*D) | ((!S0)*C))) | ((!S1)*((S0*B) | ((!S0)*A))))";
+  }
+}
+cell(NAND2) {
+  area : 2;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A*B)'";
+  }
+}
+cell(NAND2B) {
+  area : 2;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN'*B)'";
+  }
+}
+cell(NAND3) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A*B*C)'";
+  }
+}
+
+cell(NAND3B) {
+  area : 3;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN'*B*C)'";
+  }
+}
+cell(NAND4) {
+  area : 4;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A*B*C*D)'";
+  }
+}
+cell(NAND4B) {
+  area : 4;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN'*B*C*D)'";
+  }
+}
+cell(NAND4BB) {
+  area : 4;
+  pin(AN) {
+    direction : input;
+  }
+  pin(BN) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN'*BN'*C*D)'";
+  }
+}
+cell(NOR2) {
+  area : 1;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A+B)'";
+  }
+}
+cell(NOR2B) {
+  area : 1;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN' + B)'";
+  }
+}
+cell(NOR3) {
+  area : 2;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A+B+C)'";
+  }
+}
+cell(NOR3B) {
+  area : 2;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN' + B + C)'";
+  }
+}
+cell(NOR4) {
+  area : 2;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A+B+C+D)'";
+  }
+}
+cell(NOR4B) {
+  area : 2;
+  pin(AN) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN' + B + C + D)'";
+  }
+}
+cell(NOR4BB) {
+  area : 2;
+  pin(AN) {
+    direction : input;
+  }
+  pin(BN) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(AN' + BN' + C + D)'";
+  }
+}
+cell(OAI21) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1)*B0)'";
+  }
+}
+cell(OAI211) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1)*B0*C0)'";
+  }
+}
+cell(OAI22) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1)*(B0+B1))'";
+  }
+}
+cell(OAI221) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1)*(B0+B1)*C0)'";
+  }
+}
+cell(OAI222) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(C0) {
+    direction : input;
+  }
+  pin(C1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1)*(B0+B1)*(C0+C1))'";
+  }
+}
+cell(OAI2BB1) {
+  area : 2;
+  pin(A0N) {
+    direction : input;
+  }
+  pin(A1N) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0N'+A1N')*B0)'";
+  }
+}
+cell(OAI2BB2) {
+  area : 2;
+  pin(A0N) {
+    direction : input;
+  }
+  pin(A1N) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0N'+A1N')*(B0+B1))'";
+  }
+}
+cell(OAI31) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1+A2)*B0)'";
+  }
+}
+cell(OAI32) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1+A2)*(B0+B1))'";
+  }
+}
+cell(OAI33) {
+  area : 2;
+  pin(A0) {
+    direction : input;
+  }
+  pin(A1) {
+    direction : input;
+  }
+  pin(A2) {
+    direction : input;
+  }
+  pin(B0) {
+    direction : input;
+  }
+  pin(B1) {
+    direction : input;
+  }
+  pin(B2) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "((A0+A1+A2)*(B0+B1+B2))'";
+  }
+}
+cell(OR2) {
+  area : 2;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A+B";
+  }
+}
+cell(OR3) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A+B+C";
+  }
+}
+cell(OR4) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(C) {
+    direction : input;
+  }
+  pin(D) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A+B+C+D)";
+  }
+}
+cell(TBUF) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(OE) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "A";
+    three_state : "!OE";
+  }
+}
+cell(TLATHQ) {
+  area : 7;
+  pin(D) {
+    direction : input;
+  }
+  pin(G) {
+    direction : input;
+  }
+  latch(IQ,IQN) {
+    enable : "G";
+    data_in : "D";
+  }
+  pin(Q) {
+    direction : output;
+    function : "IQ";
+  }
+}
+cell(XNOR2) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A^B)'";
+  }
+}
+cell(XOR2) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(Y) {
+    direction : output;
+    function : "(A ^ B)";
+  }
+}
+cell(ADDF) {
+  area : 3;
+  pin(A) {
+    direction : input;
+  }
+  pin(B) {
+    direction : input;
+  }
+  pin(CI) {
+    direction : input;
+  }
+  pin(S) {
+    direction : output;
+    function : "A^B^CI";
+  }
+  pin(CO) {
+    direction : output;
+    function : "(((A^B)*CI)+(A*B))";
+  }
+}
+cell(LOGIC_0) {
+  area : 1;
+  pin(LOGIC_0_PIN) {
+    direction : output;
+    function : "0";
+  }
+}
+cell(LOGIC_1) {
+  area : 1;
+  pin(LOGIC_1_PIN) {
+    direction : output;
+    function : "1";
+  }
+}
+
+/***************************************/
+}
