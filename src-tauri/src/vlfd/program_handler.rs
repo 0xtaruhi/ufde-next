@@ -7,7 +7,7 @@ use std::io::BufRead;
 use super::device_handler::DeviceResult;
 
 pub struct ProgramHandler {
-    device: DeviceHandler,
+   pub device: DeviceHandler,
 }
 
 impl ProgramHandler {
