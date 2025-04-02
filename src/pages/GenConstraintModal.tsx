@@ -4,7 +4,7 @@ import { PortInfo, getAllPorts } from "../utils/VerilogParser";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { devicePorts, maybeClockNames } from "../utils/Pins";
-import { writeTextFile } from "@tauri-apps/api/fs";
+import { writeTextFile } from "@tauri-apps/plugin-fs";
 import { ProjectContext } from "../App";
 import { getDirOfFile } from "../utils/utils";
 import { TbFileReport, TbRobot } from "react-icons/tb";

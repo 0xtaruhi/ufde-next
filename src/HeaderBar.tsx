@@ -10,7 +10,7 @@ import { openProject } from "./model/project";
 import { showFailedNotification, showWarningNotification } from "./pages/Notifies";
 import { useDisclosure } from "@mantine/hooks";
 import NewProjectModal from "./pages/NewProjectModal";
-import { writeTextFile } from "@tauri-apps/api/fs";
+import { writeTextFile } from "@tauri-apps/plugin-fs";
 import { modals } from "@mantine/modals";
 
 function LightDarkToggleButton() {

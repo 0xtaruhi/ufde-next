@@ -11,9 +11,10 @@ import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
 import { useEffect } from "react";
-import { appWindow } from "@tauri-apps/api/window";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { modals } from "@mantine/modals";
-import { writeTextFile } from "@tauri-apps/api/fs";
+import { writeTextFile } from "@tauri-apps/plugin-fs";
+const appWindow = getCurrentWebviewWindow()
 
 const ProjectContext = createContext<{
   project: ProjectInfo | null;

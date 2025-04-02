@@ -16,14 +16,14 @@ import { useForm } from "@mantine/form";
 
 import { Input, Stack, Text, Table } from "@mantine/core";
 import { TbBrowser, TbFileImport } from "react-icons/tb";
-import { open } from "@tauri-apps/api/dialog";
+import { open } from "@tauri-apps/plugin-dialog";
 
 import "./NewProjectModal.css";
 import { t } from "i18next";
 import { ProjectInfo, SourceFile, updateRecentlyOpenedProjects } from "../model/project";
 import { ProjectContext } from "../App";
 import { showFailedNotification, showSuccessNotification } from "./Notifies";
-import { createDir, writeTextFile } from "@tauri-apps/api/fs";
+import { mkdir, writeTextFile } from "@tauri-apps/plugin-fs";
 import isWindowsPlatform, { getFileInfoByPath, getSourceFilesByDialog } from "../utils/utils";
 
 const newProject: ProjectInfo = {
@@ -291,7 +291,7 @@ function NewProjectModal(props: ModalProps) {
     var filepath = newProject.path + splitChar;
 
     if (extraConfig.createSubDir === true) {
-      createDir(newProject.path + splitChar + newProject.name).catch(() => {
+      mkdir(newProject.path + splitChar + newProject.name).catch(() => {
         showFailedNotification({
           title: t("create_project.create_new_failed_title"),
           message: t("create_project.check_dir"),

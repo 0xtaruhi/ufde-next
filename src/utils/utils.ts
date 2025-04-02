@@ -1,7 +1,7 @@
-import { platform } from "@tauri-apps/api/os";
+import { platform } from "@tauri-apps/plugin-os";
 import { SourceFile } from "../model/project";
-import { DialogFilter } from "@tauri-apps/api/dialog";
-import { open } from "@tauri-apps/api/dialog";
+import { DialogFilter } from "@tauri-apps/plugin-dialog";
+import { open } from "@tauri-apps/plugin-dialog";
 
 export default async function isWindowsPlatform() {
   const platformName = await platform();

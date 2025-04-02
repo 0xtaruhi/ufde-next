@@ -2,148 +2,44 @@
   "build": {
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
-  "package": {
-    "productName": "UFDE+",
-    "version": "1.1.0"
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "resources": [
+      "resource/**",
+      "pthreadVC2.dll",
+      "share/*",
+      "share/fde/*"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/fde-cli/bitgen",
+      "binaries/fde-cli/import",
+      "binaries/fde-cli/map",
+      "binaries/fde-cli/nlfiner",
+      "binaries/fde-cli/pack",
+      "binaries/fde-cli/place",
+      "binaries/fde-cli/route",
+      "binaries/fde-cli/sta",
+      "binaries/yosys",
+      "binaries/yosys-abc"
+    ]
   },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": true,
-        "execute": true,
-        "open": true,
-        "sidecar": true,
-        "scope": [
-          {
-            "name": "binaries/fde-cli/bitgen",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/import",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/map",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/nlfiner",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/pack",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/place",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/route",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/fde-cli/sta",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "binaries/yosys",
-            "sidecar": true,
-            "args": true
-          },
-          {
-            "name": "vscode.cmd",
-            "cmd": "code.cmd",
-            "args": true
-          },
-          {
-            "name": "vscode",
-            "cmd": "code",
-            "args": true
-          }
-        ]
-      },
-      "dialog": {
-        "all": false,
-        "ask": false,
-        "confirm": false,
-        "message": false,
-        "open": true,
-        "save": false
-      },
-      "fs": {
-        "all": false,
-        "copyFile": false,
-        "createDir": true,
-        "exists": true,
-        "readDir": true,
-        "readFile": true,
-        "removeDir": false,
-        "removeFile": false,
-        "renameFile": false,
-        "scope": [
-          "**",
-          "$APPDATA",
-          "$APPDATA/**",
-          "$RESOURCE/**"
-        ],
-        "writeFile": true
-      },
-      "path": {
-        "all": true
-      },
-      "window": {
-        "all": true
-      },
-      "os": {
-        "all": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.fudan.eda.ufdeplus.dev",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "externalBin": [
-        "binaries/fde-cli/bitgen",
-        "binaries/fde-cli/import",
-        "binaries/fde-cli/map",
-        "binaries/fde-cli/nlfiner",
-        "binaries/fde-cli/pack",
-        "binaries/fde-cli/place",
-        "binaries/fde-cli/route",
-        "binaries/fde-cli/sta",
-        "binaries/yosys",
-        "binaries/yosys-abc"
-      ],
-      "resources": [
-        "resource/**",
-        "pthreadVC2.dll",
-        "share/*",
-        "share/**"
-       ]
-    },
-    "security": {
-      "csp": null
-    },
+  "productName": "UFDE+",
+  "mainBinaryName": "UFDE+",
+  "version": "1.1.0",
+  "identifier": "com.fudan.eda.ufdeplus.dev",
+  "plugins": {},
+  "app": {
     "windows": [
       {
         "fullscreen": false,
@@ -152,8 +48,12 @@
         "width": 1100,
         "height": 700,
         "minHeight": 600,
-        "minWidth": 1000
+        "minWidth": 1000,
+        "useHttpsScheme": true
       }
-    ]
+    ],
+    "security": {
+      "csp": null
+    }
   }
 }

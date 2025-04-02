@@ -23,11 +23,11 @@ import { useDisclosure } from "@mantine/hooks";
 import { createRef, useState } from "react";
 import "./FlowPage.css";
 import { useTranslation } from "react-i18next";
-import { Command } from "@tauri-apps/api/shell";
+import { Command } from "@tauri-apps/plugin-shell";
 import { useContext } from "react";
 import { ProjectContext } from "../App";
 import { useEffect } from "react";
-import { exists } from "@tauri-apps/api/fs";
+import { exists } from "@tauri-apps/plugin-fs";
 import {
   update2FailedNotification,
   update2SuccessNotification,
@@ -189,9 +189,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       : undefined;
     if (command) {
       command.stdout.on("data", (data) => {
+        console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
       command.stderr.on("data", (data) => {
+        console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
 

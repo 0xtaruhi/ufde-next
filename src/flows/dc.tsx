@@ -1,6 +1,6 @@
 import { resolveResource } from "@tauri-apps/api/path";
 import { ProjectInfo } from "../model/project";
-import { Command } from "@tauri-apps/api/shell";
+import { Command } from "@tauri-apps/plugin-shell";
 import { ActionIcon, Combobox, InputBase, SegmentedControl, Tooltip, useCombobox } from "@mantine/core";
 import { useContext } from "react";
 import { TbArrowAutofitDown, TbChevronDown } from "react-icons/tb";
@@ -8,7 +8,7 @@ import { SettingsItem } from "../pages/FlowPage";
 import { useTranslation } from "react-i18next";
 import { getDirOfFile } from "../utils/utils";
 import { ProjectContext } from "../App";
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { showFailedNotification, showSuccessNotification } from "../pages/Notifies";
 
 export async function runDCImportFlowCommand(project: ProjectInfo) {

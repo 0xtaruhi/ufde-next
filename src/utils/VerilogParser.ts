@@ -1,4 +1,4 @@
-import { readTextFile } from "@tauri-apps/api/fs";
+import { readTextFile } from "@tauri-apps/plugin-fs";
 
 export interface PortInfo {
   direction: "input" | "output" | "inout" | "unknown";

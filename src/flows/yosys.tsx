@@ -11,11 +11,11 @@ import {
   showFailedNotification,
   showSuccessNotification,
 } from "../pages/Notifies";
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { useContext } from "react";
 import { getDirOfFile } from "../utils/utils";
 import { ProjectContext } from "../App";
-import { Command } from "@tauri-apps/api/shell";
+import { Command } from "@tauri-apps/plugin-shell";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useTranslation } from "react-i18next";
 import { ProjectInfo } from "../model/project";
