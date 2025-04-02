@@ -2,6 +2,18 @@ use super::device_handler::DeviceResult;
 use libusb1_sys as libusb_ffi;
 use std::os::raw::c_int;
 
+use std::ffi::CStr;
+use std::os::raw::c_char;
+
+//The address of the endpoint described by this descriptor.
+//Bits 0:3 are the endpoint number. Bits 4:6 are reserved. Bit 7 indicates direction
+//#define EP2 (LIBUSB_ENDPOINT_OUT | 2)
+//#define EP6 (LIBUSB_ENDPOINT_IN| 6)
+
+// #define EP2 2  // FIFO_WR
+// #define EP4 4  // COMMAND_WR
+// #define EP6 6  // FIFO_RD
+// #define EP8 8  // sync result
 #[derive(Clone, Copy)]
 pub enum EndPoint {
     EP2 = 0x02,
@@ -24,24 +36,35 @@ impl UsbHandler {
         }
     }
 
+    pub fn is_opened(&self) -> bool {
+        !self.handle.is_null()
+    }
+
     pub fn open(&mut self) -> DeviceResult<()> {
         unsafe {
             libusb_ffi::libusb_init(std::ptr::null_mut());
         }
-
+        
         let handle =
             unsafe { libusb_ffi::libusb_open_device_with_vid_pid(std::ptr::null_mut(), VID, PID) };
-
+        
         if handle.is_null() {
             return Err("device open failed".to_string());
         }
 
         unsafe {
+            libusb_ffi::libusb_reset_device(handle);
+        }
+
+        unsafe {
             let result = libusb_ffi::libusb_claim_interface(handle, 0);
+
             if result < 0 {
+                let error_name = libusb_ffi::libusb_error_name(result);
+                let error_str = convert_c_char_to_string(error_name);
                 libusb_ffi::libusb_close(handle);
-                return Err("device open failed".to_string());
-            }
+                return Err(format!("device open failed (error {result}, {error_str})").to_string());
+            };
 
             let error_check = |r: c_int| {
                 if r < 0 {
@@ -50,6 +73,7 @@ impl UsbHandler {
                 }
                 Ok(())
             };
+            
             error_check(libusb_ffi::libusb_clear_halt(handle, EndPoint::EP2 as u8))?;
             error_check(libusb_ffi::libusb_clear_halt(handle, EndPoint::EP4 as u8))?;
             error_check(libusb_ffi::libusb_clear_halt(handle, EndPoint::EP6 as u8))?;
@@ -95,6 +119,9 @@ impl UsbHandler {
         Ok(())
     }
 
+    // =========================================================================
+    // =========================== READ OPERATION ==============================
+    // =========================================================================
     fn read_usb_base(&self, endpoint: EndPoint, buffer: &mut [u8]) -> DeviceResult<()> {
         let mut untransferred = buffer.len() as i32;
         let mut buffer_current_ptr = buffer.as_mut_ptr();
@@ -111,6 +138,8 @@ impl UsbHandler {
                     1000,
                 )
             };
+            // [REF.] SMIMS_iobase.cpp:210
+            // iRet = libusb_bulk_transfer(dev_handle, EndPoint, (unsigned char *)ptr, Size, &WriteSize, 1000);
 
             if result != 0 {
                 self.try_close();
@@ -139,7 +168,11 @@ impl UsbHandler {
         self.read_usb_base(endpoint, buffer)
     }
 
-    fn write_usb_base(&self, endpoint: EndPoint, buffer: &[u8]) -> DeviceResult<()> {
+    // =========================================================================
+    // =========================== WRITE OPERATION =============================
+    // =========================================================================
+
+    pub fn write_usb_base(&self, endpoint: EndPoint, buffer: &[u8]) -> DeviceResult<()> {
         let mut untransferred = buffer.len() as i32;
         let mut buffer_current_ptr = buffer.as_ptr();
 
@@ -178,5 +211,17 @@ impl UsbHandler {
         };
 
         self.write_usb_base(endpoint, buffer)
+    }
+}
+
+// Helper function
+fn convert_c_char_to_string(ptr: *const c_char) -> String {
+    unsafe {
+        // Create a CStr reference from the raw pointer.
+        // This assumes that the pointer is non-null and points to a null-terminated string.
+        let c_str = CStr::from_ptr(ptr);
+        // Convert the CStr into a Rust String.
+        // to_string_lossy() converts non-UTF-8 sequences into replacement characters.
+        c_str.to_string_lossy().into_owned()
     }
 }
