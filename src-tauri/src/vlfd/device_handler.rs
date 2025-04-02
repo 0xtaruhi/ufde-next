@@ -126,57 +126,13 @@ impl DeviceHandler {
         Ok(())
     }
 
-    pub fn io_write_read_data(&mut self) -> DeviceResult<()> {
-        // let mut buffer = Vec::with_capacity(write_buffer.len()); // Create a buffer with the same capacity as write_buffer
-        // buffer.resize(write_buffer.len(), Default::default());
-        // buffer.clone_from_slice(write_buffer); // Clone the contents of write_buffer into buffer
-//         {
-//         let mut buffer = [0u16; 16];
-//         self.encrypt(&mut buffer);
-//         self.usb.write_usb(EndPoint::EP2, &buffer)?;
-//         let mut another_buf = [0u16; 16];
-//         self.usb.read_usb(EndPoint::EP6, &mut another_buf)?;
-//         self.decrypt(&mut another_buf);
-// }
-        // let mut buffer = [0u16; 16];
-        // println!("- {:?}", buffer);
-        // self.encrypt(&mut buffer);
-        // println!("- {:?}", buffer);
-        // self.usb.write_usb(EndPoint::EP2, &buffer)?;
-        // println!("- {:?}", buffer);
-        // let mut buffer = [0u16; 16];
-        // self.usb.read_usb(EndPoint::EP6, &mut buffer)?;
-        // println!("- {:?}", buffer);
-        // self.decrypt(&mut buffer);
-        let mut buffer = [0u16; 4];
-        self.encrypt(&mut buffer);
-        self.fifo_write(& buffer)?;
-        self.fifo_read(&mut buffer)?;
-        self.decrypt(&mut buffer);
-
-        // Print the bit array
-        // Convert the buffer into a bit array (vector of 0s and 1s)
-        let bit_array: Vec<u8> = buffer.iter()
-        .flat_map(|&num| (0..16).map(move |i| ((num >> (15 - i)) & 1) as u8))
-        .collect();
-
-        // Print the bit array
-        for bit in bit_array {
-            print!("{}", bit);  // Print each bit as 0 or 1
-        }
-
-
-        // // Ensure that the lengths match before copying
-        // if read_buffer.len() == buffer.len() {
-        //     println!("Test");
-        //     read_buffer.copy_from_slice(&buffer); // Copy contents from buffer into read_buffer
-        // } else {
-        //     // Handle the case where lengths don't match (you may want to resize read_buffer)
-        //     return Err("data length read from FIFO does not match".to_string());
-        // }
-
+    pub fn io_write_read_data(&mut self, write_buffer: &mut [u16; 4], read_buffer: &mut [u16; 4]) -> DeviceResult<()> {
+        self.encrypt(write_buffer);
+        self.fifo_write(write_buffer)?;
+        self.fifo_read(read_buffer)?;
+        self.decrypt(read_buffer);
         Ok(())
-    }   
+    }  
 
     /**
       Gacefully exists from IO mode & closes the device.

@@ -1,7 +1,4 @@
-/**
-  Configuration Space API
- */
-
+/// Configuration Space API
 pub struct Cfg {
     pub cfg: [u16; 64],
 }
