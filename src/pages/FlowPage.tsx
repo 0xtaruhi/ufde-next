@@ -44,9 +44,9 @@ const flowData: {
   label: string;
   data: FlowInfo[];
 }[] = [
-  { value: "DC", label: "DC", data: dcFlows },
-  { value: "Yosys", label: "Yosys", data: yosysFlows },
-];
+    { value: "DC", label: "DC", data: dcFlows },
+    { value: "Yosys", label: "Yosys", data: yosysFlows },
+  ];
 
 const flowsNameMap = (name: string) => {
   return flowData.find((flow) => flow.value === name)?.data;
@@ -171,7 +171,7 @@ export interface FlowProps {
 interface FlowInfo {
   name: string;
   target_file?: string;
-  runFunc?: (project: ProjectInfo) => Promise<Command> | Promise<undefined>;
+  runFunc?: (project: ProjectInfo) => Promise<Command<string> | undefined>;
   settingsPage?: React.ReactNode;
   extraActions?: React.ReactNode;
 }
@@ -188,11 +188,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       ? await props.runFunc(projectContext.project!)
       : undefined;
     if (command) {
-      command.stdout.on("data", (data) => {
+      command.stdout.on("data", (data: string) => {
         console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
-      command.stderr.on("data", (data) => {
+      command.stderr.on("data", (data: string) => {
         console.log(data);
         setStatusText((prevTest) => prevTest + data);
       });
@@ -284,7 +284,7 @@ function FlowItems(props: {
       }
       props.setActive(tmpActive);
     })();
-  });
+  }, [project?.name, project?.path]);
 
   return (
     <Timeline
