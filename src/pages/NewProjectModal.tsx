@@ -38,6 +38,10 @@ const newProject: ProjectInfo = {
     place: {
       mode: "Timing Driven",
     },
+    verification: {
+      modelsimDir: "",
+      testbenchPath: "",
+    },
   },
 };
 
@@ -291,13 +295,16 @@ function NewProjectModal(props: ModalProps) {
     var filepath = newProject.path + splitChar;
 
     if (extraConfig.createSubDir === true) {
-      mkdir(newProject.path + splitChar + newProject.name).catch(() => {
+      try {
+        await mkdir(newProject.path + splitChar + newProject.name);
+        filepath = newProject.path + splitChar + newProject.name + splitChar;
+      } catch (e) {
         showFailedNotification({
           title: t("create_project.create_new_failed_title"),
           message: t("create_project.check_dir"),
         });
-      });
-      filepath = newProject.path + splitChar + newProject.name + splitChar;
+        return;
+      }
     }
 
     filepath += newProject.name + ".json";

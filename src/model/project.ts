@@ -13,7 +13,12 @@ export type ProjectSettings = {
   };
   place: {
     mode: "Timing Driven" | "Bounding Box";
-  }
+  };
+  verification: {
+    modelsimDir: string;
+    testbenchPath: string;
+    customSimlibPath?: string; // 自定义仿真库路径（可选）
+  };
 }
 
 export type ProjectInfo = {
@@ -76,6 +81,9 @@ export async function openProject(
     const content = await readTextFile(validPath);
     const openedProject = JSON.parse(content) as ProjectInfo;
     openedProject.path = validPath;
+    if (!openedProject.settings.verification) {
+      openedProject.settings.verification = { modelsimDir: "", testbenchPath: "", customSimlibPath: "" };
+    }
     updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
     return openedProject;
   }
@@ -89,6 +97,9 @@ export async function openProjectWithSpecificPath(
   const content = await readTextFile(path);
   const openedProject = JSON.parse(content) as ProjectInfo;
   openedProject.path = path;
+  if (!openedProject.settings.verification) {
+    openedProject.settings.verification = { modelsimDir: "", testbenchPath: "" };
+  }
   updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
   return openedProject;
 }

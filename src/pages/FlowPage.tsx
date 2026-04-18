@@ -31,6 +31,7 @@ import { exists } from "@tauri-apps/plugin-fs";
 import {
   update2FailedNotification,
   update2SuccessNotification,
+  showFailedNotification,
 } from "./Notifies";
 import { notifications } from "@mantine/notifications";
 import { ProjectInfo } from "../model/project";
@@ -171,7 +172,7 @@ export interface FlowProps {
 interface FlowInfo {
   name: string;
   target_file?: string;
-  runFunc?: (project: ProjectInfo) => Promise<Command> | Promise<undefined>;
+  runFunc?: (project: ProjectInfo) => Promise<Command<string>> | Promise<undefined>;
   settingsPage?: React.ReactNode;
   extraActions?: React.ReactNode;
 }
@@ -184,9 +185,18 @@ function FlowInstance(props: FlowInfo & FlowProps) {
 
   const run = async () => {
     setStatusText("");
-    const command = props.runFunc
-      ? await props.runFunc(projectContext.project!)
-      : undefined;
+    let command: Command<string> | undefined;
+    try {
+      command = props.runFunc
+        ? await props.runFunc(projectContext.project!)
+        : undefined;
+    } catch (err: any) {
+      showFailedNotification({
+        title: t("flow." + props.name + ".title"),
+        message: err.message || String(err),
+      });
+      return;
+    }
     if (command) {
       command.stdout.on("data", (data) => {
         console.log(data);
@@ -233,8 +243,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       };
 
       command.execute().then((res) => {
-        if (res.code !== 0) {
+        const hasError = /\berror\b/i.test(res.stderr) || /\berror\b/i.test(res.stdout);
+        if (res.code !== 0 && hasError) {
           onError("Code = " + res.code);
+        } else if (res.code !== 0) {
+          onSuccess();
         } else {
           onSuccess();
         }
@@ -249,7 +262,6 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       settingsPage={
         props.settingsPage ? props.settingsPage : <EmptySettingsHint />
       }
-      // runAvailable={true}
       runAvailable={props.runAvailable}
       status={statusText}
       extraActions={props.extraActions}
@@ -332,7 +344,22 @@ function FlowPage() {
       loading: true,
     });
 
-    const command = flow.runFunc ? await flow.runFunc(project!) : undefined;
+    let command: Command<string> | undefined;
+    try {
+      command = flow.runFunc ? await flow.runFunc(project!) : undefined;
+    } catch (err: any) {
+      update2FailedNotification({
+        id: notifyId,
+        title: t("flow." + flow.name + ".title"),
+        message:
+          t("flow.notify.failed.message_prefix") +
+          t("flow." + flow.name + ".title") +
+          t("flow.notify.failed.message_suffix") +
+          ": " +
+          (err.message || String(err)),
+      });
+      return false;
+    }
     let runSuccess = false;
 
     const onSuccess = () => {
@@ -363,8 +390,11 @@ function FlowPage() {
 
     if (command) {
       await command.execute().then((res) => {
-        if (res.code !== 0) {
+        const hasError = /\berror\b/i.test(res.stderr) || /\berror\b/i.test(res.stdout);
+        if (res.code !== 0 && hasError) {
           onError("Code = " + res.code);
+        } else if (res.code !== 0) {
+          onSuccess();
         } else {
           onSuccess();
         }
@@ -381,6 +411,9 @@ function FlowPage() {
 
     for (let i = 0; i < flows.length; i++) {
       const flow = flows[i];
+      if (flow.name.endsWith(".sta")) {
+        continue;
+      }
       if (!(await run(flow))) {
         break;
       }

@@ -9,10 +9,12 @@
     "active": true,
     "targets": "all",
     "resources": [
-      "resource/**",
+      "resource/**/*",
       "pthreadVC2.dll",
       "share/*",
-      "share/fde/*"
+      "share/fde/*",
+      "QtCore4.dll",
+      "QtGui4.dll"
     ],
     "icon": [
       "icons/32x32.png",
@@ -30,8 +32,11 @@
       "binaries/fde-cli/place",
       "binaries/fde-cli/route",
       "binaries/fde-cli/sta",
+      "binaries/fde-cli/viewer",
       "binaries/yosys",
-      "binaries/yosys-abc"
+      "binaries/yosys-abc",
+      "binaries/ip-generator/ip_generator",
+      "binaries/ip-generator/img2mif"
     ]
   },
   "productName": "UFDE+",

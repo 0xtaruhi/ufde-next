@@ -2,8 +2,8 @@ import { resolveResource } from "@tauri-apps/api/path";
 import { ProjectInfo } from "../model/project";
 import { Command } from "@tauri-apps/plugin-shell";
 import { ActionIcon, Combobox, InputBase, SegmentedControl, Tooltip, useCombobox } from "@mantine/core";
-import { useContext } from "react";
-import { TbArrowAutofitDown, TbChevronDown } from "react-icons/tb";
+import { useContext, useEffect, useState } from "react";
+import { TbArrowAutofitDown, TbChevronDown, TbFileText, TbEye } from "react-icons/tb";
 import { SettingsItem } from "../pages/FlowPage";
 import { useTranslation } from "react-i18next";
 import { getDirOfFile } from "../utils/utils";
@@ -39,6 +39,7 @@ export async function runDCMapFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project?.name + "_dc_" + "imp.xml";
   const outputFileName = project?.name + "_dc_" + "map.xml";
+  const outputFileName_v = project?.name + "_dc_" + "map.v"; 
 
   const command = Command.sidecar(
     "binaries/fde-cli/map",
@@ -51,6 +52,8 @@ export async function runDCMapFlowCommand(project: ProjectInfo) {
       celllibfilePath,
       mapArgs,
       mapFileMode,
+      "-v",
+      outputFileName_v,
       "-e",
       files?.join(" ") ?? "",
     ],
@@ -68,6 +71,7 @@ export async function runDCPackFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project.name + "_dc_" + "map.xml";
   const outputFileName = project.name + "_dc_" + "pack.xml";
+  const outputFileName_v = project.name + "_dc_" + "pack.v";
 
   const command = Command.sidecar(
     "binaries/fde-cli/pack",
@@ -84,6 +88,8 @@ export async function runDCPackFlowCommand(project: ProjectInfo) {
       outputFileName,
       "-g",
       xdlcfgfilePath,
+      "-s",
+      outputFileName_v,
       "-e",
     ],
     { cwd: await getDirOfFile(project.path) }
@@ -161,6 +167,7 @@ export async function runDCPlaceFlowCommand(project: ProjectInfo) {
 
 export async function runDCRouteFlowCommand(project: ProjectInfo) {
   const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
   const getRouteMode = () => {
     if (project.settings.route.mode === "Direct Search") {
       return "-d";
@@ -176,10 +183,26 @@ export async function runDCRouteFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project.name + "_dc_" + "place.xml";
   const outputFileName = project.name + "_dc_" + "route.xml";
+  const outputFileName_v = project.name + "_dc_" + "route.v";
 
   const command = Command.sidecar(
     "binaries/fde-cli/route",
-    ["-a", archfilePath, "-n", inputFileName, "-o", outputFileName, routeMode, routecst, routecstFilePath, "-e"],
+    [
+      "-a",
+      archfilePath,
+      "-n",
+      inputFileName,
+      "-o",
+      outputFileName,
+      routeMode,
+      routecst,
+      routecstFilePath,
+      "-i",
+      cilfilePath,
+      "-v",
+      outputFileName_v,
+      "-e"
+    ],
     { cwd: await getDirOfFile(project.path) }
   );
 
@@ -242,6 +265,46 @@ export function DCRouteFlowSettingsPage() {
   return settings;
 }
 
+export async function runDCSTAFlowCommand(project: ProjectInfo) {
+  const celllibfilePath = await resolveResource("resource/hw_lib/fdp3_cell.xml");
+  const xdlcfgfilePath = await resolveResource("resource/hw_lib/fdp3_config.xml");
+  const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const confilePath = await resolveResource("resource/hw_lib/fdp3_con.xml");
+
+  const routeFileName = project.name + "_dc_" + "route.xml";
+  const nlfinerOutputName = project.name + "_dc_" + "sta.xml";
+  const staOutputName = project.name + "_dc_" + "sta_out.rp";
+
+  const nlfinerCommand = Command.sidecar(
+    "binaries/fde-cli/nlfiner",
+    [
+      "-d", routeFileName,
+      "-l", celllibfilePath,
+      "-c", xdlcfgfilePath,
+      "-o", nlfinerOutputName,
+    ],
+    { cwd: await getDirOfFile(project.path) }
+  );
+
+  const nlfinerRes = await nlfinerCommand.execute();
+  if (nlfinerRes.code !== 0) {
+    throw new Error("nlfiner failed: " + nlfinerRes.stderr);
+  }
+
+  const staCommand = Command.sidecar(
+    "binaries/fde-cli/sta",
+    [
+      "-a", archfilePath,
+      "-i", nlfinerOutputName,
+      "-l", confilePath,
+      "-r", staOutputName,
+    ],
+    { cwd: await getDirOfFile(project.path) }
+  );
+
+  return staCommand;
+}
+
 export async function runDCGenBitFlowCommand(project: ProjectInfo) {
   const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
   const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
@@ -256,6 +319,129 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
   );
 
   return command;
+}
+
+function DCViewPlaceAction() {
+  const { project } = useContext(ProjectContext);
+  if (!project || !project.path) return null;
+  const { t } = useTranslation();
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_dc_place.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function DCViewRouteAction() {
+  const { project } = useContext(ProjectContext);
+  if (!project || !project.path) return null;
+  const { t } = useTranslation();
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_dc_route.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function DCViewSTAAction() {
+  const { project } = useContext(ProjectContext);
+  if (!project || !project.path) return null;
+  const { t } = useTranslation();
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_dc_sta_out.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function DCViewSTAReportAction() {
+  const { project } = useContext(ProjectContext);
+
+  if (!project || !project.path) {
+    return null;
+  }
+
+  const [reportFile, setReportFile] = useState<string>("");
+
+  useEffect(() => {
+    const resolvePath = async () => {
+      if (project) {
+        setReportFile((await getDirOfFile(project.path)) + project.name + "_dc_sta_out.rp");
+      }
+    };
+    resolvePath();
+  }, [project?.path]);
+
+  return (
+    <Tooltip label={reportFile}>
+      <ActionIcon size="md" variant="subtle" style={{ padding: "5px" }}>
+        <TbFileText size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
 }
 
 function DCDownloadBitAction() {
@@ -300,17 +486,30 @@ export const dcFlows = [
     target_file: "dc_place.xml",
     runFunc: runDCPlaceFlowCommand,
     settingsPage: <DCPlaceFlowSettingsPage />,
+    extraActions: <DCViewPlaceAction />,
   },
   {
     name: "dc.route",
     target_file: "dc_route.xml",
     runFunc: runDCRouteFlowCommand,
     settingsPage: <DCRouteFlowSettingsPage />,
+    extraActions: <DCViewRouteAction />,
   },
   {
     name: "dc.genbit",
     target_file: "dc_genbit.bit",
     runFunc: runDCGenBitFlowCommand,
     extraActions: <DCDownloadBitAction />,
+  },
+  {
+    name: "dc.sta",
+    target_file: "dc_sta_out.rp",
+    runFunc: runDCSTAFlowCommand,
+    extraActions: (
+      <>
+        <DCViewSTAAction />
+        <DCViewSTAReportAction />
+      </>
+    ),
   },
 ];

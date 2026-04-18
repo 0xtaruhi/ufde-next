@@ -2,6 +2,8 @@
   "nav": {
     "project": "プロジェクト",
     "flow": "フロー",
+    "ip": "IP",
+    "verification": "検証",
     "settings": "設定"
   },
   "menu": {
@@ -110,6 +112,7 @@
     "settings": "設定",
     "no-settings-available": "利用可能な設定がありません",
     "mode": "モード",
+    "view": "表示",
     "run_all": "全て実行",
     "dc": {
       "import": {
@@ -131,6 +134,42 @@
       "route": {
         "title": "ワイヤリング",
         "description": "論理ブロック間の接続を対象デバイスにワイヤリングする"
+      },
+      "sta": {
+        "title": "スタティックタイミング解析",
+        "description": "タイミング収束を確認するためにスタティックタイミング解析を実行",
+        "viewReport": "レポートを表示"
+      },
+      "genbit": {
+        "title": "ビットストリームの生成",
+        "description": "対象デバイスのビットストリームファイルの生成"
+      }
+    },
+    "yosys": {
+      "yosys": {
+        "title": "論理合成",
+        "description": "Yosys ツールを使用して論理ネットリストを生成"
+      },
+      "map": {
+        "title": "プロセス・マッピング",
+        "description": "逻辑ネットリストを対象デバイスのプリミティブにマッピングする"
+      },
+      "pack": {
+        "title": "論理パッケージング",
+        "description": "LUT を論理ブロックにパッケージングする"
+      },
+      "place": {
+        "title": "レイアウト",
+        "description": "論理ブロックを対象デバイスに配置"
+      },
+      "route": {
+        "title": "ワイヤリング",
+        "description": "論理ブロック間の接続を対象デバイスにワイヤリングする"
+      },
+      "sta": {
+        "title": "スタティックタイミング解析",
+        "description": "タイミング収束を確認するためにスタティックタイミング解析を実行",
+        "viewReport": "レポートを表示"
       },
       "genbit": {
         "title": "ビットストリームの生成",
@@ -162,6 +201,143 @@
     "verilog": "Verilog ファイル",
     "systemverilog": "SystemVerilog ファイル",
     "constraint": "制約ファイル"
+  },
+  "ip": {
+    "title": "IP コア設定",
+    "subtitle": "FPGA IP コアを選択して設定",
+    "available": "利用可能な IP コア",
+    "configuration": "IP コア設定",
+    "selectPrompt": "左から IP コアを選択してください",
+    "ram": {
+      "description": "ランダムアクセスメモリ IP コア"
+    },
+    "pll": {
+      "description": "位相ロックループクロック管理 IP コア"
+    }
+  },
+  "ram": {
+    "config": {
+      "title": "RAM ジェネレータ",
+      "description": "MIF ファイルまたはパラメータから BRAM 初期化データを生成"
+    },
+    "fileMode": "MIF ファイル",
+    "paramMode": "パラメータ設定",
+    "imageMode": "画像から MIF",
+    "selectFileTitle": "MIF ファイルを選択",
+    "fileSelected": "ファイル選択済み: {{file}}",
+    "fileNotExist": "ファイルが存在しません: {{file}}",
+    "selectFileFailed": "ファイル選択に失敗: {{error}}",
+    "copyFileFailed": "ファイルのコピーに失敗: {{error}}",
+    "noFileSelected": "MIF ファイルを選択してください",
+    "generateSuccess": "生成成功！",
+    "generateFailed": "生成失敗、終了コード {{code}}",
+    "generateException": "生成例外: {{error}}",
+    "generateMifFailed": "MIF ファイル生成失敗: {{error}}",
+    "noOutputFile": "表示可能な出力ファイルがありません",
+    "openFileFailed": "ファイルオープン失敗: {{error}}",
+    "openFolderFailed": "フォルダオープン失敗: {{error}}",
+    "mifFilePath": "MIF ファイルパス",
+    "noFilePlaceholder": "ファイル未選択",
+    "selectMifButton": "MIF ファイルを選択",
+    "selectedFile": "選択されたファイル",
+    "outputFile": "出力ファイル",
+    "viewOutputButton": "ファイルを表示",
+    "openFolderButton": "フォルダを開く",
+    "commandOutput": "コマンド出力",
+    "resetButton": "リセット",
+    "generateButton": "生成",
+    "processing": "生成中...",
+    "currentStatus": "現在の状態",
+    "notSelected": "未選択",
+    "error": "エラー",
+    "success": "成功",
+    "ramType": "RAM タイプ",
+    "singlePort": "シングルポート RAM",
+    "dualPort": "デュアルポート RAM",
+    "configSelect": "設定選択",
+    "configSelectDescription": "ビット幅 x 深度（総容量）を選択",
+    "portAConfig": "ポート A 設定",
+    "portADescription": "ポート A のビット幅 x 深度を選択",
+    "portBConfig": "ポート B 設定",
+    "portBDescription": "ポート B のビット幅 x 深度を選択（同じ総容量が必要）",
+    "capacityInfo": "総容量：ポート A = {{portA}} ビット、ポート B = {{portB}} ビット",
+    "generatedMif": "生成された MIF ファイル",
+    "outputLocation": "出力場所",
+    "noProjectOpen": "パラメータ設定モードを使用するにはプロジェクトを開いてください",
+    "selectImageTitle": "画像ファイルを選択",
+    "selectImageFailed": "画像選択に失敗: {{error}}",
+    "imageFilePath": "画像ファイルパス",
+    "noImagePlaceholder": "画像ファイルを選択 (PNG/JPG/BMP)",
+    "selectImageButton": "画像を選択",
+    "previewImagePath": "プレビュー画像",
+    "imageConvertInfo": "画像は 128x64 ピクセルに変換され、8 ビット幅の MIF ファイル（1024 深度）として出力されます",
+    "noImageSelected": "画像ファイルを選択してください",
+    "img2mifFailed": "画像から MIF 変換失敗: {{error}}",
+    "imageModeDescription": "「画像から MIF」タブをクリックして変換ダイアログを開きます",
+    "openImageConverter": "変換器を開く",
+    "convertingImage": "画像を変換中...",
+    "imageConverted": "画像の変換に成功しました",
+    "imageConvertFailed": "画像の変換に失敗しました",
+    "convertButton": "変換"
+  },
+  "pll": {
+    "config": {
+      "title": "PLL ジェネレータ",
+      "description": "位相ロックループクロック管理 IP コアを生成"
+    },
+    "configMode": "設定モード",
+    "singleMode": "単一生成",
+    "batchMode": "バッチ生成",
+    "divideValue": "分周値",
+    "divideValueDescription": "分周係数を選択",
+    "fpgaGates": "FPGA ゲート数",
+    "fpgaGatesDescription": "FPGA ゲート数を選択（30万または50万）",
+    "outputFile": "出力ファイル",
+    "batchGeneration": "バッチ生成",
+    "batchDescription": "すべての 8 種類の組み合わせを生成します：",
+    "resetButton": "リセット",
+    "generateButton": "生成",
+    "generateAllButton": "すべて生成",
+    "processing": "生成中...",
+    "generatedSuccess": "生成成功！",
+    "allGeneratedSuccess": "すべての PLL 組み合わせの生成に成功しました！",
+    "error": "エラー",
+    "noProjectOpen": "PLL IP コアを生成するにはプロジェクトを開いてください",
+    "unknownError": "不明なエラー"
+  },
+  "verification": {
+    "title": "機能検証",
+    "subtitle": "シミュレーション環境を設定してテストを実行",
+    "simNetlist": "シミュレーションネットリスト",
+    "noNetlistPlaceholder": "利用可能なネットリストがありません",
+    "noNetlistFound": "作業ディレクトリに _gate.v、_map.v、_pack.v、_route.v で終わるファイルが見つかりません。",
+    "modelsimPath": "ModelSim bin ディレクトリ",
+    "modelsimPathHelp": "（vlib.exe、vlog.exe、vsim.exe を含む）",
+    "noDirPlaceholder": "ディレクトリ未選択",
+    "selectModelsimButton": "ディレクトリを選択",
+    "selectModelsimTitle": "ModelSim bin ディレクトリを選択",
+    "selectModelsimFailed": "ディレクトリ選択に失敗: {{error}}",
+    "testbenchPath": "Testbench ファイル",
+    "noFilePlaceholder": "ファイル未選択",
+    "selectTestbenchButton": "ファイルを選択",
+    "selectTestbenchTitle": "Testbench ファイルを選択",
+    "selectTestbenchFailed": "ファイル選択に失敗: {{error}}",
+    "customSimlibPath": "カスタムシミュレーションライブラリ（任意）",
+    "noCustomSimlibPlaceholder": "カスタムライブラリ未選択",
+    "selectCustomSimlibButton": "ライブラリを選択",
+    "selectCustomSimlibTitle": "カスタムシミュレーションライブラリを選択",
+    "selectCustomSimlibFailed": "ライブラリ選択に失敗: {{error}}",
+    "clearButton": "クリア",
+    "resetButton": "リセット",
+    "runButton": "シミュレーション実行",
+    "runningButton": "実行中...",
+    "runningTitle": "シミュレーション実行中",
+    "runningMessage": "ModelSim シミュレーションを実行中です。しばらくお待ちください...",
+    "successTitle": "シミュレーション成功",
+    "successMessage": "シミュレーションが完了し、VCD ファイルが生成されました：{{vcd}}",
+    "errorTitle": "シミュレーション失敗",
+    "error": "エラー",
+    "noProjectOpen": "プロジェクトを開いてください"
   },
   "other": {
     "vscode_not_found": "Visual Studio Code が見つかりませんでした。インストールしてから、もう一度お試しください。"

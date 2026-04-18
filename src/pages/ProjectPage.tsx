@@ -70,7 +70,7 @@ function SourceFileSection() {
           onDoubleClick={async () => {
             const platformName = await platform();
             const cmdStr = /^win/i.test(platformName) ? "vscode.cmd" : "vscode";
-            const command = new Command(cmdStr, file.path);
+            const command = Command.create(cmdStr, file.path);
             command.spawn().catch((_) => {
               showFailedNotification({ message: "other.vscode_not_found", title: "" });
             });

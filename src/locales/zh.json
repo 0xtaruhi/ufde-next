@@ -2,6 +2,8 @@
   "nav": {
     "project": "项目",
     "flow": "流程",
+    "ip": "IP",
+    "verification": "验证",
     "settings": "设置"
   },
   "menu": {
@@ -115,6 +117,7 @@
     "settings": "设置",
     "no-settings-available": "没有可用的设置",
     "mode": "模式",
+    "view": "查看",
     "run_all": "运行全部",
     "dc": {
       "import": {
@@ -136,6 +139,11 @@
       "route": {
         "title": "布线",
         "description": "将逻辑块之间的连接布线至目标设备上"
+      },
+      "sta": {
+        "title": "静态时序分析",
+        "description": "执行静态时序分析，检查时序收敛情况",
+        "viewReport": "查看报告"
       },
       "genbit": {
         "title": "生成位流",
@@ -162,6 +170,11 @@
       "route": {
         "title": "布线",
         "description": "将逻辑块之间的连接布线至目标设备上"
+      },
+      "sta": {
+        "title": "静态时序分析",
+        "description": "执行静态时序分析，检查时序收敛情况",
+        "viewReport": "查看报告"
       },
       "genbit": {
         "title": "生成位流",
@@ -191,5 +204,148 @@
   },
   "other": {
     "vscode_not_found": "未找到 Visual Studio Code，请安装后并将其添加到环境变量后重试。"
+  },
+  "ip": {
+    "title": "IP 核配置",
+    "subtitle": "选择并配置 FPGA IP 核",
+    "available": "可用 IP 核",
+    "configuration": "IP 核配置",
+    "selectPrompt": "请从左侧选择一个 IP 核进行配置",
+    "ram": {
+      "description": "随机存取存储器 IP 核"
+    },
+    "pll": {
+      "description": "锁相环时钟管理 IP 核"
+    },
+    "fifo": {
+      "description": "先进先出存储器 IP 核"
+    },
+    "uart": {
+      "description": "通用异步收发传输器 IP 核"
+    }
+  },
+  "ram": {
+    "config": {
+      "title": "RAM 生成器",
+      "description": "从 MIF 文件或参数配置生成 BRAM 初始化数据"
+    },
+    "fileMode": "MIF 文件",
+    "paramMode": "参数配置",
+    "imageMode": "图片转 MIF",
+    "selectFileTitle": "选择 MIF 文件",
+    "fileSelected": "已选择文件: {{file}}",
+    "fileNotExist": "文件不存在: {{file}}",
+    "selectFileFailed": "选择文件失败: {{error}}",
+    "copyFileFailed": "复制文件失败: {{error}}",
+    "noFileSelected": "请先选择 MIF 文件",
+    "generateSuccess": "生成成功！",
+    "generateFailed": "生成失败，退出码 {{code}}",
+    "generateException": "生成异常: {{error}}",
+    "generateMifFailed": "生成 MIF 文件失败: {{error}}",
+    "noOutputFile": "没有可查看的输出文件",
+    "openFileFailed": "打开文件失败: {{error}}",
+    "openFolderFailed": "打开文件夹失败: {{error}}",
+    "mifFilePath": "MIF 文件路径",
+    "noFilePlaceholder": "未选择文件",
+    "selectMifButton": "选择 MIF 文件",
+    "selectedFile": "已选文件",
+    "outputFile": "输出文件",
+    "viewOutputButton": "查看文件",
+    "openFolderButton": "打开文件夹",
+    "commandOutput": "命令输出",
+    "resetButton": "重置",
+    "generateButton": "生成",
+    "processing": "生成中...",
+    "currentStatus": "当前状态",
+    "notSelected": "未选择",
+    "error": "错误",
+    "success": "成功",
+    "ramType": "RAM 类型",
+    "singlePort": "单口 RAM",
+    "dualPort": "双口 RAM",
+    "configSelect": "配置选择",
+    "configSelectDescription": "选择位宽 x 深度（总容量）",
+    "portAConfig": "A 口配置",
+    "portADescription": "选择 A 口位宽 x 深度",
+    "portBConfig": "B 口配置",
+    "portBDescription": "选择 B 口位宽 x 深度（要求总容量相同）",
+    "capacityInfo": "总容量：A 口 = {{portA}} 比特，B 口 = {{portB}} 比特",
+    "generatedMif": "生成的 MIF 文件",
+    "outputLocation": "输出位置",
+    "noProjectOpen": "请先打开一个项目以使用参数配置模式",
+    "selectImageTitle": "选择图片文件",
+    "selectImageFailed": "选择图片失败: {{error}}",
+    "imageFilePath": "图片文件路径",
+    "noImagePlaceholder": "选择图片文件 (PNG/JPG/BMP)",
+    "selectImageButton": "选择图片",
+    "previewImagePath": "预览图片",
+    "imageConvertInfo": "图片将被转换为 128x64 像素，输出为 8 位宽度 MIF 文件 (1024 深度)",
+    "noImageSelected": "请先选择图片文件",
+    "img2mifFailed": "图片转 MIF 失败: {{error}}",
+    "imageModeDescription": "点击「图片转 MIF」标签打开转换对话框",
+    "openImageConverter": "打开转换器",
+    "convertingImage": "正在转换图片...",
+    "imageConverted": "图片转换成功",
+    "imageConvertFailed": "图片转换失败",
+    "convertButton": "转换"
+  },
+  "pll": {
+    "config": {
+      "title": "PLL 生成器",
+      "description": "生成锁相环时钟管理 IP 核"
+    },
+    "configMode": "配置模式",
+    "singleMode": "单一生成",
+    "batchMode": "批量生成",
+    "divideValue": "分频值",
+    "divideValueDescription": "选择分频系数（Divide by Value）",
+    "fpgaGates": "FPGA 门数",
+    "fpgaGatesDescription": "选择 FPGA 门数（30W 或 50W）",
+    "outputFile": "输出文件",
+    "batchGeneration": "批量生成",
+    "batchDescription": "将生成所有 8 种组合：",
+    "resetButton": "重置",
+    "generateButton": "生成",
+    "generateAllButton": "生成全部",
+    "processing": "生成中...",
+    "generatedSuccess": "生成成功！",
+    "allGeneratedSuccess": "所有 PLL 组合生成成功！",
+    "error": "错误",
+    "noProjectOpen": "请先打开一个项目以生成 PLL IP 核",
+    "unknownError": "未知错误"
+  },
+  "verification": {
+    "title": "功能验证",
+    "subtitle": "配置仿真环境并运行测试",
+    "simNetlist": "仿真网表文件",
+    "noNetlistPlaceholder": "未找到可用网表",
+    "noNetlistFound": "工作目录下未找到以 _gate.v、_map.v、_pack.v 或 _route.v 结尾的文件。",
+    "modelsimPath": "ModelSim bin 目录",
+    "modelsimPathHelp": "（含有 vlib.exe，vlog.exe，vsim.exe）",
+    "noDirPlaceholder": "未选择目录",
+    "selectModelsimButton": "选择目录",
+    "selectModelsimTitle": "选择 ModelSim bin 目录",
+    "selectModelsimFailed": "选择目录失败: {{error}}",
+    "testbenchPath": "Testbench 文件",
+    "noFilePlaceholder": "未选择文件",
+    "selectTestbenchButton": "选择文件",
+    "selectTestbenchTitle": "选择 Testbench 文件",
+    "selectTestbenchFailed": "选择文件失败: {{error}}",
+    "customSimlibPath": "自定义仿真库（可选）",
+    "noCustomSimlibPlaceholder": "未选择自定义仿真库",
+    "selectCustomSimlibButton": "选择库文件",
+    "selectCustomSimlibTitle": "选择自定义仿真库文件",
+    "selectCustomSimlibFailed": "选择库文件失败: {{error}}",
+    "clearButton": "清除",
+    "resetButton": "重置",
+    "runButton": "运行仿真",
+    "runningButton": "仿真中...",
+    "runningTitle": "正在仿真",
+    "runningMessage": "ModelSim 仿真运行中，请稍等...",
+    "successTitle": "仿真成功",
+    "successMessage": "仿真完成，VCD 文件已生成：{{vcd}}",
+    "errorTitle": "仿真失败",
+    "error": "错误",
+    "noProjectOpen": "请先打开一个项目"
   }
 }

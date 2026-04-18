@@ -2,6 +2,8 @@
   "nav": {
     "project": "Project",
     "flow": "Flow",
+    "ip": "IP",
+    "verification": "Verification",
     "settings": "Settings"
   },
   "menu": {
@@ -115,6 +117,7 @@
     "settings": "Settings",
     "no-settings-available": "No settings available",
     "mode": "Mode",
+    "view": "View",
     "run_all": "Run All",
     "dc": {
       "import": {
@@ -136,6 +139,11 @@
       "route": {
         "title": "Route",
         "description": "Route the placed netlist on the target device."
+      },
+      "sta": {
+        "title": "Static Timing Analysis",
+        "description": "Perform static timing analysis to check timing closure",
+        "viewReport": "View Report"
       },
       "genbit": {
         "title": "Generate Bitstream",
@@ -162,6 +170,11 @@
       "route": {
         "title": "Route",
         "description": "Route the placed netlist on the target device."
+      },
+      "sta": {
+        "title": "Static Timing Analysis",
+        "description": "Perform static timing analysis to check timing closure",
+        "viewReport": "View Report"
       },
       "genbit": {
         "title": "Generate Bitstream",
@@ -191,5 +204,148 @@
   },
   "other": {
     "vscode_not_found": "VSCode not found, please install it and add it to the environment variable and retry!"
+  },
+  "ip": {
+    "title": "IP Core Configuration",
+    "subtitle": "Select and configure FPGA IP cores",
+    "available": "Available IP Cores",
+    "configuration": "IP Core Configuration",
+    "selectPrompt": "Please select an IP core from the left to configure",
+    "ram": {
+      "description": "Random Access Memory IP Core"
+    },
+    "pll": {
+      "description": "Phase-Locked Loop Clock Management IP Core"
+    },
+    "fifo": {
+      "description": "First-In First-Out Memory IP Core"
+    },
+    "uart": {
+      "description": "Universal Asynchronous Receiver/Transmitter IP Core"
+    }
+  },
+  "ram": {
+    "config": {
+      "title": "RAM Generator",
+      "description": "Generate BRAM initialization data from MIF file or parameters"
+    },
+    "fileMode": "MIF File",
+    "paramMode": "Parameter Config",
+    "imageMode": "Image to MIF",
+    "selectFileTitle": "Select MIF File",
+    "fileSelected": "File selected: {{file}}",
+    "fileNotExist": "File does not exist: {{file}}",
+    "selectFileFailed": "Failed to select file: {{error}}",
+    "copyFileFailed": "Failed to copy file: {{error}}",
+    "noFileSelected": "Please select a MIF file first",
+    "generateSuccess": "Generation successful!",
+    "generateFailed": "Generation failed with exit code {{code}}",
+    "generateException": "Generation exception: {{error}}",
+    "generateMifFailed": "Failed to generate MIF file: {{error}}",
+    "noOutputFile": "No output file to view",
+    "openFileFailed": "Failed to open file: {{error}}",
+    "openFolderFailed": "Failed to open folder: {{error}}",
+    "mifFilePath": "MIF File Path",
+    "noFilePlaceholder": "No file selected",
+    "selectMifButton": "Select MIF File",
+    "selectedFile": "Selected File",
+    "outputFile": "Output File",
+    "viewOutputButton": "View File",
+    "openFolderButton": "Open Folder",
+    "commandOutput": "Command Output",
+    "resetButton": "Reset",
+    "generateButton": "Generate",
+    "processing": "Generating...",
+    "currentStatus": "Current Status",
+    "notSelected": "Not selected",
+    "error": "Error",
+    "success": "Success",
+    "ramType": "RAM Type",
+    "singlePort": "Single Port",
+    "dualPort": "Dual Port",
+    "configSelect": "Configuration",
+    "configSelectDescription": "Select Width x Depth (Total Capacity)",
+    "portAConfig": "Port A Configuration",
+    "portADescription": "Select Port A Width x Depth",
+    "portBConfig": "Port B Configuration",
+    "portBDescription": "Select Port B Width x Depth (same total capacity required)",
+    "capacityInfo": "Total capacity: Port A = {{portA}} bits, Port B = {{portB}} bits",
+    "generatedMif": "Generated MIF",
+    "outputLocation": "Output Location",
+    "noProjectOpen": "Please open a project first to use parameter configuration mode",
+    "selectImageTitle": "Select Image File",
+    "selectImageFailed": "Failed to select image: {{error}}",
+    "imageFilePath": "Image File Path",
+    "noImagePlaceholder": "Select an image file (PNG/JPG/BMP)",
+    "selectImageButton": "Select Image",
+    "previewImagePath": "Preview image",
+    "imageConvertInfo": "Image will be converted to 128x64 pixels and output as 8-bit width MIF file (1024 depth)",
+    "noImageSelected": "Please select an image file first",
+    "img2mifFailed": "Image to MIF conversion failed: {{error}}",
+    "imageModeDescription": "Click 'Image to MIF' tab to open the conversion dialog",
+    "openImageConverter": "Open Converter",
+    "convertingImage": "Converting image...",
+    "imageConverted": "Image converted successfully",
+    "imageConvertFailed": "Failed to convert image",
+    "convertButton": "Convert"
+  },
+  "pll": {
+    "config": {
+      "title": "PLL Generator",
+      "description": "Generate Phase-Locked Loop clock management IP core"
+    },
+    "configMode": "Configuration Mode",
+    "singleMode": "Single Generation",
+    "batchMode": "Batch Generation",
+    "divideValue": "Divide Value",
+    "divideValueDescription": "Select divide by value",
+    "fpgaGates": "FPGA Gates",
+    "fpgaGatesDescription": "Select FPGA gates (30W or 50W)",
+    "outputFile": "Output File",
+    "batchGeneration": "Batch Generation",
+    "batchDescription": "Will generate all 8 combinations:",
+    "resetButton": "Reset",
+    "generateButton": "Generate",
+    "generateAllButton": "Generate All",
+    "processing": "Generating...",
+    "generatedSuccess": "Generated successfully!",
+    "allGeneratedSuccess": "All PLL combinations generated successfully!",
+    "error": "Error",
+    "noProjectOpen": "Please open a project first to generate PLL IP core",
+    "unknownError": "Unknown error"
+  },
+  "verification": {
+    "title": "Verification",
+    "subtitle": "Configure simulation environment and run tests",
+    "simNetlist": "Simulation Netlist",
+    "noNetlistPlaceholder": "No netlist available",
+    "noNetlistFound": "No files ending with _gate.v, _map.v, _pack.v or _route.v were found in the working directory.",
+    "modelsimPath": "ModelSim bin Directory",
+    "modelsimPathHelp": "(contains vlib.exe, vlog.exe, vsim.exe)",
+    "noDirPlaceholder": "No directory selected",
+    "selectModelsimButton": "Select Directory",
+    "selectModelsimTitle": "Select ModelSim bin Directory",
+    "selectModelsimFailed": "Failed to select directory: {{error}}",
+    "testbenchPath": "Testbench File",
+    "noFilePlaceholder": "No file selected",
+    "selectTestbenchButton": "Select File",
+    "selectTestbenchTitle": "Select Testbench File",
+    "selectTestbenchFailed": "Failed to select file: {{error}}",
+    "customSimlibPath": "Custom Simulation Library (Optional)",
+    "noCustomSimlibPlaceholder": "No custom simulation library selected",
+    "selectCustomSimlibButton": "Select Library",
+    "selectCustomSimlibTitle": "Select Custom Simulation Library File",
+    "selectCustomSimlibFailed": "Failed to select library file: {{error}}",
+    "clearButton": "Clear",
+    "resetButton": "Reset",
+    "runButton": "Run Simulation",
+    "runningButton": "Simulating...",
+    "runningTitle": "Simulating",
+    "runningMessage": "ModelSim simulation is running, please wait...",
+    "successTitle": "Simulation Succeeded",
+    "successMessage": "Simulation completed, VCD file generated: {{vcd}}",
+    "errorTitle": "Simulation Failed",
+    "error": "Error",
+    "noProjectOpen": "Please open a project first"
   }
 }

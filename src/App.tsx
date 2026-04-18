@@ -2,7 +2,7 @@ import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { createContext, useState, useContext } from "react";
-import { TbSettings, TbChevronRight, TbFile, TbActivity } from "react-icons/tb";
+import { TbSettings, TbChevronRight, TbFile, TbActivity, TbGlobe, TbTestPipe } from "react-icons/tb";
 
 import { ProjectInfo, RecentlyOpenedProjectsType } from "./model/project";
 
@@ -10,6 +10,8 @@ import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
+import IPPage from "./pages/IPPage";
+import VerificationPage from "./pages/VerificationPage";
 import { useEffect } from "react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { modals } from "@mantine/modals";
@@ -48,6 +50,8 @@ const navLinksData: NavLinkData[] = [
     rightSection: TbChevronRight,
   },
   { label: "nav.flow", icon: TbActivity, rightSection: TbChevronRight },
+  { label: "nav.ip", icon: TbGlobe, rightSection: TbChevronRight },
+  { label: "nav.verification", icon: TbTestPipe, rightSection: TbChevronRight },
   { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
 ];
 
@@ -62,7 +66,7 @@ function NavbarArea({
   const { project } = useContext(ProjectContext);
 
   const items = navLinksData.map((item) =>
-    project === null && item.label === "nav.flow" ? null : (
+    project === null && (item.label === "nav.flow" || item.label === "nav.ip" || item.label === "nav.verification") ? null : (
       <NavLink
         active={navLabel === item.label}
         label={t(item.label)}
@@ -86,6 +90,10 @@ function MainContextArea({ navLabel }: { navLabel: string }) {
     return <ProjectPage />;
   } else if (navLabel === "nav.flow") {
     return <FlowPage />;
+  } else if (navLabel === "nav.ip") {
+    return <IPPage />;
+  } else if (navLabel === "nav.verification") {
+    return <VerificationPage />;
   } else if (navLabel === "nav.settings") {
     return <SettingsPage />;
   }
@@ -119,18 +127,17 @@ function App() {
           children: "Do you want to save the project before exit?",
           labels: { confirm: "Yes", cancel: "No" },
           confirmProps: { color: "red" },
-          onConfirm: () => {
+          onConfirm: async () => {
             const { path, ...rest } = project;
-            writeTextFile(path, JSON.stringify(rest)).then(() => {
-              appWindow.close();
-            });
+            await writeTextFile(path, JSON.stringify(rest));
+            appWindow.destroy();
           },
           onCancel: () => {
-            appWindow.close();
+            appWindow.destroy();
           },
         });
       } else {
-        appWindow.close();
+        appWindow.destroy();
       }
     });
 
