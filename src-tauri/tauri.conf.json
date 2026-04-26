@@ -12,9 +12,7 @@
       "resource/**/*",
       "pthreadVC2.dll",
       "share/*",
-      "share/fde/*",
-      "QtCore4.dll",
-      "QtGui4.dll"
+      "share/fde/*"
     ],
     "icon": [
       "icons/32x32.png",

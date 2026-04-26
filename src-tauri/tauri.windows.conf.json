@@ -1,0 +1,8 @@
+{
+  "bundle": {
+    "resources": [
+      "QtCore4.dll",
+      "QtGui4.dll"
+    ]
+  }
+}

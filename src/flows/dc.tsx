@@ -505,6 +505,7 @@ export const dcFlows = [
     name: "dc.sta",
     target_file: "dc_sta_out.rp",
     runFunc: runDCSTAFlowCommand,
+    allowNonZeroExit: true,
     extraActions: (
       <>
         <DCViewSTAAction />

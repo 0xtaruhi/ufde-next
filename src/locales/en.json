@@ -331,6 +331,8 @@
     "selectTestbenchButton": "Select File",
     "selectTestbenchTitle": "Select Testbench File",
     "selectTestbenchFailed": "Failed to select file: {{error}}",
+    "topModule": "Top Module (Optional)",
+    "topModulePlaceholder": "Auto-detected from testbench",
     "customSimlibPath": "Custom Simulation Library (Optional)",
     "noCustomSimlibPlaceholder": "No custom simulation library selected",
     "selectCustomSimlibButton": "Select Library",

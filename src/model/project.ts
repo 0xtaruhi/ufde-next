@@ -17,7 +17,8 @@ export type ProjectSettings = {
   verification: {
     modelsimDir: string;
     testbenchPath: string;
-    customSimlibPath?: string; // 自定义仿真库路径（可选）
+    customSimlibPath?: string;
+    topModule?: string;
   };
 }
 
@@ -82,7 +83,7 @@ export async function openProject(
     const openedProject = JSON.parse(content) as ProjectInfo;
     openedProject.path = validPath;
     if (!openedProject.settings.verification) {
-      openedProject.settings.verification = { modelsimDir: "", testbenchPath: "", customSimlibPath: "" };
+      openedProject.settings.verification = { modelsimDir: "", testbenchPath: "", customSimlibPath: "", topModule: "" };
     }
     updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
     return openedProject;
@@ -98,7 +99,7 @@ export async function openProjectWithSpecificPath(
   const openedProject = JSON.parse(content) as ProjectInfo;
   openedProject.path = path;
   if (!openedProject.settings.verification) {
-    openedProject.settings.verification = { modelsimDir: "", testbenchPath: "" };
+    openedProject.settings.verification = { modelsimDir: "", testbenchPath: "", topModule: "" };
   }
   updateRecentlyOpenedProjects(openedProject, recentlyOpenedProjects, setRecentlyOpenedProjects);
   return openedProject;

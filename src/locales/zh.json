@@ -331,6 +331,8 @@
     "selectTestbenchButton": "选择文件",
     "selectTestbenchTitle": "选择 Testbench 文件",
     "selectTestbenchFailed": "选择文件失败: {{error}}",
+    "topModule": "Top Module（可选）",
+    "topModulePlaceholder": "从 Testbench 自动检测",
     "customSimlibPath": "自定义仿真库（可选）",
     "noCustomSimlibPlaceholder": "未选择自定义仿真库",
     "selectCustomSimlibButton": "选择库文件",

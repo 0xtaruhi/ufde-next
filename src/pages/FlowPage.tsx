@@ -175,6 +175,7 @@ interface FlowInfo {
   runFunc?: (project: ProjectInfo) => Promise<Command<string>> | Promise<undefined>;
   settingsPage?: React.ReactNode;
   extraActions?: React.ReactNode;
+  allowNonZeroExit?: boolean;
 }
 
 function FlowInstance(props: FlowInfo & FlowProps) {
@@ -243,11 +244,11 @@ function FlowInstance(props: FlowInfo & FlowProps) {
       };
 
       command.execute().then((res) => {
-        const hasError = /\berror\b/i.test(res.stderr) || /\berror\b/i.test(res.stdout);
-        if (res.code !== 0 && hasError) {
-          onError("Code = " + res.code);
-        } else if (res.code !== 0) {
-          onSuccess();
+        if (res.code !== 0 && !props.allowNonZeroExit) {
+          let msg = "Code = " + res.code;
+          if (res.stderr) msg += "\nstderr: " + res.stderr;
+          if (res.stdout) msg += "\nstdout: " + res.stdout;
+          onError(msg);
         } else {
           onSuccess();
         }
@@ -319,6 +320,7 @@ function FlowItems(props: {
               setActive={props.setActive}
               settingsPage={flow.settingsPage}
               extraActions={flow.extraActions}
+              allowNonZeroExit={flow.allowNonZeroExit}
             />
           </Timeline.Item>
         );
@@ -390,11 +392,11 @@ function FlowPage() {
 
     if (command) {
       await command.execute().then((res) => {
-        const hasError = /\berror\b/i.test(res.stderr) || /\berror\b/i.test(res.stdout);
-        if (res.code !== 0 && hasError) {
-          onError("Code = " + res.code);
-        } else if (res.code !== 0) {
-          onSuccess();
+        if (res.code !== 0 && !flow.allowNonZeroExit) {
+          let msg = "Code = " + res.code;
+          if (res.stderr) msg += "\nstderr: " + res.stderr;
+          if (res.stdout) msg += "\nstdout: " + res.stdout;
+          onError(msg);
         } else {
           onSuccess();
         }
@@ -419,7 +421,7 @@ function FlowPage() {
       }
       setActive(i + 1);
     }
-  }, []);
+  }, [flowName]);
 
   return (
     <>

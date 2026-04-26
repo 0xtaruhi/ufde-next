@@ -47,7 +47,7 @@ fn preprocess_netlist(input_path: &std::path::Path, output_path: &std::path::Pat
             let param_name = &caps[2];
             let value = &caps[3];
             
-            let is_bram_instance = instance_path.contains("Bram") || instance_path.contains("bram");
+            let is_bram_instance = instance_path.to_lowercase().contains("bram");
             let is_bram_param = bram_params.contains(&param_name);
             
             if is_bram_instance && is_bram_param {
@@ -144,9 +144,7 @@ pub async fn run_modelsim_simulation(args: SimulationArgs) -> Result<String, Str
     }
     
     if let Some(ref custom_path) = args.custom_simlib_path {
-        if !custom_path.is_empty() 
-            && std::path::Path::new(custom_path).exists() 
-            && custom_path != default_custom_simlib.to_str().unwrap_or("") {
+        if !custom_path.is_empty() && std::path::Path::new(custom_path).exists() {
             vlog_cmd.arg(custom_path);
         }
     }

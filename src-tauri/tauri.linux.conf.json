@@ -1,0 +1,9 @@
+{
+  "bundle": {
+    "resources": [
+      "libs/*",
+      "plugins/platforms/*",
+      "qt.conf"
+    ]
+  }
+}

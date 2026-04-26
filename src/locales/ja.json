@@ -322,6 +322,8 @@
     "selectTestbenchButton": "ファイルを選択",
     "selectTestbenchTitle": "Testbench ファイルを選択",
     "selectTestbenchFailed": "ファイル選択に失敗: {{error}}",
+    "topModule": "トップモジュール（任意）",
+    "topModulePlaceholder": "テストベンチから自動検出",
     "customSimlibPath": "カスタムシミュレーションライブラリ（任意）",
     "noCustomSimlibPlaceholder": "カスタムライブラリ未選択",
     "selectCustomSimlibButton": "ライブラリを選択",

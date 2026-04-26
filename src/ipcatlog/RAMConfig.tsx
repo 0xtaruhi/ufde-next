@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   Stack,
   Card,
@@ -16,7 +16,7 @@ import { TbUpload, TbPray, TbSettings, TbFile, TbInfoCircle, TbPhoto } from 'rea
 import { open } from '@tauri-apps/plugin-dialog';
 import { Command } from '@tauri-apps/plugin-shell';
 import { BaseIPConfigProps } from './types';
-import { exists, writeTextFile, mkdir, remove, copyFile } from '@tauri-apps/plugin-fs';
+import { exists, writeTextFile, mkdir, remove } from '@tauri-apps/plugin-fs';
 import { notifications } from '@mantine/notifications';
 import { update2SuccessNotification, update2FailedNotification } from '../pages/Notifies';
 import { useTranslation } from 'react-i18next';
@@ -105,9 +105,12 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
     return RAM_CONFIG_OPTIONS.filter(c => c.width * c.depth === targetBits && c.width >= refWidth);
   };
 
+  const onConfigChangeRef = useRef(onConfigChange);
+  onConfigChangeRef.current = onConfigChange;
+
   useEffect(() => {
-    if (onConfigChange) {
-      onConfigChange({ 
+    if (onConfigChangeRef.current) {
+      onConfigChangeRef.current({ 
         mifPath: mifFilePath,
         inputMode,
         ramType,
@@ -116,7 +119,7 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
         portBConfig,
       });
     }
-  }, [mifFilePath, inputMode, ramType, singleConfig, portAConfig, portBConfig, onConfigChange]);
+  }, [mifFilePath, inputMode, ramType, singleConfig, portAConfig, portBConfig]);
 
   useEffect(() => {
     const compatibleConfigs = getCompatibleConfigs(portAConfig);
@@ -401,22 +404,8 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
         return null;
       }
       const fileName = mifFilePath.split(/[\\/]/).pop() as string;
-      const targetPath = await join(outputDir, fileName);
-      try {
-        if (targetPath !== mifFilePath) {
-          await copyFile(mifFilePath, targetPath);
-        }
-      } catch (copyError) {
-        notifications.show({
-          title: t('ram.error'),
-          message: t('ram.copyFileFailed', { error: copyError }),
-          color: 'red',
-        });
-        return null;
-      }
-      
-      const vPath = targetPath.replace(/\.mif$/i, '.v');
-      return { mifPath: targetPath, vPath };
+      const vPath = (await join(outputDir, fileName)).replace(/\.mif$/i, '.v');
+      return { mifPath: mifFilePath, vPath };
     } else if (inputMode === 'image') {
       if (!imageFilePath) {
         notifications.show({
@@ -467,7 +456,7 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
       }
     } catch (e) {
     }
-    const command = Command.sidecar('binaries/ip-generator/ip_generator', ['bram', fileName], { cwd: outputDir });
+    const command = Command.sidecar('binaries/ip-generator/ip_generator', ['bram', targetMifPath], { cwd: outputDir });
 
     const notifyId = notifications.show({
       title: t('flow.notify.running.title'),

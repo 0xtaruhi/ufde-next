@@ -8,14 +8,13 @@
   "permissions": [
     "core:default",
     "fs:allow-read-file",
+    "fs:allow-read-text-file",
     "fs:allow-write-file",
+    "fs:allow-write-text-file",
     "fs:allow-read-dir",
     "fs:allow-mkdir",
     "fs:allow-exists",
-    "fs:read-all",
-    "fs:read-files",
-    "fs:write-all",
-    "fs:write-files",
+    "fs:allow-remove",
     {
       "identifier": "fs:scope",
       "allow": [

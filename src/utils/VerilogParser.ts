@@ -18,7 +18,7 @@ export async function getAllPorts(file: string): Promise<Map<string, PortInfo[]>
 
   const ports: Map<string, PortInfo[]> = new Map();
   for (let module of modules) {
-    const moduleName = module.match(/module\s+(\w+)\s*\(/);
+    const moduleName = module.match(/module\s+(\w+)/);
     if (!moduleName) {
       continue;
     }

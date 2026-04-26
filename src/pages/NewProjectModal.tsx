@@ -41,6 +41,7 @@ const newProject: ProjectInfo = {
     verification: {
       modelsimDir: "",
       testbenchPath: "",
+      topModule: "",
     },
   },
 };

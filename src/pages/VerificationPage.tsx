@@ -36,6 +36,7 @@ function VerificationPage() {
   const [modelsimPath, setModelsimPath] = useState<string>('');
   const [testbenchPath, setTestbenchPath] = useState<string>('');
   const [customSimlibPath, setCustomSimlibPath] = useState<string>('');
+  const [customTopModule, setCustomTopModule] = useState<string>('');
   const [simOptions, setSimOptions] = useState<{ value: string; label: string }[]>([]);
   const [selectedSimFile, setSelectedSimFile] = useState<string | null>(null);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
@@ -46,10 +47,12 @@ function VerificationPage() {
       setModelsimPath(verif?.modelsimDir ?? '');
       setTestbenchPath(verif?.testbenchPath ?? '');
       setCustomSimlibPath(verif?.customSimlibPath ?? '');
+      setCustomTopModule(verif?.topModule ?? '');
     } else {
       setModelsimPath('');
       setTestbenchPath('');
       setCustomSimlibPath('');
+      setCustomTopModule('');
     }
   }, [project?.path]);
 
@@ -84,7 +87,7 @@ function VerificationPage() {
     scanSimFiles();
   }, [project?.path]);
 
-  const updateVerificationSetting = (key: 'modelsimDir' | 'testbenchPath' | 'customSimlibPath', value: string) => {
+  const updateVerificationSetting = (key: 'modelsimDir' | 'testbenchPath' | 'customSimlibPath' | 'topModule', value: string) => {
     if (!project) return;
     const newProject = { ...project };
     if (!newProject.settings.verification) {
@@ -130,6 +133,19 @@ function VerificationPage() {
         const path = selected as string;
         setTestbenchPath(path);
         updateVerificationSetting('testbenchPath', path);
+
+        // Auto-detect top module from testbench
+        try {
+          const ports = await getAllPorts(path);
+          const modules = Array.from(ports.keys());
+          if (modules.length > 0) {
+            const detected = modules[modules.length - 1];
+            setCustomTopModule(detected);
+            updateVerificationSetting('topModule', detected);
+          }
+        } catch (e) {
+          // Silently fallback to empty; user can manually enter
+        }
       }
     } catch (err) {
       showFailedNotification({
@@ -172,6 +188,7 @@ function VerificationPage() {
     setModelsimPath('');
     setTestbenchPath('');
     setCustomSimlibPath('');
+    setCustomTopModule('');
     if (simOptions.length > 0) {
       setSelectedSimFile(simOptions[0].value);
     } else {
@@ -180,6 +197,7 @@ function VerificationPage() {
     updateVerificationSetting('modelsimDir', '');
     updateVerificationSetting('testbenchPath', '');
     updateVerificationSetting('customSimlibPath', '');
+    updateVerificationSetting('topModule', '');
   };
 
   const handleSimulate = async () => {
@@ -189,19 +207,21 @@ function VerificationPage() {
     const projectDir = await dirname(project.path);
     const simNetlistPath = await join(projectDir, selectedSimFile);
 
-    let topModule = '';
-    try {
-      const ports = await getAllPorts(testbenchPath);
-      const modules = Array.from(ports.keys());
-      if (modules.length > 0) {
-        topModule = modules[modules.length - 1];
-      } else {
+    let topModule = customTopModule.trim();
+    if (!topModule) {
+      try {
+        const ports = await getAllPorts(testbenchPath);
+        const modules = Array.from(ports.keys());
+        if (modules.length > 0) {
+          topModule = modules[modules.length - 1];
+        } else {
+          const tbName = await basename(testbenchPath);
+          topModule = tbName.replace(/\.(v|sv|vt)$/i, '');
+        }
+      } catch (e) {
         const tbName = await basename(testbenchPath);
         topModule = tbName.replace(/\.(v|sv|vt)$/i, '');
       }
-    } catch (e) {
-      const tbName = await basename(testbenchPath);
-      topModule = tbName.replace(/\.(v|sv|vt)$/i, '');
     }
 
     const notifyId = notifications.show({
@@ -309,24 +329,36 @@ function VerificationPage() {
 
             {/* Testbench file */}
             <Card withBorder padding="sm">
-              <Group align="flex-end">
+              <Stack gap="xs">
+                <Group align="flex-end">
+                  <TextInput
+                    label={t('verification.testbenchPath')}
+                    value={testbenchPath}
+                    readOnly
+                    placeholder={t('verification.noFilePlaceholder')}
+                    style={{ flex: 1 }}
+                    size="sm"
+                  />
+                  <Button
+                    leftSection={<TbFile size={16} />}
+                    onClick={handleSelectTestbench}
+                    variant="light"
+                    size="sm"
+                  >
+                    {t('verification.selectTestbenchButton')}
+                  </Button>
+                </Group>
                 <TextInput
-                  label={t('verification.testbenchPath')}
-                  value={testbenchPath}
-                  readOnly
-                  placeholder={t('verification.noFilePlaceholder')}
-                  style={{ flex: 1 }}
+                  label={t('verification.topModule')}
+                  value={customTopModule}
+                  onChange={(e) => {
+                    setCustomTopModule(e.currentTarget.value);
+                    updateVerificationSetting('topModule', e.currentTarget.value);
+                  }}
+                  placeholder={t('verification.topModulePlaceholder')}
                   size="sm"
                 />
-                <Button
-                  leftSection={<TbFile size={16} />}
-                  onClick={handleSelectTestbench}
-                  variant="light"
-                  size="sm"
-                >
-                  {t('verification.selectTestbenchButton')}
-                </Button>
-              </Group>
+              </Stack>
             </Card>
 
             {/* Custom Simulation Library (Optional) */}

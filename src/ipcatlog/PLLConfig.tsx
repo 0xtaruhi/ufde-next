@@ -1,5 +1,5 @@
 // src/ipcatlog/PLLConfig.tsx
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   Stack,
   Card,
@@ -47,14 +47,17 @@ const PLLConfig: React.FC<PLLConfigProps> = ({ onConfigChange }) => {
     setSuccessOutputPath('');
   }, [divideValue, fpgaGates]);
 
+  const onConfigChangeRef = useRef(onConfigChange);
+  onConfigChangeRef.current = onConfigChange;
+
   useEffect(() => {
-    if (onConfigChange) {
-      onConfigChange({
+    if (onConfigChangeRef.current) {
+      onConfigChangeRef.current({
         divideValue: parseInt(divideValue),
         fpgaGates: parseInt(fpgaGates),
       });
     }
-  }, [divideValue, fpgaGates, onConfigChange]);
+  }, [divideValue, fpgaGates]);
 
   const getOutputDir = async (): Promise<string | null> => {
     if (project) {

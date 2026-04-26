@@ -15,6 +15,7 @@ import VerificationPage from "./pages/VerificationPage";
 import { useEffect } from "react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 import { writeTextFile } from "@tauri-apps/plugin-fs";
 const appWindow = getCurrentWebviewWindow()
 
@@ -129,8 +130,16 @@ function App() {
           confirmProps: { color: "red" },
           onConfirm: async () => {
             const { path, ...rest } = project;
-            await writeTextFile(path, JSON.stringify(rest));
-            appWindow.destroy();
+            try {
+              await writeTextFile(path, JSON.stringify(rest));
+              appWindow.destroy();
+            } catch (err) {
+              notifications.show({
+                title: 'Save Failed',
+                message: String(err),
+                color: 'red',
+              });
+            }
           },
           onCancel: () => {
             appWindow.destroy();

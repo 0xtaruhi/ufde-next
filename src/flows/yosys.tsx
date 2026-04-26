@@ -581,6 +581,7 @@ export const yosysFlows = [
     name: "yosys.sta",
     target_file: "yosys_sta_out.rp",
     runFunc: runYosysSTAFlowCommand,
+    allowNonZeroExit: true,
     extraActions: (
       <>
         <YosysViewSTAAction />
