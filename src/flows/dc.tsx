@@ -497,7 +497,7 @@ export const dcFlows = [
   },
   {
     name: "dc.genbit",
-    target_file: "dc_genbit.bit",
+    target_file: "dc_bit.bit",
     runFunc: runDCGenBitFlowCommand,
     extraActions: <DCDownloadBitAction />,
   },

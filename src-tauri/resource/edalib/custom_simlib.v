@@ -61,7 +61,7 @@ module RAMB4_S1(ADDR, CLK, RST, DI, DO, WE, EN);
     always @(posedge CLK) begin
         if (EN) begin
             if (RST) DO <= 1'b0;
-            else if (WE) mem[ADDR] <= DI;
+            else if (WE) begin mem[ADDR] <= DI; DO <= DI; end
             else DO <= mem[ADDR];
         end
     end
@@ -115,7 +115,7 @@ module RAMB4_S2(ADDR, CLK, RST, DI, DO, WE, EN);
     always @(posedge CLK) begin
         if (EN) begin
             if (RST) DO <= 2'b00;
-            else if (WE) mem[ADDR] <= DI;
+            else if (WE) begin mem[ADDR] <= DI; DO <= DI; end
             else DO <= mem[ADDR];
         end
     end
@@ -169,7 +169,7 @@ module RAMB4_S4(ADDR, CLK, RST, DI, DO, WE, EN);
     always @(posedge CLK) begin
         if (EN) begin
             if (RST) DO <= 4'b0000;
-            else if (WE) mem[ADDR] <= DI;
+            else if (WE) begin mem[ADDR] <= DI; DO <= DI; end
             else DO <= mem[ADDR];
         end
     end
@@ -223,7 +223,7 @@ module RAMB4_S8(ADDR, CLK, RST, DI, DO, WE, EN);
     always @(posedge CLK) begin
         if (EN) begin
             if (RST) DO <= 8'h00;
-            else if (WE) mem[ADDR] <= DI;
+            else if (WE) begin mem[ADDR] <= DI; DO <= DI; end
             else DO <= mem[ADDR];
         end
     end
@@ -277,7 +277,7 @@ module RAMB4_S16(ADDR, CLK, RST, DI, DO, WE, EN);
     always @(posedge CLK) begin
         if (EN) begin
             if (RST) DO <= 16'h0000;
-            else if (WE) mem[ADDR] <= DI;
+            else if (WE) begin mem[ADDR] <= DI; DO <= DI; end
             else DO <= mem[ADDR];
         end
     end
@@ -326,8 +326,8 @@ module RAMB4_S1_S1(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         end
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 1'b0; else if (WEB) begin mem[ADDRB] <= DIB; end else DOB <= mem[ADDRB]; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 1'b0; else if (WEB) begin mem[ADDRB] <= DIB; DOB <= DIB; end else DOB <= mem[ADDRB]; end
 endmodule
 
 module RAMB4_S1_S2(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -354,8 +354,8 @@ module RAMB4_S1_S2(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 2'b00; else if (WEB) begin mem[{ADDRB, 1'b0}] <= DIB[0]; mem[{ADDRB, 1'b1}] <= DIB[1]; end else DOB <= {mem[{ADDRB, 1'b1}], mem[{ADDRB, 1'b0}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 2'b00; else if (WEB) begin mem[{ADDRB, 1'b0}] <= DIB[0]; mem[{ADDRB, 1'b1}] <= DIB[1]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 1'b1}], mem[{ADDRB, 1'b0}]}; end
 endmodule
 
 module RAMB4_S1_S4(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -382,8 +382,8 @@ module RAMB4_S1_S4(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[{ADDRB, 2'b00}] <= DIB[0]; mem[{ADDRB, 2'b01}] <= DIB[1]; mem[{ADDRB, 2'b10}] <= DIB[2]; mem[{ADDRB, 2'b11}] <= DIB[3]; end else DOB <= {mem[{ADDRB, 2'b11}], mem[{ADDRB, 2'b10}], mem[{ADDRB, 2'b01}], mem[{ADDRB, 2'b00}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[{ADDRB, 2'b00}] <= DIB[0]; mem[{ADDRB, 2'b01}] <= DIB[1]; mem[{ADDRB, 2'b10}] <= DIB[2]; mem[{ADDRB, 2'b11}] <= DIB[3]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 2'b11}], mem[{ADDRB, 2'b10}], mem[{ADDRB, 2'b01}], mem[{ADDRB, 2'b00}]}; end
 endmodule
 
 module RAMB4_S1_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -410,8 +410,8 @@ module RAMB4_S1_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
 endmodule
 
 module RAMB4_S1_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -438,8 +438,8 @@ module RAMB4_S1_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DI
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 1'b0; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
 endmodule
 
 
@@ -465,8 +465,8 @@ module RAMB4_S2_S2(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+1536] = INIT_0C[i*2 +: 2]; mem[i+1664] = INIT_0D[i*2 +: 2]; mem[i+1792] = INIT_0E[i*2 +: 2]; mem[i+1920] = INIT_0F[i*2 +: 2];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 2'b00; else if (WEB) begin mem[ADDRB] <= DIB; end else DOB <= mem[ADDRB]; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 2'b00; else if (WEB) begin mem[ADDRB] <= DIB; DOB <= DIB; end else DOB <= mem[ADDRB]; end
 endmodule
 
 module RAMB4_S2_S4(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -493,8 +493,8 @@ module RAMB4_S2_S4(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[{ADDRB, 2'b00}] <= DIB[0]; mem[{ADDRB, 2'b01}] <= DIB[1]; mem[{ADDRB, 2'b10}] <= DIB[2]; mem[{ADDRB, 2'b11}] <= DIB[3]; end else DOB <= {mem[{ADDRB, 2'b11}], mem[{ADDRB, 2'b10}], mem[{ADDRB, 2'b01}], mem[{ADDRB, 2'b00}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[{ADDRB, 2'b00}] <= DIB[0]; mem[{ADDRB, 2'b01}] <= DIB[1]; mem[{ADDRB, 2'b10}] <= DIB[2]; mem[{ADDRB, 2'b11}] <= DIB[3]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 2'b11}], mem[{ADDRB, 2'b10}], mem[{ADDRB, 2'b01}], mem[{ADDRB, 2'b00}]}; end
 endmodule
 
 module RAMB4_S2_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -521,8 +521,8 @@ module RAMB4_S2_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
 endmodule
 
 module RAMB4_S2_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -549,8 +549,8 @@ module RAMB4_S2_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DI
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 2'b00; else if (WEA) begin mem[{ADDRA, 1'b0}] <= DIA[0]; mem[{ADDRA, 1'b1}] <= DIA[1]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 1'b1}], mem[{ADDRA, 1'b0}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
 endmodule
 
 
@@ -576,8 +576,8 @@ module RAMB4_S4_S4(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+768] = INIT_0C[i*4 +: 4]; mem[i+832] = INIT_0D[i*4 +: 4]; mem[i+896] = INIT_0E[i*4 +: 4]; mem[i+960] = INIT_0F[i*4 +: 4];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[ADDRB] <= DIB; end else DOB <= mem[ADDRB]; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 4'b0000; else if (WEB) begin mem[ADDRB] <= DIB; DOB <= DIB; end else DOB <= mem[ADDRB]; end
 endmodule
 
 module RAMB4_S4_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -604,8 +604,8 @@ module RAMB4_S4_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[{ADDRA, 2'b00}] <= DIA[0]; mem[{ADDRA, 2'b01}] <= DIA[1]; mem[{ADDRA, 2'b10}] <= DIA[2]; mem[{ADDRA, 2'b11}] <= DIA[3]; end else DOA <= {mem[{ADDRA, 2'b11}], mem[{ADDRA, 2'b10}], mem[{ADDRA, 2'b01}], mem[{ADDRA, 2'b00}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[{ADDRA, 2'b00}] <= DIA[0]; mem[{ADDRA, 2'b01}] <= DIA[1]; mem[{ADDRA, 2'b10}] <= DIA[2]; mem[{ADDRA, 2'b11}] <= DIA[3]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 2'b11}], mem[{ADDRA, 2'b10}], mem[{ADDRA, 2'b01}], mem[{ADDRA, 2'b00}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[{ADDRB, 3'b000}] <= DIB[0]; mem[{ADDRB, 3'b001}] <= DIB[1]; mem[{ADDRB, 3'b010}] <= DIB[2]; mem[{ADDRB, 3'b011}] <= DIB[3]; mem[{ADDRB, 3'b100}] <= DIB[4]; mem[{ADDRB, 3'b101}] <= DIB[5]; mem[{ADDRB, 3'b110}] <= DIB[6]; mem[{ADDRB, 3'b111}] <= DIB[7]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 3'b111}], mem[{ADDRB, 3'b110}], mem[{ADDRB, 3'b101}], mem[{ADDRB, 3'b100}], mem[{ADDRB, 3'b011}], mem[{ADDRB, 3'b010}], mem[{ADDRB, 3'b001}], mem[{ADDRB, 3'b000}]}; end
 endmodule
 
 module RAMB4_S4_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -632,8 +632,8 @@ module RAMB4_S4_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DI
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[{ADDRA, 2'b00}] <= DIA[0]; mem[{ADDRA, 2'b01}] <= DIA[1]; mem[{ADDRA, 2'b10}] <= DIA[2]; mem[{ADDRA, 2'b11}] <= DIA[3]; end else DOA <= {mem[{ADDRA, 2'b11}], mem[{ADDRA, 2'b10}], mem[{ADDRA, 2'b01}], mem[{ADDRA, 2'b00}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 4'b0000; else if (WEA) begin mem[{ADDRA, 2'b00}] <= DIA[0]; mem[{ADDRA, 2'b01}] <= DIA[1]; mem[{ADDRA, 2'b10}] <= DIA[2]; mem[{ADDRA, 2'b11}] <= DIA[3]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 2'b11}], mem[{ADDRA, 2'b10}], mem[{ADDRA, 2'b01}], mem[{ADDRA, 2'b00}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
 endmodule
 
 
@@ -659,8 +659,8 @@ module RAMB4_S8_S8(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB
         mem[i+384] = INIT_0C[i*8 +: 8]; mem[i+416] = INIT_0D[i*8 +: 8]; mem[i+448] = INIT_0E[i*8 +: 8]; mem[i+480] = INIT_0F[i*8 +: 8];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 8'h00; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[ADDRB] <= DIB; end else DOB <= mem[ADDRB]; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 8'h00; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 8'h00; else if (WEB) begin mem[ADDRB] <= DIB; DOB <= DIB; end else DOB <= mem[ADDRB]; end
 endmodule
 
 module RAMB4_S8_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DIB, DOB, WEB, ENB);
@@ -687,8 +687,8 @@ module RAMB4_S8_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, DI
         mem[i+3072] = INIT_0C[i]; mem[i+3328] = INIT_0D[i]; mem[i+3584] = INIT_0E[i]; mem[i+3840] = INIT_0F[i];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 8'h00; else if (WEA) begin mem[{ADDRA, 3'b000}] <= DIA[0]; mem[{ADDRA, 3'b001}] <= DIA[1]; mem[{ADDRA, 3'b010}] <= DIA[2]; mem[{ADDRA, 3'b011}] <= DIA[3]; mem[{ADDRA, 3'b100}] <= DIA[4]; mem[{ADDRA, 3'b101}] <= DIA[5]; mem[{ADDRA, 3'b110}] <= DIA[6]; mem[{ADDRA, 3'b111}] <= DIA[7]; end else DOA <= {mem[{ADDRA, 3'b111}], mem[{ADDRA, 3'b110}], mem[{ADDRA, 3'b101}], mem[{ADDRA, 3'b100}], mem[{ADDRA, 3'b011}], mem[{ADDRA, 3'b010}], mem[{ADDRA, 3'b001}], mem[{ADDRA, 3'b000}]}; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 8'h00; else if (WEA) begin mem[{ADDRA, 3'b000}] <= DIA[0]; mem[{ADDRA, 3'b001}] <= DIA[1]; mem[{ADDRA, 3'b010}] <= DIA[2]; mem[{ADDRA, 3'b011}] <= DIA[3]; mem[{ADDRA, 3'b100}] <= DIA[4]; mem[{ADDRA, 3'b101}] <= DIA[5]; mem[{ADDRA, 3'b110}] <= DIA[6]; mem[{ADDRA, 3'b111}] <= DIA[7]; DOA <= DIA; end else DOA <= {mem[{ADDRA, 3'b111}], mem[{ADDRA, 3'b110}], mem[{ADDRA, 3'b101}], mem[{ADDRA, 3'b100}], mem[{ADDRA, 3'b011}], mem[{ADDRA, 3'b010}], mem[{ADDRA, 3'b001}], mem[{ADDRA, 3'b000}]}; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[{ADDRB, 4'h0}] <= DIB[0]; mem[{ADDRB, 4'h1}] <= DIB[1]; mem[{ADDRB, 4'h2}] <= DIB[2]; mem[{ADDRB, 4'h3}] <= DIB[3]; mem[{ADDRB, 4'h4}] <= DIB[4]; mem[{ADDRB, 4'h5}] <= DIB[5]; mem[{ADDRB, 4'h6}] <= DIB[6]; mem[{ADDRB, 4'h7}] <= DIB[7]; mem[{ADDRB, 4'h8}] <= DIB[8]; mem[{ADDRB, 4'h9}] <= DIB[9]; mem[{ADDRB, 4'hA}] <= DIB[10]; mem[{ADDRB, 4'hB}] <= DIB[11]; mem[{ADDRB, 4'hC}] <= DIB[12]; mem[{ADDRB, 4'hD}] <= DIB[13]; mem[{ADDRB, 4'hE}] <= DIB[14]; mem[{ADDRB, 4'hF}] <= DIB[15]; DOB <= DIB; end else DOB <= {mem[{ADDRB, 4'hF}], mem[{ADDRB, 4'hE}], mem[{ADDRB, 4'hD}], mem[{ADDRB, 4'hC}], mem[{ADDRB, 4'hB}], mem[{ADDRB, 4'hA}], mem[{ADDRB, 4'h9}], mem[{ADDRB, 4'h8}], mem[{ADDRB, 4'h7}], mem[{ADDRB, 4'h6}], mem[{ADDRB, 4'h5}], mem[{ADDRB, 4'h4}], mem[{ADDRB, 4'h3}], mem[{ADDRB, 4'h2}], mem[{ADDRB, 4'h1}], mem[{ADDRB, 4'h0}]}; end
 endmodule
 
 
@@ -714,8 +714,8 @@ module RAMB4_S16_S16(ADDRA, CLKA, RSTA, DIA, DOA, WEA, ENA, ADDRB, CLKB, RSTB, D
         mem[i+192] = INIT_0C[i*16 +: 16]; mem[i+208] = INIT_0D[i*16 +: 16]; mem[i+224] = INIT_0E[i*16 +: 16]; mem[i+240] = INIT_0F[i*16 +: 16];
     end
     
-    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 16'h0000; else if (WEA) begin mem[ADDRA] <= DIA; end else DOA <= mem[ADDRA]; end
-    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[ADDRB] <= DIB; end else DOB <= mem[ADDRB]; end
+    always @(posedge CLKA) if (ENA) begin if (RSTA) DOA <= 16'h0000; else if (WEA) begin mem[ADDRA] <= DIA; DOA <= DIA; end else DOA <= mem[ADDRA]; end
+    always @(posedge CLKB) if (ENB) begin if (RSTB) DOB <= 16'h0000; else if (WEB) begin mem[ADDRB] <= DIB; DOB <= DIB; end else DOB <= mem[ADDRB]; end
 endmodule
 
 
