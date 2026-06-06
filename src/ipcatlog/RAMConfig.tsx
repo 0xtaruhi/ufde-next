@@ -16,7 +16,7 @@ import { TbUpload, TbPray, TbSettings, TbFile, TbInfoCircle, TbPhoto } from 'rea
 import { open } from '@tauri-apps/plugin-dialog';
 import { Command } from '@tauri-apps/plugin-shell';
 import { BaseIPConfigProps } from './types';
-import { exists, writeTextFile, mkdir, remove } from '@tauri-apps/plugin-fs';
+import { copyFile, exists, writeTextFile, mkdir, remove } from '@tauri-apps/plugin-fs';
 import { notifications } from '@mantine/notifications';
 import { update2SuccessNotification, update2FailedNotification } from '../pages/Notifies';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +25,8 @@ import { join, dirname } from '@tauri-apps/api/path';
 import { ProjectContext } from '../App';
 
 interface RAMConfigProps extends BaseIPConfigProps {}
+
+const formatError = (err: unknown): string => err instanceof Error ? err.message : String(err);
 
 type RamType = 'single' | 'dual';
 type InputMode = 'file' | 'param' | 'image';
@@ -246,9 +248,10 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
         const vPath = mifPath.replace(/\.mif$/i, '.v');
         return { mifPath, vPath, previewPath };
       } else {
+        const error = result.stderr || t('ram.generateFailed', { code: result.code });
         notifications.show({
           title: t('ram.error'),
-          message: t('ram.img2mifFailed', { code: result.code, stderr: result.stderr }),
+          message: t('ram.img2mifFailed', { error }),
           color: 'red',
         });
         return null;
@@ -256,7 +259,7 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
     } catch (err) {
       notifications.show({
         title: t('ram.error'),
-        message: t('ram.img2mifFailed', { error: err }),
+        message: t('ram.img2mifFailed', { error: formatError(err) }),
         color: 'red',
       });
       return null;
@@ -365,7 +368,7 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
     } catch (err) {
       notifications.show({
         title: t('ram.error'),
-        message: t('ram.generateMifFailed', { error: err }),
+        message: t('ram.generateMifFailed', { error: formatError(err) }),
         color: 'red',
       });
       return null;
@@ -404,8 +407,18 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
         return null;
       }
       const fileName = mifFilePath.split(/[\\/]/).pop() as string;
-      const vPath = (await join(outputDir, fileName)).replace(/\.mif$/i, '.v');
-      return { mifPath: mifFilePath, vPath };
+      const stagedMifPath = await join(outputDir, fileName);
+      if (stagedMifPath !== mifFilePath) {
+        try {
+          if (await exists(stagedMifPath)) {
+            await remove(stagedMifPath);
+          }
+        } catch (e) {
+        }
+        await copyFile(mifFilePath, stagedMifPath);
+      }
+      const vPath = stagedMifPath.replace(/\.mif$/i, '.v');
+      return { mifPath: stagedMifPath, vPath };
     } else if (inputMode === 'image') {
       if (!imageFilePath) {
         notifications.show({
@@ -435,40 +448,41 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
     setIsProcessing(true);
     setSuccessMifPath('');
     setSuccessVPath('');
-    const outputDir = await getOutputDir();
-    
-    if (!outputDir) {
-      notifications.show({
-        title: t('ram.error'),
-        message: t('ram.noProjectOpen'),
-        color: 'red',
-      });
-      setIsProcessing(false);
-      return;
-    }
+    let notifyId: string | undefined;
 
-    const fileName = targetMifPath.split(/[\\/]/).pop() as string;
     try {
-      const vFileName = fileName.replace(/\.mif$/i, '.v');
-      const vFilePath = await join(outputDir, vFileName);
-      if (await exists(vFilePath)) {
-        await remove(vFilePath);
+      const outputDir = await getOutputDir();
+
+      if (!outputDir) {
+        notifications.show({
+          title: t('ram.error'),
+          message: t('ram.noProjectOpen'),
+          color: 'red',
+        });
+        return;
       }
-    } catch (e) {
-    }
-    const command = Command.sidecar('binaries/ip-generator/ip_generator', ['bram', targetMifPath], { cwd: outputDir });
 
-    const notifyId = notifications.show({
-      title: t('flow.notify.running.title'),
-      message:
-        t('flow.notify.running.message_prefix') +
-        t('ram.config.title') +
-        t('flow.notify.running.message_suffix'),
-      autoClose: false,
-      loading: true,
-    });
+      const fileName = targetMifPath.split(/[\\/]/).pop() as string;
+      try {
+        const vFileName = fileName.replace(/\.mif$/i, '.v');
+        const vFilePath = await join(outputDir, vFileName);
+        if (await exists(vFilePath)) {
+          await remove(vFilePath);
+        }
+      } catch (e) {
+      }
+      const command = Command.sidecar('binaries/ip-generator/ip_generator', ['bram', targetMifPath], { cwd: outputDir });
 
-    try {
+      notifyId = notifications.show({
+        title: t('flow.notify.running.title'),
+        message:
+          t('flow.notify.running.message_prefix') +
+          t('ram.config.title') +
+          t('flow.notify.running.message_suffix'),
+        autoClose: false,
+        loading: true,
+      });
+
       const { code } = await command.execute();
 
       if (code === 0) {
@@ -500,15 +514,25 @@ const RAMConfig: React.FC<RAMConfigProps> = ({ onConfigChange }) => {
         });
       }
     } catch (err) {
-      update2FailedNotification({
-        id: notifyId,
-        title: t('ram.config.title'),
-        message:
-          t('flow.notify.failed.message_prefix') +
-          t('ram.config.title') +
-          t('flow.notify.failed.message_suffix') +
-          ': ' + err,
-      });
+      const errMsg = formatError(err);
+      const message =
+        t('flow.notify.failed.message_prefix') +
+        t('ram.config.title') +
+        t('flow.notify.failed.message_suffix') +
+        ': ' + errMsg;
+      if (notifyId) {
+        update2FailedNotification({
+          id: notifyId,
+          title: t('ram.config.title'),
+          message,
+        });
+      } else {
+        notifications.show({
+          title: t('ram.config.title'),
+          message,
+          color: 'red',
+        });
+      }
     } finally {
       setIsProcessing(false);
     }

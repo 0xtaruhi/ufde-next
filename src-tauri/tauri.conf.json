@@ -30,11 +30,8 @@
       "binaries/fde-cli/place",
       "binaries/fde-cli/route",
       "binaries/fde-cli/sta",
-      "binaries/fde-cli/viewer",
       "binaries/yosys",
-      "binaries/yosys-abc",
-      "binaries/ip-generator/ip_generator",
-      "binaries/ip-generator/img2mif"
+      "binaries/yosys-abc"
     ]
   },
   "productName": "UFDE+",

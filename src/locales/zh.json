@@ -40,7 +40,10 @@
     "delete_files_confirm": "确认要移除选中的文件吗？",
     "double_click_to_open": "双击打开文件",
     "modified_close_project_confirm": "项目已被修改，是否仍要关闭项目？（未保存的修改将会丢失）",
-    "close_project": "关闭项目"
+    "close_project": "关闭项目",
+    "save_before_exit_confirm": "退出前是否保存项目？",
+    "save_failed_title": "保存失败",
+    "save_failed_message": "保存项目失败：{{error}}"
   },
   "constraint": {
     "module": "模块",

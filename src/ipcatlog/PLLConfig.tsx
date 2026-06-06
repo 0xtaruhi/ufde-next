@@ -22,6 +22,8 @@ import { ProjectContext } from '../App';
 
 interface PLLConfigProps extends BaseIPConfigProps {}
 
+const formatError = (err: unknown): string => err instanceof Error ? err.message : String(err);
+
 const DIVIDE_OPTIONS = [
   { value: '2', label: '2' },
   { value: '4', label: '4' },
@@ -63,50 +65,48 @@ const PLLConfig: React.FC<PLLConfigProps> = ({ onConfigChange }) => {
     if (project) {
       const projectDir = await dirname(project.path);
       const ipDir = await join(projectDir, 'IP');
-      try {
-        await mkdir(ipDir, { recursive: true });
-      } catch (e) {
-      }
+      await mkdir(ipDir, { recursive: true });
       return ipDir;
     }
     return null;
   };
 
   const handleSubmit = async () => {
-    const outputDir = await getOutputDir();
-    if (!outputDir) {
-      notifications.show({
-        title: t('pll.error'),
-        message: t('pll.noProjectOpen'),
-        color: 'red',
-      });
-      return;
-    }
-
     setIsProcessing(true);
     setSuccessOutputPath('');
-
-    const outputFile = `PLL_${divideValue}_${fpgaGates}.v`;
-    const fullOutputPath = await join(outputDir, outputFile);
-
-    const command = Command.sidecar('binaries/ip-generator/ip_generator', [
-      'pll',
-      '--divide', divideValue,
-      '--gates', fpgaGates,
-      '--output', outputFile,
-    ], { cwd: outputDir });
-
-    const notifyId = notifications.show({
-      title: t('flow.notify.running.title'),
-      message:
-        t('flow.notify.running.message_prefix') +
-        t('pll.config.title') +
-        t('flow.notify.running.message_suffix'),
-      autoClose: false,
-      loading: true,
-    });
+    let notifyId: string | undefined;
 
     try {
+      const outputDir = await getOutputDir();
+      if (!outputDir) {
+        notifications.show({
+          title: t('pll.error'),
+          message: t('pll.noProjectOpen'),
+          color: 'red',
+        });
+        return;
+      }
+
+      const outputFile = `PLL_${divideValue}_${fpgaGates}.v`;
+      const fullOutputPath = await join(outputDir, outputFile);
+
+      const command = Command.sidecar('binaries/ip-generator/ip_generator', [
+        'pll',
+        '--divide', divideValue,
+        '--gates', fpgaGates,
+        '--output', outputFile,
+      ], { cwd: outputDir });
+
+      notifyId = notifications.show({
+        title: t('flow.notify.running.title'),
+        message:
+          t('flow.notify.running.message_prefix') +
+          t('pll.config.title') +
+          t('flow.notify.running.message_suffix'),
+        autoClose: false,
+        loading: true,
+      });
+
       const { code, stdout, stderr } = await command.execute();
 
       let result;
@@ -134,15 +134,26 @@ const PLLConfig: React.FC<PLLConfigProps> = ({ onConfigChange }) => {
         });
       }
     } catch (err) {
-      update2FailedNotification({
-        id: notifyId,
-        title: t('pll.config.title'),
-        message:
-          t('flow.notify.failed.message_prefix') +
-          t('pll.config.title') +
-          t('flow.notify.failed.message_suffix') +
-          ': ' + err,
-      });
+      const errMsg = formatError(err);
+      const message =
+        t('flow.notify.failed.message_prefix') +
+        t('pll.config.title') +
+        t('flow.notify.failed.message_suffix') +
+        ': ' + errMsg;
+
+      if (notifyId) {
+        update2FailedNotification({
+          id: notifyId,
+          title: t('pll.config.title'),
+          message,
+        });
+      } else {
+        notifications.show({
+          title: t('pll.config.title'),
+          message,
+          color: 'red',
+        });
+      }
     } finally {
       setIsProcessing(false);
     }

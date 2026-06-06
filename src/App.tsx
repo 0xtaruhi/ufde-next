@@ -102,6 +102,7 @@ function MainContextArea({ navLabel }: { navLabel: string }) {
 }
 
 function App() {
+  const { t } = useTranslation();
   const [opened, { toggle }] = useDisclosure(true);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [navLabel, setNavLabel] = useState<string>("nav.project");
@@ -123,10 +124,10 @@ function App() {
       e.preventDefault();
       if (project != null && projectModified) {
         modals.openConfirmModal({
-          title: "Save Project",
+          title: t("menu.save_project"),
           centered: true,
-          children: "Do you want to save the project before exit?",
-          labels: { confirm: "Yes", cancel: "No" },
+          children: t("project.save_before_exit_confirm"),
+          labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
           confirmProps: { color: "red" },
           onConfirm: async () => {
             const { path, ...rest } = project;
@@ -135,8 +136,8 @@ function App() {
               appWindow.destroy();
             } catch (err) {
               notifications.show({
-                title: 'Save Failed',
-                message: String(err),
+                title: t("project.save_failed_title"),
+                message: t("project.save_failed_message", { error: String(err) }),
                 color: 'red',
               });
             }
@@ -153,7 +154,7 @@ function App() {
     return () => {
       unlisten.then((fn) => fn());
     };
-  }, [project, projectModified]);
+  }, [project, projectModified, t]);
 
   useEffect(() => {
     if (project) {

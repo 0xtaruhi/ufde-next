@@ -15,7 +15,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { useContext, useEffect, useState } from "react";
 import { getDirOfFile } from "../utils/utils";
 import { ProjectContext } from "../App";
-import { Command } from "@tauri-apps/plugin-shell";
+import { Command, open as openPath } from "@tauri-apps/plugin-shell";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useTranslation } from "react-i18next";
 import { ProjectInfo } from "../model/project";
@@ -372,8 +372,8 @@ export async function runYosysGenBitFlowCommand(project: ProjectInfo) {
 
 function YosysViewPlaceAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -404,8 +404,8 @@ function YosysViewPlaceAction() {
 
 function YosysViewRouteAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -436,8 +436,8 @@ function YosysViewRouteAction() {
 
 function YosysViewSTAAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -468,25 +468,36 @@ function YosysViewSTAAction() {
 
 function YosysViewSTAReportAction() {
   const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  const [reportFile, setReportFile] = useState<string>("");
+
+  useEffect(() => {
+    const resolvePath = async () => {
+      if (project?.path) {
+        setReportFile((await getDirOfFile(project.path)) + project.name + "_yosys_sta_out.rp");
+      } else {
+        setReportFile("");
+      }
+    };
+    resolvePath();
+  }, [project?.path, project?.name]);
 
   if (!project || !project.path) {
     return null;
   }
 
-  const [reportFile, setReportFile] = useState<string>("");
-
-  useEffect(() => {
-    const resolvePath = async () => {
-      if (project) {
-        setReportFile((await getDirOfFile(project.path)) + project.name + "_yosys_sta_out.rp");
-      }
-    };
-    resolvePath();
-  }, [project?.path]);
+  const onClick = async () => {
+    if (!reportFile) return;
+    try {
+      await openPath(reportFile);
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.yosys.sta.viewReport"), message: e.message || String(e) });
+    }
+  };
 
   return (
-    <Tooltip label={reportFile}>
-      <ActionIcon size="md" variant="subtle" style={{ padding: "5px" }}>
+    <Tooltip label={reportFile || t("flow.yosys.sta.viewReport")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
         <TbFileText size={20} />
       </ActionIcon>
     </Tooltip>
@@ -495,12 +506,11 @@ function YosysViewSTAReportAction() {
 
 function YosysDownloadBitAction() {
   const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
 
   if (!project || !project.path) {
     return null;
   }
-
-  const { t } = useTranslation();
 
   const downloadBitFile = async () => {
     if (project) {

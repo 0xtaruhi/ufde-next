@@ -1099,6 +1099,41 @@ module BLOCKRAM (
                 assign DOUTA[15:2] = 14'b0;
                 assign DOUTB[15:4] = 12'b0;
             end
+            else if (porta_attr == "2048X2" && portb_attr == "512X8") begin : gen_s2_s8
+                RAMB4_S2_S8 ramb4_inst (
+                    .ADDRA(ADDRA[11:1]), .CLKA(CKA), .RSTA(RSTA),
+                    .DIA(DINA[1:0]), .DOA(DOUTA[1:0]), .WEA(AWE), .ENA(AEN),
+                    .ADDRB(ADDRB[11:3]), .CLKB(CKB), .RSTB(RSTB),
+                    .DIB(DINB[7:0]), .DOB(DOUTB[7:0]), .WEB(BWE), .ENB(BEN)
+                );
+                defparam ramb4_inst.INIT_00 = init_00; defparam ramb4_inst.INIT_01 = init_01;
+                defparam ramb4_inst.INIT_02 = init_02; defparam ramb4_inst.INIT_03 = init_03;
+                defparam ramb4_inst.INIT_04 = init_04; defparam ramb4_inst.INIT_05 = init_05;
+                defparam ramb4_inst.INIT_06 = init_06; defparam ramb4_inst.INIT_07 = init_07;
+                defparam ramb4_inst.INIT_08 = init_08; defparam ramb4_inst.INIT_09 = init_09;
+                defparam ramb4_inst.INIT_0A = init_0a; defparam ramb4_inst.INIT_0B = init_0b;
+                defparam ramb4_inst.INIT_0C = init_0c; defparam ramb4_inst.INIT_0D = init_0d;
+                defparam ramb4_inst.INIT_0E = init_0e; defparam ramb4_inst.INIT_0F = init_0f;
+                assign DOUTA[15:2] = 14'b0;
+                assign DOUTB[15:8] = 8'b0;
+            end
+            else if (porta_attr == "2048X2" && portb_attr == "256X16") begin : gen_s2_s16
+                RAMB4_S2_S16 ramb4_inst (
+                    .ADDRA(ADDRA[11:1]), .CLKA(CKA), .RSTA(RSTA),
+                    .DIA(DINA[1:0]), .DOA(DOUTA[1:0]), .WEA(AWE), .ENA(AEN),
+                    .ADDRB(ADDRB[11:4]), .CLKB(CKB), .RSTB(RSTB),
+                    .DIB(DINB[15:0]), .DOB(DOUTB[15:0]), .WEB(BWE), .ENB(BEN)
+                );
+                defparam ramb4_inst.INIT_00 = init_00; defparam ramb4_inst.INIT_01 = init_01;
+                defparam ramb4_inst.INIT_02 = init_02; defparam ramb4_inst.INIT_03 = init_03;
+                defparam ramb4_inst.INIT_04 = init_04; defparam ramb4_inst.INIT_05 = init_05;
+                defparam ramb4_inst.INIT_06 = init_06; defparam ramb4_inst.INIT_07 = init_07;
+                defparam ramb4_inst.INIT_08 = init_08; defparam ramb4_inst.INIT_09 = init_09;
+                defparam ramb4_inst.INIT_0A = init_0a; defparam ramb4_inst.INIT_0B = init_0b;
+                defparam ramb4_inst.INIT_0C = init_0c; defparam ramb4_inst.INIT_0D = init_0d;
+                defparam ramb4_inst.INIT_0E = init_0e; defparam ramb4_inst.INIT_0F = init_0f;
+                assign DOUTA[15:2] = 14'b0;
+            end
             
             // S4_Sx series (Port A = 4-bit): S4_S4, S4_S8, S4_S16
             else if (porta_attr == "1024X4" && portb_attr == "1024X4") begin : gen_s4_s4

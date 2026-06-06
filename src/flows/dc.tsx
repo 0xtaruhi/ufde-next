@@ -1,6 +1,6 @@
 import { resolveResource } from "@tauri-apps/api/path";
 import { ProjectInfo } from "../model/project";
-import { Command } from "@tauri-apps/plugin-shell";
+import { Command, open as openPath } from "@tauri-apps/plugin-shell";
 import { ActionIcon, Combobox, InputBase, SegmentedControl, Tooltip, useCombobox } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import { TbArrowAutofitDown, TbChevronDown, TbFileText, TbEye } from "react-icons/tb";
@@ -323,8 +323,8 @@ export async function runDCGenBitFlowCommand(project: ProjectInfo) {
 
 function DCViewPlaceAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -355,8 +355,8 @@ function DCViewPlaceAction() {
 
 function DCViewRouteAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -387,8 +387,8 @@ function DCViewRouteAction() {
 
 function DCViewSTAAction() {
   const { project } = useContext(ProjectContext);
-  if (!project || !project.path) return null;
   const { t } = useTranslation();
+  if (!project || !project.path) return null;
 
   const onClick = async () => {
     try {
@@ -419,25 +419,36 @@ function DCViewSTAAction() {
 
 function DCViewSTAReportAction() {
   const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  const [reportFile, setReportFile] = useState<string>("");
+
+  useEffect(() => {
+    const resolvePath = async () => {
+      if (project?.path) {
+        setReportFile((await getDirOfFile(project.path)) + project.name + "_dc_sta_out.rp");
+      } else {
+        setReportFile("");
+      }
+    };
+    resolvePath();
+  }, [project?.path, project?.name]);
 
   if (!project || !project.path) {
     return null;
   }
 
-  const [reportFile, setReportFile] = useState<string>("");
-
-  useEffect(() => {
-    const resolvePath = async () => {
-      if (project) {
-        setReportFile((await getDirOfFile(project.path)) + project.name + "_dc_sta_out.rp");
-      }
-    };
-    resolvePath();
-  }, [project?.path]);
+  const onClick = async () => {
+    if (!reportFile) return;
+    try {
+      await openPath(reportFile);
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.dc.sta.viewReport"), message: e.message || String(e) });
+    }
+  };
 
   return (
-    <Tooltip label={reportFile}>
-      <ActionIcon size="md" variant="subtle" style={{ padding: "5px" }}>
+    <Tooltip label={reportFile || t("flow.dc.sta.viewReport")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
         <TbFileText size={20} />
       </ActionIcon>
     </Tooltip>
@@ -446,12 +457,11 @@ function DCViewSTAReportAction() {
 
 function DCDownloadBitAction() {
   const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
 
   if (!project || !project.path) {
     return null;
   }
-
-  const { t } = useTranslation();
 
   const downloadBitFile = async () => {
     if (project) {
@@ -496,12 +506,6 @@ export const dcFlows = [
     extraActions: <DCViewRouteAction />,
   },
   {
-    name: "dc.genbit",
-    target_file: "dc_bit.bit",
-    runFunc: runDCGenBitFlowCommand,
-    extraActions: <DCDownloadBitAction />,
-  },
-  {
     name: "dc.sta",
     target_file: "dc_sta_out.rp",
     runFunc: runDCSTAFlowCommand,
@@ -512,5 +516,11 @@ export const dcFlows = [
         <DCViewSTAReportAction />
       </>
     ),
+  },
+  {
+    name: "dc.genbit",
+    target_file: "dc_bit.bit",
+    runFunc: runDCGenBitFlowCommand,
+    extraActions: <DCDownloadBitAction />,
   },
 ];
