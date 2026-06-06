@@ -53,7 +53,7 @@ function IPPage() {
       <Title order={2} mb="md">{t('ip.title')}</Title>
       <Text c="dimmed" mb="lg">{t('ip.subtitle')}</Text>
 
-      <Grid gutter="md" h="calc(100% - 80px)">
+      <Grid gap="md" h="calc(100% - 80px)">
         <Grid.Col span={4}>
           <Card shadow="sm" withBorder h="100%" p="md">
             <Title order={4} mb="md">{t('ip.available')}</Title>

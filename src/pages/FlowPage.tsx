@@ -129,7 +129,7 @@ export function Flow(props: AbstractFlowProps) {
         </Group>
       </Flex>
       {props.status && (
-        <Collapse in={collapaseOpened}>
+        <Collapse expanded={collapaseOpened}>
           <Textarea
             value={props.status}
             size="sm"

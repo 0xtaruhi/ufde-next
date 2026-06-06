@@ -13,5 +13,36 @@ export default defineConfig(async () => ({
   server: {
     port: 1420,
     strictPort: true,
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return;
+          }
+
+          if (id.includes("ace-builds") || id.includes("react-ace")) {
+            return "editor";
+          }
+
+          if (id.includes("@mantine")) {
+            return "mantine";
+          }
+
+          if (id.includes("i18next") || id.includes("react-i18next")) {
+            return "i18n";
+          }
+
+          if (id.includes("react-icons")) {
+            return "icons";
+          }
+
+          if (id.includes("react") || id.includes("react-dom") || id.includes("react-router")) {
+            return "react";
+          }
+        },
+      },
+    },
   }
 }));

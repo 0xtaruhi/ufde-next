@@ -9,7 +9,7 @@
   max-width: 48%;
   margin-right: calc(var(--mantine-spacing-l) * 3);
 
-  @media (max-width: mantine-breakpoint-md) {
+  @media (max-width: 62em) {
     max-width: 100%;
     margin-right: 0;
   }
@@ -22,13 +22,13 @@
   line-height: 1.2;
   font-weight: 900;
 
-  @media (max-width: mantine-breakpoint-xs) {
+  @media (max-width: 36em) {
     font-size: rem(28px);
   }
 }
 
 .control {
-  @media (max-width: mantine-breakpoint-xs) {
+  @media (max-width: 36em) {
     flex: 1;
   }
 }
@@ -38,7 +38,7 @@
   height: 100%;
   margin: auto;
 
-  @media (max-width: mantine-breakpoint-md) {
+  @media (max-width: 62em) {
     display: none;
   }
 }

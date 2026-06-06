@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, useContext } from "react";
+import { useState, useContext, type ReactElement } from "react";
 import {
   Button,
   Group,
@@ -77,7 +77,7 @@ type StepProps = {
 type StepContent = {
   label: string;
   description: string;
-  content?: (props: StepProps) => JSX.Element;
+  content?: (props: StepProps) => ReactElement;
 };
 
 function PrevAndNextButton(props: PrevAndNextButtonProps) {
