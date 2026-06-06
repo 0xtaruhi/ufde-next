@@ -19,9 +19,9 @@ impl Cfg {
     pub fn set_vericomm_isv(&mut self, value: u16) {
         let temp1: u16 = self.cfg[2] & 0x0001;
         let temp2: u16 = (value << 4) & 0x00f0;
-        self.cfg[2] = temp1 |  temp2;
+        self.cfg[2] = temp1 | temp2;
     }
-    
+
     pub fn set_vericomm_clock_check(&mut self, check: bool) {
         if check {
             self.cfg[2] |= 0x0001;
@@ -78,7 +78,7 @@ pub trait CfgInfo {
     fn smims_version(&self) -> i32;
     fn smims_majorversion(&self) -> i32;
     fn smims_subversion(&self) -> i32;
-    fn smims_subsubversion(&self) -> i32;    
+    fn smims_subsubversion(&self) -> i32;
 
     fn fifo_size(&self) -> u16;
     fn flash_total_block(&self) -> u16;
@@ -109,15 +109,11 @@ impl CfgInfo for Cfg {
     fn get_vericomm_isv(&self) -> u8 {
         let mut temp: u16 = self.cfg[2] >> 4;
         temp &= 0x000f;
-        return temp as u8;
+        temp as u8
     }
 
     fn get_vericomm_clockcheck_enable(&self) -> bool {
-        if self.cfg[2] & 0x0001 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[2] & 0x0001 != 0
     }
 
     fn get_veri_sdk_channel_selector(&self) -> u8 {
@@ -184,51 +180,27 @@ impl CfgInfo for Cfg {
 
     // State methods cfg[37]
     fn vericomm_ability(&self) -> bool {
-        if self.cfg[37] & 0x0001 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0001 != 0
     }
 
     fn veri_instrument_ability(&self) -> bool {
-        if self.cfg[37] & 0x0002 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0002 != 0
     }
 
     fn veri_link_ability(&self) -> bool {
-        if self.cfg[37] & 0x0004 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0004 != 0
     }
 
     fn veri_soc_ability(&self) -> bool {
-        if self.cfg[37] & 0x0008 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0008 != 0
     }
 
     fn vericomm_pro_ability(&self) -> bool {
-        if self.cfg[37] & 0x0010 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0010 != 0
     }
 
     fn veri_sdk_ability(&self) -> bool {
-        if self.cfg[37] & 0x0100 != 0 {
-            return true;
-        } else {
-            return false;
-        }
+        self.cfg[37] & 0x0100 != 0
     }
 
     // =========================================================================
@@ -237,19 +209,10 @@ impl CfgInfo for Cfg {
     }
 
     fn is_pcb_connect(&self) -> bool {
-        if self.cfg[48] & 0x0100 != 0 {
-            return false;
-        } else {
-            return true;
-        }
+        self.cfg[48] & 0x0100 == 0
     }
 
     fn is_vericomm_clockcontinue(&self) -> bool {
-        if self.cfg[49] & 0x0001 != 0 {
-            return false;
-        } else {
-            return true;
-        }
+        self.cfg[49] & 0x0001 == 0
     }
-
 }

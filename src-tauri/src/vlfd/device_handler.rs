@@ -1,13 +1,13 @@
-use super::constants;
 use super::cfg::Cfg;
 use super::cfg::CfgInfo;
+use super::constants;
 use super::usb_handler::EndPoint;
 use super::usb_handler::UsbHandler;
 
 pub struct DeviceHandler {
     pub usb: UsbHandler,
-    pub cfg: Cfg,                   // Configuration API
-    encrypt_table: [u16; 32],       // Encrypt table, uint16_t x 32
+    pub cfg: Cfg,             // Configuration API
+    encrypt_table: [u16; 32], // Encrypt table, uint16_t x 32
     encode_index: usize,
     decode_index: usize,
 }
@@ -37,7 +37,7 @@ impl DeviceHandler {
     pub fn engine_reset(&self) -> DeviceResult<bool> {
         let command = [0x02u8];
         self.usb.write_usb(EndPoint::EP4, &command)?;
-        return Ok(true);
+        Ok(true)
     }
 
     pub fn open(&mut self) -> DeviceResult<()> {
@@ -54,18 +54,12 @@ impl DeviceHandler {
     // ============================== VLFD =====================================
     // =========================================================================
 
-    /**
-     * - VLFD_IO_ProgramFPGA (in another file)
-     * - VLFD_IO_Open
-     * - VLFD_IO_WriteReadData
-     * - VLFD_IO_Close
-     */
-
+    // - VLFD_IO_ProgramFPGA (in another file)
+    // - VLFD_IO_Open
+    // - VLFD_IO_WriteReadData
+    // - VLFD_IO_Close
     // Note: program FPGA is implemented separately -> (program_handler)
-    /**
-     
-     */
-    pub fn io_open(&mut self) -> DeviceResult<()>{
+    pub fn io_open(&mut self) -> DeviceResult<()> {
         println!("1");
         if self.usb.is_opened() {
             self.usb.close()?;
@@ -76,10 +70,9 @@ impl DeviceHandler {
         // Read SMIMS encrypt table
         // self.encrypt_table_read();
         // self.decoded_encrypt_table();
-        
-        // Read the CFG from SMIMS engine 
+        // Read the CFG from SMIMS engine
         // self.read_cfg();    // (note that decypt happens inside of read_cfg)
-        
+
         // The three tasks mentioned above can be done with:
         self.init()?;
 
@@ -87,7 +80,7 @@ impl DeviceHandler {
         if (self.cfg.smims_version() as u16) < constants::SMIMS_VERSION {
             return Err("board version error".to_string());
         }
-        
+
         // Check if FPGA is programmed
         // cfg.is_programmed <==> SMIMS_isFPGAProrgam
         if !self.cfg.is_programmed() {
@@ -115,44 +108,48 @@ impl DeviceHandler {
         self.cfg.set_vericomm_clock_highdelay(clock_high_delay);
         self.cfg.set_vericomm_clock_lowdelay(clock_low_delay);
         self.cfg.set_vericomm_isv(0);
-        self.cfg.set_vericomm_clock_check(false);   // Disable regular clock check
-        self.cfg.set_mode_selector(0);              // Set SMIMS Engine I/O to VeriComm Mode
+        self.cfg.set_vericomm_clock_check(false); // Disable regular clock check
+        self.cfg.set_mode_selector(0); // Set SMIMS Engine I/O to VeriComm Mode
 
         // Encrypt the newly configured CFG and prepare it for uploading
         self.write_cfg()?;
-        
+
         // Send command to activate VeriComm module
         self.activate_vericomm()?;
         Ok(())
     }
 
-    pub fn io_write_read_data(&mut self, write_buffer: &mut [u16; 4], read_buffer: &mut [u16; 4]) -> DeviceResult<()> {
+    pub fn io_write_read_data(
+        &mut self,
+        write_buffer: &mut [u16; 4],
+        read_buffer: &mut [u16; 4],
+    ) -> DeviceResult<()> {
         self.encrypt(write_buffer);
         self.fifo_write(write_buffer)?;
         self.fifo_read(read_buffer)?;
         self.decrypt(read_buffer);
         Ok(())
-    }  
+    }
 
     /**
-      Gacefully exists from IO mode & closes the device.
-      */
+    Gacefully exists from IO mode & closes the device.
+    */
     pub fn io_close(&mut self) -> DeviceResult<bool> {
         if !self.usb.is_opened() {
-            return Ok(true)
+            return Ok(true);
         }
 
         // End Application Mode
         self.command_active()?;
         self.close()?;
 
-        return Ok(true);
+        Ok(true)
     }
 
     // =========================================================================
     // ========================== Data Transfer API ============================
     // =========================================================================
-    
+
     pub fn fifo_write<T>(&self, buffer: &[T]) -> DeviceResult<()> {
         self.usb.write_usb(EndPoint::EP2, buffer)?;
         Ok(())
@@ -210,7 +207,7 @@ impl DeviceHandler {
      Writes the current CFG back to SMIMS
     */
     pub fn write_cfg(&mut self) -> DeviceResult<()> {
-        let mut cfg = self.cfg.cfg.clone();
+        let mut cfg = self.cfg.cfg;
         self.sync_delay()?;
         self.encrypt(&mut cfg);
         let command = [0x01u8, 0x11u8];
@@ -288,7 +285,7 @@ impl DeviceHandler {
     // =========================================================================
     // ============================ Encrypt API ================================
     // =========================================================================
-    
+
     pub fn encrypt_table_read(&mut self) -> DeviceResult<()> {
         self.sync_delay()?;
 
@@ -384,7 +381,7 @@ impl DeviceHandler {
         // i = ~((temp >> 16) | (temp & 0x0000ffff)) as u16;
         i = !((temp >> 16) | (temp & 0x0000ffff)) as u16;
 
-        return i;
+        i
     }
 }
 

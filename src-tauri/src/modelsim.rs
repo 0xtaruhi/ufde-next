@@ -209,7 +209,7 @@ pub async fn run_modelsim_simulation(args: SimulationArgs) -> Result<String, Str
     }
 
     let output = std::process::Command::new(&vsim)
-        .args(&["-c", "-novopt", &args.top_module, "-do", "sim_run.do"])
+        .args(["-c", "-novopt", &args.top_module, "-do", "sim_run.do"])
         .current_dir(&modelsim_work_dir)
         .output()
         .map_err(|e| format!("vsim failed: {}", e))?;
@@ -225,7 +225,7 @@ pub async fn run_modelsim_simulation(args: SimulationArgs) -> Result<String, Str
     }
 
     let output = std::process::Command::new(&vcd2wlf)
-        .args(&["waveform.vcd", "waveform.wlf"])
+        .args(["waveform.vcd", "waveform.wlf"])
         .current_dir(&modelsim_work_dir)
         .output()
         .map_err(|e| format!("vcd2wlf failed: {}", e))?;
@@ -237,7 +237,7 @@ pub async fn run_modelsim_simulation(args: SimulationArgs) -> Result<String, Str
     }
 
     std::process::Command::new(&vsim)
-        .args(&["-view", "waveform.wlf"])
+        .args(["-view", "waveform.wlf"])
         .current_dir(&modelsim_work_dir)
         .spawn()
         .map_err(|e| format!("failed to open vsim viewer: {}", e))?;
