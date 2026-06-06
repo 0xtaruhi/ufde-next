@@ -2,7 +2,7 @@ import { AppShell, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { createContext, useState, useContext } from "react";
-import { TbSettings, TbChevronRight, TbFile, TbActivity } from "react-icons/tb";
+import { TbSettings, TbChevronRight, TbFile, TbActivity, TbGlobe, TbTestPipe } from "react-icons/tb";
 
 import { ProjectInfo, RecentlyOpenedProjectsType } from "./model/project";
 
@@ -10,9 +10,12 @@ import SettingsPage from "./pages/SettingsPage";
 import ProjectPage from "./pages/ProjectPage";
 import HeaderBar from "./HeaderBar";
 import FlowPage from "./pages/FlowPage";
+import IPPage from "./pages/IPPage";
+import VerificationPage from "./pages/VerificationPage";
 import { useEffect } from "react";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 import { writeTextFile } from "@tauri-apps/plugin-fs";
 const appWindow = getCurrentWebviewWindow()
 
@@ -48,6 +51,8 @@ const navLinksData: NavLinkData[] = [
     rightSection: TbChevronRight,
   },
   { label: "nav.flow", icon: TbActivity, rightSection: TbChevronRight },
+  { label: "nav.ip", icon: TbGlobe, rightSection: TbChevronRight },
+  { label: "nav.verification", icon: TbTestPipe, rightSection: TbChevronRight },
   { label: "nav.settings", icon: TbSettings, rightSection: TbChevronRight },
 ];
 
@@ -62,7 +67,7 @@ function NavbarArea({
   const { project } = useContext(ProjectContext);
 
   const items = navLinksData.map((item) =>
-    project === null && item.label === "nav.flow" ? null : (
+    project === null && (item.label === "nav.flow" || item.label === "nav.ip" || item.label === "nav.verification") ? null : (
       <NavLink
         active={navLabel === item.label}
         label={t(item.label)}
@@ -86,6 +91,10 @@ function MainContextArea({ navLabel }: { navLabel: string }) {
     return <ProjectPage />;
   } else if (navLabel === "nav.flow") {
     return <FlowPage />;
+  } else if (navLabel === "nav.ip") {
+    return <IPPage />;
+  } else if (navLabel === "nav.verification") {
+    return <VerificationPage />;
   } else if (navLabel === "nav.settings") {
     return <SettingsPage />;
   }
@@ -93,6 +102,7 @@ function MainContextArea({ navLabel }: { navLabel: string }) {
 }
 
 function App() {
+  const { t } = useTranslation();
   const [opened, { toggle }] = useDisclosure(true);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [navLabel, setNavLabel] = useState<string>("nav.project");
@@ -114,30 +124,37 @@ function App() {
       e.preventDefault();
       if (project != null && projectModified) {
         modals.openConfirmModal({
-          title: "Save Project",
+          title: t("menu.save_project"),
           centered: true,
-          children: "Do you want to save the project before exit?",
-          labels: { confirm: "Yes", cancel: "No" },
+          children: t("project.save_before_exit_confirm"),
+          labels: { confirm: t("common.confirm_yes"), cancel: t("common.confirm_no") },
           confirmProps: { color: "red" },
-          onConfirm: () => {
+          onConfirm: async () => {
             const { path, ...rest } = project;
-            writeTextFile(path, JSON.stringify(rest)).then(() => {
-              appWindow.close();
-            });
+            try {
+              await writeTextFile(path, JSON.stringify(rest));
+              appWindow.destroy();
+            } catch (err) {
+              notifications.show({
+                title: t("project.save_failed_title"),
+                message: t("project.save_failed_message", { error: String(err) }),
+                color: 'red',
+              });
+            }
           },
           onCancel: () => {
-            appWindow.close();
+            appWindow.destroy();
           },
         });
       } else {
-        appWindow.close();
+        appWindow.destroy();
       }
     });
 
     return () => {
       unlisten.then((fn) => fn());
     };
-  }, [project, projectModified]);
+  }, [project, projectModified, t]);
 
   useEffect(() => {
     if (project) {

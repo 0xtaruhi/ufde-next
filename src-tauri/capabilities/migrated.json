@@ -8,10 +8,13 @@
   "permissions": [
     "core:default",
     "fs:allow-read-file",
+    "fs:allow-read-text-file",
     "fs:allow-write-file",
+    "fs:allow-write-text-file",
     "fs:allow-read-dir",
     "fs:allow-mkdir",
     "fs:allow-exists",
+    "fs:allow-remove",
     {
       "identifier": "fs:scope",
       "allow": [
@@ -36,6 +39,7 @@
     "core:window:allow-show",
     "core:window:allow-hide",
     "core:window:allow-close",
+    "core:window:allow-destroy",
     "core:window:allow-set-decorations",
     "core:window:allow-set-always-on-top",
     "core:window:allow-set-content-protected",
@@ -108,7 +112,25 @@
         {
           "args": true,
           "cmd": "",
+          "name": "binaries/fde-cli/viewer",
+          "sidecar": true
+        },
+        {
+          "args": true,
+          "cmd": "",
           "name": "binaries/yosys",
+          "sidecar": true
+        },
+        {
+          "args": true,
+          "cmd": "",
+          "name": "binaries/ip-generator/ip_generator",
+          "sidecar": true
+        },
+        {
+          "args": true,
+          "cmd": "",
+          "name": "binaries/ip-generator/img2mif",
           "sidecar": true
         },
         {

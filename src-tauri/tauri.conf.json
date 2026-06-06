@@ -9,7 +9,7 @@
     "active": true,
     "targets": "all",
     "resources": [
-      "resource/**",
+      "resource/**/*",
       "pthreadVC2.dll",
       "share/*",
       "share/fde/*"

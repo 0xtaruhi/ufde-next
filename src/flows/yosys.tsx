@@ -6,22 +6,22 @@ import {
   Tooltip,
   useCombobox,
 } from "@mantine/core";
-import { TbArrowAutofitDown, TbChevronDown } from "react-icons/tb";
+import { TbArrowAutofitDown, TbChevronDown, TbFileText, TbEye } from "react-icons/tb";
 import {
   showFailedNotification,
   showSuccessNotification,
 } from "../pages/Notifies";
 import { invoke } from "@tauri-apps/api/core";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getDirOfFile } from "../utils/utils";
 import { ProjectContext } from "../App";
-import { Command } from "@tauri-apps/plugin-shell";
+import { Command, open as openPath } from "@tauri-apps/plugin-shell";
 import { resolveResource } from "@tauri-apps/api/path";
 import { useTranslation } from "react-i18next";
 import { ProjectInfo } from "../model/project";
 import { SettingsItem } from "../pages/FlowPage";
 
-async function runYosysYosysFlowCommand(project: ProjectInfo) {
+export async function runYosysYosysFlowCommand(project: ProjectInfo) {
   const xmlfileMap = project?.name + "_yosys_" + "syn.edf";
   const tclScript = await resolveResource("resource/yosys/yosys_fde.tcl");
   const simlibFile = await resolveResource("resource/yosys/fdesimlib.v");
@@ -43,7 +43,7 @@ async function runYosysYosysFlowCommand(project: ProjectInfo) {
     xmlfileMap;
   const command = Command.sidecar(
     "binaries/yosys",
-    ["-p", tclLine, inputFiles.join(" ")],
+    ["-p", tclLine, ...inputFiles],
     { cwd: await getDirOfFile(project.path) }
   );
   return command;
@@ -60,6 +60,7 @@ export async function runYosysMapFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project?.name + "_yosys_" + "syn.edf";
   const outputFileName = project?.name + "_yosys_" + "map.xml";
+  const outputFileName_v = project?.name + "_yosys_" + "map.v";
 
   const command = Command.sidecar(
     "binaries/fde-cli/map",
@@ -73,6 +74,8 @@ export async function runYosysMapFlowCommand(project: ProjectInfo) {
       celllibfilePath,
       mapArgs,
       mapFileMode,
+      "-v",
+      outputFileName_v,
       "-e",
       // files?.join(" ") ?? "",
     ],
@@ -96,6 +99,7 @@ export async function runYosysPackFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project.name + "_yosys_" + "map.xml";
   const outputFileName = project.name + "_yosys_" + "pack.xml";
+  const outputFileName_v = project.name + "_yosys_" + "pack.v";
 
   const command = Command.sidecar(
     "binaries/fde-cli/pack",
@@ -112,6 +116,8 @@ export async function runYosysPackFlowCommand(project: ProjectInfo) {
       outputFileName,
       "-g",
       xdlcfgfilePath,
+      "-s",
+      outputFileName_v,
       "-e",
     ],
     { cwd: await getDirOfFile(project.path) }
@@ -195,6 +201,7 @@ export async function runYosysPlaceFlowCommand(project: ProjectInfo) {
 
 export async function runYosysRouteFlowCommand(project: ProjectInfo) {
   const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
   const getRouteMode = () => {
     if (project.settings.route.mode === "Direct Search") {
       return "-d";
@@ -212,6 +219,7 @@ export async function runYosysRouteFlowCommand(project: ProjectInfo) {
 
   const inputFileName = project.name + "_yosys_" + "place.xml";
   const outputFileName = project.name + "_yosys_" + "route.xml";
+  const outputFileName_v = project.name + "_yosys_" + "route.v";
 
   const command = Command.sidecar(
     "binaries/fde-cli/route",
@@ -225,6 +233,10 @@ export async function runYosysRouteFlowCommand(project: ProjectInfo) {
       routeMode,
       routecst,
       routecstFilePath,
+      "-i",
+      cilfilePath,
+      "-v",
+      outputFileName_v,
       "-e",
     ],
     { cwd: await getDirOfFile(project.path) }
@@ -292,6 +304,46 @@ export function YosysRouteFlowSettingsPage() {
   return settings;
 }
 
+export async function runYosysSTAFlowCommand(project: ProjectInfo) {
+  const celllibfilePath = await resolveResource("resource/hw_lib/fdp3_cell.xml");
+  const xdlcfgfilePath = await resolveResource("resource/hw_lib/fdp3_config.xml");
+  const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+  const confilePath = await resolveResource("resource/hw_lib/fdp3_con.xml");
+
+  const routeFileName = project.name + "_yosys_" + "route.xml";
+  const nlfinerOutputName = project.name + "_yosys_" + "sta.xml";
+  const staOutputName = project.name + "_yosys_" + "sta_out.rp";
+
+  const nlfinerCommand = Command.sidecar(
+    "binaries/fde-cli/nlfiner",
+    [
+      "-d", routeFileName,
+      "-l", celllibfilePath,
+      "-c", xdlcfgfilePath,
+      "-o", nlfinerOutputName,
+    ],
+    { cwd: await getDirOfFile(project.path) }
+  );
+
+  const nlfinerRes = await nlfinerCommand.execute();
+  if (nlfinerRes.code !== 0) {
+    throw new Error("nlfiner failed: " + nlfinerRes.stderr);
+  }
+
+  const staCommand = Command.sidecar(
+    "binaries/fde-cli/sta",
+    [
+      "-a", archfilePath,
+      "-i", nlfinerOutputName,
+      "-l", confilePath,
+      "-r", staOutputName,
+    ],
+    { cwd: await getDirOfFile(project.path) }
+  );
+
+  return staCommand;
+}
+
 export async function runYosysGenBitFlowCommand(project: ProjectInfo) {
   const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
   const cilfilePath = await resolveResource("resource/hw_lib/fdp3p7_cil.xml");
@@ -318,14 +370,147 @@ export async function runYosysGenBitFlowCommand(project: ProjectInfo) {
   return command;
 }
 
-function YosysDownloadBitAction() {
+function YosysViewPlaceAction() {
   const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  if (!project || !project.path) return null;
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_yosys_place.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function YosysViewRouteAction() {
+  const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  if (!project || !project.path) return null;
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_yosys_route.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function YosysViewSTAAction() {
+  const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  if (!project || !project.path) return null;
+
+  const onClick = async () => {
+    try {
+      const archfilePath = await resolveResource("resource/hw_lib/fdp3p7_arch.xml");
+      const projectDir = await getDirOfFile(project.path);
+      const xmlFile = projectDir + project.name + "_yosys_sta_out.xml";
+      const command = Command.sidecar(
+        "binaries/fde-cli/viewer",
+        ["-a", archfilePath, "-d", xmlFile],
+        { cwd: projectDir }
+      );
+      command.execute().catch((e) => {
+        showFailedNotification({ title: t("flow.view"), message: String(e) });
+      });
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.view"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={t("flow.view")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbEye size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function YosysViewSTAReportAction() {
+  const { project } = useContext(ProjectContext);
+  const { t } = useTranslation();
+  const [reportFile, setReportFile] = useState<string>("");
+
+  useEffect(() => {
+    const resolvePath = async () => {
+      if (project?.path) {
+        setReportFile((await getDirOfFile(project.path)) + project.name + "_yosys_sta_out.rp");
+      } else {
+        setReportFile("");
+      }
+    };
+    resolvePath();
+  }, [project?.path, project?.name]);
 
   if (!project || !project.path) {
     return null;
   }
 
+  const onClick = async () => {
+    if (!reportFile) return;
+    try {
+      await openPath(reportFile);
+    } catch (e: any) {
+      showFailedNotification({ title: t("flow.yosys.sta.viewReport"), message: e.message || String(e) });
+    }
+  };
+
+  return (
+    <Tooltip label={reportFile || t("flow.yosys.sta.viewReport")}>
+      <ActionIcon size="md" variant="subtle" onClick={onClick} style={{ padding: "5px" }}>
+        <TbFileText size={20} />
+      </ActionIcon>
+    </Tooltip>
+  );
+}
+
+function YosysDownloadBitAction() {
+  const { project } = useContext(ProjectContext);
   const { t } = useTranslation();
+
+  if (!project || !project.path) {
+    return null;
+  }
 
   const downloadBitFile = async () => {
     if (project) {
@@ -387,17 +572,31 @@ export const yosysFlows = [
     target_file: "yosys_place.xml",
     runFunc: runYosysPlaceFlowCommand,
     settingsPage: <YosysPlaceFlowSettingsPage />,
+    extraActions: <YosysViewPlaceAction />,
   },
   {
     name: "yosys.route",
     target_file: "yosys_route.xml",
     runFunc: runYosysRouteFlowCommand,
     settingsPage: <YosysRouteFlowSettingsPage />,
+    extraActions: <YosysViewRouteAction />,
   },
   {
     name: "yosys.genbit",
     target_file: "yosys_bit.bit",
     runFunc: runYosysGenBitFlowCommand,
     extraActions: <YosysDownloadBitAction />,
+  },
+  {
+    name: "yosys.sta",
+    target_file: "yosys_sta_out.rp",
+    runFunc: runYosysSTAFlowCommand,
+    allowNonZeroExit: true,
+    extraActions: (
+      <>
+        <YosysViewSTAAction />
+        <YosysViewSTAReportAction />
+      </>
+    ),
   },
 ];

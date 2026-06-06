@@ -1,0 +1,24 @@
+{
+  "bundle": {
+    "externalBin": [
+      "binaries/fde-cli/bitgen",
+      "binaries/fde-cli/import",
+      "binaries/fde-cli/map",
+      "binaries/fde-cli/nlfiner",
+      "binaries/fde-cli/pack",
+      "binaries/fde-cli/place",
+      "binaries/fde-cli/route",
+      "binaries/fde-cli/sta",
+      "binaries/fde-cli/viewer",
+      "binaries/yosys",
+      "binaries/yosys-abc",
+      "binaries/ip-generator/ip_generator",
+      "binaries/ip-generator/img2mif"
+    ],
+    "resources": [
+      "libs/*",
+      "plugins/platforms/*",
+      "qt.conf"
+    ]
+  }
+}
