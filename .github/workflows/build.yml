@@ -175,7 +175,7 @@ jobs:
         run: ./scripts/prepare-tauri-sidecars.sh --target "${{ matrix.target }}" --platform "${{ matrix.platform }}"
 
       - name: Build Tauri bundle
-        uses: tauri-apps/tauri-action@v1
+        uses: tauri-apps/tauri-action@v0.6.2
         with:
           args: ${{ matrix.tauri_args }}
 
