@@ -1,0 +1,20 @@
+[package]
+name = "ufde-ip-tools"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+image = { version = "0.25.9", default-features = false, features = ["bmp", "jpeg", "png"] }
+
+[[bin]]
+name = "ip_generator"
+path = "src/bin/ip_generator.rs"
+
+[[bin]]
+name = "img2mif"
+path = "src/bin/img2mif.rs"
+
+[[bin]]
+name = "viewer"
+path = "src/bin/viewer.rs"

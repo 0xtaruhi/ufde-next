@@ -1,0 +1,16 @@
+{
+  "build": {
+    "beforeBuildCommand": "./scripts/build-macos-sidecars.sh && pnpm build"
+  },
+  "bundle": {
+    "resources": [
+      "resource/**/*",
+      "pthreadVC2.dll",
+      "macos-bin/*",
+      "macos-libs/*",
+      "macos-plugins/platforms/*",
+      "share/*",
+      "share/fde/*"
+    ]
+  }
+}
