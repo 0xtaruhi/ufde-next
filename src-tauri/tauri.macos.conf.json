@@ -3,6 +3,10 @@
     "beforeBuildCommand": "./scripts/build-macos-sidecars.sh && pnpm build"
   },
   "bundle": {
+    "macOS": {
+      "signingIdentity": "-",
+      "hardenedRuntime": false
+    },
     "resources": [
       "resource/**/*",
       "pthreadVC2.dll",
