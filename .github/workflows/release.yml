@@ -31,7 +31,7 @@ jobs:
             platform: linux
             target: x86_64-unknown-linux-gnu
             build_fde_viewer: '1'
-            tauri_args: --target x86_64-unknown-linux-gnu --config src-tauri/tauri.linux.conf.json
+            tauri_args: --target x86_64-unknown-linux-gnu --config src-tauri/tauri.linux.conf.json --bundles deb,rpm
             sidecar_url_secret: UFDE_SIDECAR_ARCHIVE_URL_LINUX_X64
           - name: windows-x64
             os: windows-latest
@@ -102,7 +102,7 @@ jobs:
 
       - name: Install macOS system dependencies
         if: matrix.platform == 'macos'
-        run: brew install ninja cmake boost flex bison yosys
+        run: brew install ninja cmake boost flex bison icu4c yosys
 
       - name: Install Windows system dependencies
         if: matrix.platform == 'windows'
@@ -117,6 +117,7 @@ jobs:
         env:
           FDE_SOURCE_DIR: ${{ github.workspace }}/FDE-Source
           UFDE_BUILD_FDE_VIEWER: ${{ matrix.build_fde_viewer }}
+          ICU4C_PREFIX: ${{ matrix.platform == 'macos' && '/opt/homebrew/opt/icu4c' || '' }}
           UFDE_SIDECAR_ARCHIVE_URL: ${{ secrets[matrix.sidecar_url_secret] }}
         run: ./scripts/prepare-tauri-sidecars.sh --target "${{ matrix.target }}" --platform "${{ matrix.platform }}"
 

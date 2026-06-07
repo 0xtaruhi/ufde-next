@@ -20,7 +20,6 @@
       "pthreadVC2.dll",
       "QtCore4.dll",
       "QtGui4.dll",
-      "windows-bin/*",
       "share/*",
       "share/fde/*"
     ]

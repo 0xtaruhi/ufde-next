@@ -209,7 +209,21 @@ prepare_fde_from_source() {
 
   local build_dir="${FDE_BUILD_DIR:-$fde_source_dir/build-codex-$target_triple}"
   echo "Building FDE CLI sidecars from $fde_source_dir."
-  cmake -S "$fde_source_dir" -B "$build_dir" -G Ninja -DVIEWER="$build_viewer"
+  local cmake_args=(-DVIEWER="$build_viewer")
+  if [[ "$platform" == "macos" ]]; then
+    local icu4c_prefix="${ICU4C_PREFIX:-}"
+    if [[ -z "$icu4c_prefix" ]] && command -v brew >/dev/null 2>&1; then
+      icu4c_prefix="$(brew --prefix icu4c 2>/dev/null || true)"
+    fi
+    if [[ -n "$icu4c_prefix" ]]; then
+      cmake_args+=(
+        -DCMAKE_EXE_LINKER_FLAGS="-L$icu4c_prefix/lib"
+        -DCMAKE_SHARED_LINKER_FLAGS="-L$icu4c_prefix/lib"
+      )
+    fi
+  fi
+
+  cmake -S "$fde_source_dir" -B "$build_dir" -G Ninja "${cmake_args[@]}"
 
   local targets=(bitgen import map nlfiner pack place route sta)
   if [[ "$build_viewer" == "ON" ]]; then
