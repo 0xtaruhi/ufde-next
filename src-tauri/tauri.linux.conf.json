@@ -16,9 +16,13 @@
       "binaries/ip-generator/img2mif"
     ],
     "resources": [
+      "resource/**/*",
+      "linux-bin/*",
       "libs/*",
       "plugins/platforms/*",
-      "qt.conf"
+      "qt.conf",
+      "share/*",
+      "share/fde/*"
     ]
   }
 }
