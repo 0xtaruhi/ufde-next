@@ -1,0 +1,134 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag, for example v1.1.0'
+        required: true
+        type: string
+      draft:
+        description: 'Create or update a draft release'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: release (${{ matrix.name }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x64
+            os: ubuntu-22.04
+            platform: linux
+            target: x86_64-unknown-linux-gnu
+            build_fde_viewer: '1'
+            tauri_args: --target x86_64-unknown-linux-gnu --config src-tauri/tauri.linux.conf.json
+            sidecar_url_secret: UFDE_SIDECAR_ARCHIVE_URL_LINUX_X64
+          - name: windows-x64
+            os: windows-latest
+            platform: windows
+            target: x86_64-pc-windows-msvc
+            build_fde_viewer: '0'
+            tauri_args: --target x86_64-pc-windows-msvc --config src-tauri/tauri.windows.conf.json
+            sidecar_url_secret: UFDE_SIDECAR_ARCHIVE_URL_WINDOWS_X64
+          - name: macos-arm64
+            os: macos-latest
+            platform: macos
+            target: aarch64-apple-darwin
+            build_fde_viewer: '0'
+            tauri_args: --target aarch64-apple-darwin --config src-tauri/tauri.macos.conf.json
+            sidecar_url_secret: UFDE_SIDECAR_ARCHIVE_URL_MACOS_ARM64
+    runs-on: ${{ matrix.os }}
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+      RELEASE_DRAFT: ${{ github.event_name == 'workflow_dispatch' && inputs.draft || false }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout FDE source
+        if: matrix.platform != 'windows'
+        uses: actions/checkout@v4
+        with:
+          repository: 0xtaruhi/FDE-Source
+          path: FDE-Source
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux system dependencies
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            libwebkit2gtk-4.1-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            patchelf \
+            libusb-1.0-0-dev \
+            libboost-all-dev \
+            qtbase5-dev \
+            flex \
+            bison \
+            clang \
+            gawk \
+            pkg-config \
+            libffi-dev \
+            zlib1g-dev \
+            yosys
+
+      - name: Install macOS system dependencies
+        if: matrix.platform == 'macos'
+        run: brew install ninja cmake boost flex bison yosys
+
+      - name: Install Windows system dependencies
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: choco install nsis 7zip -y
+
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prepare sidecars
+        shell: bash
+        env:
+          FDE_SOURCE_DIR: ${{ github.workspace }}/FDE-Source
+          UFDE_BUILD_FDE_VIEWER: ${{ matrix.build_fde_viewer }}
+          UFDE_SIDECAR_ARCHIVE_URL: ${{ secrets[matrix.sidecar_url_secret] }}
+        run: ./scripts/prepare-tauri-sidecars.sh --target "${{ matrix.target }}" --platform "${{ matrix.platform }}"
+
+      - name: Build and upload release assets
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ env.RELEASE_TAG }}
+          releaseName: 'UFDE+ ${{ env.RELEASE_TAG }}'
+          releaseBody: 'Automated UFDE+ desktop builds for supported platforms.'
+          releaseDraft: ${{ env.RELEASE_DRAFT }}
+          prerelease: false
+          args: ${{ matrix.tauri_args }}
+          releaseAssetNamePattern: 'UFDE+_[version]_[platform]_[arch]_[bundle][setup][ext]'

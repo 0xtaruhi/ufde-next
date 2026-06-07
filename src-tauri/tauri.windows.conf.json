@@ -16,8 +16,13 @@
       "binaries/ip-generator/img2mif"
     ],
     "resources": [
+      "resource/**/*",
+      "pthreadVC2.dll",
       "QtCore4.dll",
-      "QtGui4.dll"
+      "QtGui4.dll",
+      "windows-bin/*",
+      "share/*",
+      "share/fde/*"
     ]
   }
 }
