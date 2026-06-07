@@ -17,6 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Checkout FDE source
+        uses: actions/checkout@v4
+        with:
+          repository: 0xtaruhi/FDE-Source
+          path: FDE-Source
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -41,13 +47,28 @@ jobs:
             libayatana-appindicator3-dev \
             librsvg2-dev \
             libusb-1.0-0-dev \
-            pkg-config
+            libboost-all-dev \
+            qtbase5-dev \
+            flex \
+            bison \
+            cmake \
+            ninja-build \
+            clang \
+            pkg-config \
+            yosys
 
       - name: Install frontend dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build frontend
         run: pnpm build
+
+      - name: Prepare Linux sidecars
+        shell: bash
+        env:
+          FDE_SOURCE_DIR: ${{ github.workspace }}/FDE-Source
+          UFDE_BUILD_FDE_VIEWER: '1'
+        run: ./scripts/prepare-tauri-sidecars.sh --target x86_64-unknown-linux-gnu --platform linux
 
       - name: Clippy app
         run: cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
